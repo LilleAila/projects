@@ -69,6 +69,7 @@
               rustc
               cargo
               rustfmt
+              rust-analyzer
             ];
           };
         }
