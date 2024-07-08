@@ -15,7 +15,8 @@
     in
     {
       devShells = forEachSystem (
-        pkgs: with pkgs; {
+        pkgs: with pkgs; rec {
+          default = nix;
           nix = mkShell {
             nativeBuildInputs = [
               nixd
@@ -27,6 +28,15 @@
               python3
               black
               nodePackages.pyright
+            ];
+          };
+          javascript = mkShell {
+            nativeBuildInputs = [
+              typescript
+              nodePackages.typescript-language-server
+              prettierd
+              emmet-ls
+              vscode-langservers-extracted
             ];
           };
           haskell = mkShell {
