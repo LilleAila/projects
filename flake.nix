@@ -44,6 +44,13 @@
           astro = mkShell {
             nativeBuildInputs = javascript.nativeBuildInputs ++ [ nodePackages."@astrojs/language-server" ];
           };
+          texlive = mkShell {
+            nativeBuildInputs = [
+              texliveFull
+              pandoc
+              (python311.withPackages (ps: with ps; [ pygments ]))
+            ];
+          };
           haskell = mkShell {
             nativeBuildInputs = with haskellPackages; [
               ghc
