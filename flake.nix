@@ -41,6 +41,9 @@
               vscode-langservers-extracted
             ];
           };
+          astro = mkShell {
+            nativeBuildInputs = javascript.nativeBuildInputs ++ [ nodePackages."@astrojs/language-server" ];
+          };
           haskell = mkShell {
             nativeBuildInputs = with haskellPackages; [
               ghc
