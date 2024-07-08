@@ -27,7 +27,7 @@
             nativeBuildInputs = [
               python3
               black
-              nodePackages.pyright
+              pyright
             ];
           };
           javascript = mkShell {
