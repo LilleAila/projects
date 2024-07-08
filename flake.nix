@@ -25,7 +25,6 @@
           };
           python = mkShell {
             nativeBuildInputs = [
-              python3
               black
               pyright
             ];
