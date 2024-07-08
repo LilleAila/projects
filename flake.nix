@@ -64,6 +64,13 @@
               stylua
             ];
           };
+          rust = mkShell {
+            nativeBuildInputs = [
+              rustc
+              cargo
+              rustfmt
+            ];
+          };
         }
       );
     };
