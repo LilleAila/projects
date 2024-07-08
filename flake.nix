@@ -22,6 +22,13 @@
               nixfmt-rfc-style
             ];
           };
+          python = mkShell {
+            nativeBuildInputs = [
+              python3
+              black
+              nodePackages.pyright
+            ];
+          };
           haskell = mkShell {
             nativeBuildInputs = with haskellPackages; [
               ghc
