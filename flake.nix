@@ -58,6 +58,12 @@
               ghcid
             ];
           };
+          lua = mkShell {
+            nativeBuildInputs = [
+              lua-language-server
+              stylua
+            ];
+          };
         }
       );
     };
