@@ -131,6 +131,6 @@ def surface_area_of_cube(edge_length: float) -> str:
     return f"The surface area of the cube is {6 * edge_length ** 2}."
 
 # Å definere egne types ble addet i python 3.12 :o
-# type Vector = list[float]
-# def scale(scalar: float, vector: Vector) -> Vector:
-#     return [scalar * num for num in vector]
+type Vector = list[float]
+def scale(scalar: float, vector: Vector) -> Vector:
+    return [scalar * num for num in vector]

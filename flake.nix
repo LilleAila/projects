@@ -47,7 +47,7 @@
             nativeBuildInputs = [
               texliveFull
               pandoc
-              (python311.withPackages (ps: with ps; [ pygments ]))
+              (python312.withPackages (ps: with ps; [ pygments ]))
             ];
           };
           haskell = mkShell {
