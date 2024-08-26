@@ -124,3 +124,13 @@ print(", World!")
 print("01", end=" | ")
 print("02", end=" | ")
 print("03")
+
+# Man can declare types slik som dette:
+# Tatt fra docs: https://docs.python.org/3/library/typing.html
+def surface_area_of_cube(edge_length: float) -> str:
+    return f"The surface area of the cube is {6 * edge_length ** 2}."
+
+# Å definere egne types ble addet i python 3.12 :o
+# type Vector = list[float]
+# def scale(scalar: float, vector: Vector) -> Vector:
+#     return [scalar * num for num in vector]
