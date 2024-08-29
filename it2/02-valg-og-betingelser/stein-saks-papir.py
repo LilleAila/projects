@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Oppgave:
     - Lag et stein saks papir-spill.
@@ -13,7 +14,7 @@ Mulige forbedringer:
     - Bruke verdien for antall uavgjort
 """
 
-import random # Brukes for å få datamaskinen til å velge
+import random  # Brukes for å få datamaskinen til å velge
 
 
 # ANSI-fargekoder
@@ -31,12 +32,12 @@ class colors:
     BOLD = "\033[1m"
     ITALIC = "\033[3m"
     UNDERLINE = "\033[4m"
-    ENDC = "\033[0m" # Brukes for å nullstille tilbake til normal tekst
+    ENDC = "\033[0m"  # Brukes for å nullstille tilbake til normal tekst
 
 
 # KlasserSkrivesSlikSomDette
 class RockPaperScissorsGame:
-    def __init__(self, choices=["papir", "saks", "stein"], rounds=3):
+    def __init__(self, choices=["stein", "saks", "papir"], rounds=3):
         """
         Sette variabler for spillet
         """
@@ -46,8 +47,9 @@ class RockPaperScissorsGame:
         self._player_score = 0
         self._draws = 0
         self._rounds = rounds
-        self._choices = choices
-        self.choices = list(reversed(self._choices)) # "eksportert" variabel med leselig versjon av valgene, uten _
+        # "eksportert" variabel med leselig versjon av valgene, derfor uten "_"
+        self.choices = choices
+        self._choices = list(reversed(self.choices))
 
     def _input(self):
         """
@@ -60,7 +62,7 @@ class RockPaperScissorsGame:
         while True:
             ans = input(prompt)
             if ans in self._choices:
-                 # `return` stopper løkken på samme måte som break
+                # `return` stopper løkken på samme måte som break
                 return ans
             else:
                 print(err)
@@ -95,15 +97,23 @@ class RockPaperScissorsGame:
             case "computer":
                 # Denne print-koden er ikke veldig fin fordi jeg har lagt inn fargekoder
                 # f-strings lar meg skrive verdier direkte inn
-                print(f"{colors.BOLD}{colors.RED}Du tapte!{colors.ENDC} Datamaskinen valgte {colors.BOLD}{colors.BLUE}{computer_choice}{colors.ENDC}.")
+                print(
+                    f"{colors.BOLD}{colors.RED}Du tapte!{colors.ENDC} Datamaskinen valgte {colors.BOLD}{colors.BLUE}{computer_choice}{colors.ENDC}."
+                )
                 self._computer_score += 1
             case "player":
-                print(f"{colors.BOLD}{colors.GREEN}Du vant!{colors.ENDC} Datamaskinen valgte {colors.BOLD}{colors.BLUE}{computer_choice}{colors.ENDC}.")
+                print(
+                    f"{colors.BOLD}{colors.GREEN}Du vant!{colors.ENDC} Datamaskinen valgte {colors.BOLD}{colors.BLUE}{computer_choice}{colors.ENDC}."
+                )
                 self._player_score += 1
             case _:
-                print(f"{colors.BOLD}{colors.YELLOW}Det ble uavgjort!{colors.ENDC} Datamaskinen valgte {colors.BOLD}{colors.BLUE}{computer_choice}{colors.ENDC}.")
+                print(
+                    f"{colors.BOLD}{colors.YELLOW}Det ble uavgjort!{colors.ENDC} Datamaskinen valgte {colors.BOLD}{colors.BLUE}{computer_choice}{colors.ENDC}."
+                )
                 self._draws += 1
-        print(f"Din poengsum: {colors.BOLD}{colors.MAGENTA}{self._player_score}{colors.ENDC}, Datamaskinen sin poengsum: {colors.BOLD}{colors.MAGENTA}{self._computer_score}{colors.ENDC}")
+        print(
+            f"Din poengsum: {colors.BOLD}{colors.MAGENTA}{self._player_score}{colors.ENDC}, Datamaskinen sin poengsum: {colors.BOLD}{colors.MAGENTA}{self._computer_score}{colors.ENDC}"
+        )
 
     def _game(self):
         """
@@ -111,17 +121,23 @@ class RockPaperScissorsGame:
         """
         # Sette sammen listen over valg med ", " mellom
         choices = ", ".join(self.choices)
-        print(f"Spill {colors.ITALIC}{colors.BLUE}{choices}{colors.ENDC}! Målet er å vinne mot datamaskinen {colors.BOLD}{self._rounds}{colors.ENDC} ganger!")
+        print(
+            f"Spill {colors.ITALIC}{colors.BLUE}{choices}{colors.ENDC}! Målet er å vinne mot datamaskinen {colors.BOLD}{self._rounds}{colors.ENDC} ganger!"
+        )
         print()
         # Løkke som går for alltid
         while True:
             self.play()
             # Stopp løkken og gi tilbakemelding til spilleren
             if self._computer_score >= self._rounds:
-                print(f"Spillet er over, {colors.BOLD}{colors.RED}du tapte!{colors.ENDC} Du vant {self._player_score} ganger.")
+                print(
+                    f"Spillet er over, {colors.BOLD}{colors.RED}du tapte!{colors.ENDC} Du vant {self._player_score} ganger."
+                )
                 break
             if self._player_score >= self._rounds:
-                print(f"Spillet er over, {colors.BOLD}{colors.GREEN}du vant!{colors.ENDC} Datamaskinen vant {self._computer_score} ganger.")
+                print(
+                    f"Spillet er over, {colors.BOLD}{colors.GREEN}du vant!{colors.ENDC} Datamaskinen vant {self._computer_score} ganger."
+                )
                 break
 
     def game(self):
@@ -135,10 +151,10 @@ class RockPaperScissorsGame:
         while self._is_playing:
             self._game()
             if not input("Vil du spille på nytt? (j/n) ").lower().strip() == "j":
-                self._is_playing = False # Stopper løkken
-                break # ikke nødvendig med break, `continue` hadde gjort det samme i dette tilfellet
+                self._is_playing = False  # Stopper løkken
+                break  # ikke nødvendig med break, `continue` hadde gjort det samme i dette tilfellet
             # Kjøre __init__ funksjonen, som i praksis vil nullstille klassen. Sende gjennom verdiene den hadde fra før.
-            self.__init__(choices = self._choices, rounds = self._rounds)
+            self.__init__(choices=self._choices, rounds=self._rounds)
             print()
 
 
@@ -149,9 +165,8 @@ if __name__ == "__main__":
     game.game()
 
     # Kan også gjøre for eksempel:
-    # denne listen er baklengs fra det den egenltig bruker
     """
     choices = ["stein", "saks", "papir", "en annen ting", "enda en ting"]
-    game = RockPaperScissorsGame(choices=list(reversed(choices)), rounds=5)
+    game = RockPaperScissorsGame(choices=choices, rounds=5)
     game.game()
     """
