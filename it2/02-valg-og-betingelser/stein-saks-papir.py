@@ -130,6 +130,7 @@ class RockPaperScissorsGame:
             self._game()
             if not input("Vil du spille på nytt? (j/n) ").lower().strip() == "j":
                 self._is_playing = False # Stopper løkken
+                break # ikke nødvendig med break, `continue` hadde gjort det samme i dette tilfellet
             # Kjøre __init__ funksjonen, som i praksis vil nullstille klassen. Sende gjennom verdiene den hadde fra før.
             self.__init__(choices = self._choices, rounds = self._rounds)
             print()
