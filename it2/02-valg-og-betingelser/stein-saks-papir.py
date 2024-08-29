@@ -5,9 +5,15 @@ Oppgave:
 Lisens: GNU General Public License v3.0
 
 Skrevet av Olai Solsvik
+
+Mulige forbedringer:
+    - Ha en egen fil for locale slik at tekst ikke er hard-codet
+    - Legge til en "interactive"-modus der spilleren kan velge valgene og antall runder
+    - Gjøre koden for å farge teksten enklere å lese
+    - Bruke verdien for antall uavgjort
 """
 
-import random
+import random # Brukes for å få datamaskinen til å velge
 
 
 # ANSI-fargekoder
@@ -101,7 +107,7 @@ class RockPaperScissorsGame:
 
     def _game(self):
         """
-        Løkke som kjører til spillet er ferdig
+        Løkke som kjører til spillet er ferdig og starter nye runder
         """
         # Sette sammen listen over valg med ", " mellom
         choices = ", ".join(self.choices)
@@ -115,7 +121,7 @@ class RockPaperScissorsGame:
                 print(f"Spillet er over, {colors.BOLD}{colors.RED}du tapte!{colors.ENDC} Du vant {self._player_score} ganger.")
                 break
             if self._player_score >= self._rounds:
-                print(f"Spillet er over, {colors.BOLD}{colors.GREEN}du vant!{colors.ENDC} Daramaskinen vant {self._computer_score} ganger.")
+                print(f"Spillet er over, {colors.BOLD}{colors.GREEN}du vant!{colors.ENDC} Datamaskinen vant {self._computer_score} ganger.")
                 break
 
     def game(self):
