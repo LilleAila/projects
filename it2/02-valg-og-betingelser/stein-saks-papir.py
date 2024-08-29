@@ -25,7 +25,7 @@ class colors:
     BOLD = "\033[1m"
     ITALIC = "\033[3m"
     UNDERLINE = "\033[4m"
-    ENDC = "\033[0m"
+    ENDC = "\033[0m" # Brukes for å nullstille tilbake til normal tekst
 
 
 # KlasserSkrivesSlikSomDette
@@ -54,24 +54,29 @@ class RockPaperScissorsGame:
         while True:
             ans = input(prompt)
             if ans in self._choices:
+                 # `return` stopper løkken på samme måte som break
                 return ans
             else:
                 print(err)
 
     def _play(self, player_choice, computer_choice):
         """
-        Intern funksjon for å sjekke om man vinner
+        Intern funksjon for å sjekke om man vinner når input er valgene
+        Strengene er validert på forhånd
         """
         num_choices = len(self._choices)
         player = self._choices.index(player_choice)
         computer = self._choices.index(computer_choice)
 
+        # Valgene er rangert i en liste slik at den med høyere indeks vinner over den med en lavere.
+        # Et spesialtilfelle er hvis en har den første og en har den andre, men siden jeg bruker %
+        # , blir det negative tallet positivt og alt virker :)
         if (computer - player) % num_choices == 1:
             return "computer"
         elif (player - computer) % num_choices == 1:
             return "player"
-        else:
-            return "draw"
+        # Trenger ikke else siden `return` stopper funksjonen
+        return "draw"
 
     def play(self):
         """
@@ -94,7 +99,7 @@ class RockPaperScissorsGame:
                 self._draws += 1
         print(f"Din poengsum: {colors.BOLD}{colors.MAGENTA}{self._player_score}{colors.ENDC}, Datamaskinen sin poengsum: {colors.BOLD}{colors.MAGENTA}{self._computer_score}{colors.ENDC}")
 
-    def game(self):
+    def _game(self):
         """
         Løkke som kjører til spillet er ferdig
         """
@@ -112,18 +117,34 @@ class RockPaperScissorsGame:
             if self._player_score >= self._rounds:
                 print(f"Spillet er over, {colors.BOLD}{colors.GREEN}du vant!{colors.ENDC} Daramaskinen vant {self._computer_score} ganger.")
                 break
-        if input("Vil du spille på nytt? (j/n) ").lower().strip() == "j":
+
+    def game(self):
+        """
+        Wrapper rundt _game() for å starte på nytt dersom brukeren vil det.
+        Jeg kunne brukt rekursjon (altså game() kjører seg selv hvis spillet skal starte på nytt)
+        , men det ville ført til at spillet krasjet etter 1000 omspill, fordi det er grensen for rekursjon.
+        https://stackoverflow.com/a/3323013
+        """
+        self._is_playing = True
+        while self._is_playing:
+            self._game()
+            if not input("Vil du spille på nytt? (j/n) ").lower().strip() == "j":
+                self._is_playing = False # Stopper løkken
+            # Kjøre __init__ funksjonen, som i praksis vil nullstille klassen. Sende gjennom verdiene den hadde fra før.
             self.__init__(choices = self._choices, rounds = self._rounds)
-            self.game()
+            print()
 
 
 # Gjøre at koden kjører kun når man kjører dette direkte, ikke hvis man prøver å importere den som et bibliotek
 if __name__ == "__main__":
-    # game = RockPaperScissorsGame()
-    # game.game()
+    # Lage en instance av klassen og starte spillet.
+    game = RockPaperScissorsGame()
+    game.game()
 
     # Kan også gjøre for eksempel:
     # denne listen er baklengs fra det den egenltig bruker
+    """
     choices = ["stein", "saks", "papir", "en annen ting", "enda en ting"]
     game = RockPaperScissorsGame(choices=list(reversed(choices)), rounds=5)
     game.game()
+    """
