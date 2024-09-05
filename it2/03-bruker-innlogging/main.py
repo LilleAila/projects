@@ -22,19 +22,19 @@ class Login:
                 return _input
             print("Du må skrive inn noe!")
 
-    def user_exists(self, username):
+    def _user_exists(self, username):
         users = self._db.search(Query().username == username)
         return len(users) > 0
 
-    def check_password(self, username, password):
+    def _check_password(self, username, password):
         users = self._db.search(Query().username == username)
         if len(users) == 0:
             raise UserDoesNotExistError(f"The user {username} does not exist!")
         else:
             return bcrypt.checkpw(password.encode("utf-8"), users[0]["password"].encode("utf-8"))
 
-    def write_user(self, username, password):
-        if self.user_exists(username):
+    def _write_user(self, username, password):
+        if self._user_exists(username):
             raise UserAlreadyExistsError(f"The user {username} already exists!")
         self._db.insert({
             "type": "user",
@@ -42,6 +42,11 @@ class Login:
             # tinydb trenger en vanlig string, ikke bytes, mens bcrypt er motsatt.
             "password": bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         })
+
+    def _list_users(self):
+        users = self._db.all()
+        print("Alle brukere:")
+        print("\n".join([user["username"] for user in users if user["type"] == "user"]))
 
     # Samme som over men bruker getpass
     def _input_password(self, prompt):
@@ -59,7 +64,7 @@ class Login:
             username = self._input("Brukernavnet ditt: ")
             password = self._input_password("Passordet ditt: ")
             try:
-                if self.check_password(username, password):
+                if self._check_password(username, password):
                     self._username = username
                     self._success()
                     break
@@ -82,7 +87,7 @@ class Login:
                 else:
                     print("Passordene er ikke like!")
             try:
-                self.write_user(username, password)
+                self._write_user(username, password)
                 print(f"Brukeren din {username} ble laget!")
                 break
             except UserAlreadyExistsError:
@@ -103,8 +108,10 @@ class Login:
 Du kan:
 - (l)ogg ut
 - (s)topp programmet
+- (a)lle brukere
             """)
             action = self._input("Hva vil du gjøre? ")
+            print()
             match action:
                 case "l":
                     # Stopp løkken og gå tilbake til main()
@@ -113,11 +120,17 @@ Du kan:
                     # Stopp løkken *og* fortelle hovedfunksjonen at programmet har stoppet
                     self._running = False
                     break
+                case "a":
+                    self._list_users()
                 case _:
                     print("Det er ikke et gyldig valg!")
                     continue
 
 
 if __name__ == "__main__":
-    login = Login()
-    login.main()
+    try:
+        login = Login()
+        login.main()
+    except (KeyboardInterrupt, EOFError):
+        print()
+        print("Hade")
