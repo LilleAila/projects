@@ -3,3 +3,4 @@
 **/.ipynb_checkpoints
 **/.jupyter
 **/media
+**/__pycache__
