@@ -19,8 +19,8 @@ class DuplicateUserError(Exception):
 
 
 class Users:
-    def __init__(self):
-        self._db = TinyDB("./db.json")
+    def __init__(self, db_path):
+        self._db = TinyDB(db_path)
         # https://tinydb.readthedocs.io/en/latest/usage.html#queries
         # brukes i alle database-operasjoner for å filtrere til riktig dokument
         self._user = Query()

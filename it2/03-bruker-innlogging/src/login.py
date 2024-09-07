@@ -4,9 +4,9 @@ from getpass import getpass  # Bultin, hide chars when inputting password
 
 
 class Login:
-    def __init__(self):
+    def __init__(self, db_path="./db.json"):
         self._username = None
-        self._users = Users()
+        self._users = Users(db_path=db_path)
 
     def _input(self, prompt):
         _input = ""
