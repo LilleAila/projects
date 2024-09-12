@@ -1,0 +1,64 @@
+---
+title: Bruker-login
+---
+flowchart TB
+  start[Start];
+  has_user{{Eksisterer brukeren?}};
+
+  start --> has_user;
+  has_user -- Ja --> login;
+  has_user -- Nei --> signup;
+
+  subgraph user_input [Input]
+    direction TB
+    input[Spør om input];
+    verify{{Skrev brukeren tekst?}};
+    valid[Returner tekst];
+
+    input --> verify;
+    verify -- Ja --> valid;
+    verify -- Nei --> input;
+  end
+
+  subgraph login [Logg inn]
+    direction TB
+    username[Spør om brukernavn];
+    password[Spør om passord];
+    validate_login{{Er det riktig?}};
+
+    username --> password;
+    password --> validate_login;
+    validate_login -- Nei --> username;
+  end
+  logged_in[Bruker er logget inn!];
+
+  subgraph 2fa [Tofaktor autentisering]
+    direction TB
+    has_2fa{{Har brukeren tofaktorautentisering?}};
+    ask_2fa[Spør brukeren om kode];
+    verify_2fa{{Er koden riktig?}};
+
+    has_2fa -- Ja --> ask_2fa;
+    ask_2fa --> verify_2fa;
+    verify_2fa -- Nei --> ask_2fa;
+  end
+  %% Defined outside so that it links properly
+  %% If defined inside the subgraph, these nodes will be inside too
+  validate_login -- Ja --> 2fa;
+  has_2fa -- Nei --> logged_in;
+  verify_2fa -- Ja --> logged_in;
+
+  subgraph signup [Lag bruker]
+    direction TB
+    ask_username[Spør om brukernavn];
+    ask_password[Spør om passord];
+    ask_password2[Spør om passord på nytt];
+    check_passwords{{Er passordene like?}};
+    create_user[Lag bruker];
+
+    ask_username --> ask_password --> ask_password2 --> check_passwords;
+    check_passwords -- Ja --> create_user;
+    check_passwords -- Nei --> ask_password;
+  end
+
+  signup --> login;

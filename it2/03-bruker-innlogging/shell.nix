@@ -5,5 +5,7 @@ with import <nixpkgs> {}; mkShell {
       tinydb
       pyotp
     ]))
+    mermaid-cli
+    plantuml
   ];
 }
