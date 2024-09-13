@@ -8,7 +8,6 @@ start
 if (Eksisterer brukeren?) then (Ja)
 else (Nei)
   partition "Lag bruker" {
-    :Lag bruker;
     repeat :Spør om brukernavn;
     :Spør om passord;
     :Spør om passord igjen;
@@ -18,7 +17,6 @@ else (Nei)
 endif
 
 partition "Logg inn" {
-  :Logg inn;
   repeat :Spør om brukernavn;
   :Spør om passord;
   'backward:Brukernavn eller passord er feil!;
