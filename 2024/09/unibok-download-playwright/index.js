@@ -69,6 +69,37 @@ class Downloader {
       await this.download_book(name, url);
     }
   }
+
+  async get_library() {
+    const books = this.page.locator(".book");
+    const book_count = await books.count();
+    let book_data = [];
+    for (let i = 0; i < book_count; i++) {
+      const book = books.nth(i);
+      const name = await book
+        .locator(".wrapper .bookinfo h3.tittel")
+        .textContent();
+      const href = await book.locator(".wrapper a.omslag").getAttribute("href");
+      book_data.push([name, `${this.base_url}/${href}`]);
+    }
+    return book_data;
+  }
+
+  async download_library() {
+    // Done in to iterations to avoid going back and forth because of clicking the links
+    const books = await this.get_library();
+    let books_to_download = [];
+    for (const book of books) {
+      const [name, url] = book;
+      await this.page.goto(url);
+      await this.page.waitForLoadState("load");
+      await this.page.waitForSelector(".splashscreen", { state: "detached" });
+      const new_url = this.page.url();
+      books_to_download.push([name, new_url]);
+    }
+    // download_books(books_to_download);
+    console.log(books_to_download);
+  }
 }
 
 (async () => {
@@ -79,8 +110,9 @@ class Downloader {
   //   "Enchanté",
   //   "https://les.unibok.no/#cappelendamm/p193917/2430/1",
   // );
-  await downloader.download_books([
-    ["Enchanté", "https://les.unibok.no/#cappelendamm/p193917/2430/1"],
-  ]);
+  // await downloader.download_books([
+  //   ["Enchanté", "https://les.unibok.no/#cappelendamm/p193917/2430/1"],
+  // ]);
+  await downloader.download_library();
   await downloader.stop();
 })();
