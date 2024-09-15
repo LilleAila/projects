@@ -1,11 +1,11 @@
 import { chromium } from "playwright-core";
 import "dotenv/config";
 import * as fs from "fs/promises";
+import { execSync } from "child_process";
 
 const main = async () => {
   const browser = await chromium.launch({
-    executablePath:
-      "/nix/store/mslmcb4ddcpvl0f65r0bxkfzgsqx2p17-ungoogled-chromium-127.0.6533.119/bin/chromium",
+    executablePath: execSync("which chromium").toString().trim(),
     headless: false,
   });
 
