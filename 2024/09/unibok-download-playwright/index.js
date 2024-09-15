@@ -2,47 +2,73 @@ import { chromium } from "playwright-core";
 import "dotenv/config";
 import * as fs from "fs/promises";
 import { execSync } from "child_process";
+import { URL } from "url";
 
-const main = async () => {
-  const browser = await chromium.launch({
-    executablePath: execSync("which chromium").toString().trim(),
-    headless: false,
-  });
+class Downloader {
+  constructor() {
+    this._base_url = "https://les.unibok.no";
+  }
 
-  const ctx = await browser.newContext();
-  const page = await ctx.newPage();
+  async start() {
+    this.browser = await chromium.launch({
+      executablePath: execSync("which chromium").toString().trim(),
+      headless: false,
+    });
 
-  // Login to get authorization for downloading files
-  await page.goto("https://unibok.no/feidelogin");
-  await page.waitForSelector("input#org_selector_filter");
+    this.ctx = await this.browser.newContext();
+    this.page = await this.ctx.newPage();
+  }
 
-  await page.fill("input#org_selector_filter", " "); // needs to be filled before button can be pressed
-  await page.click(`li[org_id="${process.env.FEIDE_ORG_NAME}"]`);
-  await page.click("button#selectorg_button");
+  async login() {
+    await this.page.goto("https://unibok.no/feidelogin");
+    await this.page.waitForSelector("input#org_selector_filter");
 
-  await page.waitForSelector("input#username");
+    await this.page.fill("input#org_selector_filter", " "); // needs to be filled before button can be pressed
+    await this.page.click(`li[org_id="${process.env.FEIDE_ORG_NAME}"]`);
+    await this.page.click("button#selectorg_button");
 
-  await page.fill("input#username", process.env.FEIDE_USERNAME);
-  await page.fill("input#password", process.env.FEIDE_PASSWORD);
-  await page.click(`button[type="submit"]`);
+    await this.page.waitForSelector("input#username");
 
-  // Download the file
-  await page.waitForTimeout(5000);
-  const downloadUrl =
-    "https://les.unibok.no/bookresource/publisher/cappelendamm/book/p193917/epub/2430/offline.ub";
-  // const [download] = await Promise.all([
-  //   page.waitForEvent("download"),
-  //   page.goto(downloadUrl),
-  // ]);
-  // const downloadPath = "./output.epub";
-  // await download.saveAs(downloadPath);
-  // https://dev.to/ryanroselloog/use-playwright-to-download-files-from-remote-servers-23b0
-  // It looks like page.goto() doesn't like direct file URLs
-  const response = await page.context().request.get(`${downloadUrl}`);
-  let responseBuffer = await response.body();
-  await fs.writeFile(`./output.epub`, responseBuffer, "binary");
+    await this.page.fill("input#username", process.env.FEIDE_USERNAME);
+    await this.page.fill("input#password", process.env.FEIDE_PASSWORD);
+    await this.page.click(`button[type="submit"]`);
 
-  await browser.close();
-};
+    await this.page.waitForTimeout(5000); // Wait for auth to process
+  }
 
-main();
+  async download_file(url, destination) {
+    const response = await this.page.context().request.get(`${url}`);
+    let responseBuffer = await response.body();
+    await fs.writeFile(destination, responseBuffer, "binary");
+  }
+
+  async stop() {
+    await this.browser.close();
+  }
+
+  parse_url(url) {
+    const parsed_url = new URL(url);
+    const fragment = parsed_url.hash.slice(1);
+    const data = fragment.split("/");
+    const [publisher, ref, id] = data;
+    return { publisher, ref, id };
+  }
+
+  async download_book(name, url) {
+    const book = this.parse_url(url);
+    const file_url = `${this._base_url}/bookresource/publisher/${book.publisher}/book/${book.ref}/epub/${book.id}/offline.ub`;
+    const filename = `./${name}.epub`;
+    await this.download_file(file_url, filename);
+  }
+}
+
+(async () => {
+  const downloader = new Downloader();
+  await downloader.start();
+  await downloader.login();
+  await downloader.download_book(
+    "Enchanté",
+    "https://les.unibok.no/#cappelendamm/p193917/2430/1",
+  );
+  await downloader.stop();
+})();
