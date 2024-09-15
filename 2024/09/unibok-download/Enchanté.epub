@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Conditional class for older versions of IE -->
+<!--[if lt IE 9 & !IEMobile]><html class="ie" lang="en"><![endif]-->
+<!--[if gt IE 8 | IEMobile]><!-->
+
+<html lang="no">
+  <!--<![endif]-->
+  <!--<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="no" lang="no">-->
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/unibok_mini.css" rel="stylesheet" media="all" type="text/css">
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <meta name="robots" content="noindex" />
+
+    <title>Ingen tilgang</title>
+  </head>
+
+  <body class="enspalte">
+    <div class="container">
+      <div class="toppbar">
+      </div>
+
+      <div role="navigation" class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a href="/index.html" class="navbar-brand"><img src="/images/sitename_x2.png" alt="Unibok - Digitale lærebøker"></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row hovedinnhold">
+        <div class="col-md-8">
+
+          <h1>Ingen tilgang</h1>
+
+          <p>Du må logge inn for å få tilgang til denne siden. <a href="/login">Gå til logg inn</a>.</p>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row bunnmeny">
+      <div class="bunnmenyCont">
+        <div class="bunnmenyelementCont">
+          
+          <div class="bunnmenylogoCont">
+            <div class="bunnmenyimgCont" id="cdlogo">
+              <a href="http://www.cappelendamm.no/"><img alt="Cappelen Damm logo" src="/images/cd_logo.png" width="150" height="16"></a>
+            </div>
+
+            <div class="bunnmenyimgCont" id="asch_logo">
+              <a href="http://www.aschehoug.no/"><img alt="Aschehoug logo" src="/images/asch_logo.png" width="110" height="29"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
