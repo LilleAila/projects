@@ -6,7 +6,8 @@ import { URL } from "url";
 
 class Downloader {
   constructor() {
-    this._base_url = "https://les.unibok.no";
+    this.base_url = "https://les.unibok.no";
+    this.output_dir = "./output";
   }
 
   async start() {
@@ -55,10 +56,18 @@ class Downloader {
   }
 
   async download_book(name, url) {
+    await fs.mkdir(this.output_dir, { recursive: true });
     const book = this.parse_url(url);
-    const file_url = `${this._base_url}/bookresource/publisher/${book.publisher}/book/${book.ref}/epub/${book.id}/offline.ub`;
-    const filename = `./${name}.epub`;
+    const file_url = `${this.base_url}/bookresource/publisher/${book.publisher}/book/${book.ref}/epub/${book.id}/offline.ub`;
+    const filename = `${this.output_dir}/${name}.epub`;
     await this.download_file(file_url, filename);
+  }
+
+  async download_books(books) {
+    for (const book of books) {
+      const [name, url] = book;
+      await this.download_book(name, url);
+    }
   }
 }
 
@@ -66,9 +75,12 @@ class Downloader {
   const downloader = new Downloader();
   await downloader.start();
   await downloader.login();
-  await downloader.download_book(
-    "Enchanté",
-    "https://les.unibok.no/#cappelendamm/p193917/2430/1",
-  );
+  // await downloader.download_book(
+  //   "Enchanté",
+  //   "https://les.unibok.no/#cappelendamm/p193917/2430/1",
+  // );
+  await downloader.download_books([
+    ["Enchanté", "https://les.unibok.no/#cappelendamm/p193917/2430/1"],
+  ]);
   await downloader.stop();
 })();
