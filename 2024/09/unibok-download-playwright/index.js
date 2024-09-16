@@ -97,8 +97,7 @@ class Downloader {
       const new_url = this.page.url();
       books_to_download.push([name, new_url]);
     }
-    // download_books(books_to_download);
-    console.log(books_to_download);
+    download_books(books_to_download);
   }
 }
 
