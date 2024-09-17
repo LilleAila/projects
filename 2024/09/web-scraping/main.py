@@ -19,6 +19,6 @@ for table in tables:
         words.append([column.get_text(strip=True) for column in columns])
 
 with open("output.csv", "w", newline="", encoding="utf-8") as file:
-    writer = csv.writer(file)
+    writer = csv.writer(file, delimiter=";")
     writer.writerow(["Bokmål", "Nynorsk"])
     writer.writerows(words)
