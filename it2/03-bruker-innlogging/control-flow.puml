@@ -1,7 +1,8 @@
 ' Activity diagram docs: https://plantuml.com/activity-diagram-beta
 ' Syntax docs: https://plantuml.com/commons
 
-@startuml bruker-login
+@startuml
+title Bruker-innlogging
 
 start
 
