@@ -1,3 +1,4 @@
+squareSumDifference :: [Int] -> Int
 squareSumDifference xs = sumSquares xs - squareSum xs
   where
     squareSum xs = sum xs ^ 2
