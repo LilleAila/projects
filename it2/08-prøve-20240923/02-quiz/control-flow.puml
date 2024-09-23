@@ -1,0 +1,79 @@
+@startuml
+title Quiz-spill
+
+start
+
+partition "Hent spørsmål" {
+  :Les ""hovedstader.csv"";
+  :Les ""innbyggere.csv"";
+  :Les ""naboland.csv"";
+  :Lagre verdiene;
+}
+
+partition "Spill spillet" {
+  repeat :Velg en kategori;
+  :Velg et spørsmål i kategorien;
+  :Spør brukeren om svaret;
+
+  partition "Sjekk svaret" {
+    switch (Hvilken kategori er spørsmålet?)
+    case ( Hovedstader )
+      if (Er svaret likt fasiten?) then (Ja)
+        :Gi poeng;
+      else (Nei)
+      endif
+    case ( Innbyggere )
+      :Gjør svaret om til tall;
+      if (Er svaret helt likt fasiten?) then (Ja)
+        :Skriv at det var veldig bra;
+        :Gi poeng;
+      elseif (Er svaret innen 10% av fasiten?) then (Ja)
+        :Gi poeng;
+      else (Nei)
+      endif
+    case ( Naboland )
+      if (Er det nok riktige svar?) then (Ja)
+        :Gi poeng;
+      else (Nei)
+      endif
+    endswitch
+  }
+  repeat while (Har det gått tre runder?) is (Ja) not (Nei)
+
+}
+
+:Skriv hvor bra spilleren spilte;
+
+end
+
+' if (Eksisterer brukeren?) then (Ja)
+' else (Nei)
+'   partition "Lag bruker" {
+'     repeat :Spør om brukernavn; <<input>>
+'     :Spør om passord; <<input>>
+'     :Spør om passord igjen; <<input>>
+'     ' backward:Passordene er ikke like!;
+'     repeat while (Er passordene like?) is (Nei) not (Ja)
+'   }
+' endif
+'
+' partition "Logg inn" {
+'   repeat :Spør om brukernavn; <<input>>
+'   :Spør om passord; <<input>>
+'   ' backward:Brukernavn eller passord er feil!;
+'   repeat while (Er det riktig?) is (Nei) not (Ja)
+' }
+'
+' partition "Tofaktor autentisering" {
+'   if (Har brukeren satt opp 2fa?) then (Ja)
+'     repeat :Spør brukeren om kode; <<input>>
+'     repeat while (Er koden riktig?) is (Nei) not (Ja)
+'   else (Nei)
+'   endif
+' }
+'
+' :Logg inn bruker;
+'
+' end
+
+@enduml
