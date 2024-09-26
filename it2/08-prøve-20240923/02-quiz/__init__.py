@@ -30,31 +30,36 @@ class Game:
         self._read_file("naboland.csv")
 
     def __init__(self):
+        """Sette variabler relatert til spillet"""
         self._init_answers()
         self._score = 0
         self._rounds = 0
+        self._user_answers = []
 
     def _trim_str(self, text):
+        """Fjerne ekstra mellomrom og gjøre til små bokstaver"""
         return text.strip().lower()
 
     def ask_question(self):
+        """Velge et tilfeldig spørsmål og stille det til brukeren"""
         # Velg tilfeldig spørsmål og kategori
-        question_type = random.choice(list(self._questions.keys()))
-        questions = self._questions[question_type]
+        category = random.choice(list(self._questions.keys()))
+        questions = self._questions[category]
         question = random.choice(questions["answers"])
         # En ekstra sjekk for om det er denne typen spørsmål
-        if question_type == "naboland":
+        if category == "naboland":
             print("Skriv naboland separert med komma:")
         # Spør bruker om svaret
+        user_question = f"{questions['question']} {question[0].capitalize()}? "
         user_answer = self._trim_str(
-            input(f"{questions['question']} {question[0].capitalize()}? ")
+            input(user_question)
         )
         answer = question[1]
 
         correct = False
 
-        # Gå gjennom de ulike typene spørsmål, siden hver av dem har litt ulik logikk
-        match question_type:
+        # Gå gjennom de ulike kategoriene, siden hver av dem har litt ulik logikk
+        match category:
             case "innbyggere":
                 try:
                     user_answer = int(user_answer)
@@ -93,6 +98,12 @@ class Game:
         else:
             print(f"Det var feil svar! Du har {self._score} riktige svar.")
 
+        self._user_answers.append({
+            "correct": correct,
+            "question": user_question,
+            "answer": user_answer
+        })
+
     def game(self):
         print("Velkommen til dette geografi-quiz spillet!")
         while self._rounds < 3:
@@ -104,6 +115,7 @@ class Game:
         print(
             f"Spillet er avsluttet! Du fikk {self._score} poent på {self._rounds} runder!"
         )
+
         match self._score:
             case 0:
                 print("Det var dårlig")
@@ -114,7 +126,19 @@ class Game:
             case 3:
                 print("Det var kjempebra")
 
+        correct = [i for i in self._user_answers if i["correct"]]
+        incorrect = [i for i in self._user_answers if not i["correct"]]
+        if len(correct) > 0:
+            print("Du fikk riktig på:")
+            [print(i["question"], i["answer"]) for i in correct]
+        if len(incorrect) > 0:
+            print("Du fikk feil på:")
+            [print(i["question"], i["answer"]) for i in incorrect]
+
 
 if __name__ == "__main__":
     game = Game()
-    game.game()
+    try:
+        game.game()
+    except (EOFError, KeyboardInterrupt):
+        print("\nneiiiiii ikke stopp spillet :(")
