@@ -55,12 +55,19 @@ class Downloader {
     return { publisher, ref, id };
   }
 
+  escape_file_name(name) {
+    // Replace / with - in paths
+    return name.replace(/\//g, "-");
+  }
+
   async download_book(name, url) {
+    console.log(`${name}: Starting download`);
     await fs.mkdir(this.output_dir, { recursive: true });
     const book = this.parse_url(url);
     const file_url = `${this.base_url}/bookresource/publisher/${book.publisher}/book/${book.ref}/epub/${book.id}/offline.ub`;
-    const filename = `${this.output_dir}/${name}.epub`;
+    const filename = `${this.output_dir}/${this.escape_file_name(name)}.epub`;
     await this.download_file(file_url, filename);
+    console.log(`${name}: Finished download`);
   }
 
   async download_books(books) {
@@ -86,9 +93,10 @@ class Downloader {
   }
 
   async download_library() {
-    // Done in to iterations to avoid going back and forth because of clicking the links
+    // Done in two iterations to avoid going back and forth because of clicking the links
     const books = await this.get_library();
     let books_to_download = [];
+    console.log("Retrieved book names");
     for (const book of books) {
       const [name, url] = book;
       await this.page.goto(url);
@@ -97,7 +105,9 @@ class Downloader {
       const new_url = this.page.url();
       books_to_download.push([name, new_url]);
     }
-    download_books(books_to_download);
+    console.log("Retrieved book data");
+    await this.download_books(books_to_download);
+    console.log("Completed downloads");
   }
 }
 
