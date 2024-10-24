@@ -1,0 +1,141 @@
+@startuml
+' skinparam groupInheritance 2
+
+abstract Character {
+  - String name
+  - Int health
+  + String getName()
+  + Int getHealth()
+  + void takeDamage(Int)
+  + void heal(Int)
+}
+
+note top of Character
+  Abstract er en klasse
+  uten implementasjoner
+  av funksjonene
+end note
+
+object Enemy2 {
+  name = "Enemy 2"
+  health = 123
+}
+
+object Enemy1 {
+  name = "Enemy 1"
+  health = 100
+}
+
+object Enemy4 {
+  name = "Enemy 4"
+  health = 256
+}
+
+object Enemy3 {
+  name = "Enemy 3"
+  health = 42
+}
+
+class Enemy {
+  - Int damage
+  + Int attack()
+}
+
+note left of Enemy
+  Grunnklasse for
+  ulike typer fiender
+end note
+
+Enemy1 --|> Enemy
+Enemy2 --|> Enemy
+Enemy <|-- Enemy3
+Enemy <|-- Enemy4
+
+class Attack {
+  - String name
+  - Int damage
+  + String getName()
+  + Int getDamage()
+}
+
+class Inventory {
+  - Item[] items
+  + void addItem(Item)
+  + void removeItem(Item)
+  + Item[] getItems()
+}
+
+class Player {
+  - Attack[] attacks
+  - Inventory inventory
+  + Attack[] getAttacks()
+  + Inventory getInventory()
+}
+
+
+interface Usable {
+  + void use()
+}
+
+note right of Usable
+  Interface er funksjoner
+  uten implementasjon
+end note
+
+class Item {
+  - String name
+  + String getName()
+}
+
+note right of Item
+  Grunnklasse for
+  ulike gjenstander
+end note
+
+Usable <-- Item
+
+class Weapon {
+  - Int damage
+  - Int durability
+  + Int attack()
+}
+
+class Food {
+  + Int nutrition
+}
+class Key {
+  + Room targetRoom
+}
+
+Item <|-- Weapon
+Item <|-- Food
+Item <|-- Key
+
+Player::inventory <-- Inventory
+Item --> Inventory::items
+
+class Room {
+  .. Neighboring rooms ..
+  + Room? north
+  + Room? south
+  + Room? east
+  + Room? west
+  .. Props ..
+  - Bool locked
+  - Enemy[] enemies
+  - Item[] items
+  + Bool isLocked()
+  + Enemy[] getEnemies()
+  + Item[] getItems()
+}
+
+Item --> Room::items
+
+Enemy --> Room::enemies
+
+Attack --> Player::attacks
+
+Character <|-- Player
+Character <|-- Enemy
+
+@enduml
