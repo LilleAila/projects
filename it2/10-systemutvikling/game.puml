@@ -36,8 +36,7 @@ object Enemy3 {
   health = 42
 }
 
-class Enemy {
-  - Int damage
+interface Enemy {
   + Int attack()
 }
 
