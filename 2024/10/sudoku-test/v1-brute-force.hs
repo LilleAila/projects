@@ -1,4 +1,5 @@
-import Data.IntMap (restrictKeys)
+-- Simple brute-force sudoku solver algorithm using backtracking
+
 import Data.List
 
 type Row = [Int]
@@ -54,6 +55,28 @@ validBoard :: Grid -> Bool
 -- Everything is 0-indexed
 validBoard board = and [validSquare board x y | x <- [0 .. 8], y <- [0 .. 8]]
 
+solveBoard :: Grid -> Maybe Grid
+solveBoard board = tryNumbers board 0 0 [1 .. 9]
+
+tryNumbers :: Grid -> Int -> Int -> [Int] -> Maybe Grid
+tryNumbers _ _ _ [] = Nothing
+tryNumbers board row col (n : ns)
+  | row >= length board = Just board
+  | col >= length (board !! row) = tryNumbers board (row + 1) 0 [1 .. 9]
+  | board !! row !! col /= 0 = tryNumbers board row (col + 1) [1 .. 9]
+  | validSquare newBoard row col = case tryNumbers newBoard row (col + 1) [1 .. 9] of
+      Nothing -> tryNumbers board row col ns
+      Just solution -> Just solution
+  | otherwise = tryNumbers board row col ns
+  where
+    newBoard = placeNumber board row col n
+
+placeNumber :: Grid -> Int -> Int -> Int -> Grid
+placeNumber board row col n =
+  take row board
+    ++ [take col (board !! row) ++ [n] ++ drop (col + 1) (board !! row)]
+    ++ drop (row + 1) board
+
 main :: IO ()
 main = do
-  print "test"
+  print $ solveBoard game1
