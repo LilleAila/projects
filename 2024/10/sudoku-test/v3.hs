@@ -1,3 +1,4 @@
+import Control.Exception (assert)
 import Data.Char (digitToInt)
 import Data.List (intercalate, transpose, (\\))
 import Data.Maybe (fromJust)
@@ -86,6 +87,61 @@ traverseBoard' board =
     -- The result from one fmap is passed to the next. If one of them return Nothing, everything returns Nothing.
     >>= fmap boardToBoxes . traverse removeNumbers . boardToBoxes
 
+-- Recursive solver with backtracking (similar to v1 but way faster)
+makeFixed :: Board -> Int -> Int -> Board
+makeFixed board row col =
+  take row board
+    ++ [take col (board !! row) ++ [fixedSquare] ++ drop (col + 1) (board !! row)]
+    ++ drop (row + 1) board
+  where
+    square = board !! row !! col
+    fixedSquare = case square of
+      Fixed x -> Fixed x
+      Possible (y : _) -> Fixed y
+
+makeRemainder :: Board -> Int -> Int -> Maybe Board
+makeRemainder board row col =
+  case square of
+    Fixed _ -> Nothing
+    _ -> Just updatedBoard
+  where
+    square = board !! row !! col
+    remainderSquare = case square of
+      Fixed x -> Fixed x
+      Possible [x] -> Fixed x
+      Possible (_ : xs) -> Possible xs
+
+    updatedBoard =
+      take row board
+        ++ [take col (board !! row) ++ [remainderSquare] ++ drop (col + 1) (board !! row)]
+        ++ drop (row + 1) board
+
+isFixed :: Square -> Bool
+isFixed square = case square of
+  Fixed _ -> True
+  Possible _ -> False
+
+solveBoard :: Maybe Board -> Int -> Int -> Maybe Board
+solveBoard Nothing _ _ = Nothing
+solveBoard (Just board) row col
+  | row >= length board = Just board
+  | col >= length (board !! row) = solveBoard (Just board) (row + 1) 0
+  | isFixed (board !! row !! col) = solveBoard (Just board) row (col + 1)
+  | otherwise = case traversedBoard of
+      Nothing -> case nextBoard of
+        Just nextBoard -> solveBoard (Just nextBoard) row col
+        Nothing -> Nothing
+      Just traversedBoard -> case solvedBoard of
+        Just solvedBoard -> Just solvedBoard
+        Nothing -> case nextBoard of
+          Just nextBoard -> solveBoard (Just nextBoard) row col
+          Nothing -> Nothing
+  where
+    newBoard = makeFixed board row col
+    nextBoard = makeRemainder board row col
+    traversedBoard = traverseBoard newBoard
+    solvedBoard = solveBoard traversedBoard row (col + 1)
+
 -- Input
 parseBoard :: String -> Board
 parseBoard board = map (map parseSquare) $ splitChunks 9 board
@@ -97,8 +153,16 @@ parseBoard board = map (map parseSquare) $ splitChunks 9 board
 
 board1 = parseBoard "...26.7.168..7..9.19...45..82.1...4...46.29...5...3.28..93...74.4..5..367.3.18..."
 
+board2 = parseBoard ".......1.4.........2...........5.4.7..8...3....1.9....3..4..2...5.1........8.6..."
+
 main :: IO ()
 main = do
-  putStrLn $ showPossibilities board1
-  putStrLn $ showBoard board1
-  putStrLn $ showBoard $ fromJust $ traverseBoard board1
+  -- putStrLn $ showPossibilities board2
+  putStrLn $ showBoard board2
+  -- putStrLn $ showPossibilities $ fromJust $ traverseBoard board2
+  -- putStrLn $ showBoard $ fromJust $ traverseBoard board2
+  -- putStrLn $ showPossibilities $ makeFixed board2 0 0
+  -- putStrLn $ showPossibilities $ makeRemainder board2 0 0
+  -- print $ [show x ++ show y ++ " " ++ show (length $ makeFixed board2 x y) | x <- [0 .. 8], y <- [0 .. 8]]
+  -- putStrLn $ showBoard $ makeFixed board2 7 3
+  putStrLn $ showBoard $ fromJust $ solveBoard (Just board2) 0 0
