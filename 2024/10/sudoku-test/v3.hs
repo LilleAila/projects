@@ -1,3 +1,4 @@
+import Control.Applicative ((<|>))
 import Control.Exception (assert)
 import Data.Char (digitToInt)
 import Data.List (intercalate, transpose, (\\))
@@ -88,11 +89,14 @@ traverseBoard' board =
     >>= fmap boardToBoxes . traverse removeNumbers . boardToBoxes
 
 -- Recursive solver with backtracking (similar to v1 but way faster)
-makeFixed :: Board -> Int -> Int -> Board
-makeFixed board row col =
+setSquare :: Board -> Int -> Int -> Square -> Board
+setSquare board row col square =
   take row board
-    ++ [take col (board !! row) ++ [fixedSquare] ++ drop (col + 1) (board !! row)]
+    ++ [take col (board !! row) ++ [square] ++ drop (col + 1) (board !! row)]
     ++ drop (row + 1) board
+
+makeFixed :: Board -> Int -> Int -> Board
+makeFixed board row col = setSquare board row col fixedSquare
   where
     square = board !! row !! col
     fixedSquare = case square of
@@ -100,10 +104,9 @@ makeFixed board row col =
       Possible (y : _) -> Fixed y
 
 makeRemainder :: Board -> Int -> Int -> Maybe Board
-makeRemainder board row col =
-  case square of
-    Fixed _ -> Nothing
-    _ -> Just updatedBoard
+makeRemainder board row col = case square of
+  Fixed _ -> Nothing
+  _ -> Just $ setSquare board row col remainderSquare
   where
     square = board !! row !! col
     remainderSquare = case square of
@@ -111,15 +114,20 @@ makeRemainder board row col =
       Possible [x] -> Fixed x
       Possible (_ : xs) -> Possible xs
 
-    updatedBoard =
-      take row board
-        ++ [take col (board !! row) ++ [remainderSquare] ++ drop (col + 1) (board !! row)]
-        ++ drop (row + 1) board
-
 isFixed :: Square -> Bool
 isFixed square = case square of
   Fixed _ -> True
   Possible _ -> False
+
+noDuplicates :: (Eq a) => [a] -> Bool
+noDuplicates [] = True
+noDuplicates (x : xs) = notElem x xs && noDuplicates xs
+
+validBoard :: Board -> Bool
+validBoard board = all validRow board && all validRow (rowsToCols board) && all validRow (boardToBoxes board)
+  where
+    validRow :: Row -> Bool
+    validRow = noDuplicates . filter isFixed
 
 solveBoard :: Maybe Board -> Int -> Int -> Maybe Board
 solveBoard Nothing _ _ = Nothing
@@ -127,20 +135,15 @@ solveBoard (Just board) row col
   | row >= length board = Just board
   | col >= length (board !! row) = solveBoard (Just board) (row + 1) 0
   | isFixed (board !! row !! col) = solveBoard (Just board) row (col + 1)
-  | otherwise = case traversedBoard of
-      Nothing -> case nextBoard of
-        Just nextBoard -> solveBoard (Just nextBoard) row col
-        Nothing -> Nothing
-      Just traversedBoard -> case solvedBoard of
-        Just solvedBoard -> Just solvedBoard
-        Nothing -> case nextBoard of
-          Just nextBoard -> solveBoard (Just nextBoard) row col
-          Nothing -> Nothing
+  | otherwise = traverseBoard board >>= solveBoard'
   where
-    newBoard = makeFixed board row col
-    nextBoard = makeRemainder board row col
-    traversedBoard = traverseBoard newBoard
-    solvedBoard = solveBoard traversedBoard row (col + 1)
+    solveBoard' board
+      | not (validBoard board) = Nothing
+      | otherwise =
+          let nextBoard = makeFixed board row col
+              remainderBoard = makeRemainder board row col
+           in -- <|> works with monadic functions, and if the left one returns Nothing, it will instead use the result from the right one, and if both return Nothing, the expression will return Nothing.
+              solveBoard (Just nextBoard) row (col + 1) <|> solveBoard remainderBoard row col
 
 -- Input
 parseBoard :: String -> Board
@@ -153,16 +156,11 @@ parseBoard board = map (map parseSquare) $ splitChunks 9 board
 
 board1 = parseBoard "...26.7.168..7..9.19...45..82.1...4...46.29...5...3.28..93...74.4..5..367.3.18..."
 
-board2 = parseBoard ".......1.4.........2...........5.4.7..8...3....1.9....3..4..2...5.1........8.6..."
+board2 = parseBoard "6......1.4.........2...........5.4.7..8...3....1.9....3..4..2...5.1........8.6..."
+
+board3 = parseBoard ".......12.5.4............3.7..6..4....1..........8....92....8.....51.7.......3..."
 
 main :: IO ()
 main = do
-  -- putStrLn $ showPossibilities board2
-  putStrLn $ showBoard board2
-  -- putStrLn $ showPossibilities $ fromJust $ traverseBoard board2
-  -- putStrLn $ showBoard $ fromJust $ traverseBoard board2
-  -- putStrLn $ showPossibilities $ makeFixed board2 0 0
-  -- putStrLn $ showPossibilities $ makeRemainder board2 0 0
-  -- print $ [show x ++ show y ++ " " ++ show (length $ makeFixed board2 x y) | x <- [0 .. 8], y <- [0 .. 8]]
-  -- putStrLn $ showBoard $ makeFixed board2 7 3
+  putStrLn $ showBoard board1
   putStrLn $ showBoard $ fromJust $ solveBoard (Just board2) 0 0
