@@ -1,3 +1,12 @@
+-- Rather than trying every single number for each square, this implementation
+-- will traverse the board, removing all numbers that are present in intersecting
+-- fixed squares. This will lead to a smaller amount of possibilities to check
+-- It does this recursively, testing all possibilities until the board is solved
+-- Possible improvements include:
+-- Doing a breadth-first search rather than a depth-first search
+-- Finding the optimal next square rather than incrementing by one for the next boards
+-- Using a data structure such as a vector, instead of a list
+
 import Control.Applicative ((<|>))
 import Control.Exception (assert)
 import Data.Char (digitToInt)
