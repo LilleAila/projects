@@ -1,5 +1,5 @@
--- Similar to v3, but finds the optimal square with the lowest number of possibilities
--- for each iteration of reducing the board.
+-- Similar to v3, but finds the optimal square with the lowest number of
+-- possibilities for each iteration of reducing the board.
 
 import Control.Applicative ((<|>))
 import Control.Exception (assert)
@@ -133,19 +133,23 @@ validBoard board = all validRow board && all validRow (rowsToCols board) && all 
     validRow :: Row -> Bool
     validRow = noDuplicates . filter isFixed
 
-solveBoard :: Maybe Board -> Int -> Int -> Maybe Board
-solveBoard Nothing _ _ = Nothing
-solveBoard (Just board) row col
-  | row >= length board = Just board
-  | col >= length (board !! row) = solveBoard (Just board) (row + 1) 0
-  | isFixed (board !! row !! col) = solveBoard (Just board) row (col + 1)
+fullBoard :: Board -> Bool
+fullBoard = all (all isFixed)
+
+solvedBoard :: Board -> Bool
+solvedBoard board = fullBoard board && validBoard board
+
+solveBoard :: Maybe Board -> Maybe Board
+solveBoard Nothing = Nothing
+solveBoard (Just board)
+  | solvedBoard board = Just board
   | otherwise = traverseBoard board >>= solveBoard'
   where
     solveBoard' board
       | not (validBoard board) = Nothing
       | otherwise =
           let (nextBoard, remainderBoard) = nextBoards board -- <|> works with monadic functions, and if the left one returns Nothing, it will instead use the result from the right one, and if both return Nothing, the expression will return Nothing.
-           in solveBoard (Just nextBoard) row (col + 1) <|> solveBoard (Just remainderBoard) row col
+           in solveBoard (Just nextBoard) <|> solveBoard (Just remainderBoard)
 
 -- Input
 parseBoard :: String -> Board
@@ -167,4 +171,4 @@ board4 = parseBoard ".......1.4.........2...........5.4.7..8...3....1.9....3..4.
 main :: IO ()
 main = do
   putStrLn $ showBoard board4
-  putStrLn $ showBoard $ fromJust $ solveBoard (Just board4) 0 0
+  putStrLn $ showBoard $ fromJust $ solveBoard (Just board4)
