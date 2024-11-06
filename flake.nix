@@ -56,6 +56,8 @@
               haskell-language-server
               ormolu
               ghcid
+              stack
+              cabal-install
             ];
           };
           lua = mkShell {
