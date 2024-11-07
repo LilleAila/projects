@@ -170,5 +170,5 @@ board4 = parseBoard ".......1.4.........2...........5.4.7..8...3....1.9....3..4.
 
 main :: IO ()
 main = do
-  putStrLn $ showBoard board4
-  putStrLn $ showBoard $ fromJust $ solveBoard (Just board4)
+  putStrLn $ showBoard board1
+  putStrLn $ showBoard $ fromJust $ solveBoard (Just board1)
