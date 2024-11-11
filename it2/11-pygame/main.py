@@ -13,20 +13,24 @@ class Colors:
 
 class Screen:
     """Ulike verdier om skjermen. Gjør heller dette enn å ha globale variabler."""
-    __slots__ = ("dimensions", "padding", "fps", "surface")
+    __slots__ = ("dimensions", "padding", "fps", "surface", "available_area")
 
     def __init__(self, dimensions: Geometry = (600, 400), padding: int = 24, fps: int = 60) -> None:
         self.dimensions = dimensions
         self.padding = padding
         self.fps = fps
 
+        (width, height) = self.dimensions
+        self.available_area = ((padding, width - padding), (padding, height - padding))
+
     def open(self):
         self.surface = pg.display.set_mode(self.dimensions)
 
-class Paddle:
+class Paddle(pg.sprite.Sprite):
     __slots__ = ("__position", "__geometry", "__screen", "__rect")
 
     def __init__(self, position: Position, geometry: Geometry, screen: Screen) -> None:
+        super().__init__()
         self.__position = position
         self.__geometry = geometry
         self.__screen = screen
@@ -35,22 +39,25 @@ class Paddle:
     def position(self) -> Position:
         return self.__position
 
-    @position.setter
-    def position(self, new_position: Position) -> Position:
-        self.__position = new_position
-        return self.__position
+    def move(self, direction: Position):
+        (dir_x, dir_y) = direction
+        (pos_x, pos_y) = self.__position
+        (width, height) = self.__geometry
+        ((min_x, max_x), (min_y, max_y)) = self.__screen.available_area
+        self.__position = (min(max(pos_x + dir_x, min_x), max_x - width), min(max(pos_y + dir_y, min_y), max_y - height))
+
+    def update(self, keys):
+        print(keys)
 
     def draw(self) -> None:
         (x_1, y_1) = self.__position
         (width, height) = self.__geometry
         x_2, y_2 = x_1 + width, y_1 + height
-        # x_1, y_1 = x - width / 2, y - height / 2
-        # x_2, y_2 = x + width / 2, y + height / 2
         self.__rect = pg.draw.rect(self.__screen.surface, Colors.FOREGROUND, (x_1, y_1, x_2, y_2))
 
 
 class App:
-    __slots__ = ("__properties", "__running", "__clock", "__screen", "__sprites")
+    __slots__ = ("__properties", "__running", "__clock", "__screen", "__sprites", "__paddle1")
 
     def __init__(self, screen: Screen) -> None:
         self.__screen = screen
@@ -61,16 +68,23 @@ class App:
             match event.type:
                 case pg.QUIT:
                     self.__running = False
+        self.__handle_keyboard()
+
+    def __handle_keyboard(self) -> None:
+        keys = pg.key.get_pressed()
+        if keys[kc.K_j]:
+            self.__paddle1.move((0, 10))
+        if keys[kc.K_k]:
+            self.__paddle1.move((0, -10))
 
     def __update(self) -> None:
-        self.__sprites.update()
+        self.__sprites.update(pg.key.get_pressed())
 
     def __draw(self) -> None:
         self.__screen.surface.fill(Colors.BACKGROUND)
         self.__sprites.draw(self.__screen.surface)
 
-        paddle1 = Paddle((50, 50), (25, 100), self.__screen)
-        paddle1.draw()
+        self.__paddle1.draw()
 
         pg.display.flip()
 
@@ -80,6 +94,9 @@ class App:
         self.__screen.open()
         self.__clock = pg.time.Clock()
         self.__sprites = pg.sprite.Group()
+
+        self.__paddle1 = Paddle((50, 50), (1, 100), self.__screen)
+
         while self.__running:
             self.__handle_events()
             self.__update()
