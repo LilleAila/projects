@@ -84,18 +84,37 @@ class Paddle(Sprite):
         self.rect.move_ip(direction)
 
 class Ball(Sprite):
-    __slots__ = ("__velocity")
+    __slots__ = ("__velocity", "__radius")
 
     def __init__(self, position: Position, radius: int, screen: Screen) -> None:
+        self.__velocity = (5, 5)
+        self.__radius = radius
+
         super().__init__(position, (radius * 2, radius * 2), screen)
 
         pg.draw.circle(self.image, Colors.FOREGROUND, (radius, radius), radius)
 
-        self.__velocity = (5, 5)
-
-    def update(self):
+    def update(self) -> None:
         self.rect.move_ip(self.__velocity)
         self.handle_edge_collision()
+
+    def handle_edge_collision(self) -> None:
+        if self.rect.x >= self.screen.width - 2 * self.__radius or self.rect.x <= 0:
+            self.flip_x()
+        if self.rect.y >= self.screen.height - 2 * self.__radius or self.rect.y <= 0:
+            self.flip_y()
+
+    def flip_x(self) -> None:
+        self.__velocity = (-self.__velocity[0], self.__velocity[1])
+
+    def flip_y(self) -> None:
+        self.__velocity = (self.__velocity[0], -self.__velocity[1])
+
+    def check_paddle_collision(self, paddle: Paddle) -> bool:
+        if self.rect.colliderect(paddle.rect):
+            self.flip_x()
+            return True
+        return False
 
 class Game:
     __slots__ = ("__properties", "__running", "__clock", "__screen", "__sprites", "__paddle1", "__paddle2", "__ball1")
@@ -116,18 +135,20 @@ class Game:
         if keys[kc.K_ESCAPE]:
             self.__running = False
         if keys[kc.K_j]:
-            self.__paddle1.move((0, 10))
-        if keys[kc.K_k]:
-            self.__paddle1.move((0, -10))
-        if keys[kc.K_f]:
             self.__paddle2.move((0, 10))
-        if keys[kc.K_d]:
+        if keys[kc.K_k]:
             self.__paddle2.move((0, -10))
+        if keys[kc.K_f]:
+            self.__paddle1.move((0, 10))
+        if keys[kc.K_d]:
+            self.__paddle1.move((0, -10))
 
     def __update(self) -> None:
         # Linjen under ville sendt keys til alle sprites. Jeg velger heller å håndtere all input direkte i __handle_keyboard.
         # self.__sprites.update(pg.key.get_pressed())
         self.__sprites.update()
+        self.__ball1.check_paddle_collision(self.__paddle1)
+        self.__ball1.check_paddle_collision(self.__paddle2)
 
     def __draw(self) -> None:
         self.__screen.surface.fill(Colors.BACKGROUND)
