@@ -37,8 +37,22 @@ class Scene(Scene):
             )
         )
 
+        dot1_label = Text(f"x={t1.get_value():1f}", color=WHITE).scale(0.5)
+        dot1_label.add_updater(
+            lambda x: x.become(
+                Text(f"x={t1.get_value():.1f}", color=WHITE).scale(0.5)
+            ).move_to(ax.c2p(t1.get_value(), f(t1.get_value())) + 0.5 * DR)
+        )
+
+        dot2_label = Text(f"x={t2.get_value():1f}", color=WHITE).scale(0.5)
+        dot2_label.add_updater(
+            lambda x: x.become(
+                Text(f"x={t2.get_value():.1f}", color=WHITE).scale(0.5)
+            ).move_to(ax.c2p(t2.get_value(), f(t2.get_value())) + 0.5 * DR)
+        )
+
         labels = VGroup(labels, graph_label)
-        self.add(ax, graph, labels, dot1, dot2, l1)
+        self.add(ax, graph, labels, dot1, dot1_label, dot2, dot2_label, l1)
 
         self.play(t1.animate.set_value(2.5), run_time=2)
 
