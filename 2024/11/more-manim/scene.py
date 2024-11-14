@@ -1,25 +1,47 @@
 from manim import *
 
+f = lambda x: 1 / 2 * np.power(x, 3) - 3 * x
+
 
 class Scene(Scene):
     def construct(self):
-        equations = [
-            r"ax^2+bx+c}=0",
-            r"x^2+\frac{b}{a}x+\frac{c}{a}=0",
-            r"x^2+\frac{b}{a}x=-\frac{c}{a}",
-            r"x^2+\frac{b}{a}x+\left(\frac{b}{2a}\right)^{2}=-\frac{c}{a}+\left(\frac{b}{2a}\right)^{2}",
-            r"\left(x+\frac{b}{2a}\right)^{2}=-\frac{c}{a}+\left(\frac{b}{2a}\right)^{2}",
-            r"x+\frac{b}{2a}=\pm\sqrt{-\frac{c}{a}+\left(\frac{b}{2a}\right)^{2}}",
-            r"x=-\frac{b}{2a}\pm\sqrt{-\frac{c}{a}+\left(\frac{b}{2a}\right)^{2}}",
-            r"x=\left(-\frac{b}{2a}\pm\sqrt{-\frac{c}{a}+\left(\frac{b}{2a}\right)^{2}}\right) \times \frac{2a}{2a}",
-            r"x=\frac{-b\pm\sqrt{-\frac{c}{a} \times \left(2a\right)^{2} + \left(\frac{b}{2a}\right)^{2} \times \left(2a\right)^{2}}}{2a}",
-            r"x=\frac{-b\pm\sqrt{b^{2}-4ac}}{2a}",
-        ]
+        ax = Axes(
+            x_range=[-4, 4, 1],
+            y_range=[-4, 4, 1],
+            axis_config={"color": GREEN, "include_numbers": True},
+            tips=False,
+        )
 
-        equation = MathTex(equations[0])
-        self.play(Create(equation))
-        for eq in equations[1:]:
-            self.wait(2)
-            self.play(Transform(equation, MathTex(eq)), run_time=0.8)
-        self.wait(2)
-        self.play(FadeOut(equation), run_time=1)
+        labels = ax.get_axis_labels()
+
+        graph = ax.plot(f, color=BLUE)
+        graph_label = ax.get_graph_label(
+            graph, "f(x) = \\frac{1}{2} x^3-3x", x_val=-2, direction=UP + LEFT
+        )
+
+        # https://docs.manim.community/en/stable/examples.html#argminexample
+        t1 = ValueTracker(3)
+        dot1 = Dot(point=[ax.c2p(t1.get_value(), f(t1.get_value()))])
+        dot1.add_updater(lambda x: x.move_to(ax.c2p(t1.get_value(), f(t1.get_value()))))
+
+        t2 = ValueTracker(2)
+        dot2 = Dot(point=[ax.c2p(t2.get_value(), f(t2.get_value()))])
+        dot2.add_updater(lambda x: x.move_to(ax.c2p(t2.get_value(), f(t2.get_value()))))
+
+        l1 = Line(dot1.get_center(), dot2.get_center()).set_length(100).set_color(RED)
+        l1.add_updater(
+            lambda x: x.become(
+                Line(dot1.get_center(), dot2.get_center())
+                .set_length(100)
+                .set_color(RED)
+            )
+        )
+
+        labels = VGroup(labels, graph_label)
+        self.add(ax, graph, labels, dot1, dot2, l1)
+
+        self.play(t1.animate.set_value(2.5), run_time=2)
+
+        self.wait(1)
+
+        self.play(t1.animate.set_value(2.01), run_time=2)
