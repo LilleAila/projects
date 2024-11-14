@@ -1,5 +1,6 @@
 import pygame as pg
 import pygame.locals as kc
+import random as rd
 
 type Geometry = tuple[int, int]
 type Position = tuple[int, int]
@@ -44,9 +45,9 @@ class Sprite(pg.sprite.Sprite):
 
     def __init__(self, position: Position, geometry: Geometry, screen: Screen) -> None:
         super().__init__()
+        self.screen = screen
         self.__geometry = geometry
 
-        self.screen = screen
         # Gjennomsiktig bakgrunn: https://stackoverflow.com/a/328067
         self.image = pg.Surface(self.__geometry, pg.SRCALPHA).convert_alpha()
         self.rect = self.image.get_rect()
@@ -54,8 +55,6 @@ class Sprite(pg.sprite.Sprite):
         (x, y) = position
         self.rect.x = x
         self.rect.y = y
-
-        self.handle_edge_collision()
 
     @property
     def width(self) -> int:
@@ -71,24 +70,63 @@ class Sprite(pg.sprite.Sprite):
         self.rect.x = min(max(x, min_x), max_x - self.rect.width)
         self.rect.y = min(max(y, min_y), max_y - self.rect.height)
 
-    def update(self):
+    def update(self) -> None:
         self.handle_edge_collision()
+        self.image.blit(self.image, self.rect)
+
+class Score(pg.sprite.Sprite):
+    def __init__(self, screen: Screen) -> None:
+        super().__init__()
+        self.screen = screen
+
+        self.text = (0, 0)
+
+        self.font = pg.font.SysFont("Arial", 30)
+        self.image = self.font.render(self.text, True, Colors.FOREGROUND)
+        self.rect = self.image.get_rect()
+
+    def update(self) -> None:
+        self.image = self.font.render(self.text, True, Colors.FOREGROUND)
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (self.screen.center[0] - self.rect.width // 2, self.screen.padding)
+
+    @property
+    def text(self) -> str:
+        return self.__text
+
+    @text.setter
+    def text(self, scores: tuple[int, int]) -> None:
+        score_l, score_r = scores
+        self.__text = f"{score_l} : {score_r}"
 
 class Paddle(Sprite):
+    __slots__ = ("__points")
+
     def __init__(self, position: Position, geometry: Geometry, screen: Screen) -> None:
         super().__init__(position, geometry, screen)
+        self.handle_edge_collision()
 
         pg.draw.rect(self.image, Colors.FOREGROUND, (0, 0, self.width, self.height))
 
-    def move(self, direction: Position):
+        self.__points = 0
+
+    @property
+    def points(self) -> int:
+        return self.__points
+
+    def gain_point(self) -> None:
+        self.__points += 1
+
+    def move(self, direction: Position) -> None:
+        # In place, muterer rect direkte
         self.rect.move_ip(direction)
 
 class Ball(Sprite):
     __slots__ = ("__velocity", "__radius")
 
-    def __init__(self, position: Position, radius: int, screen: Screen) -> None:
-        self.__velocity = (5, 5)
+    def __init__(self, position: Position, screen: Screen, radius: int, velocity: int) -> None:
         self.__radius = radius
+        self.__velocity = (rd.choice([-velocity, velocity]), rd.choice([-velocity, velocity]))
 
         super().__init__(position, (radius * 2, radius * 2), screen)
 
@@ -101,6 +139,7 @@ class Ball(Sprite):
     def handle_edge_collision(self) -> None:
         if self.rect.x >= self.screen.width - 2 * self.__radius or self.rect.x <= 0:
             self.flip_x()
+        # TODO: should lose when hitting the right / left edges
         if self.rect.y >= self.screen.height - 2 * self.__radius or self.rect.y <= 0:
             self.flip_y()
 
@@ -110,14 +149,17 @@ class Ball(Sprite):
     def flip_y(self) -> None:
         self.__velocity = (self.__velocity[0], -self.__velocity[1])
 
+    # TODO: if ball hits top / bottom of paddle, it bounces back and forth because of the flip_x
+    # should flip y if it hits the bottom
     def check_paddle_collision(self, paddle: Paddle) -> bool:
         if self.rect.colliderect(paddle.rect):
             self.flip_x()
+            paddle.gain_point()
             return True
         return False
 
 class Game:
-    __slots__ = ("__properties", "__running", "__clock", "__screen", "__sprites", "__paddle1", "__paddle2", "__ball1")
+    __slots__ = ("__properties", "__running", "__clock", "__screen", "__sprites", "__paddle1", "__paddle2", "__ball1", "__score")
 
     def __init__(self, screen: Screen) -> None:
         self.__screen = screen
@@ -149,6 +191,7 @@ class Game:
         self.__sprites.update()
         self.__ball1.check_paddle_collision(self.__paddle1)
         self.__ball1.check_paddle_collision(self.__paddle2)
+        self.__score.text = (self.__paddle1.points, self.__paddle2.points)
 
     def __draw(self) -> None:
         self.__screen.surface.fill(Colors.BACKGROUND)
@@ -163,12 +206,14 @@ class Game:
         self.__sprites = pg.sprite.Group()
 
         # Initialiserer sprites helt i hjørnet. Kollisjon blir sjekket i __init__, slik at den plasseres riktig
-        self.__paddle1 = Paddle((0, 0), (20, 200), self.__screen)
+        self.__paddle1 = Paddle((0, 0), (15, 100), self.__screen)
         self.__sprites.add(self.__paddle1)
-        self.__paddle2 = Paddle((self.__screen.width, 0), (20, 200), self.__screen)
+        self.__paddle2 = Paddle((self.__screen.width, 0), (15, 100), self.__screen)
         self.__sprites.add(self.__paddle2)
-        self.__ball1 = Ball(self.__screen.center, 20, self.__screen)
+        self.__ball1 = Ball(self.__screen.center, self.__screen, 15, 5)
         self.__sprites.add(self.__ball1)
+        self.__score = Score(self.__screen)
+        self.__sprites.add(self.__score)
 
         while self.__running:
             self.__handle_events()
