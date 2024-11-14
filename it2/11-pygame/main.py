@@ -26,38 +26,79 @@ class Screen:
     def open(self):
         self.surface = pg.display.set_mode(self.dimensions)
 
-class Paddle(pg.sprite.Sprite):
-    __slots__ = ("__position", "__geometry", "__screen", "__rect")
+    @property
+    def width(self):
+        return self.dimensions[0]
+
+    @property
+    def height(self):
+        return self.dimensions[1]
+
+    @property
+    def center(self) -> Position:
+        # Dele og runde ned til int
+        return (self.width // 2, self.height // 2)
+
+class Sprite(pg.sprite.Sprite):
+    __slots__ = ("screen", "__geometry")
 
     def __init__(self, position: Position, geometry: Geometry, screen: Screen) -> None:
         super().__init__()
-        self.__position = position
         self.__geometry = geometry
-        self.__screen = screen
+
+        self.screen = screen
+        # Gjennomsiktig bakgrunn: https://stackoverflow.com/a/328067
+        self.image = pg.Surface(self.__geometry, pg.SRCALPHA).convert_alpha()
+        self.rect = self.image.get_rect()
+
+        (x, y) = position
+        self.rect.x = x
+        self.rect.y = y
+
+        self.handle_edge_collision()
 
     @property
-    def position(self) -> Position:
-        return self.__position
+    def width(self) -> int:
+        return self.__geometry[0]
+
+    @property
+    def height(self) -> int:
+        return self.__geometry[1]
+
+    def handle_edge_collision(self) -> None:
+        ((min_x, max_x), (min_y, max_y)) = self.screen.available_area
+        x, y = self.rect.x, self.rect.y
+        self.rect.x = min(max(x, min_x), max_x - self.rect.width)
+        self.rect.y = min(max(y, min_y), max_y - self.rect.height)
+
+    def update(self):
+        self.handle_edge_collision()
+
+class Paddle(Sprite):
+    def __init__(self, position: Position, geometry: Geometry, screen: Screen) -> None:
+        super().__init__(position, geometry, screen)
+
+        pg.draw.rect(self.image, Colors.FOREGROUND, (0, 0, self.width, self.height))
 
     def move(self, direction: Position):
-        (dir_x, dir_y) = direction
-        (pos_x, pos_y) = self.__position
-        (width, height) = self.__geometry
-        ((min_x, max_x), (min_y, max_y)) = self.__screen.available_area
-        self.__position = (min(max(pos_x + dir_x, min_x), max_x - width), min(max(pos_y + dir_y, min_y), max_y - height))
+        self.rect.move_ip(direction)
 
-    def update(self, keys):
-        print(keys)
+class Ball(Sprite):
+    __slots__ = ("__velocity")
 
-    def draw(self) -> None:
-        (x_1, y_1) = self.__position
-        (width, height) = self.__geometry
-        x_2, y_2 = x_1 + width, y_1 + height
-        self.__rect = pg.draw.rect(self.__screen.surface, Colors.FOREGROUND, (x_1, y_1, x_2, y_2))
+    def __init__(self, position: Position, radius: int, screen: Screen) -> None:
+        super().__init__(position, (radius * 2, radius * 2), screen)
 
+        pg.draw.circle(self.image, Colors.FOREGROUND, (radius, radius), radius)
 
-class App:
-    __slots__ = ("__properties", "__running", "__clock", "__screen", "__sprites", "__paddle1")
+        self.__velocity = (5, 5)
+
+    def update(self):
+        self.rect.move_ip(self.__velocity)
+        self.handle_edge_collision()
+
+class Game:
+    __slots__ = ("__properties", "__running", "__clock", "__screen", "__sprites", "__paddle1", "__paddle2", "__ball1")
 
     def __init__(self, screen: Screen) -> None:
         self.__screen = screen
@@ -72,20 +113,25 @@ class App:
 
     def __handle_keyboard(self) -> None:
         keys = pg.key.get_pressed()
+        if keys[kc.K_ESCAPE]:
+            self.__running = False
         if keys[kc.K_j]:
             self.__paddle1.move((0, 10))
         if keys[kc.K_k]:
             self.__paddle1.move((0, -10))
+        if keys[kc.K_f]:
+            self.__paddle2.move((0, 10))
+        if keys[kc.K_d]:
+            self.__paddle2.move((0, -10))
 
     def __update(self) -> None:
-        self.__sprites.update(pg.key.get_pressed())
+        # Linjen under ville sendt keys til alle sprites. Jeg velger heller å håndtere all input direkte i __handle_keyboard.
+        # self.__sprites.update(pg.key.get_pressed())
+        self.__sprites.update()
 
     def __draw(self) -> None:
         self.__screen.surface.fill(Colors.BACKGROUND)
         self.__sprites.draw(self.__screen.surface)
-
-        self.__paddle1.draw()
-
         pg.display.flip()
 
     def run(self) -> None:
@@ -95,7 +141,13 @@ class App:
         self.__clock = pg.time.Clock()
         self.__sprites = pg.sprite.Group()
 
-        self.__paddle1 = Paddle((50, 50), (1, 100), self.__screen)
+        # Initialiserer sprites helt i hjørnet. Kollisjon blir sjekket i __init__, slik at den plasseres riktig
+        self.__paddle1 = Paddle((0, 0), (20, 200), self.__screen)
+        self.__sprites.add(self.__paddle1)
+        self.__paddle2 = Paddle((self.__screen.width, 0), (20, 200), self.__screen)
+        self.__sprites.add(self.__paddle2)
+        self.__ball1 = Ball(self.__screen.center, 20, self.__screen)
+        self.__sprites.add(self.__ball1)
 
         while self.__running:
             self.__handle_events()
@@ -105,5 +157,5 @@ class App:
 
 
 if __name__ == "__main__":
-    app = App(Screen())
+    app = Game(Screen())
     app.run()
