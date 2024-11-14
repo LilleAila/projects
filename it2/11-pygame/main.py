@@ -74,30 +74,48 @@ class Sprite(pg.sprite.Sprite):
         self.handle_edge_collision()
         self.image.blit(self.image, self.rect)
 
-class Score(pg.sprite.Sprite):
-    def __init__(self, screen: Screen) -> None:
+class TextSprite(pg.sprite.Sprite):
+    __slots__ = ("screen", "text", "__font", "__position")
+
+    def __init__(self, screen: Screen, text: None | str = None, position: None | Position = None) -> None:
         super().__init__()
         self.screen = screen
 
-        self.text = (0, 0)
+        if text is not None:
+            self.text = text
+        if position is not None:
+            self.__position = position
 
-        self.font = pg.font.SysFont("Arial", 30)
-        self.image = self.font.render(self.text, True, Colors.FOREGROUND)
+        self.__font = pg.font.SysFont("Arial", 30)
+        self.image = self.__font.render(self.text, True, Colors.FOREGROUND)
         self.rect = self.image.get_rect()
 
     def update(self) -> None:
-        self.image = self.font.render(self.text, True, Colors.FOREGROUND)
+        self.image = self.__font.render(self.text, True, Colors.FOREGROUND)
         self.rect = self.image.get_rect()
-        self.rect.topleft = (self.screen.center[0] - self.rect.width // 2, self.screen.padding)
+        self.rect.topleft = self.position
 
     @property
-    def text(self) -> str:
-        return self.__text
+    def position(self):
+        return self.__position
 
-    @text.setter
-    def text(self, scores: tuple[int, int]) -> None:
+class Score(TextSprite):
+    def __init__(self, screen: Screen):
+        self.score = (0, 0)
+        super().__init__(screen)
+
+    @property
+    def position(self) -> Position:
+        return (self.screen.center[0] - self.rect.width // 2, self.screen.padding)
+
+    @property
+    def score(self) -> str:
+        return self.text
+
+    @score.setter
+    def score(self, scores: tuple[int, int]) -> None:
         score_l, score_r = scores
-        self.__text = f"{score_l} : {score_r}"
+        self.text = f"{score_l} : {score_r}"
 
 class Paddle(Sprite):
     __slots__ = ("__points")
@@ -191,7 +209,7 @@ class Game:
         self.__sprites.update()
         self.__ball1.check_paddle_collision(self.__paddle1)
         self.__ball1.check_paddle_collision(self.__paddle2)
-        self.__score.text = (self.__paddle1.points, self.__paddle2.points)
+        self.__score.score = (self.__paddle1.points, self.__paddle2.points)
 
     def __draw(self) -> None:
         self.__screen.surface.fill(Colors.BACKGROUND)
