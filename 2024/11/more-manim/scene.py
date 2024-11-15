@@ -19,6 +19,8 @@ class Scene(Scene):
             graph, "f(x) = \\frac{1}{2} x^3-3x", x_val=-2, direction=UP + LEFT
         )
 
+        labels = VGroup(labels, graph_label)
+
         # https://docs.manim.community/en/stable/examples.html#argminexample
         t1 = ValueTracker(3)
         dot1 = Dot(point=[ax.c2p(t1.get_value(), f(t1.get_value()))])
@@ -28,12 +30,10 @@ class Scene(Scene):
         dot2 = Dot(point=[ax.c2p(t2.get_value(), f(t2.get_value()))])
         dot2.add_updater(lambda x: x.move_to(ax.c2p(t2.get_value(), f(t2.get_value()))))
 
-        l1 = Line(dot1.get_center(), dot2.get_center()).set_length(100).set_color(RED)
+        l1 = Line(dot1.get_center(), dot2.get_center()).set_length(10).set_color(RED)
         l1.add_updater(
             lambda x: x.become(
-                Line(dot1.get_center(), dot2.get_center())
-                .set_length(100)
-                .set_color(RED)
+                Line(dot1.get_center(), dot2.get_center()).set_length(10).set_color(RED)
             )
         )
 
@@ -51,8 +51,17 @@ class Scene(Scene):
             ).move_to(ax.c2p(t2.get_value(), f(t2.get_value())) + 0.5 * DR)
         )
 
-        labels = VGroup(labels, graph_label)
-        self.add(ax, graph, labels, dot1, dot1_label, dot2, dot2_label, l1)
+        dots = VGroup(dot1, dot1_label, dot2, dot2_label)
+
+        self.add(ax)
+        self.play(Create(graph), run_time=2)
+        self.wait(0.4)
+        self.play(Create(dots))
+        self.play(Create(labels))
+        self.wait(0.5)
+        self.play(Create(l1), run_time=1)
+
+        self.wait(0.5)
 
         self.play(t1.animate.set_value(2.5), run_time=2)
 
