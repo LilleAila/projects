@@ -54,7 +54,7 @@ class Scene(Scene):
         dots = VGroup(dot1, dot1_label, dot2, dot2_label)
 
         self.add(ax)
-        self.play(Create(graph), run_time=2)
+        self.play(Create(graph))
         self.wait(0.4)
         self.play(Create(dots))
         self.play(Create(labels))
