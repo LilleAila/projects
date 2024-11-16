@@ -30,10 +30,10 @@ class Scene(MovingCameraScene):
         dot2 = Dot(point=[ax.c2p(t2.get_value(), f(t2.get_value()))])
         dot2.add_updater(lambda x: x.move_to(ax.c2p(t2.get_value(), f(t2.get_value()))))
 
-        l1 = Line(dot1.get_center(), dot2.get_center()).set_length(10).set_color(RED)
+        l1 = Line(dot1.get_center(), dot2.get_center()).set_length(15).set_color(RED)
         l1.add_updater(
             lambda x: x.become(
-                Line(dot1.get_center(), dot2.get_center()).set_length(10).set_color(RED)
+                Line(dot1.get_center(), dot2.get_center()).set_length(15).set_color(RED)
             )
         )
 
@@ -56,7 +56,7 @@ class Scene(MovingCameraScene):
         self.play(Create(ax))
         self.play(Create(labels))
         self.wait()
-        self.play(Create(graph))
+        self.play(Create(graph), run_time=2)
         self.play(Create(graph_label))
         self.wait(0.4)
         self.play(Create(dots))
