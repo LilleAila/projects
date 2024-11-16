@@ -1,10 +1,6 @@
 from manim import *
 from math import radians
 
-f1 = lambda x: x
-f2 = lambda x: x + 1
-f = lambda x: f1(x) if x < 0 else f2(x)
-
 
 class DiscontinuousExcl(VMobject):
     def __init__(self, size=0.4, **kwargs):
@@ -33,34 +29,48 @@ class DiscontinuousIncl(VMobject):
 class PointOnGraph(VMobject):
     __slots__ = "__tracker"
 
-    def __init__(self, ax, f, initial_value, **kwargs):
+    def __init__(self, ax, f, name, initial_value, direction=DR, color=WHITE, **kwargs):
+        # Possible improvement: use MoveAlongPath
+        # https://docs.manim.community/en/stable/reference/manim.animation.movement.MoveAlongPath.html#movealongpath
+        # The only problem is it would be harder to position the label.
+        # Could maybe make the label + dot a "static" mobject and move the entire thing?
         super().__init__(**kwargs)
 
         self.__tracker = ValueTracker(initial_value)
-        p1 = Dot(
-            point=[ax.c2p(self.__tracker.get_value(), f(self.__tracker.get_value()))]
+        point = Dot(
+            point=ax.c2p(self.__tracker.get_value(), f(self.__tracker.get_value())),
+            color=color,
         )
-        p1.add_updater(
+        point.add_updater(
             lambda x: x.move_to(
                 ax.c2p(self.__tracker.get_value(), f(self.__tracker.get_value()))
             )
         )
-        p1_label = Text(
-            f"({self.__tracker.get_value():.1f}, {f(self.__tracker.get_value()):.1f})"
-        )
-        p1_label.add_updater(
-            lambda x: x.become(
-                Text(
-                    f"({self.__tracker.get_value():.1f}, {f(self.__tracker.get_value()):.1f})",
-                    color=WHITE,
-                ).scale(0.5)
-            ).move_to(
+        point_label = (
+            Text(
+                f"{name} = ({self.__tracker.get_value():.1f}, {f(self.__tracker.get_value()):.1f})",
+                color=color,
+            )
+            .scale(0.5)
+            .move_to(
                 ax.c2p(self.__tracker.get_value(), f(self.__tracker.get_value()))
-                + 0.5 * DR
+                + 0.5 * direction
             )
         )
 
-        self.add(p1, p1_label)
+        point_label.add_updater(
+            lambda x: x.become(
+                Text(
+                    f"{name} = ({self.__tracker.get_value():.1f}, {f(self.__tracker.get_value()):.1f})",
+                    color=color,
+                ).scale(0.5)
+            ).move_to(
+                ax.c2p(self.__tracker.get_value(), f(self.__tracker.get_value()))
+                + 0.5 * direction
+            )
+        )
+
+        self.add(point, point_label)
 
     def move_point(self, x):
         return self.__tracker.animate.set_value(x)
@@ -68,7 +78,15 @@ class PointOnGraph(VMobject):
 
 class Scene(MovingCameraScene):
     def construct(self):
+        # Save the camera state for moving it
+        # https://docs.manim.community/en/stable/examples.html#special-camera-settings
+        self.camera: MovingCamera  # LSP doesn't understand that
         self.camera.frame.save_state()
+
+        ### Draw axes and the graph of the function.
+        f1 = lambda x: x
+        f2 = lambda x: x + 1
+        f = lambda x: f1(x) if x < 0 else f2(x)
 
         ax = Axes(
             x_range=[-3, 3, 1],
@@ -105,10 +123,54 @@ class Scene(MovingCameraScene):
         self.play(Create(graph_label))
         self.play(Create(graph), run_time=2)
         self.play(Create(m1), Create(m2))
+        self.wait(2)
 
-        p1 = PointOnGraph(ax, f1, -1.5)
-        p2 = PointOnGraph(ax, f2, 1.5)
+        ### Slide to the right, write limits, slide back
+        self.play(self.camera.frame.animate.move_to([8.7, 0, 0]))
+        center = (ax.get_right() + self.camera.frame.get_right()) / 2
+        self.wait(1)
+
+        lim1s = [
+            r"\lim_{x \to 0^{-}} f \left( x \right) \stackrel{?}{=} \lim_{x \to 0^{+}} f \left( x \right)",
+            r"\lim_{x \to 0^{-}} f \left( x \right) \neq \lim_{x \to 0^{+}} f \left( x \right)",
+        ]
+        lim1 = MathTex(lim1s[0]).move_to(center + UP * 3)
+
+        self.play(Write(lim1))
+        self.wait(3)
+        self.play(Restore(self.camera.frame))
+        self.wait(1)
+
+        ### Two points on function moving towards each other
+        p1 = PointOnGraph(ax, f1, "A", -1.5)
+        p2 = PointOnGraph(ax, f2, "B", 1.5)
 
         self.play(Create(p1), Create(p2))
         self.wait(1)
         self.play(p1.move_point(0), p2.move_point(0), run_time=4)
+        self.wait(2)
+
+        ### Slide back to side, show limits algebraically
+        self.play(self.camera.frame.animate.move_to([8.7, 0, 0]))
+        lim2s = [
+            (
+                r"\lim_{x \to 0^{-}} f \left( x \right)",
+                r"\lim_{x \to 0^{+}} f \left( x \right)",
+            ),
+            (r"\lim_{x \to 0^{-}} x", r"\lim_{x \to 0^{+}} x + 1"),
+            (r"\lim_{x \to 0^{-}} x = 0", r"\lim_{x \to 0^{+}} x + 1 = 1"),
+        ]
+        lim2_a = MathTex(lim2s[0][0]).move_to(center + UP)
+        lim2_b = MathTex(lim2s[0][1]).move_to(center + DOWN)
+        self.play(GrowFromCenter(lim2_a), GrowFromCenter(lim2_b))
+        for lim in lim2s:
+            (lim_a, lim_b) = lim
+            self.wait(2)
+            self.play(
+                Transform(lim2_a, MathTex(lim_a).move_to(center + UP)),
+                Transform(lim2_b, MathTex(lim_b).move_to(center + DOWN)),
+            )
+        self.wait(3)
+        self.play(ShrinkToCenter(lim2_a), ShrinkToCenter(lim2_b))
+        self.play(lim1.animate.move_to(center))
+        self.play(Transform(lim1, MathTex(lim1s[1]).move_to(center)))
