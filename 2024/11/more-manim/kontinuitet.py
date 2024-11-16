@@ -30,6 +30,42 @@ class DiscontinuousIncl(VMobject):
         self.add(l1, l2, l3, l4, l5)
 
 
+class PointOnGraph(VMobject):
+    __slots__ = "__tracker"
+
+    def __init__(self, ax, f, initial_value, **kwargs):
+        super().__init__(**kwargs)
+
+        self.__tracker = ValueTracker(initial_value)
+        p1 = Dot(
+            point=[ax.c2p(self.__tracker.get_value(), f(self.__tracker.get_value()))]
+        )
+        p1.add_updater(
+            lambda x: x.move_to(
+                ax.c2p(self.__tracker.get_value(), f(self.__tracker.get_value()))
+            )
+        )
+        p1_label = Text(
+            f"({self.__tracker.get_value():.1f}, {f(self.__tracker.get_value()):.1f})"
+        )
+        p1_label.add_updater(
+            lambda x: x.become(
+                Text(
+                    f"({self.__tracker.get_value():.1f}, {f(self.__tracker.get_value()):.1f})",
+                    color=WHITE,
+                ).scale(0.5)
+            ).move_to(
+                ax.c2p(self.__tracker.get_value(), f(self.__tracker.get_value()))
+                + 0.5 * DR
+            )
+        )
+
+        self.add(p1, p1_label)
+
+    def move_point(self, x):
+        return self.__tracker.animate.set_value(x)
+
+
 class Scene(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
@@ -65,8 +101,14 @@ class Scene(MovingCameraScene):
         )
 
         self.play(Create(ax), Create(labels))
-        self.wait()
+        self.wait(1)
         self.play(Create(graph_label))
         self.play(Create(graph), run_time=2)
-        # self.play(Create(dot_left), Create(dot_right))
         self.play(Create(m1), Create(m2))
+
+        p1 = PointOnGraph(ax, f1, -1.5)
+        p2 = PointOnGraph(ax, f2, 1.5)
+
+        self.play(Create(p1), Create(p2))
+        self.wait(1)
+        self.play(p1.move_point(0), p2.move_point(0), run_time=4)
