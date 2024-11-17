@@ -1,79 +1,7 @@
 from manim import *
 from math import radians
 
-
-class DiscontinuousExcl(VMobject):
-    def __init__(self, size=0.4, **kwargs):
-        super().__init__(**kwargs)
-
-        l1 = Line(ORIGIN, size * RIGHT)
-        l2 = Line(ORIGIN, size * UP)
-        # Invisible lines, because it by default sets the origin to the center, rather than corner.
-        l3 = Line(ORIGIN, size * LEFT).set_opacity(0)
-        l4 = Line(ORIGIN, size * DOWN).set_opacity(0)
-        self.add(l1, l2, l3, l4)
-
-
-class DiscontinuousIncl(VMobject):
-    def __init__(self, size=0.3, **kwargs):
-        super().__init__(**kwargs)
-
-        l1 = Line(ORIGIN, size * UP)
-        l2 = Line(ORIGIN, size * DOWN)
-        l3 = Line(size * UP, size * UP + size / 2 * RIGHT)
-        l4 = Line(size * DOWN, size * DOWN + size / 2 * RIGHT)
-        l5 = Line(ORIGIN, size / 2 * LEFT).set_opacity(0)
-        self.add(l1, l2, l3, l4, l5)
-
-
-class PointOnGraph(VMobject):
-    __slots__ = "tracker"
-
-    def __init__(self, ax, f, name, initial_value, direction=DR, color=WHITE, **kwargs):
-        # Possible improvement: use MoveAlongPath
-        # https://docs.manim.community/en/stable/reference/manim.animation.movement.MoveAlongPath.html#movealongpath
-        # The only problem is it would be harder to position the label.
-        # Could maybe make the label + dot a "static" mobject and move the entire thing?
-        super().__init__(**kwargs)
-
-        self.tracker = ValueTracker(initial_value)
-        point = Dot(
-            point=ax.c2p(self.tracker.get_value(), f(self.tracker.get_value())),
-            color=color,
-        )
-        point.add_updater(
-            lambda x: x.move_to(
-                ax.c2p(self.tracker.get_value(), f(self.tracker.get_value()))
-            )
-        )
-        point_label = (
-            Text(
-                f"{name} = ({self.tracker.get_value():.1f}, {f(self.tracker.get_value()):.1f})",
-                color=color,
-            )
-            .scale(0.5)
-            .move_to(
-                ax.c2p(self.tracker.get_value(), f(self.tracker.get_value()))
-                + 0.5 * direction
-            )
-        )
-
-        point_label.add_updater(
-            lambda x: x.become(
-                Text(
-                    f"{name} = ({self.tracker.get_value():.1f}, {f(self.tracker.get_value()):.1f})",
-                    color=color,
-                ).scale(0.5)
-            ).move_to(
-                ax.c2p(self.tracker.get_value(), f(self.tracker.get_value()))
-                + 0.5 * direction
-            )
-        )
-
-        self.add(point, point_label)
-
-    def move_point(self, x):
-        return self.tracker.animate.set_value(x)
+from lib import DiscontinuousExcl, DiscontinuousIncl, PointOnGraph
 
 
 class Kontinuitet(MovingCameraScene):
@@ -218,3 +146,83 @@ class Kontinuitet(MovingCameraScene):
             Unwrite(graph),
         )
         self.wait()
+
+
+class Derivasjon(MovingCameraScene):
+    def construct(self):
+        self.camera: MovingCamera
+        self.camera.frame.save_state()
+
+        ### Draw function
+        f = lambda x: 1 / 2 * np.power(x, 3) - 3 * x
+
+        ax = Axes(
+            x_range=[-4, 8, 1],
+            y_range=[-4, 4, 1],
+            axis_config={"color": GREEN, "include_numbers": True},
+            tips=False,
+        )
+
+        labels = ax.get_axis_labels()
+
+        graph = ax.plot(f, color=BLUE)
+        graph_label = ax.get_graph_label(
+            graph, "f(x) = \\frac{1}{2} x^3-3x", x_val=-2, direction=UP + LEFT
+        ).scale(0.6)
+
+        ### Draw points and secant line
+        # https://docs.manim.community/en/stable/examples.html#argminexample
+        dot1 = PointOnGraph(ax, f, "A", 3, direction=DOWN * 0.6 + RIGHT * 2.7)
+        dot2 = PointOnGraph(ax, f, "B", 2, direction=DOWN * 0.6 + RIGHT * 2.7)
+
+        l1 = (
+            Line(dot1.get_dot_center(), dot2.get_dot_center())
+            .set_length(15)
+            .set_color(RED)
+        )
+        l1.add_updater(
+            lambda x: x.become(
+                Line(dot1.get_dot_center(), dot2.get_dot_center())
+                .set_length(15)
+                .set_color(RED)
+            )
+        )
+
+        dots = VGroup(dot1, dot2)
+
+        self.play(Create(ax))
+        self.play(Create(labels))
+        self.wait()
+        self.play(Create(graph), run_time=2)
+        self.play(Create(graph_label))
+        self.wait(0.4)
+        self.play(Create(dots))
+        self.wait(0.5)
+        self.play(Create(l1), run_time=1)
+
+        ### Write the definition of the derivative
+        # bad code, output also looks bad
+        r"""
+        equations = [
+            r"f' \left( x \right) = \lim_{\Delta x \to 0} \frac{\Delta f \left( x \right)}{\Delta x}",
+            r"f' \left( x \right) = \lim_{\Delta x \to 0} \frac{f \left( x + \Delta x \right) - f \left( x \right)}{\Delta x}",
+            r"f' \left( x \right) = \lim_{h \to 0} \frac{f \left( x + h \right) - f \left( x \right)}{h}",
+        ]
+
+        eq = MathTex(equations[0]).scale(0.6).next_to(dot1, RIGHT)
+        self.play(self.camera.frame.animate.scale(0.7).move_to(eq))
+
+        self.play(Create(eq))
+        self.wait(2)
+        self.play(Transform(eq, MathTex(equations[1]).scale(0.6).next_to(dot1, RIGHT)))
+        self.wait(4)
+        self.play(Transform(eq, MathTex(equations[2]).scale(0.6).next_to(dot1, RIGHT)))
+        self.wait(2)
+
+        self.play(Restore(self.camera.frame))
+        self.play(Uncreate(eq))
+        """
+
+        self.wait(0.5)
+
+        self.play(dot1.move_point(2.5), run_time=2)
