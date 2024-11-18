@@ -1,7 +1,12 @@
 from manim import *
 from math import radians
 
-from lib import DiscontinuousExcl, DiscontinuousIncl, PointOnGraph
+from lib import (
+    DiscontinuousExcl,
+    DiscontinuousIncl,
+    PointOnGraph,
+    PointOnGraphFixedLabel,
+)
 
 
 class Kontinuitet(MovingCameraScene):
@@ -154,6 +159,131 @@ class Derivasjon(MovingCameraScene):
         self.camera.frame.save_state()
 
         ### Draw function
+        f = lambda x: x**3 - 3 * x
+
+        ax = Axes(
+            x_range=[-4, 6, 1],
+            y_range=[-4, 4, 1],
+            axis_config={"color": GREEN, "include_numbers": True},
+            tips=False,
+        )
+
+        labels = ax.get_axis_labels()
+
+        graph = ax.plot(f, color=BLUE)
+        graph_label = ax.get_graph_label(
+            graph,
+            r"f(x) = x^{3} - 3x",
+            x_val=-1,
+            direction=LEFT,
+        ).scale(0.8)
+
+        self.play(Create(ax), Create(labels))
+        self.wait()
+        self.play(Write(graph_label))
+        self.play(Write(graph), run_time=2)
+        self.wait(0.5)
+
+        ### Draw formula
+        dot1 = PointOnGraphFixedLabel(
+            "(x, f(x))", ax, f, 0, scale=0.35, direction=DOWN * 0.5 + RIGHT * 1.3
+        )
+        self.play(Write(dot1))
+        self.wait(1)
+
+        eqs = [
+            r"f' \left( x \right) = \lim_{\Delta x \to 0} \frac{\Delta f \left( x \right)}{\Delta x}",
+            r"f' \left( x \right) = \lim_{\Delta x \to 0} \frac{f \left( x + \Delta x \right) - f \left( x \right)}{\Delta x}",
+            r"f' \left( x \right) = \lim_{h \to 0} \frac{f \left( x + h \right) - f \left( x \right)}{h}",
+            r"f' \left( x \right) = \lim_{x \to a} \frac{f \left( a + h \right) - f \left( a \right)}{h}",
+            r"f' \left( x \right) = \lim_{x \to a} \frac{f \left( a + x - a \right) - f \left( a \right)}{x - a}",
+            r"f' \left( x \right) = \lim_{x \to a} \frac{f \left( x \right) - f \left( a \right)}{x - a}",
+        ]
+        title = Text("Definisjon:").move_to(RIGHT * 3.5 + UP * 2.5).scale(0.5)
+        self.play(Write(title))
+        make_eq = lambda x: MathTex(x).move_to(RIGHT * 3.5 + UP * 1.7).scale(0.5)
+        eq = make_eq(eqs[0])
+        center = eq.get_center()
+        self.play(self.camera.frame.animate.scale(0.6).move_to(eq))
+        self.play(Write(eq))
+
+        self.wait(2)
+        self.play(Transform(eq, make_eq(eqs[1])))
+        self.wait(2)
+        self.play(Transform(eq, make_eq(eqs[2])))
+        self.wait(2)
+
+        self.play(Restore(self.camera.frame))
+
+        ### Draw points and secant line
+        dot2 = PointOnGraphFixedLabel(
+            "(x+h, f(x+h))", ax, f, 2, scale=0.35, direction=UP * 0.6 + LEFT * 1.8
+        )
+
+        l1 = (
+            Line(dot1.get_dot_center(), dot2.get_dot_center())
+            .set_length(20)
+            .set_color(RED)
+        )
+        l1.add_updater(
+            lambda x: x.become(
+                Line(dot1.get_dot_center(), dot2.get_dot_center())
+                .set_length(20)
+                .set_color(RED)
+            )
+        )
+
+        self.play(Create(dot2))
+        self.play(Create(l1))
+        self.wait(0.5)
+        self.play(dot2.move_point(1), run_time=2)
+        self.wait(0.5)
+        self.play(dot2.move_point(0.001), run_time=2)
+        self.wait(2)
+        self.play(Unwrite(l1))
+        self.play(Uncreate(dot2))
+
+        self.wait(2)
+
+        self.play(self.camera.frame.animate.scale(0.6).move_to(eq))
+
+        self.wait(1)
+        self.play(Transform(eq, make_eq(eqs[3])))
+        self.wait(2)
+
+        eq2 = MathTex(r"x = a + h").scale(0.6).move_to(center + DOWN)
+        self.play(Write(eq2))
+        self.wait(2)
+
+        self.play(eq2.animate.move_to(eq2.get_center() + LEFT))
+        eq3 = MathTex(r"h = x - a").scale(0.6).move_to(center + DOWN + RIGHT)
+        self.play(GrowFromCenter(eq3))
+
+        self.play(Transform(eq, make_eq(eqs[4])))
+        self.wait(2)
+        self.play(Transform(eq, make_eq(eqs[5])))
+
+        self.wait(2)
+
+        self.play(Restore(self.camera.frame))
+
+        self.play(Unwrite(dot1))
+        self.play(
+            Uncreate(ax),
+            Uncreate(labels),
+            Uncreate(graph_label),
+            Uncreate(graph),
+            run_time=3,
+        )
+        self.wait()
+
+
+class Deriverbarhet(MovingCameraScene):
+    def construct(self):
+        self.camera: MovingCamera
+        self.camera.frame.save_state()
+
+        ### Draw function
         f1 = lambda x: x**2 - 3
         f2 = lambda x: 1 / 4 * (x - 4) ** 2
         f = lambda x: f1(x) if x < 2 else f2(x)
@@ -183,26 +313,26 @@ class Derivasjon(MovingCameraScene):
 
         l1 = (
             Line(dot1.get_dot_center(), dot2.get_dot_center())
-            .set_length(15)
+            .set_length(20)
             .set_color(RED)
         )
         l1.add_updater(
             lambda x: x.become(
                 Line(dot1.get_dot_center(), dot2.get_dot_center())
-                .set_length(15)
+                .set_length(20)
                 .set_color(RED)
             )
         )
 
         l2 = (
             Line(dot2.get_dot_center(), dot3.get_dot_center())
-            .set_length(15)
+            .set_length(20)
             .set_color(ORANGE)
         )
         l2.add_updater(
             lambda x: x.become(
                 Line(dot2.get_dot_center(), dot3.get_dot_center())
-                .set_length(15)
+                .set_length(20)
                 .set_color(ORANGE)
             )
         )
@@ -226,3 +356,15 @@ class Derivasjon(MovingCameraScene):
         self.wait(1)
 
         self.play(dot1.move_point(1.999), dot3.move_point(2.001), run_time=2)
+
+        self.wait(2)
+        self.play(Unwrite(lines))
+        self.play(Unwrite(dots))
+        self.play(
+            Uncreate(ax),
+            Uncreate(labels),
+            Uncreate(graph_label),
+            Uncreate(graph),
+            run_time=3,
+        )
+        self.wait()

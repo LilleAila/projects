@@ -26,14 +26,19 @@ class DiscontinuousIncl(VMobject):
 
 
 class PointOnGraph(VMobject):
-    __slots__ = ("tracker", "point")
+    __slots__ = ("tracker", "point", "__name", "__f")
 
-    def __init__(self, ax, f, name, initial_value, direction=DR, color=WHITE, **kwargs):
+    def __init__(
+        self, ax, f, name, initial_value, scale=0.5, direction=DR, color=WHITE, **kwargs
+    ):
         # Possible improvement: use MoveAlongPath
         # https://docs.manim.community/en/stable/reference/manim.animation.movement.MoveAlongPath.html#movealongpath
         # The only problem is it would be harder to position the label.
         # Could maybe make the label + dot a "static" mobject and move the entire thing?
         super().__init__(**kwargs)
+
+        self.__name = name
+        self.__f = f
 
         self.tracker = ValueTracker(initial_value)
         self.point = Dot(
@@ -46,11 +51,8 @@ class PointOnGraph(VMobject):
             )
         )
         point_label = (
-            Text(
-                f"{name} = ({self.tracker.get_value():.1f}, {f(self.tracker.get_value()):.1f})",
-                color=color,
-            )
-            .scale(0.5)
+            Text(self.make_label(), color=color)
+            .scale(scale)
             .move_to(
                 ax.c2p(self.tracker.get_value(), f(self.tracker.get_value()))
                 + 0.5 * direction
@@ -59,10 +61,7 @@ class PointOnGraph(VMobject):
 
         point_label.add_updater(
             lambda x: x.become(
-                Text(
-                    f"{name} = ({self.tracker.get_value():.1f}, {f(self.tracker.get_value()):.1f})",
-                    color=color,
-                ).scale(0.5)
+                Text(self.make_label(), color=color).scale(scale)
             ).move_to(
                 ax.c2p(self.tracker.get_value(), f(self.tracker.get_value()))
                 + 0.5 * direction
@@ -71,8 +70,22 @@ class PointOnGraph(VMobject):
 
         self.add(self.point, point_label)
 
+    def make_label(self) -> str:
+        return f"{self.__name} = ({self.tracker.get_value():.1f}, {self.__f(self.tracker.get_value()):.1f})"
+
     def move_point(self, x):
         return self.tracker.animate.set_value(x)
 
     def get_dot_center(self):
         return self.point.get_center()
+
+
+class PointOnGraphFixedLabel(PointOnGraph):
+    __slots__ = "__label"
+
+    def __init__(self, label, ax, f, initial_value, **kwargs):
+        self.__label = label
+        super().__init__(ax, f, "", initial_value, **kwargs)
+
+    def make_label(self) -> str:
+        return self.__label
