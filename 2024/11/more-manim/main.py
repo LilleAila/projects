@@ -154,7 +154,10 @@ class Derivasjon(MovingCameraScene):
         self.camera.frame.save_state()
 
         ### Draw function
-        f = lambda x: 1 / 2 * np.power(x, 3) - 3 * x
+        # f = lambda x: 1 / 2 * np.power(x, 3) - 3 * x
+        f1 = lambda x: x**2 - 3
+        f2 = lambda x: 1 / 4 * (x - 4) ** 2
+        f = lambda x: f1(x) if x < 2 else f2(x)
 
         ax = Axes(
             x_range=[-4, 8, 1],
@@ -165,15 +168,19 @@ class Derivasjon(MovingCameraScene):
 
         labels = ax.get_axis_labels()
 
-        graph = ax.plot(f, color=BLUE)
+        graph = ax.plot(f, discontinuities=[2], dt=0.01, color=BLUE)
         graph_label = ax.get_graph_label(
-            graph, "f(x) = \\frac{1}{2} x^3-3x", x_val=-2, direction=UP + LEFT
+            graph,
+            r"f(x) = \begin{cases} x^{2} - 3 & \text{, } x < 2 \\ \frac{1}{4} \left( x - 4 \right) ^{2} \end{cases}",
+            x_val=7,
+            direction=UP * 0.8,
         ).scale(0.6)
 
         ### Draw points and secant line
         # https://docs.manim.community/en/stable/examples.html#argminexample
-        dot1 = PointOnGraph(ax, f, "A", 3, direction=DOWN * 0.6 + RIGHT * 2.7)
+        dot1 = PointOnGraph(ax, f, "A", 0, direction=DOWN * 0.6 + RIGHT * 2.7)
         dot2 = PointOnGraph(ax, f, "B", 2, direction=DOWN * 0.6 + RIGHT * 2.7)
+        dot3 = PointOnGraph(ax, f, "C", 4, direction=DOWN * 0.6 + RIGHT * 2.7)
 
         l1 = (
             Line(dot1.get_dot_center(), dot2.get_dot_center())
@@ -188,41 +195,35 @@ class Derivasjon(MovingCameraScene):
             )
         )
 
-        dots = VGroup(dot1, dot2)
+        l2 = (
+            Line(dot2.get_dot_center(), dot3.get_dot_center())
+            .set_length(15)
+            .set_color(RED)
+        )
+        l2.add_updater(
+            lambda x: x.become(
+                Line(dot2.get_dot_center(), dot3.get_dot_center())
+                .set_length(15)
+                .set_color(RED)
+            )
+        )
 
-        self.play(Create(ax))
-        self.play(Create(labels))
+        dots = VGroup(dot1, dot2, dot3)
+        lines = VGroup(l1, l2)
+
+        self.play(Create(ax), Create(labels))
         self.wait()
-        self.play(Create(graph), run_time=2)
         self.play(Create(graph_label))
+        self.play(Create(graph), run_time=2)
         self.wait(0.4)
         self.play(Create(dots))
         self.wait(0.5)
-        self.play(Create(l1), run_time=1)
-
-        ### Write the definition of the derivative
-        # bad code, output also looks bad
-        r"""
-        equations = [
-            r"f' \left( x \right) = \lim_{\Delta x \to 0} \frac{\Delta f \left( x \right)}{\Delta x}",
-            r"f' \left( x \right) = \lim_{\Delta x \to 0} \frac{f \left( x + \Delta x \right) - f \left( x \right)}{\Delta x}",
-            r"f' \left( x \right) = \lim_{h \to 0} \frac{f \left( x + h \right) - f \left( x \right)}{h}",
-        ]
-
-        eq = MathTex(equations[0]).scale(0.6).next_to(dot1, RIGHT)
-        self.play(self.camera.frame.animate.scale(0.7).move_to(eq))
-
-        self.play(Create(eq))
-        self.wait(2)
-        self.play(Transform(eq, MathTex(equations[1]).scale(0.6).next_to(dot1, RIGHT)))
-        self.wait(4)
-        self.play(Transform(eq, MathTex(equations[2]).scale(0.6).next_to(dot1, RIGHT)))
-        self.wait(2)
-
-        self.play(Restore(self.camera.frame))
-        self.play(Uncreate(eq))
-        """
+        self.play(Create(lines))
 
         self.wait(0.5)
 
-        self.play(dot1.move_point(2.5), run_time=2)
+        self.play(dot1.move_point(1), dot3.move_point(3), run_time=2)
+
+        self.wait(1)
+
+        self.play(dot1.move_point(1.99), dot3.move_point(2.01), run_time=2)
