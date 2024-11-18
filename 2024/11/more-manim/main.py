@@ -195,9 +195,9 @@ class Derivasjon(MovingCameraScene):
             r"f' \left( x \right) = \lim_{\Delta x \to 0} \frac{\Delta f \left( x \right)}{\Delta x}",
             r"f' \left( x \right) = \lim_{\Delta x \to 0} \frac{f \left( x + \Delta x \right) - f \left( x \right)}{\Delta x}",
             r"f' \left( x \right) = \lim_{h \to 0} \frac{f \left( x + h \right) - f \left( x \right)}{h}",
-            r"f' \left( x \right) = \lim_{x \to a} \frac{f \left( a + h \right) - f \left( a \right)}{h}",
-            r"f' \left( x \right) = \lim_{x \to a} \frac{f \left( a + x - a \right) - f \left( a \right)}{x - a}",
-            r"f' \left( x \right) = \lim_{x \to a} \frac{f \left( x \right) - f \left( a \right)}{x - a}",
+            r"f' \left( a \right) = \lim_{x \to a} \frac{f \left( a + h \right) - f \left( a \right)}{h}",
+            r"f' \left( a \right) = \lim_{x \to a} \frac{f \left( a + x - a \right) - f \left( a \right)}{x - a}",
+            r"f' \left( a \right) = \lim_{x \to a} \frac{f \left( x \right) - f \left( a \right)}{x - a}",
         ]
         title = Text("Definisjon:").move_to(RIGHT * 3.5 + UP * 2.5).scale(0.5)
         self.play(Write(title))
@@ -239,26 +239,26 @@ class Derivasjon(MovingCameraScene):
         self.play(dot2.move_point(1), run_time=2)
         self.wait(0.5)
         self.play(dot2.move_point(0.001), run_time=2)
-        self.wait(2)
-        self.play(Unwrite(l1))
-        self.play(Uncreate(dot2))
+        # self.wait(4)
+        # self.play(Unwrite(l1))
+        # self.play(Uncreate(dot2))
 
-        self.wait(2)
+        self.wait(4)
 
         self.play(self.camera.frame.animate.scale(0.6).move_to(eq))
 
-        self.wait(1)
+        self.wait(2)
+        # eq2 = MathTex(r"x = a + h").scale(0.6).move_to(center + DOWN)
+        # self.play(Write(eq2))
+        # self.wait(2)
+
         self.play(Transform(eq, make_eq(eqs[3])))
         self.wait(2)
 
-        eq2 = MathTex(r"x = a + h").scale(0.6).move_to(center + DOWN)
-        self.play(Write(eq2))
-        self.wait(2)
-
-        self.play(eq2.animate.move_to(eq2.get_center() + LEFT))
-        eq3 = MathTex(r"h = x - a").scale(0.6).move_to(center + DOWN + RIGHT)
+        # self.play(eq2.animate.move_to(eq2.get_center() + LEFT))
+        eq3 = MathTex(r"h = x - a").scale(0.6).move_to(center + DOWN * 0.75)
         self.play(GrowFromCenter(eq3))
-
+        self.wait(2)
         self.play(Transform(eq, make_eq(eqs[4])))
         self.wait(2)
         self.play(Transform(eq, make_eq(eqs[5])))
@@ -267,12 +267,53 @@ class Derivasjon(MovingCameraScene):
 
         self.play(Restore(self.camera.frame))
 
-        self.play(Unwrite(dot1))
+        dot3 = PointOnGraphFixedLabel(
+            "(a, f(a))", ax, f, 0, scale=0.35, direction=DOWN * 0.5 + RIGHT * 1.3
+        )
+        self.play(Unwrite(l1))
+        self.play(Unwrite(dot1), Unwrite(dot2))
+        self.play(Write(dot3))
+        self.wait(1)
+
+        dot4 = PointOnGraphFixedLabel(
+            "(x, f(x))", ax, f, 2, scale=0.35, direction=UP * 0.5 + LEFT * 1.3
+        )
+
+        self.play(Write(dot4))
+
+        l2 = (
+            Line(dot3.get_dot_center(), dot4.get_dot_center())
+            .set_length(20)
+            .set_color(RED)
+        )
+        l2.add_updater(
+            lambda x: x.become(
+                Line(dot3.get_dot_center(), dot4.get_dot_center())
+                .set_length(20)
+                .set_color(RED)
+            )
+        )
+        self.play(Write(l2))
+
+        self.play(dot4.move_point(1), run_time=2)
+        self.wait(1)
+        self.play(dot4.move_point(0.001), run_time=2)
+        self.wait(2)
+        self.play(Unwrite(l2))
+        self.play(Unwrite(dot4))
+
+        self.wait(1)
+        self.play(Unwrite(dot3))
+        self.wait(1)
+
         self.play(
             Uncreate(ax),
             Uncreate(labels),
             Uncreate(graph_label),
             Uncreate(graph),
+            Unwrite(title),
+            Unwrite(eq),
+            Unwrite(eq3),
             run_time=3,
         )
         self.wait()
