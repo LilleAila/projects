@@ -154,7 +154,6 @@ class Derivasjon(MovingCameraScene):
         self.camera.frame.save_state()
 
         ### Draw function
-        # f = lambda x: 1 / 2 * np.power(x, 3) - 3 * x
         f1 = lambda x: x**2 - 3
         f2 = lambda x: 1 / 4 * (x - 4) ** 2
         f = lambda x: f1(x) if x < 2 else f2(x)
