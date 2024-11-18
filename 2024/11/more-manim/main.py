@@ -167,7 +167,7 @@ class Derivasjon(MovingCameraScene):
 
         labels = ax.get_axis_labels()
 
-        graph = ax.plot(f, discontinuities=[2], dt=0.01, color=BLUE)
+        graph = ax.plot(f, discontinuities=[2], dt=0.001, color=BLUE)
         graph_label = ax.get_graph_label(
             graph,
             r"f(x) = \begin{cases} x^{2} - 3 & \text{, } x < 2 \\ \frac{1}{4} \left( x - 4 \right) ^{2} \end{cases}",
@@ -177,8 +177,8 @@ class Derivasjon(MovingCameraScene):
 
         ### Draw points and secant line
         # https://docs.manim.community/en/stable/examples.html#argminexample
-        dot1 = PointOnGraph(ax, f, "A", 0, direction=DOWN * 0.6 + RIGHT * 2.7)
-        dot2 = PointOnGraph(ax, f, "B", 2, direction=DOWN * 0.6 + RIGHT * 2.7)
+        dot1 = PointOnGraph(ax, f, "B", 0, direction=DOWN * 0.6 + RIGHT * 2.7)
+        dot2 = PointOnGraph(ax, f, "A", 2, direction=DOWN * 0.6 + RIGHT * 2.7)
         dot3 = PointOnGraph(ax, f, "C", 4, direction=DOWN * 0.6 + RIGHT * 2.7)
 
         l1 = (
@@ -197,13 +197,13 @@ class Derivasjon(MovingCameraScene):
         l2 = (
             Line(dot2.get_dot_center(), dot3.get_dot_center())
             .set_length(15)
-            .set_color(RED)
+            .set_color(ORANGE)
         )
         l2.add_updater(
             lambda x: x.become(
                 Line(dot2.get_dot_center(), dot3.get_dot_center())
                 .set_length(15)
-                .set_color(RED)
+                .set_color(ORANGE)
             )
         )
 
@@ -225,4 +225,4 @@ class Derivasjon(MovingCameraScene):
 
         self.wait(1)
 
-        self.play(dot1.move_point(1.99), dot3.move_point(2.01), run_time=2)
+        self.play(dot1.move_point(1.999), dot3.move_point(2.001), run_time=2)
