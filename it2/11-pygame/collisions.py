@@ -30,7 +30,6 @@ class Ball(pg.sprite.Sprite):
         pg.draw.circle(self.image, FG, (25, 25), 25)
 
     def update(self, sprites):
-        self.rect.move_ip(self.velocity)
         hits = [s for s in pg.sprite.spritecollide(self, sprites, False) if s != self]
         for hit in hits:
             hit.flip()
@@ -38,6 +37,7 @@ class Ball(pg.sprite.Sprite):
             self.flip_x()
         if self.rect.y <= 0 or self.rect.y >= 600 - 50:
             self.flip_y()
+        self.rect.move_ip(self.velocity)
 
     def flip(self):
         vx, vy = self.velocity
