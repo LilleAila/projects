@@ -215,7 +215,7 @@ class Derivasjon(MovingCameraScene):
 
         self.play(Restore(self.camera.frame))
 
-        ### Draw points and secant line
+        ### Draw points and first secant line
         dot2 = PointOnGraphFixedLabel(
             "(x+h, f(x+h))", ax, f, 2, scale=0.35, direction=UP * 0.6 + LEFT * 1.8
         )
@@ -267,6 +267,7 @@ class Derivasjon(MovingCameraScene):
 
         self.play(Restore(self.camera.frame))
 
+        ### Draw second secant line
         dot3 = PointOnGraphFixedLabel(
             "(a, f(a))", ax, f, 0, scale=0.35, direction=DOWN * 0.5 + RIGHT * 1.3
         )
@@ -293,24 +294,50 @@ class Derivasjon(MovingCameraScene):
                 .set_color(RED)
             )
         )
-        self.play(Write(l2))
+        self.play(Create(l2))
 
         self.play(dot4.move_point(1), run_time=2)
         self.wait(1)
         self.play(dot4.move_point(0.001), run_time=2)
         self.wait(2)
-        self.play(Unwrite(l2))
-        self.play(Unwrite(dot4))
+        # self.play(Unwrite(l2))
+        # self.play(Unwrite(dot4))
 
+        ### Draw third secant line
+        dot5 = PointOnGraphFixedLabel(
+            "(x, f(x))", ax, f, -2, scale=0.35, direction=DOWN * 0.5 + LEFT * 1.3
+        )
+
+        self.play(Write(dot5))
+
+        l3 = (
+            Line(dot3.get_dot_center(), dot5.get_dot_center())
+            .set_length(20)
+            .set_color(ORANGE)
+        )
+        l3.add_updater(
+            lambda x: x.become(
+                Line(dot3.get_dot_center(), dot5.get_dot_center())
+                .set_length(20)
+                .set_color(ORANGE)
+            )
+        )
+        self.play(Create(l3))
+
+        self.play(dot5.move_point(-1), run_time=2)
         self.wait(1)
-        self.play(Unwrite(dot3))
+        self.play(dot5.move_point(-0.001), run_time=2)
+        self.wait(2)
+        self.play(Uncreate(l2), Uncreate(l3), run_time=3)
+        self.play(Unwrite(dot4), Unwrite(dot5), Unwrite(dot3))
+
         self.wait(1)
 
         self.play(
-            Uncreate(ax),
-            Uncreate(labels),
-            Uncreate(graph_label),
-            Uncreate(graph),
+            Unwrite(ax),
+            Unwrite(labels),
+            Unwrite(graph_label),
+            Unwrite(graph),
             Unwrite(title),
             Unwrite(eq),
             Unwrite(eq3),
@@ -391,16 +418,65 @@ class Deriverbarhet(MovingCameraScene):
         self.play(Create(lines))
 
         self.wait(0.5)
-
         self.play(dot1.move_point(1), dot3.move_point(3), run_time=2)
-
         self.wait(1)
-
         self.play(dot1.move_point(1.999), dot3.move_point(2.001), run_time=2)
-
         self.wait(2)
+
+
+        self.play(self.camera.frame.animate.move_to([8.7, 0, 0]))
+        center = (ax.get_right() + self.camera.frame.get_right()) / 2
+        self.wait(2)
+
+        eq1s = [
+            r"\lim_{x \to 2} f \left( x \right)",
+            r"\lim_{x \to 2} \begin{cases} x^{2} - 3 & \text{, } x < 2 \\ \frac{1}{4} \left( x - 4 \right) ^{2} \end{cases}"
+        ]
+        mk_eq1 = lambda x: lambda pos: MathTex(x).scale(0.7).move_to(pos)
+        eq1 = mk_eq1(eq1s[0])(center)
+        self.play(Write(eq1))
+        self.wait(2)
+        self.play(Transform(eq1, mk_eq1(eq1s[1])(center)))
+        self.wait(2)
+        self.play(eq1.animate.move_to(center + 2 * UP))
+
+        eq2s = [
+            r"\lim_{x \to 2^{-}} f \left ( x \right)",
+            r"\lim_{x \to 2^{-}} x^{2} - 3",
+            r"\lim_{x \to 2^{-}} 2^{2} - 3",
+            r"\lim_{x \to 2^{-}} 4 - 3",
+            r"4 - 3",
+            r"1",
+        ]
+        mk_eq2 = lambda x: MathTex(x).scale(0.7).move_to(center + LEFT)
+        eq2 = mk_eq2(eq2s[0])
+        self.play(GrowFromCenter(eq2))
+        self.wait(2)
+        self.play(Transform(eq2, mk_eq2(eq2s[1])))
+        self.wait(2)
+        self.play(Transform(eq2, mk_eq2(eq2s[2])))
+        self.wait(1)
+        self.play(Transform(eq2, mk_eq2(eq2s[3])))
+        self.wait(1)
+        self.play(Transform(eq2, mk_eq2(eq2s[4])))
+        self.play(Transform(eq2, mk_eq2(eq2s[5])))
+
+        eq3s = [
+            r"\lim_{x \to 2^{+}} f \left ( x \right)",
+            r"\lim_{x \to 2^{+}} \frac{1}{4} \left( x - 4 \right) ^{2}",
+            r"\lim_{x \to 2^{+}} \frac{1}{4} \left( 2 - 4 \right) ^{2}",
+            r"\lim_{x \to 2^{+}} \frac{1}{4} \left( -2 \right) ^{2}",
+            r"\lim_{x \to 2^{+}} \frac{1}{4} 4",
+            r"\frac{1}{4} 4",
+            r"1",
+        ]
+        mk_eq3 = lambda x: MathTex(x).scale(0.7).move_to(center + RIGHT)
+        eq3 = mk_eq3(eq3s[0])
+        self.play(GrowFromCenter(eq3))
+        self.wait(2)
+
         self.play(Unwrite(lines))
-        self.play(Unwrite(dots))
+        self.play(Uncreate(dots))
         self.play(
             Uncreate(ax),
             Uncreate(labels),
