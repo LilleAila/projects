@@ -2,6 +2,7 @@ from manim import *
 from math import radians
 
 from lib import (
+    play_audio,
     DiscontinuousExcl,
     DiscontinuousIncl,
     PointOnGraph,
@@ -51,7 +52,9 @@ class Kontinuitet(MovingCameraScene):
             .rotate(radians(45))
         )
 
-        self.play(Create(ax), Create(labels))
+        with play_audio(self, "assets/test.wav"):
+            self.play(Create(ax), Create(labels))
+
         self.wait(1)
         self.play(Create(graph_label))
         self.play(Create(graph), run_time=2)

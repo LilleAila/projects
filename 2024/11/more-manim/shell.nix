@@ -4,6 +4,7 @@ with import <nixpkgs> {}; mkShell {
       manim
       manim-slides
       # pyqt5_with_qtmultimedia
+      pydub
     ]))
   ];
 }
