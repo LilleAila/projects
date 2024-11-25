@@ -371,7 +371,7 @@ class Deriverbarhet(MovingCameraScene):
         graph = ax.plot(f, discontinuities=[2], dt=0.001, color=BLUE)
         graph_label = ax.get_graph_label(
             graph,
-            r"f(x) = \begin{cases} x^{2} - 3 & \text{, } x < 2 \\ \frac{1}{4} \left( x - 4 \right) ^{2} \end{cases}",
+            r"f(x) = \begin{cases} x^{2} - 3 & \text{, } x < 2 \\ \frac{1}{4} \left( x - 4 \right) ^{2} & \text{, } x \geq 2 \end{cases}",
             x_val=7,
             direction=UP * 0.8,
         ).scale(0.6)
@@ -415,25 +415,15 @@ class Deriverbarhet(MovingCameraScene):
         self.wait()
         self.play(Create(graph_label))
         self.play(Create(graph), run_time=2)
-        self.wait(0.4)
-        self.play(Create(dots))
-        self.wait(0.5)
-        self.play(Create(lines))
-
-        self.wait(0.5)
-        self.play(dot1.move_point(1), dot3.move_point(3), run_time=2)
         self.wait(1)
-        self.play(dot1.move_point(1.999), dot3.move_point(2.001), run_time=2)
-        self.wait(2)
-
 
         self.play(self.camera.frame.animate.move_to([8.7, 0, 0]))
         center = (ax.get_right() + self.camera.frame.get_right()) / 2
         self.wait(2)
 
         eq1s = [
-            r"\lim_{x \to a} \frac{f \left( x \right) - f \left( a \right)}{x - a}"
-            r"\lim_{x \to 2} \frac{f \left( x \right) - f \left( 2 \right)}{x - 2}"
+            r"\lim_{x \to a} \frac{f \left( x \right) - f \left( a \right)}{x - a}",
+            r"\lim_{x \to 2} \frac{f \left( x \right) - f \left( 2 \right)}{x - 2}",
         ]
         mk_eq1 = lambda x: lambda pos: MathTex(x).scale(0.7).move_to(pos)
         eq1 = mk_eq1(eq1s[0])(center)
@@ -448,28 +438,105 @@ class Deriverbarhet(MovingCameraScene):
             r"\lim_{x \to 2^{-}} \frac{\left( x^{2} - 3 \right) - \left( 2^{2} - 3 \right)}{x - 2}",
             r"\lim_{x \to 2^{-}} \frac{\left( x^{2} - 3 \right) - 1}{x - 2}",
             r"\lim_{x \to 2^{-}} \frac{x^{2} - 4}{x - 2}",
-            r"\lim_{x \to 2^{-}} \frac{2x \left( x - 2 \right)}{x - 2}",
-            r"\lim_{x \to 2^{-}} 2x",
-            r"\lim_{x \to 2^{-}} 2x = 4",
+            # Konjugatsetningen
+            r"\lim_{x \to 2^{-}} \frac{\left( x - 2 \right)\left(x + 2\right)}{x - 2}",
+            r"\lim_{x \to 2^{-}} x+2",
+            r"\lim_{x \to 2^{-}} x+2 = 4",
         ]
-        mk_eq2 = lambda x: MathTex(x).scale(0.7).move_to(center + LEFT)
+        mk_eq2 = lambda x: MathTex(x).scale(0.7).move_to(center + LEFT * 2)
         eq2 = mk_eq2(eq2s[0])
         self.play(GrowFromCenter(eq2))
         self.wait(2)
         self.play(Transform(eq2, mk_eq2(eq2s[1])))
+        self.wait(2)
+        self.play(Transform(eq2, mk_eq2(eq2s[2])))
+        self.wait(2)
+        self.play(Transform(eq2, mk_eq2(eq2s[3])))
+        self.wait(2)
+        self.play(Transform(eq2, mk_eq2(eq2s[4])))
+        self.wait(2)
+        self.play(Transform(eq2, mk_eq2(eq2s[5])))
+        self.wait(1)
+        self.play(Transform(eq2, mk_eq2(eq2s[6])))
 
+        self.wait(2)
 
         eq3s = [
-            r"\lim_{x \to 2^{-}} \frac{f \left( x \right) - f \left( 2 \right)}{x - 2}",
-            r"\lim_{x \to 2^{-}} \frac{\frac{1}{4} \left( x - 4 \right) ^{2} - \frac{1}{4} \left( 2 - 4 \right) ^{2}{x - 2}",
-            r"\lim_{x \to 2^{-}} \frac{\frac{1}{4} \left( x - 4 \right) ^{2} - \frac{1}{4} \left( -2 \right) ^{2}{x - 2}",
-            r"\lim_{x \to 2^{-}} \frac{\frac{1}{4} \left( x - 4 \right) ^{2} - \frac{1}{4} \cdot 4}{x - 2}",
-            r"\lim_{x \to 2^{-}} \frac{\frac{1}{4} \left( \left( x - 4 \right) ^{2} - 4 \right)}{x - 2}",
-            r"\lim_{x \to 2^{-}} \frac{\frac{1}{4} \left( x^2 - 8x + 4^2 - 4 \right)}{x - 2}",
+            r"\lim_{x \to 2^{+}} \frac{f \left( x \right) - f \left( 2 \right)}{x - 2}",
+            r"\lim_{x \to 2^{+}} \frac{\frac{1}{4} \left( x - 4 \right) ^{2} - \frac{1}{4} \left( 2 - 4 \right) ^{2}}{x - 2}",
+            r"\lim_{x \to 2^{+}} \frac{\frac{1}{4} \left( x - 4 \right) ^{2} - \frac{1}{4} \left( -2 \right) ^{2}}{x - 2}",
+            # (-2)^2 = 4
+            r"\lim_{x \to 2^{+}} \frac{\frac{1}{4} \left( x - 4 \right) ^{2} - \frac{1}{4} \cdot 4}{x - 2}",
+            r"\lim_{x \to 2^{+}} \frac{\frac{1}{4} \left( \left( x - 4 \right) ^{2} - 4 \right)}{x - 2}",
+            # Flytte ned i nevner
+            r"\lim_{x \to 2^{+}} \frac{\left( x - 4 \right) ^{2} - 4}{4 \left(x - 2\right)}",
+            r"\lim_{x \to 2^{+}} \frac{\left( x - 4 \right) ^{2} - 2^{2}}{4 \left(x - 2\right)}",
+            # Konjugatsetningen
+            r"\lim_{x \to 2^{+}} \frac{\left( x - 4 - 2 \right)\left(x - 4 + 2\right)}{4 \left(x - 2\right)}",
+            r"\lim_{x \to 2^{+}} \frac{\left( x - 6 \right)\left(x - 2\right)}{4 \left(x - 2\right)}",
+            # Fjerne x-2
+            r"\lim_{x \to 2^{+}} \frac{x - 6}{4}",
+            r"\lim_{x \to 2^{+}} \frac{x - 6}{4} = \frac{2-6}{4}",
+            r"\lim_{x \to 2^{+}} \frac{x - 6}{4} = \frac{-4}{4}",
+            r"\lim_{x \to 2^{+}} \frac{x - 6}{4} = -1",
         ]
+        mk_eq3 = lambda x: MathTex(x).scale(0.7).move_to(center + RIGHT * 2)
+        eq3 = mk_eq3(eq3s[0])
+        self.play(GrowFromCenter(eq3))
+        self.wait(2)
+        self.play(Transform(eq3, mk_eq3(eq3s[1])))
+        self.wait(2)
+        self.play(Transform(eq3, mk_eq3(eq3s[2])))
+        self.wait(2)
+        self.play(Transform(eq3, mk_eq3(eq3s[3])))
+        self.wait(2)
+        self.play(Transform(eq3, mk_eq3(eq3s[4])))
+        self.wait(2)
+        self.play(Transform(eq3, mk_eq3(eq3s[5])))
+        self.wait(2)
+        self.play(Transform(eq3, mk_eq3(eq3s[6])))
+        self.wait(2)
+        # Konjugatsetningen
+        self.play(Transform(eq3, mk_eq3(eq3s[7])))
+        self.wait(1)
+        self.play(Transform(eq3, mk_eq3(eq3s[8])))
+        self.wait(2)
+        # Fjerne x-2
+        self.play(Transform(eq3, mk_eq3(eq3s[9])))
+        self.wait(1)
+        self.play(Transform(eq3, mk_eq3(eq3s[10])))
+        self.wait(1)
+        self.play(Transform(eq3, mk_eq3(eq3s[11])))
+        self.wait(1)
+        self.play(Transform(eq3, mk_eq3(eq3s[12])))
+
+        self.wait(3)
+
+        eq4 = (
+            MathTex(r"\lim_{x \to 2^{-}} = 4 \neq \lim_{x \to 2^{+}} = -1")
+            .scale(0.7)
+            .move_to(center)
+        )
+        self.play(ShrinkToCenter(eq2), ShrinkToCenter(eq3), GrowFromCenter(eq4))
+
+        self.wait(2)
+        self.play(Restore(self.camera.frame))
+        self.wait(1)
+
+        self.play(Create(dots))
+        self.wait(0.5)
+        self.play(Create(lines))
+
+        self.wait(2)
+        self.play(dot1.move_point(1), dot3.move_point(3), run_time=2)
+        self.wait(1)
+        self.play(dot1.move_point(1.999), dot3.move_point(2.001), run_time=2)
+
+        self.wait(3)
 
         self.play(Unwrite(lines))
         self.play(Uncreate(dots))
+        self.wait()
         self.play(
             Uncreate(ax),
             Uncreate(labels),
