@@ -1,0 +1,57 @@
+@startuml
+
+class Author {
+  - String names
+  + String full_name
+}
+
+enum Edition {
+  Physical
+  Digital
+  Audiobook
+}
+
+enum Genre {
+  Action
+  Humor
+  Science Fiction
+  Mystery
+  Nonfiction
+}
+
+class Book {
+  + String title
+  + Author[] authors
+  + Int isbn
+  + Date published
+  + Edition edition
+  + Genre genre
+  + Date borrow_date
+  + Date due_date
+  + Bool borrowed
+  + Bool borrow(Date)
+  + Bool past_due(Date)
+  + Void return_book()
+}
+
+Author --> Book::authors
+Genre --> Book::genre
+Edition --> Book::edition
+
+class Library {
+  + Book[] books
+  + Void add_book(Book)
+  + Book[] search(Str)
+}
+
+Book --> Library::books
+
+class TUI {
+  - Bool __running
+  - Library __library
+  + Void start()
+}
+
+Library --> TUI::__running
+
+@enduml

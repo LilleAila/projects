@@ -3,5 +3,6 @@ with import <nixpkgs> {}; mkShell {
     (python312.withPackages(ps: with ps; [
       black
     ]))
+    plantuml
   ];
 }
