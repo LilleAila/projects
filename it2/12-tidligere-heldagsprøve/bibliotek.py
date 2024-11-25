@@ -122,37 +122,95 @@ class Book:
         self.__due_date = self.__borrow_date + datetime.timedelta(days=60)
         return True
 
-    def return_book(self):
+    def return_book(self) -> None:
         assert self.borrowed, "Cannot return non-borrowed book"
         self.__borrowed = False
         self.__borrow_date = None
         self.__due_date = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         authors = " & ".join(self.authors)
         if self.borrowed:
-            return f"{self.title} - {authors}\nBorrowed {str(self.borrow_date)}, Due {str(self.due_date)}"
+            return f"{self.title} - {authors} - Borrowed {str(self.borrow_date)}, Due {str(self.due_date)}"
         else:
-            return f"{self.title} - {authors}\nNot borrowed"
+            return f"{self.title} - {authors} - Not borrowed"
 
 
 class Library:
     __slots__ = "__books"
 
-    def __init__(self):
-        pass
+    def __init__(self) -> None:
+        self.__books = [
+            Book(
+                "The hitchhiker's guide to the galaxy",
+                [Author("Douglas Adams")],
+                9780307417138,
+                datetime.date(1979, 10, 15),
+                genres=[GENRES[1], GENRES[2]],
+            )
+        ]
+
+    @property
+    def books(self) -> list[Book]:
+        return self.__books
+
+    def __repr__(self) -> str:
+        num_books = len(self.books)
+        s = "s" if num_books > 1 else ""
+        return f"Library with {num_books} book{s}"
 
 
-test_book = Book(
-    "The hitchhiker's guide to the galaxy",
-    [Author("Douglas Adams")],
-    9780307417138,
-    datetime.date(1979, 10, 15),
-    genres=[GENRES[1], GENRES[2]],
-)
+class TUI:
+    __slots__ = ("__running", "__library")
 
-# Ulike tester for å forsikre meg om at koden fungerer
-assert test_book.borrow(datetime.date.today()) == True
-assert not test_book.past_due(datetime.date.today())
-assert test_book.past_due(test_book.due_date + datetime.timedelta(days=1))
-test_book.return_book()
+    def __init__(self) -> None:
+        self.__running = False
+        self.__library = Library()
+
+    def __input(self, prompt: str) -> str:
+        while True:
+            result = input(prompt)
+            if len(result) > 0:
+                return result
+
+    def __choose_action(self, actions: dict[str, str]) -> str:
+        actions_prompt = "\n".join(
+            [f"{key}: {action}" for key, action in actions.items()]
+        )
+        try:
+            print()
+            while True:
+                result = self.__input(actions_prompt + "\nChoose an action: ")
+                print()
+                if result in actions:
+                    return result
+                else:
+                    print("Invalid answer! Try again.")
+        except (KeyboardInterrupt, EOFError):
+            self.__running = False
+            return ""
+
+    def __list_books(self) -> str:
+        books = map(str, self.__library.books)
+        return "\n".join(books)
+
+    def start(self) -> None:
+        self.__running = True
+        print("Welcome to the library!")
+        while self.__running:
+            action = self.__choose_action(
+                {
+                    "l": "List books",
+                    "a": "Add book",
+                    "s": "Search for book",
+                    "b": "Borrow book",
+                }
+            )
+            match action:
+                case "l":
+                    print(self.__list_books())
+
+
+if __name__ == "__main__":
+    tui = TUI()
+    tui.start()
