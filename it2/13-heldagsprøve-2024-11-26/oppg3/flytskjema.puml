@@ -1,0 +1,27 @@
+@startuml
+
+title KlikkKlikkKlikk
+
+start
+
+:Start spillet;
+
+repeat
+if (Tryppet spilleren innenfor rektangelet?) is (ja) then
+  :Gi poeng;
+else (nei)
+endif
+if (Er runden ferdig?) is (ja) then
+  :Vis poengsum;
+  :Vent til neste runde;
+  :Endre bakgrunnsfarge;
+  :Nullstill spillet;
+else (nei)
+endif
+repeat while (Kjører spillet?) is (ja) not (nei)
+
+:Lagre høyeste poengsum;
+
+end
+
+@enduml

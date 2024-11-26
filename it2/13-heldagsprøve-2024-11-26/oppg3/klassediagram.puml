@@ -1,0 +1,53 @@
+@startuml
+
+title KlikkKlikkKlikk
+
+class Sprite {
+  + Rect rect
+}
+
+class TextSprite {
+  + Str text
+  + Rect rect
+}
+
+class Time {
+  + Int time
+}
+
+class Result {
+  + show_result(Int)
+  + hide_result()
+}
+
+class Target {
+  + move()
+}
+
+TextSprite <|-- Time
+TextSprite <|-- Result
+Sprite <|-- Target
+
+class Game {
+  - Clock __clock
+  - Screen __screen
+  - Int __score
+  - Int __best_score
+  - Time __time
+  - Result __result
+  - Target __target
+  - Bool __running
+  - Bool __game_running
+  - Color __bg
+  - __handle_events()
+  - __handle_keyboard()
+  - __update()
+  - __draw()
+  + run()
+}
+
+Time --> Game::__time
+Result --> Game::__result
+Target --> Game::__target
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+title BMI-kalkulator
+
+start
+
+repeat
+:Be om høyde; <<input>>
+if (Er svaret tomt) then (ja)
+  stop
+else (nei)
+  :Be om vekt; <<input>>
+  if (Er svaret tomt) then (ja)
+    stop
+  else (nei)
+    :Regn ut ""vekt/høyde²"";
+  endif
+endif
+repeat while (kjører programmet?) is (ja) not (nei)
+
+stop
+
+@enduml

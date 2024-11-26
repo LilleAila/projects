@@ -1,0 +1,46 @@
+@startuml
+
+title Parking lot
+
+class Car {
+  + Str licenseplate
+  + Str name
+  + Str color
+  + Float price_per_minute = 1.5
+  + Str __repr__()
+}
+
+class BigCar {
+  + Float price_per_minute = 3.0
+}
+
+class Spot {
+  + Int index
+  + Bool occupied
+  - Car car
+  - Time in_time
+  + Void add_car(Car, Time)
+  + Void remove_car(Time)
+  + Bool has_color(Str)
+  + Bool has_licenseplate(Str)
+  + Str get_car_info()
+  + Str __repr__()
+}
+
+class Parking {
+  - Int num_spots
+  - Spot[] __spots
+  + Str spots
+  + Int free_spots
+  + Void add_car(Car, Time)
+  + Void remove_car_by_index(Int, Time)
+  + Void remove_car(Str, Time)
+  + Void get_cars_with_color(Str)
+  + Str __repr__()
+}
+
+BigCar --o Car
+Car --> Spot::car
+Spot --> Parking::__spots
+
+@enduml
