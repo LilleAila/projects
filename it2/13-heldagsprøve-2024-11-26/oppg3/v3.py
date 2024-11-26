@@ -26,6 +26,7 @@ PAUSE_DURATION: int = 3
 TARGET_MOVE_TIME: int = 2
 TARGET_SIZE: Geometry = (100, 100)
 
+
 # Hjelpefunksjoner
 def random_color(min: int, max: int) -> Color:
     return (randint(min, max), randint(min, max), randint(min, max))
@@ -65,6 +66,7 @@ class Screen:
 
 class Sprite(pg.sprite.Sprite):
     """Klasse for å gjøre det litt enklere å jobbe med sprites"""
+
     __slots__ = ("screen", "__geometry")
 
     def __init__(self, position: Position, geometry: Geometry, screen: Screen) -> None:
@@ -94,6 +96,7 @@ class Sprite(pg.sprite.Sprite):
 
 class TextSprite(pg.sprite.Sprite):
     """Det samme som over, men for tekst"""
+
     __slots__ = ("screen", "text", "__font", "__position")
 
     def __init__(
@@ -127,6 +130,7 @@ class TextSprite(pg.sprite.Sprite):
 
 class Time(TextSprite):
     """Tekst-sprite for å telle tiden"""
+
     __slots__ = "__time"
 
     def __init__(self, screen: Screen) -> None:
@@ -152,6 +156,7 @@ class Time(TextSprite):
 
 class Result(TextSprite):
     """En sprite som vises på slutten av runden for å si resultatet."""
+
     def __init__(self, screen: Screen) -> None:
         super().__init__(screen, size=50, text="")
 
@@ -171,6 +176,7 @@ class Result(TextSprite):
 
 class Target(Sprite):
     """Sprite for rektangelet man skal trykke på"""
+
     def __init__(self, geometry: Geometry, screen: Screen) -> None:
         super().__init__((0, 0), geometry, screen)
         pg.draw.rect(self.image, Colors.FOREGROUND, (0, 0, self.width, self.height))
@@ -186,6 +192,7 @@ class Target(Sprite):
 
 class Game:
     """Selve spillet"""
+
     # Definerer alle ulike attributter her i __slots__ (kun for å få bedre oversikt)
     __slots__ = (
         "__running",
@@ -238,7 +245,9 @@ class Game:
                 # Stoppe spillet etter runden er ferdig, vise resultat
                 self.__game_running = False
                 self.__result.show_result(self.__score)
-                self.__best_score = max(self.__score, self.__best_score) # Lagre den beste poengsummen
+                self.__best_score = max(
+                    self.__score, self.__best_score
+                )  # Lagre den beste poengsummen
                 self.__round_end = pg.time.get_ticks()
         elif pg.time.get_ticks() - self.__round_end >= PAUSE_DURATION * 1000:
             # Starte spillet igjen etter pausetiden har gått ut.

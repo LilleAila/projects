@@ -10,6 +10,7 @@ import datetime
 
 class Car:
     """Informasjon om biler."""
+
     def __init__(
         self, licenseplate: str, name: str, color: str, price_per_minute: float = 1.5
     ) -> None:
@@ -31,6 +32,7 @@ class BigCar(Car):
 
 class Spot:
     """Hver parkeringsplass har sin egen instans av denne klassen."""
+
     def __init__(self, index: int) -> None:
         self.index = index
         self.occupied = False
@@ -89,6 +91,7 @@ class Spot:
 
 class Parking:
     """Parkeringsplass med alle plassene."""
+
     def __init__(self, num_spots: int) -> None:
         # spots har en index arg og det blir addet til start av __repr__
         self.num_spots = num_spots
