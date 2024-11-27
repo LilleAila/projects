@@ -1,16 +1,20 @@
 from manim import *
 from pydub import AudioSegment
 from contextlib import contextmanager
+from math import ceil
 
 
 @contextmanager
 def play_audio(scene: Scene, audio_file: str):
     """Play audio while animation is playing inside with"""
     audio = AudioSegment.from_file(audio_file)
-    audio_duration = len(audio) / 1000.0
+    audio_duration = ceil(len(audio) / 1000.0)
     scene.add_sound(audio_file)
-    yield audio_duration # Executes code inside the "with"
-    remaining_time = max(0, audio_duration - scene.renderer.time)
+    start_time = scene.renderer.time
+    yield audio_duration  # Executes code inside the "with"
+    delta_time = scene.renderer.time - start_time
+    remaining_time = max(0, audio_duration - delta_time)
+    print(delta_time, remaining_time)
     scene.wait(remaining_time)
 
 

@@ -1,3 +1,6 @@
+# https://github.com/ManimCommunity/manim/issues/4005
+# Have to render with `manim -pql main.py Kontinuitet --disable_caching`
+
 from manim import *
 from math import radians
 
@@ -16,6 +19,11 @@ class Kontinuitet(MovingCameraScene):
         # https://docs.manim.community/en/stable/examples.html#special-camera-settings
         self.camera: MovingCamera  # LSP doesn't understand that
         self.camera.frame.save_state()
+
+        self.wait()
+        with play_audio(self, "assets/a01.wav"):
+            pass
+        self.wait()
 
         ### Draw axes and the graph of the function.
         f1 = lambda x: x
@@ -52,13 +60,19 @@ class Kontinuitet(MovingCameraScene):
             .rotate(radians(45))
         )
 
-        with play_audio(self, "assets/test.wav"):
-            self.play(Create(ax), Create(labels))
+        self.play(Create(ax), Create(labels))
 
         self.wait(1)
-        self.play(Create(graph_label))
-        self.play(Create(graph), run_time=2)
-        self.play(Create(m1), Create(m2))
+        with play_audio(self, "assets/a02.wav"):
+            self.wait(1.5)
+            self.play(Create(graph_label))
+        self.wait()
+        with play_audio(self, "assets/a03.wav"):
+            self.play(Create(graph), run_time=2)
+            self.play(Create(m1), Create(m2))
+        self.wait(1)
+        with play_audio(self, "assets/a04.wav"):
+            pass
         self.wait(3)
 
         ### Slide to the right, find center of available space
