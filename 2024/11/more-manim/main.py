@@ -87,13 +87,18 @@ class Kontinuitet(MovingCameraScene):
             r"f \left( 0 \right) = 0 + 1",
             r"f \left( 0 \right) = 1",
         ]
-        f_value = MathTex(f_values[0]).move_to(center + UP * 3)
+        mkf_value = lambda x: MathTex(x).move_to(center + UP * 3)
+        f_value = mkf_value(f_values[0])
         self.play(Write(f_value))
-        for i in f_values[1:]:
+        self.wait(1)
+        self.play(Transform(f_value, mkf_value(f_values[1])))
+        self.wait(1)
+        with play_audio(self, "assets/a05.wav"):
+            self.play(Transform(f_value, mkf_value(f_values[2])))
             self.wait(1)
-            self.play(Transform(f_value, MathTex(i).move_to(center + UP * 3)))
-        f_value_box = SurroundingRectangle(f_value, color=BLUE, buff=0.3)
-        self.play(Write(f_value_box))
+            self.play(Transform(f_value, mkf_value(f_values[3])))
+            f_value_box = SurroundingRectangle(f_value, color=BLUE, buff=0.3)
+            self.play(Write(f_value_box))
         self.wait(2)
 
         ### Find value of limits
@@ -102,9 +107,8 @@ class Kontinuitet(MovingCameraScene):
             r"\lim_{x \to 0^{-}} f \left( x \right) \neq \lim_{x \to 0^{+}} f \left( x \right)",
         ]
         lim1 = MathTex(lim1s[0]).move_to(center)
-
-        self.play(Write(lim1))
-
+        with play_audio(self, "assets/a06.wav"):
+            self.play(Write(lim1))
         self.wait(3)
 
         self.play(Restore(self.camera.frame))
@@ -116,8 +120,13 @@ class Kontinuitet(MovingCameraScene):
 
         self.play(Create(p1), Create(p2))
         self.wait(1)
+        with play_audio(self, "assets/a07.wav"):
+            pass
+        self.wait(1)
         self.play(p1.move_point(0), p2.move_point(0), run_time=4)
-        self.wait(2)
+        with play_audio(self, "assets/a08.wav"):
+            pass
+        self.wait(1)
 
         ### Slide back to side, show limits algebraically
         self.play(self.camera.frame.animate.move_to([8.7, 0, 0]))
@@ -133,31 +142,39 @@ class Kontinuitet(MovingCameraScene):
         ]
         lim2_a = MathTex(lim2s[0][0]).move_to(center + UP)
         lim2_b = MathTex(lim2s[0][1]).move_to(center + DOWN)
-        self.play(GrowFromCenter(lim2_a), GrowFromCenter(lim2_b))
-        for lim in lim2s:
-            (lim_a, lim_b) = lim
+        with play_audio(self, "assets/a09.wav"):
+            self.play(GrowFromCenter(lim2_a), GrowFromCenter(lim2_b))
             self.wait(2)
+            (lim_a, lim_b) = lim2s[1]
             self.play(
                 Transform(lim2_a, MathTex(lim_a).move_to(center + UP)),
                 Transform(lim2_b, MathTex(lim_b).move_to(center + DOWN)),
             )
-        self.wait(3)
+        self.wait(0.5)
+        with play_audio(self, "assets/a10.wav"):
+            self.wait(2)
+            (lim_a, lim_b) = lim2s[2]
+            self.play(
+                Transform(lim2_a, MathTex(lim_a).move_to(center + UP)),
+                Transform(lim2_b, MathTex(lim_b).move_to(center + DOWN)),
+            )
+        self.wait(2)
         self.play(ShrinkToCenter(lim2_a), ShrinkToCenter(lim2_b))
         self.play(lim1.animate.move_to(center))
         self.play(Transform(lim1, MathTex(lim1s[1]).move_to(center)))
-
         self.wait(2)
 
         self.play(Unwrite(lim1), Unwrite(f_value_box))
         self.play(f_value.animate.move_to(center))
-        self.play(
-            Transform(
-                f_value,
-                MathTex(
-                    r"f \left( 0 \right) \neq \lim_{x \to 0} f \left( 0 \right)"
-                ).move_to(center),
+        with play_audio(self, "assets/a11.wav"):
+            self.play(
+                Transform(
+                    f_value,
+                    MathTex(
+                        r"f \left( 0 \right) \neq \lim_{x \to 0} f \left( 0 \right)"
+                    ).move_to(center),
+                )
             )
-        )
 
         self.wait(2)
         self.play(
@@ -174,6 +191,11 @@ class Derivasjon(MovingCameraScene):
     def construct(self):
         self.camera: MovingCamera
         self.camera.frame.save_state()
+
+        self.wait(1)
+        with play_audio(self, "assets/a12.wav"):
+            pass
+        self.wait(2)
 
         ### Draw function
         f = lambda x: x**3 - 3 * x
@@ -197,15 +219,17 @@ class Derivasjon(MovingCameraScene):
 
         self.play(Create(ax), Create(labels))
         self.wait()
-        self.play(Write(graph_label))
-        self.play(Write(graph), run_time=2)
+        with play_audio(self, "assets/a13.wav"):
+            self.play(Write(graph_label))
+            self.play(Write(graph), run_time=2)
         self.wait(0.5)
 
         ### Draw formula
         dot1 = PointOnGraphFixedLabel(
             "(x, f(x))", ax, f, 0, scale=0.35, direction=DOWN * 0.5 + RIGHT * 1.3
         )
-        self.play(Write(dot1))
+        with play_audio(self, "assets/a14.wav"):
+            self.play(Write(dot1))
         self.wait(1)
 
         eqs = [
@@ -222,12 +246,14 @@ class Derivasjon(MovingCameraScene):
         eq = make_eq(eqs[0])
         center = eq.get_center()
         self.play(self.camera.frame.animate.scale(0.6).move_to(eq))
-        self.play(Write(eq))
+        with play_audio(self, "assets/a15.wav"):
+            self.play(Write(eq))
+        self.wait(2)
 
-        self.wait(2)
-        self.play(Transform(eq, make_eq(eqs[1])))
-        self.wait(2)
-        self.play(Transform(eq, make_eq(eqs[2])))
+        with play_audio(self, "assets/a16.wav"):
+            self.play(Transform(eq, make_eq(eqs[1])))
+            self.wait(2)
+            self.play(Transform(eq, make_eq(eqs[2])))
         self.wait(2)
 
         self.play(Restore(self.camera.frame))
@@ -250,36 +276,33 @@ class Derivasjon(MovingCameraScene):
             )
         )
 
-        self.play(Create(dot2))
-        self.play(Create(l1))
-        self.wait(0.5)
-        self.play(dot2.move_point(1), run_time=2)
-        self.wait(0.5)
-        self.play(dot2.move_point(0.001), run_time=2)
-        # self.wait(4)
-        # self.play(Unwrite(l1))
-        # self.play(Uncreate(dot2))
-
-        self.wait(4)
+        self.wait(1)
+        with play_audio(self, "assets/a17.wav"):
+            self.play(Create(dot2))
+            self.play(Create(l1))
+        self.wait(2)
+        with play_audio(self, "assets/a18.wav"):
+            self.play(dot2.move_point(1), run_time=2)
+            self.wait(0.5)
+            self.play(dot2.move_point(0.001), run_time=2)
+        self.wait(2)
 
         self.play(self.camera.frame.animate.scale(0.6).move_to(eq))
 
         self.wait(2)
-        # eq2 = MathTex(r"x = a + h").scale(0.6).move_to(center + DOWN)
-        # self.play(Write(eq2))
-        # self.wait(2)
 
-        self.play(Transform(eq, make_eq(eqs[3])))
+        with play_audio(self, "assets/a19.wav"):
+            self.play(Transform(eq, make_eq(eqs[3])))
         self.wait(2)
 
-        # self.play(eq2.animate.move_to(eq2.get_center() + LEFT))
         eq3 = MathTex(r"h = x - a").scale(0.6).move_to(center + DOWN * 0.75)
-        self.play(GrowFromCenter(eq3))
-        self.wait(2)
+        with play_audio(self, "assets/a20.wav"):
+            self.play(GrowFromCenter(eq3))
+        self.wait(1)
         self.play(Transform(eq, make_eq(eqs[4])))
         self.wait(2)
-        self.play(Transform(eq, make_eq(eqs[5])))
-
+        with play_audio(self, "assets/a21.wav"):
+            self.play(Transform(eq, make_eq(eqs[5])))
         self.wait(2)
 
         self.play(Restore(self.camera.frame))
@@ -288,9 +311,11 @@ class Derivasjon(MovingCameraScene):
         dot3 = PointOnGraphFixedLabel(
             "(a, f(a))", ax, f, 0, scale=0.35, direction=DOWN * 0.5 + RIGHT * 1.3
         )
-        self.play(Unwrite(l1))
-        self.play(Unwrite(dot1), Unwrite(dot2))
-        self.play(Write(dot3))
+        self.wait(0.5)
+        with play_audio(self, "assets/a22.wav"):
+            self.play(Unwrite(l1))
+            self.play(Unwrite(dot1), Unwrite(dot2))
+            self.play(Write(dot3))
         self.wait(1)
 
         dot4 = PointOnGraphFixedLabel(
@@ -311,8 +336,10 @@ class Derivasjon(MovingCameraScene):
                 .set_color(RED)
             )
         )
-        self.play(Create(l2))
 
+        with play_audio(self, "assets/a23.wav"):
+            self.play(Create(l2))
+            self.wait(1)
         self.play(dot4.move_point(1), run_time=2)
         self.wait(1)
         self.play(dot4.move_point(0.001), run_time=2)
@@ -324,8 +351,6 @@ class Derivasjon(MovingCameraScene):
         dot5 = PointOnGraphFixedLabel(
             "(x, f(x))", ax, f, -2, scale=0.35, direction=DOWN * 0.5 + LEFT * 1.3
         )
-
-        self.play(Write(dot5))
 
         l3 = (
             Line(dot3.get_dot_center(), dot5.get_dot_center())
@@ -339,11 +364,14 @@ class Derivasjon(MovingCameraScene):
                 .set_color(ORANGE)
             )
         )
-        self.play(Create(l3))
 
-        self.play(dot5.move_point(-1), run_time=2)
-        self.wait(1)
-        self.play(dot5.move_point(-0.001), run_time=2)
+        with play_audio(self, "assets/a24.wav"):
+            self.play(Write(dot5))
+            self.play(Create(l3))
+            self.wait(1)
+            self.play(dot5.move_point(-1), run_time=2)
+            self.wait(1)
+            self.play(dot5.move_point(-0.001), run_time=2)
         self.wait(2)
         self.play(Uncreate(l2), Uncreate(l3), run_time=3)
         self.play(Unwrite(dot4), Unwrite(dot5), Unwrite(dot3))
@@ -367,6 +395,11 @@ class Deriverbarhet(MovingCameraScene):
     def construct(self):
         self.camera: MovingCamera
         self.camera.frame.save_state()
+
+        self.wait()
+        with play_audio(self, "assets/a25.wav"):
+            pass
+        self.wait()
 
         ### Draw function
         f1 = lambda x: x**2 - 3
@@ -427,8 +460,9 @@ class Deriverbarhet(MovingCameraScene):
 
         self.play(Create(ax), Create(labels))
         self.wait()
-        self.play(Create(graph_label))
-        self.play(Create(graph), run_time=2)
+        with play_audio(self, "assets/a26.wav"):
+            self.play(Create(graph_label))
+            self.play(Create(graph), run_time=2)
         self.wait(1)
 
         self.play(self.camera.frame.animate.move_to([8.7, 0, 0]))
@@ -441,9 +475,10 @@ class Deriverbarhet(MovingCameraScene):
         ]
         mk_eq1 = lambda x: lambda pos: MathTex(x).scale(0.7).move_to(pos)
         eq1 = mk_eq1(eq1s[0])(center)
-        self.play(Write(eq1))
-        self.wait(2)
-        self.play(Transform(eq1, mk_eq1(eq1s[1])(center)))
+        with play_audio(self, "assets/a27.wav"):
+            self.play(Write(eq1))
+            self.wait(2)
+            self.play(Transform(eq1, mk_eq1(eq1s[1])(center)))
         self.wait(2)
         self.play(eq1.animate.move_to(center + 2 * UP))
 
@@ -459,21 +494,25 @@ class Deriverbarhet(MovingCameraScene):
         ]
         mk_eq2 = lambda x: MathTex(x).scale(0.7).move_to(center + LEFT * 2)
         eq2 = mk_eq2(eq2s[0])
-        self.play(GrowFromCenter(eq2))
-        self.wait(2)
-        self.play(Transform(eq2, mk_eq2(eq2s[1])))
-        self.wait(2)
-        self.play(Transform(eq2, mk_eq2(eq2s[2])))
-        self.wait(2)
-        self.play(Transform(eq2, mk_eq2(eq2s[3])))
-        self.wait(2)
-        self.play(Transform(eq2, mk_eq2(eq2s[4])))
-        self.wait(2)
-        self.play(Transform(eq2, mk_eq2(eq2s[5])))
+        with play_audio(self, "assets/a28.wav"):
+            self.play(GrowFromCenter(eq2))
+            self.wait(2)
+            self.play(Transform(eq2, mk_eq2(eq2s[1])))
+            self.wait(2)
+            self.play(Transform(eq2, mk_eq2(eq2s[2])))
+            self.wait(2)
+            self.play(Transform(eq2, mk_eq2(eq2s[3])))
+            self.wait(1)
         self.wait(1)
-        self.play(Transform(eq2, mk_eq2(eq2s[6])))
-
-        self.wait(2)
+        with play_audio(self, "assets/a29.wav"):
+            self.play(Transform(eq2, mk_eq2(eq2s[4])))
+            self.wait(1)
+        self.wait(1)
+        with play_audio(self, "assets/a30.wav"):
+            self.play(Transform(eq2, mk_eq2(eq2s[5])))
+            self.wait(1)
+            self.play(Transform(eq2, mk_eq2(eq2s[6])))
+        self.wait(3)
 
         eq3s = [
             r"\lim_{x \to 2^{+}} \frac{f \left( x \right) - f \left( 2 \right)}{x - 2}",
@@ -496,34 +535,42 @@ class Deriverbarhet(MovingCameraScene):
         ]
         mk_eq3 = lambda x: MathTex(x).scale(0.7).move_to(center + RIGHT * 2)
         eq3 = mk_eq3(eq3s[0])
-        self.play(GrowFromCenter(eq3))
-        self.wait(2)
-        self.play(Transform(eq3, mk_eq3(eq3s[1])))
-        self.wait(2)
-        self.play(Transform(eq3, mk_eq3(eq3s[2])))
-        self.wait(2)
-        self.play(Transform(eq3, mk_eq3(eq3s[3])))
-        self.wait(2)
-        self.play(Transform(eq3, mk_eq3(eq3s[4])))
-        self.wait(2)
-        self.play(Transform(eq3, mk_eq3(eq3s[5])))
-        self.wait(2)
-        self.play(Transform(eq3, mk_eq3(eq3s[6])))
-        self.wait(2)
-        # Konjugatsetningen
-        self.play(Transform(eq3, mk_eq3(eq3s[7])))
+        with play_audio(self, "assets/a31.wav"):
+            self.play(GrowFromCenter(eq3))
+            self.wait(1)
         self.wait(1)
-        self.play(Transform(eq3, mk_eq3(eq3s[8])))
-        self.wait(2)
-        # Fjerne x-2
-        self.play(Transform(eq3, mk_eq3(eq3s[9])))
+        with play_audio(self, "assets/a32.wav"):
+            self.play(Transform(eq3, mk_eq3(eq3s[1])))
+            self.wait(2)
+            self.play(Transform(eq3, mk_eq3(eq3s[2])))
+            self.wait(2)
+            self.play(Transform(eq3, mk_eq3(eq3s[3])))
+            self.wait(1)
         self.wait(1)
-        self.play(Transform(eq3, mk_eq3(eq3s[10])))
+        with play_audio(self, "assets/a33.wav"):
+            self.play(Transform(eq3, mk_eq3(eq3s[4])))
+            self.wait(2)
+            self.play(Transform(eq3, mk_eq3(eq3s[5])))
+            self.wait(2)
+            self.play(Transform(eq3, mk_eq3(eq3s[6])))
+            self.wait(1)
         self.wait(1)
-        self.play(Transform(eq3, mk_eq3(eq3s[11])))
-        self.wait(1)
-        self.play(Transform(eq3, mk_eq3(eq3s[12])))
-
+        with play_audio(self, "assets/a34.wav"):
+            # Konjugatsetningen
+            self.play(Transform(eq3, mk_eq3(eq3s[7])))
+            self.wait(1)
+            self.play(Transform(eq3, mk_eq3(eq3s[8])))
+            self.wait(2)
+            # Fjerne x-2
+            self.play(Transform(eq3, mk_eq3(eq3s[9])))
+            self.wait(1)
+        self.wait(0.5)
+        with play_audio(self, "assets/a35.wav"):
+            self.play(Transform(eq3, mk_eq3(eq3s[10])))
+            self.wait(1)
+            self.play(Transform(eq3, mk_eq3(eq3s[11])))
+            self.wait(1)
+            self.play(Transform(eq3, mk_eq3(eq3s[12])))
         self.wait(3)
 
         eq4 = (
@@ -531,22 +578,28 @@ class Deriverbarhet(MovingCameraScene):
             .scale(0.7)
             .move_to(center)
         )
-        self.play(ShrinkToCenter(eq2), ShrinkToCenter(eq3), GrowFromCenter(eq4))
+        with play_audio(self, "assets/a36.wav"):
+            self.play(ShrinkToCenter(eq2), ShrinkToCenter(eq3), GrowFromCenter(eq4))
 
         self.wait(2)
         self.play(Restore(self.camera.frame))
         self.wait(1)
 
-        self.play(Create(dots))
-        self.wait(0.5)
-        self.play(Create(lines))
-
+        with play_audio(self, "assets/a37.wav"):
+            self.play(Create(dots))
+            self.wait(0.5)
+            self.play(Create(lines))
         self.wait(2)
+
         self.play(dot1.move_point(1), dot3.move_point(3), run_time=2)
         self.wait(1)
         self.play(dot1.move_point(1.999), dot3.move_point(2.001), run_time=2)
+        self.wait(2)
 
-        self.wait(3)
+        with play_audio(self, "assets/a38.wav"):
+            pass
+
+        self.wait(1)
 
         self.play(Unwrite(lines))
         self.play(Uncreate(dots))
@@ -558,4 +611,8 @@ class Deriverbarhet(MovingCameraScene):
             Uncreate(graph),
             run_time=3,
         )
+
         self.wait()
+        with play_audio(self, "assets/a39.wav"):
+            pass
+        self.wait(1.5)

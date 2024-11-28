@@ -13,7 +13,6 @@ def play_audio(scene: Scene, audio_file: str):
     yield audio_duration  # Executes code inside the "with"
     delta_time = scene.renderer.time - start_time
     remaining_time = max(0, audio_duration - delta_time)
-    print(delta_time, remaining_time)
     scene.wait(remaining_time)
 
 
