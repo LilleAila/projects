@@ -34,8 +34,8 @@ getRefill name = fromMaybe [0] (Map.lookup name foodRefill)
 refillFood :: Food -> Food
 refillFood [] = []
 refillFood x@((name, amount, n, s) : xs)
-  | name == "gulrøtter" = if s > 30 then (name, amount + nextRefill, n + 1, s + 1) : refillFood xs else noChange : refillFood xs
-  | name == "reinsdyrkjøtt" = if amount <= 0 then if s > 50 then (name, amount + if n < length refill then nextRefill else 0, n + 1, 0) : next else noChange : next else (name, amount, n, 0) : next
+  | name == "gulrøtter" = if s >= 30 then (name, amount + nextRefill, n + 1, s + 1) : refillFood xs else noChange : refillFood xs
+  | name == "reinsdyrkjøtt" = if amount <= 0 then if s >= 50 then (name, amount + if n < length refill then nextRefill else 0, n + 1, 0) : next else noChange : next else (name, amount, n, 0) : next
   | name == "julekringle" = noChange : next
   | otherwise = (name, amount + nextRefill, n + 1, s + 1) : next
   where
@@ -49,14 +49,14 @@ eatFood' :: Int -> Food -> Food
 eatFood' _ [] = []
 eatFood' eaten x@((name, amount, n, s) : xs)
   | eaten >= 2 = x
-  | name == "reinsdyrkjøtt" = if eaten == 0 && amount >= 2 then eat 2 : eatFood' (eaten + 2) xs else next
-  | name == "julekringle" = if eaten == 0 && amount >= 1 then eat 1 : eatFood' (eaten + 2) xs else next
+  | name == "reinsdyrkjøtt" = if eaten == 0 && amount >= 2 then eat 2 : xs else next
+  | name == "julekringle" = if eaten == 0 && amount >= 1 then eat 1 : xs else next
   | amount >= grams = eat grams : eatFood' (eaten + 1) xs
   | otherwise = next
   where
     grams = if eaten == 0 then 5 else 3
     next = (name, amount, n, s) : eatFood' eaten xs
-    eat x = (name, amount - x, n, s)
+    eat g = (name, amount - g, n, s)
 
 eatFood :: Food -> Food
 eatFood = eatFood' 0
@@ -66,15 +66,12 @@ refillAndEat = refillFood . eatFood
 
 solve :: Food -> Int
 solve food
-  | newFood `getAmount` "julekringle" <= 99 = 1
-  | otherwise = solve newFood + 1
+  | newFood `getAmount` "julekringle" <= 99 = 0
+  | otherwise = 1 + solve newFood
   where
     newFood = refillAndEat food
 
 main :: IO ()
 main = do
-  -- print $ take 70 $ iterate refillAndEat food
   print $ solve food
-  print $ refillFood [("ris", 0, 23, 23)]
-  print $ refillFood [("ris", 2, 24, 24)]
-  print $ refillFood [("ris", 2, 25, 25)]
+  print $ iterate refillAndEat food !! 22
