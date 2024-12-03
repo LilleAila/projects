@@ -74,4 +74,5 @@ solve food
 main :: IO ()
 main = do
   print $ solve food
+  -- print $ take 100 $ iterate refillAndEat food
   print $ iterate refillAndEat food !! 22

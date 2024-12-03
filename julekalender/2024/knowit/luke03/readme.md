@@ -27,10 +27,10 @@ Begynnelsen ser slik ut:
 - `t=1` Alvefine spiser 5g ris og 3g erter. Alvemor fyller på 0g ris og 3g erter.
 - `t=2` Alvefine spiser 5g ris og 3g erter. Alvemor fyller på 1g ris og 0g erter.
 - ...
-- `t=22` Det er tomt for ris. Alvefine spiser 5g erter og 3g gulrøtter. Det fylles på 2g ris.
+- `t=22` Det er tomt for ris. Alvefine spiser 5g erter og 3g gulrøtter.
 - ...
-- `t=70` Alvefine spiser den første biten med reinsdyrkjøtt.
+- `t=71` Alvefine spiser den første biten med reinsdyrkjøtt.
 - ...
-- `t=268` Den første biten julekringle treffer endelig munnen!!!
+- `t=269` Den første biten julekringle treffer endelig munnen!!!
 
 Hvor mange sekunder tar det Alvefine å spise opp all julekringla mens Alvemor fortsetter å fylle på den andre maten?
