@@ -34,7 +34,7 @@ getRefill name = fromMaybe [0] (Map.lookup name foodRefill)
 refillFood :: Food -> Food
 refillFood [] = []
 refillFood x@((name, amount, n, s) : xs)
-  | name == "gulrøtter" = if s >= 30 then (name, amount + nextRefill, n + 1, s + 1) : refillFood xs else noChange : refillFood xs
+  | name == "gulrøtter" = if s >= 30 then (name, amount + nextRefill, n + 1, s + 1) : next else noChange : next
   | name == "reinsdyrkjøtt" = if amount <= 0 then if s >= 50 then (name, amount + if n < length refill then nextRefill else 0, n + 1, 0) : next else noChange : next else (name, amount, n, 0) : next
   | name == "julekringle" = noChange : next
   | otherwise = (name, amount + nextRefill, n + 1, s + 1) : next
