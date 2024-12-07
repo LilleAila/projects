@@ -1,7 +1,6 @@
 import Data.Char (digitToInt)
 import Data.List (find)
 import qualified Data.Set as Set
-import Debug.Trace (trace)
 
 sumSquares :: Int -> Int
 sumSquares = sum . map ((^ 2) . digitToInt) . show
