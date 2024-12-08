@@ -9,7 +9,8 @@ primes = 2 : 3 : sieve (tail primes) [5, 7 ..]
         (h, ~(_ : t)) = span (< p * p) xs
 
 isPrime :: Int -> Bool
-isPrime n = n `elem` takeWhile (<= n) primes
+-- isPrime n = n `elem` takeWhile (<= n) primes
+isPrime n = n == last (takeWhile (<= n) primes)
 
 multiplyPowers :: Int -> [[Int]] -> [[Int]]
 multiplyPowers n = zipWith (map . (*)) powers
