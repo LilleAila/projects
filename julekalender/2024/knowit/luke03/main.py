@@ -79,4 +79,6 @@ if __name__ == "__main__":
     tallerken = Tallerken()
     while tallerken.food["julekringle"] > 99:
         tallerken.tick()
+        print(tallerken.seconds)
+        print(tallerken.food)
     print(tallerken.seconds)
