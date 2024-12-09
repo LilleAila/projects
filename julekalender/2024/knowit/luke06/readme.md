@@ -12,6 +12,8 @@ I nissens verksteder er det gigantiske sett med 7-segmentdisplayer som viser hvo
 +--+     +  +--+  +--+     +  +--+  +--+     +  +--+  +--+
 ```
 
+Ubrukte displayer viser 0 dersom tallet som skal vises er lite nok til å ikke trenge alle displayenene. F.eks. vises 1024 som 000001024.
+
 Hvert sifferdisplay er addressert ABC... fra høyre (lavere siffer) og hvert 7-segmentdisplay addresseres slik:
 
 ```
