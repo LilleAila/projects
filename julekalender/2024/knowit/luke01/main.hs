@@ -6,6 +6,9 @@ type Teppe = [[Bool]]
 
 type Person = [[Int]]
 
+rotate :: (Ord a) => [[a]] -> [[a]]
+rotate = map reverse . transpose
+
 parseTeppe :: String -> Teppe
 parseTeppe = map parseLine . lines
   where
@@ -47,7 +50,7 @@ tryY person teppe p = if points == 0 then 0 else max points $ tryY person movedT
     movedPoints = tryX person movedTeppe 0
 
 solve :: Person -> Teppe -> Int
-solve person teppe = maximum [solve' teppe, solve' (transpose teppe), solve' (transpose (transpose teppe)), solve' (transpose (transpose (transpose teppe)))]
+solve person teppe = maximum [solve' teppe, solve' (rotate teppe), solve' (rotate (rotate teppe)), solve' (rotate (rotate (rotate teppe)))]
   where
     solve' teppe = tryY person teppe 0
 
