@@ -12,7 +12,7 @@ rotate = map reverse . transpose
 parseTeppe :: String -> Teppe
 parseTeppe = map parseLine . lines
   where
-    parseLine l = take 5 $ map parseChar l
+    parseLine l = take 10 $ map parseChar l ++ repeat 0
     parseChar :: Char -> Int
     parseChar ' ' = 0
     parseChar x = digitToInt x
