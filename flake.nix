@@ -23,6 +23,14 @@
               nixfmt-rfc-style
             ];
           };
+          cpp = mkShell {
+            nativeBuildInputs = [
+              clang
+              gcc
+              gnumake
+              cmake
+            ];
+          };
           python = mkShell {
             nativeBuildInputs = [
               black
