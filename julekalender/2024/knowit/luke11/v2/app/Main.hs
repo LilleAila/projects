@@ -42,7 +42,7 @@ isWithinReach reach (y, x) (gripY, gripX)
     relativeX = gripX - x
     relativeY = gripY - y
     row = length reach - relativeY - 1
-    col = relativeX + 9 -- Center it on the "o" in the input
+    col = relativeX + div (length (head reach)) 2 -- Center column calculation
 
 makeGraph :: Reach -> [Grip] -> Graph
 makeGraph reach grips = Map.fromList [(grip, nextGrips grip) | grip <- grips]
