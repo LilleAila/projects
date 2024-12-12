@@ -23,6 +23,7 @@ executable luke11
     build-depends:
         base ^>=4.18.2.1,
         heap,
-        containers
+        containers,
+        PSQueue
     hs-source-dirs:   app
     default-language: GHC2021

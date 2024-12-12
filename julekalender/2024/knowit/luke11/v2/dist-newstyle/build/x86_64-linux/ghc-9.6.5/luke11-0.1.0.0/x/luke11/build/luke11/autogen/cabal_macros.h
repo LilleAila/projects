@@ -10,6 +10,16 @@
   (major1) == 0 && (major2) <  1 || \
   (major1) == 0 && (major2) == 1 && (minor) <= 0)
 #endif /* MIN_VERSION_luke11 */
+/* package PSQueue-1.2.0 */
+#ifndef VERSION_PSQueue
+#define VERSION_PSQueue "1.2.0"
+#endif /* VERSION_PSQueue */
+#ifndef MIN_VERSION_PSQueue
+#define MIN_VERSION_PSQueue(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  2 || \
+  (major1) == 1 && (major2) == 2 && (minor) <= 0)
+#endif /* MIN_VERSION_PSQueue */
 /* package base-4.18.2.1 */
 #ifndef VERSION_base
 #define VERSION_base "4.18.2.1"
