@@ -1,4 +1,4 @@
--- Same as Main2, but gets the total distance
+-- Finds the path
 
 module Main where
 
@@ -31,7 +31,7 @@ parseReach = map parseLine . lines
   where
     parseLine l = take 19 $ map parseChar l ++ repeat False
     parseChar ' ' = False
-    parseChar 'o' = False
+    parseChar 'o' = False -- Otherwise creates an infinite loop
     parseChar _ = True
 
 isWithinReach :: Reach -> Coordinate -> Grip -> Bool
@@ -54,40 +54,50 @@ euclideanDistance (x1, y1) (x2, y2) =
   sqrt (fromIntegral ((x2 - x1) ^ (2 :: Int) + (y2 - y1) ^ (2 :: Int)))
 
 -- NOTE: Algorithm not implemented by me
--- https://en.wikipedia.org/wiki/A*_search_algorithm
-aStarDistance :: Graph -> Grip -> Grip -> Maybe Double
-aStarDistance graph start goal = go initialQueue Set.empty
+aStar :: Graph -> Grip -> Grip -> Maybe [Grip]
+aStar graph start goal = go initialQueue Set.empty Map.empty
   where
     -- Priority queue with (grip, priority)
     initialQueue = PSQ.singleton start 0
+    -- Helper function to reconstruct the path
+    reconstructPath cameFrom current =
+      case Map.lookup current cameFrom of
+        Nothing -> [current]
+        Just prev -> reconstructPath cameFrom prev ++ [current]
     -- A* main loop
-    go queue visited
+    go queue visited cameFrom
       | PSQ.null queue = Nothing -- No path found
-      | current == goal = Just gScoreCurrent
-      | current `Set.member` visited = go restQueue visited
+      | current == goal = Just (reconstructPath cameFrom current)
+      | current `Set.member` visited = go restQueue visited cameFrom
       | otherwise =
           let neighbors = Map.findWithDefault [] current graph
               unvisitedNeighbors = filter (`Set.notMember` visited) neighbors
               updatedQueue = foldl' updateQueue restQueue unvisitedNeighbors
-           in go updatedQueue (Set.insert current visited)
+              updatedCameFrom = foldl' (updateCameFrom current) cameFrom unvisitedNeighbors
+           in go updatedQueue (Set.insert current visited) updatedCameFrom
       where
         -- Current node being explored
-        (current PSQ.:-> gScoreCurrent) = fromJust (PSQ.findMin queue)
+        (current PSQ.:-> _) = fromJust (PSQ.findMin queue)
         restQueue = PSQ.deleteMin queue
         -- Update queue with a neighbor
         updateQueue q neighbor =
-          let newCost = gScoreCurrent + euclideanDistance current neighbor
+          let newCost = gScore current + euclideanDistance current neighbor
               fScore = newCost + euclideanDistance neighbor goal
-           in PSQ.insertWith min neighbor fScore q
+           in PSQ.insert neighbor fScore q
+        -- Update `cameFrom` map for a neighbor
+        updateCameFrom curr cmap neighbor = Map.insert neighbor curr cmap
+        -- Get the gScore for a grip
+        gScore grip = case PSQ.lookup grip queue of
+          Just cost -> cost
+          Nothing -> 1 / 0 -- Infinity
 
 main :: IO ()
 main = do
-  gripsInput <- readFile "../grep.txt" -- Only first 10 Y
+  gripsInput <- readFile "../grep_short.txt" -- Only first 10 Y
   reachInput <- readFile "../reach.txt"
   let grips = parseGrips gripsInput
       reach = parseReach reachInput
       graph = makeGraph reach grips
       start = (0, 250)
-      -- target = (12, 259)
-      target = (999, 749)
-  print $ floor . (* 10) <$> aStarDistance graph start target
+      target = (12, 259)
+  print $ aStar graph start target
