@@ -1,0 +1,28 @@
+cabal-version:      3.0
+name:               luke11
+version:            0.1.0.0
+-- synopsis:
+-- description:
+license:            GPL-3.0-or-later
+license-file:       LICENSE
+author:             LilleAila
+maintainer:         olai@olai.dev
+-- copyright:
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common warnings
+    ghc-options: -Wall
+
+executable luke11
+    import:           warnings
+    main-is:          Main.hs
+    -- other-modules:
+    -- other-extensions:
+    build-depends:
+        base ^>=4.18.2.1,
+        heap,
+        containers
+    hs-source-dirs:   app
+    default-language: GHC2021
