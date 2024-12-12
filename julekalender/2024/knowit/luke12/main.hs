@@ -36,4 +36,4 @@ main = do
   let start = fromGregorian 2020 4 1
   -- let end = fromGregorian 2024 12 12
   -- let days = [start .. end] -- Inclusive
-  print $ getBookmarks [] start 0
+  print $ getBookmarks [] start 2
