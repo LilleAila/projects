@@ -1,3 +1,5 @@
+import Data.Map qualified as Map
+
 data Match = Match
   { team :: String,
     time :: Int,
@@ -9,10 +11,7 @@ data Match = Match
   }
   deriving (Show, Eq)
 
-teams = [("FCB", 1), ("J", 2), ("NT", 1), ("NF", 1), ("RC", 3), ("SP", 3), ("VM", 3)]
-
-getTeam :: String -> Int
-getTeam x = (snd . head) (filter ((== x) . fst) teams)
+teams = Map.fromList [("FCB", 1), ("J", 2), ("NT", 1), ("NF", 1), ("RC", 3), ("SP", 3), ("VM", 3)]
 
 parseInput = map parseLine . lines
   where
