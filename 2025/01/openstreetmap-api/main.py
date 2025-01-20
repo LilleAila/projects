@@ -5,23 +5,29 @@ import matplotlib.pyplot as plt
 from shapely.geometry import Polygon, LineString, box
 import geopandas as gpd
 
-# address = "Lungegårdskaien 40"
-# nominatim = Nominatim()
-# location = nominatim.query(address)
-# assert location is not None, "Location not found!"
-# area = location.id()
-# print(area)
-
 overpass = Overpass()
 api = Api()
 
+
+def get_coords(prompt: str) -> list[float]:
+    while True:
+        try:
+            coords = list(map(float, input(prompt).split(", ")))
+            if len(coords) == 2:
+                return coords
+        except ValueError:
+            pass
+        print("Error. Try again.")
+
+
 # Southwest, northeast
-bounding_box = [
-    60.38631650365599,
-    5.321381765736868,
-    60.387874780588064,
-    5.328217556584907,
-]
+# bounding_box = [
+#     60.38631650365599,
+#     5.321381765736868,
+#     60.387874780588064,
+#     5.328217556584907,
+# ]
+bounding_box = get_coords("Southwest corner: ") + get_coords("Northeast corner: ")
 bounding_box_polygon = box(
     bounding_box[1], bounding_box[0], bounding_box[3], bounding_box[2]
 )
@@ -35,7 +41,7 @@ out geom;
 """
 
 response = overpass.query(query)
-assert response is not None, "No location found"
+assert response is not None, "No features found!"
 features = response.toJSON()["elements"]
 
 
