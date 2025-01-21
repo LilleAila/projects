@@ -1,11 +1,8 @@
 from OSMPythonTools.overpass import Overpass
 import matplotlib.pyplot as plt
-from shapely.geometry import Polygon, MultiPolygon, LineString, MultiLineString, box
+from shapely.geometry import Polygon, MultiPolygon, LineString, box
 import geopandas as gpd
-
-# from stl import mesh
 import trimesh
-import numpy as np
 
 
 class AreaMap:
