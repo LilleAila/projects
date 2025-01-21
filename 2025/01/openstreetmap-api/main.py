@@ -191,7 +191,7 @@ class AreaMap3D(AreaMap):
 
     def export_stl(self, output_file):
         meshes = [
-            self.create_base_plate(2, 5, 14),
+            self.create_base_plate(4, 5, 14),
             self.extrude_polygons(self.buildings, 24),
             self.extrude_lines(self.roads, 6, 5),
             self.extrude_lines(self.walkways, 4, 3),
