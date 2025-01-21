@@ -24,6 +24,15 @@ class AreaMap:
                 pass
             print("Error. Try again.")
 
+    def set_utm_epsg(self):
+        assert self.bounding_box is not None, "No bounding box set!"
+        south_lat, west_lon, north_lat, east_lon = self.bounding_box
+        lat = (south_lat + north_lat) / 2
+        lon = (west_lon + east_lon) / 2
+        zone = int((lon + 180) / 6) + 1
+        northern = lat >= 0
+        self.epsg = 32600 + zone if northern else 32700 + zone
+
     def set_bounding_box_interactive(self) -> None:
         # southwest = self.get_coords("Southwest corner: ")
         # northeast = self.get_coords("Southeast corner: ")
@@ -41,16 +50,7 @@ class AreaMap:
             self.bounding_box[3],
             self.bounding_box[2],
         )
-
-    def get_utm_epsg(self):
-        assert self.bounding_box is not None, "No bounding box set!"
-        south_lat, west_lon, north_lat, east_lon = self.bounding_box
-        lat = (south_lat + north_lat) / 2
-        lon = (west_lon + east_lon) / 2
-        zone = int((lon + 180) / 6) + 1
-        northern = lat >= 0
-        epsg = 32600 + zone if northern else 32700 + zone
-        return epsg
+        self.set_utm_epsg()
 
     def get_features(self):
         bb = self.bounding_box
@@ -124,11 +124,10 @@ class AreaMap:
                             LineString(points).intersection(self.bounding_box_polygon)
                         )
 
-        epsg = self.get_utm_epsg()
         # 4326 is lat/lon
-        self.buildings = gpd.GeoDataFrame(geometry=building_polygons, crs="EPSG:4326").to_crs(epsg=epsg)
-        self.roads = gpd.GeoDataFrame(geometry=road_lines, crs="EPSG:4326").to_crs(epsg=epsg)
-        self.walkways = gpd.GeoDataFrame(geometry=walkway_lines, crs="EPSG:4326").to_crs(epsg=epsg)
+        self.buildings = gpd.GeoDataFrame(geometry=building_polygons, crs="EPSG:4326").to_crs(epsg=self.epsg)
+        self.roads = gpd.GeoDataFrame(geometry=road_lines, crs="EPSG:4326").to_crs(epsg=self.epsg)
+        self.walkways = gpd.GeoDataFrame(geometry=walkway_lines, crs="EPSG:4326").to_crs(epsg=self.epsg)
 
     def plot_map(self) -> None:
         _, ax = plt.subplots(figsize=(10, 10))
@@ -178,8 +177,25 @@ class AreaMap3D(AreaMap):
             extruded.append(mesh)
         return trimesh.util.concatenate(extruded)
 
+    def create_base_plate(self, height=2, wall_width=2, wall_height=5):
+        assert self.bounding_box_polygon is not None, "Bounding box is not set!"
+        gdf = gpd.GeoDataFrame(geometry=[self.bounding_box_polygon], crs="EPSG:4326").to_crs(epsg=self.epsg)
+        assert gdf is not None, "Invalid bounding box!"
+        base_plate = gdf.geometry[0]
+
+        outer_wall = base_plate.buffer(wall_width, join_style=2)
+        wall = outer_wall.difference(base_plate)
+
+        meshes = [
+            self.extrude_polygon(base_plate, -height),
+            self.extrude_polygon(wall, height + wall_height).apply_translation([0, 0, -height])
+        ]
+
+        return trimesh.util.concatenate(meshes)
+
     def export_stl(self, output_file):
         meshes = [
+            self.create_base_plate(2),
             self.extrude_polygons(self.buildings, 10),
             self.extrude_lines(self.roads, 3, 2),
             self.extrude_lines(self.walkways, 1, 2),
