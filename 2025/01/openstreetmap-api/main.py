@@ -42,6 +42,16 @@ class AreaMap:
             self.bounding_box[2],
         )
 
+    def get_utm_epsg(self):
+        assert self.bounding_box is not None, "No bounding box set!"
+        south_lat, west_lon, north_lat, east_lon = self.bounding_box
+        lat = (south_lat + north_lat) / 2
+        lon = (west_lon + east_lon) / 2
+        zone = int((lon + 180) / 6) + 1
+        northern = lat >= 0
+        epsg = 32600 + zone if northern else 32700 + zone
+        return epsg
+
     def get_features(self):
         bb = self.bounding_box
         assert bb is not None
@@ -114,9 +124,11 @@ class AreaMap:
                             LineString(points).intersection(self.bounding_box_polygon)
                         )
 
-        self.buildings = gpd.GeoDataFrame(geometry=building_polygons, crs="EPSG:4326").to_crs(epsg=32633)
-        self.roads = gpd.GeoDataFrame(geometry=road_lines, crs="EPSG:4326").to_crs(epsg=32633)
-        self.walkways = gpd.GeoDataFrame(geometry=walkway_lines, crs="EPSG:4326").to_crs(epsg=32633)
+        epsg = self.get_utm_epsg()
+        # 4326 is lat/lon
+        self.buildings = gpd.GeoDataFrame(geometry=building_polygons, crs="EPSG:4326").to_crs(epsg=epsg)
+        self.roads = gpd.GeoDataFrame(geometry=road_lines, crs="EPSG:4326").to_crs(epsg=epsg)
+        self.walkways = gpd.GeoDataFrame(geometry=walkway_lines, crs="EPSG:4326").to_crs(epsg=epsg)
 
     def plot_map(self) -> None:
         _, ax = plt.subplots(figsize=(10, 10))
