@@ -139,11 +139,6 @@ class AreaMap:
         self.buildings.plot(ax=ax, color="black", edgecolor="white", label="Buildings")
         self.roads.plot(ax=ax, color="blue", linewidth=0.5, label="Roads")
         self.walkways.plot(ax=ax, color="green", linewidth=0.5, label="Walkways")
-
-        ax.set_title("Bærgen")
-        ax.set_xlabel("Longitude")
-        ax.set_ylabel("Latitude")
-        plt.legend()
         plt.show()
 
 
@@ -209,5 +204,5 @@ if __name__ == "__main__":
     area_map = AreaMap3D()
     area_map.set_bounding_box_interactive()
     area_map.build_map()
-    # area_map.plot_map()
-    area_map.export_stl("output.stl")
+    area_map.plot_map()
+    # area_map.export_stl("output.stl")
