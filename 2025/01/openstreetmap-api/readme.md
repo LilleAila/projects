@@ -1,6 +1,11 @@
 # Read data about buildings from OpenStreetMap
 
+Create a `.stl` file containing a 3d model of a selected area on a map.
 Inspired by [touch mapper](https://touch-mapper.org/en/).
+
+Contains a simple website (99% written by ChatGPT) to select a rectangle from a map.
+
+Dependencies are listed in `shell.nix`. Names can very between package managers.
 
 ## Usage
 

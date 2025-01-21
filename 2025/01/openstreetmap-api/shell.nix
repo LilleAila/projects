@@ -9,6 +9,7 @@ mkShell {
         geopandas
         numpy
         trimesh
+        mapbox-earcut
       ]
     ))
   ];
