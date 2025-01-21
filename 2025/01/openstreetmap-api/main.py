@@ -1,7 +1,11 @@
 from OSMPythonTools.overpass import Overpass
 import matplotlib.pyplot as plt
-from shapely.geometry import Polygon, LineString, box
+from shapely.geometry import Polygon, MultiPolygon, LineString, MultiLineString, box
 import geopandas as gpd
+
+# from stl import mesh
+import trimesh
+import numpy as np
 
 
 class AreaMap:
@@ -24,16 +28,16 @@ class AreaMap:
             print("Error. Try again.")
 
     def set_bounding_box_interactive(self) -> None:
-        southwest = self.get_coords("Southwest corner: ")
-        northeast = self.get_coords("Southeast")
-        self.bounding_box = southwest + northeast
+        # southwest = self.get_coords("Southwest corner: ")
+        # northeast = self.get_coords("Southeast corner: ")
+        # self.bounding_box = southwest + northeast
         # Example for testing
-        # bounding_box = [
-        #     60.38631650365599,
-        #     5.321381765736868,
-        #     60.387874780588064,
-        #     5.328217556584907,
-        # ]
+        self.bounding_box = [
+            60.38631650365599,
+            5.321381765736868,
+            60.387874780588064,
+            5.328217556584907,
+        ]
         self.bounding_box_polygon = box(
             self.bounding_box[1],
             self.bounding_box[0],
@@ -113,9 +117,9 @@ class AreaMap:
                             LineString(points).intersection(self.bounding_box_polygon)
                         )
 
-        self.buildings = gpd.GeoDataFrame(geometry=building_polygons)
-        self.roads = gpd.GeoDataFrame(geometry=road_lines)
-        self.walkways = gpd.GeoDataFrame(geometry=walkway_lines)
+        self.buildings = gpd.GeoDataFrame(geometry=building_polygons, crs="EPSG:4326").to_crs(epsg=32633)
+        self.roads = gpd.GeoDataFrame(geometry=road_lines, crs="EPSG:4326").to_crs(epsg=32633)
+        self.walkways = gpd.GeoDataFrame(geometry=walkway_lines, crs="EPSG:4326").to_crs(epsg=32633)
 
     def plot_map(self) -> None:
         _, ax = plt.subplots(figsize=(10, 10))
@@ -135,8 +139,50 @@ class AreaMap:
         plt.show()
 
 
+class AreaMap3D(AreaMap):
+    def __init__(self):
+        super().__init__()
+
+    def extrude_polygon(self, polygon, height):
+        if isinstance(polygon, MultiPolygon):
+            meshes = [
+                trimesh.creation.extrude_polygon(poly, height)
+                for poly in polygon.geoms if not poly.is_empty
+            ]
+            return trimesh.util.concatenate(meshes)
+        elif polygon.is_empty:
+            raise ValueError("Empty polygon!")
+        return trimesh.creation.extrude_polygon(polygon, height)
+
+    def extrude_polygons(self, polygons, height):
+        extruded = []
+        for polygon in polygons.geometry:
+            mesh = self.extrude_polygon(polygon, height)
+            extruded.append(mesh)
+        return trimesh.util.concatenate(extruded)
+
+    def extrude_lines(self, lines, width, height):
+        extruded = []
+        for line in lines.geometry:
+            polygon = line.buffer(width / 2, cap_style=2)
+            mesh = self.extrude_polygon(polygon, height)
+            extruded.append(mesh)
+        return trimesh.util.concatenate(extruded)
+
+    def export_stl(self, output_file):
+        meshes = [
+            self.extrude_polygons(self.buildings, 10),
+            self.extrude_lines(self.roads, 3, 2),
+            self.extrude_lines(self.walkways, 1, 2),
+        ]
+        mesh = trimesh.util.concatenate(meshes)
+        mesh.export(output_file)
+
+
+
 if __name__ == "__main__":
-    area_map = AreaMap()
+    area_map = AreaMap3D()
     area_map.set_bounding_box_interactive()
     area_map.build_map()
-    area_map.plot_map()
+    # area_map.plot_map()
+    area_map.export_stl("output.stl")
