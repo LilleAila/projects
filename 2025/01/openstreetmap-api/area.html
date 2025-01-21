@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map Area Picker</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"
+    />
+    <style>
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Pick a Rectangle on the Map</h1>
+    <div id="map"></div>
+    <p>Southwest: <span id="sw"></span></p>
+    <p>Northeast: <span id="ne"></span></p>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-editable/1.3.0/Leaflet.Editable.min.js"></script>
+    <script>
+      function updateCoordinates(layer) {
+        const bounds = layer.getBounds();
+        const southwest = bounds.getSouthWest();
+        const northeast = bounds.getNorthEast();
+
+        document.getElementById("sw").textContent =
+          `${southwest.lat}, ${southwest.lng}`;
+        document.getElementById("ne").textContent =
+          `${northeast.lat}, ${northeast.lng}`;
+      }
+
+      const map = L.map("map", {
+        editable: true,
+      }).setView([0, 0], 2);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+      }).addTo(map);
+
+      const drawnItems = new L.FeatureGroup().addTo(map);
+      const drawControl = new L.Control.Draw({
+        draw: {
+          polyline: false,
+          polygon: false,
+          circle: false,
+          circlemarker: false,
+          marker: false,
+          rectangle: true,
+        },
+        edit: {
+          featureGroup: drawnItems,
+          remove: true,
+        },
+      });
+      map.addControl(drawControl);
+
+      map.on(L.Draw.Event.CREATED, function (event) {
+        const layer = event.layer;
+        drawnItems.addLayer(layer);
+
+        layer.enableEdit();
+
+        updateCoordinates(layer);
+      });
+
+      map.on("editable:editing", function (event) {
+        updateCoordinates(event.layer);
+      });
+    </script>
+  </body>
+</html>

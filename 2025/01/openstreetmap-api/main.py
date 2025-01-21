@@ -34,16 +34,17 @@ class AreaMap:
         self.epsg = 32600 + zone if northern else 32700 + zone
 
     def set_bounding_box_interactive(self) -> None:
-        # southwest = self.get_coords("Southwest corner: ")
-        # northeast = self.get_coords("Southeast corner: ")
-        # self.bounding_box = southwest + northeast
+        print("Copy the coordinates of the corners, and paste them here.")
+        southwest = self.get_coords("Southwest corner: ")
+        northeast = self.get_coords("Southeast corner: ")
+        self.bounding_box = southwest + northeast
         # Example for testing
-        self.bounding_box = [
-            60.38631650365599,
-            5.321381765736868,
-            60.387874780588064,
-            5.328217556584907,
-        ]
+        # self.bounding_box = [
+        #     60.38631650365599,
+        #     5.321381765736868,
+        #     60.387874780588064,
+        #     5.328217556584907,
+        # ]
         self.bounding_box_polygon = box(
             self.bounding_box[1],
             self.bounding_box[0],
@@ -190,10 +191,10 @@ class AreaMap3D(AreaMap):
 
     def export_stl(self, output_file):
         meshes = [
-            self.create_base_plate(2),
-            self.extrude_polygons(self.buildings, 10),
-            self.extrude_lines(self.roads, 3, 2),
-            self.extrude_lines(self.walkways, 1, 2),
+            self.create_base_plate(2, 5, 14),
+            self.extrude_polygons(self.buildings, 24),
+            self.extrude_lines(self.roads, 6, 5),
+            self.extrude_lines(self.walkways, 4, 3),
         ]
         mesh = trimesh.util.concatenate(meshes)
         mesh.export(output_file)
@@ -204,5 +205,5 @@ if __name__ == "__main__":
     area_map = AreaMap3D()
     area_map.set_bounding_box_interactive()
     area_map.build_map()
-    area_map.plot_map()
-    # area_map.export_stl("output.stl")
+    # area_map.plot_map()
+    area_map.export_stl("output.stl")

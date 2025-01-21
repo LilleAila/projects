@@ -8,9 +8,7 @@ mkShell {
         shapely
         geopandas
         numpy
-        numpy-stl
         trimesh
-        mapbox-earcut
       ]
     ))
   ];
