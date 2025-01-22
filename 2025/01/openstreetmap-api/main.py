@@ -36,7 +36,7 @@ class AreaMap:
     def set_bounding_box_interactive(self) -> None:
         print("Copy the coordinates of the corners, and paste them here.")
         southwest = self.get_coords("Southwest corner: ")
-        northeast = self.get_coords("Southeast corner: ")
+        northeast = self.get_coords("Northeast corner: ")
         self.bounding_box = southwest + northeast
         # Example for testing
         # self.bounding_box = [
@@ -126,9 +126,15 @@ class AreaMap:
                         )
 
         # 4326 is lat/lon
-        self.buildings = gpd.GeoDataFrame(geometry=building_polygons, crs="EPSG:4326").to_crs(epsg=self.epsg)
-        self.roads = gpd.GeoDataFrame(geometry=road_lines, crs="EPSG:4326").to_crs(epsg=self.epsg)
-        self.walkways = gpd.GeoDataFrame(geometry=walkway_lines, crs="EPSG:4326").to_crs(epsg=self.epsg)
+        self.buildings = gpd.GeoDataFrame(
+            geometry=building_polygons, crs="EPSG:4326"
+        ).to_crs(epsg=self.epsg)
+        self.roads = gpd.GeoDataFrame(geometry=road_lines, crs="EPSG:4326").to_crs(
+            epsg=self.epsg
+        )
+        self.walkways = gpd.GeoDataFrame(
+            geometry=walkway_lines, crs="EPSG:4326"
+        ).to_crs(epsg=self.epsg)
 
     def plot_map(self) -> None:
         _, ax = plt.subplots(figsize=(10, 10))
@@ -151,7 +157,8 @@ class AreaMap3D(AreaMap):
         if isinstance(polygon, MultiPolygon):
             meshes = [
                 trimesh.creation.extrude_polygon(poly, height)
-                for poly in polygon.geoms if not poly.is_empty
+                for poly in polygon.geoms
+                if not poly.is_empty
             ]
             return trimesh.util.concatenate(meshes)
         elif polygon.is_empty:
@@ -175,7 +182,9 @@ class AreaMap3D(AreaMap):
 
     def create_base_plate(self, height=2, wall_width=2, wall_height=5):
         assert self.bounding_box_polygon is not None, "Bounding box is not set!"
-        gdf = gpd.GeoDataFrame(geometry=[self.bounding_box_polygon], crs="EPSG:4326").to_crs(epsg=self.epsg)
+        gdf = gpd.GeoDataFrame(
+            geometry=[self.bounding_box_polygon], crs="EPSG:4326"
+        ).to_crs(epsg=self.epsg)
         assert gdf is not None, "Invalid bounding box!"
         base_plate = gdf.geometry[0]
 
@@ -184,21 +193,22 @@ class AreaMap3D(AreaMap):
 
         meshes = [
             self.extrude_polygon(base_plate, -height),
-            self.extrude_polygon(wall, height + wall_height).apply_translation([0, 0, -height])
+            self.extrude_polygon(wall, height + wall_height).apply_translation(
+                [0, 0, -height]
+            ),
         ]
 
         return trimesh.util.concatenate(meshes)
 
     def export_stl(self, output_file):
         meshes = [
-            self.create_base_plate(4, 5, 14),
+            self.create_base_plate(5, 6, 14),
             self.extrude_polygons(self.buildings, 24),
             self.extrude_lines(self.roads, 6, 5),
             self.extrude_lines(self.walkways, 4, 3),
         ]
         mesh = trimesh.util.concatenate(meshes)
         mesh.export(output_file)
-
 
 
 if __name__ == "__main__":

@@ -27,4 +27,6 @@ Enter the copied coordinates
 
 3. Import `output.stl` to a slicer of choice
 
+The parameters in `export_stl` may need to be adjusted to fit the size of the area such that the bottom plate is at least two layers in height.
+
 4. Profit
