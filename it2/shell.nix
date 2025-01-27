@@ -3,6 +3,8 @@ with import <nixpkgs> {}; mkShell {
     (python311.withPackages (ps: with ps; [
       numpy
       matplotlib
+      pandas
+      requests
     ]))
   ];
 }
