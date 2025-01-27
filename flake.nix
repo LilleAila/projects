@@ -3,7 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    jupyenv = {
+      url = "github:tweag/jupyenv";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
+
+  nixConfig.extra-substituters = [ "https://tweag-jupyter.cachix.org" ];
+  nixConfig.extra-trusted-public-keys = [
+    "tweag-jupyter.cachix.org-1:UtNH4Zs6hVUFpFBTLaA4ejYavPo5EFFqgd7G7FxGW9g="
+  ];
 
   outputs =
     { nixpkgs, ... }@inputs:
@@ -14,6 +24,16 @@
       forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
     in
     {
+      packages = forEachSystem (pkgs: {
+        jupyterlab = inputs.jupyenv.lib.${pkgs.system}.mkJupyterlabNew (
+          { ... }:
+          {
+            inherit nixpkgs;
+            imports = [ (import ./jupyterlab.nix) ];
+          }
+        );
+      });
+
       devShells = forEachSystem (
         pkgs: with pkgs; rec {
           default = nix;
@@ -21,6 +41,7 @@
             nativeBuildInputs = [
               nixd
               nixfmt-rfc-style
+              statix
             ];
           };
           cpp = mkShell {
