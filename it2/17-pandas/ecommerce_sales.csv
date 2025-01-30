@@ -1,0 +1,501 @@
+OrderID,CustomerID,OrderDate,ProductCategory,Product,Quantity,Price,PaymentMethod,City,Total
+5dc81360-4139-425c-aca2-f889c7e3b598,2e76886b-0b79-4f91-9eb8-32027677c871,2024-02-14,Toys,Doll,3,154.28,Credit Card,Phoenix,462.84
+5fbe0931-ed99-412f-a36f-f039d4035412,226f334c-6383-4294-aa69-f6dfb05c8a07,2024-06-20,Electronics,Laptop,4,198.7,Bank Transfer,Philadelphia,794.8
+d30ae680-4738-4141-9ab1-e7a7484a2f9f,cc2a5c1b-e017-4a3f-b66a-ae2762b05ede,2024-06-24,Clothing,T-shirt,1,427.06,Bank Transfer,New York,427.06
+d72b1806-99e0-46b4-8358-e222b98ca523,d1014455-582a-4a89-9729-628dd604611d,2024-04-09,Clothing,Blender,3,165.29,Debit Card,Houston,495.87
+88c814eb-535c-4bfe-bc48-f8d5b8c50d43,8b502bc3-8915-4097-bcfd-d01b558672b6,2024-02-14,Toys,Laptop,3,93.05,PayPal,Phoenix,279.15
+e97becc3-0e6e-47ee-b6a0-2b7bc36f2d84,e47e8b6a-1730-4e05-8659-efcdd028ab9c,2024-03-19,Toys,Doll,4,282.83,PayPal,New York,1131.32
+3dcb7bba-d134-46d8-bb3d-89a9833d3009,9cc41962-dd03-4f14-85dd-be8bf1726f1c,2024-06-13,Books,Laptop,1,468.72,Credit Card,New York,468.72
+958cea99-c3a6-4ad1-91fb-3aa742c2ac4c,43816081-610f-4076-9871-8e53fdb08969,2024-10-14,Electronics,Blender,1,351.05,Credit Card,Phoenix,351.05
+26c55e71-8401-4c46-8784-2424d800ddd6,2f9393c0-d2e8-429f-98a7-7956a17a803b,2024-03-25,Home Goods,Laptop,3,289.33,Debit Card,Chicago,867.99
+b758f3e1-2a13-4d69-96be-14893cbe00ff,c86feb2d-4367-466f-bc95-e2e46b2c9633,2024-08-20,Electronics,T-shirt,2,57.62,PayPal,Chicago,115.24
+6a95309d-1581-4e3d-b2c3-d7a4ca048469,10059c96-3698-4d2e-84dc-6bf09b1e4a2a,2024-07-07,Clothing,Smartphone,3,311.35,Bank Transfer,Houston,934.05
+d873f8d5-2c2f-47e0-b07b-6cebe92c40ec,7f44b2f3-17bb-4e9a-9035-b7d61810a59a,2024-02-05,Home Goods,T-shirt,3,495.13,Bank Transfer,Houston,1485.39
+249cff16-75b3-456a-ab8a-4c80ab46b098,8e0b5fa6-e2da-4652-bb9b-721b8cd79e6b,2024-03-01,Electronics,Fiction Book,3,78.64,Bank Transfer,Phoenix,235.92
+a8bd051a-55fe-44ff-9dde-bc883fc1bf49,9b539ee6-d5d8-4ddf-b1f0-77d88c4eed7f,2024-03-23,Electronics,T-shirt,3,263.98,Credit Card,Philadelphia,791.94
+608d78b8-e312-4070-958e-de8a8262e435,aa1d3602-6d2c-4c2c-a33d-1c15ffd9a659,2024-11-25,Toys,Fiction Book,4,439.91,Debit Card,Chicago,1759.64
+ebf80d4b-9169-431f-9f6a-df6c2980d5ac,c0cd2a58-8d62-4956-b660-e23da6368cca,2024-08-12,Home Goods,Fiction Book,1,372.98,Credit Card,Phoenix,372.98
+8a52e564-f457-46a2-90b9-23cec76bbdb0,58651470-eda3-4e07-975b-b5619d05eb8a,2024-12-10,Clothing,Smartphone,4,351.54,Credit Card,Houston,1406.16
+d25253a6-a4b7-4a0c-b9ba-07f32dd81ea8,e0336616-30b2-45ab-9c2f-428b2262bfb3,2024-11-19,Home Goods,Laptop,4,354.22,Bank Transfer,Houston,1416.88
+e6c8c2b2-ddec-40ca-bfe1-581e0d0f5239,be6964e4-1a58-4337-85aa-4bdb5c0f7665,2024-06-25,Books,Laptop,4,186.15,Credit Card,Chicago,744.6
+3908a2ca-5e34-4c91-9d0a-9c01ac66872c,f4cbc9c7-dfe2-4b58-9edb-e1e93f2699c1,2025-01-09,Electronics,Blender,3,153.86,Debit Card,Houston,461.58
+4509427c-79e9-4b17-8697-fe003d1985d7,c827bc72-3375-4988-b271-f476836ea126,2024-03-03,Books,Non-Fiction Book,2,406.59,Credit Card,Los Angeles,813.18
+9670263d-a22c-4424-a846-75373b8ffe78,d4116e30-218a-4873-ba31-58735cb7db84,2024-06-03,Toys,T-shirt,1,406.96,Credit Card,New York,406.96
+a54693f8-43d1-43ba-a911-1f9fd0eec136,e341d844-4fc0-42c0-8d23-cdd889cdd1da,2024-06-12,Clothing,Doll,2,434.87,Debit Card,Phoenix,869.74
+91507880-66fb-473a-8183-3b99e818bc76,b2984a07-77da-43ee-b9ef-073454e54398,2024-07-19,Electronics,Fiction Book,4,457.49,PayPal,Chicago,1829.96
+fc72e872-4d5a-423d-9a34-46dced7fbcc9,f02b035d-2d85-4c4e-8f10-3c6f7ac3dce5,2024-05-10,Books,Doll,4,260.56,Credit Card,Chicago,1042.24
+895ddbd2-059a-4d17-a43e-373676b74cf2,1dd78d7b-c7a7-4bca-a758-c31aeb5ed673,2024-09-09,Clothing,Fiction Book,2,255.74,Debit Card,Houston,511.48
+9fcffeef-6505-4b96-aa65-e52ccec5ffa5,ac2105c5-2618-409b-b8dd-5d82328df253,2024-10-25,Electronics,Non-Fiction Book,2,401.16,Credit Card,Los Angeles,802.32
+3871ec94-0499-44e8-afec-129780337271,b78871e2-555f-4ee4-9767-cd13a62a828f,2024-10-10,Electronics,Smartphone,2,328.48,Debit Card,Los Angeles,656.96
+067a50a5-6c1e-4ffc-ab4b-b9ce8c56fa7e,5f1398b4-dd0a-4bc7-8579-50270a6a7c56,2024-08-24,Books,Laptop,4,353.96,Credit Card,Chicago,1415.84
+3ed0795d-b71c-4c55-8572-b7506a2cfa9e,a19a3434-71cd-4975-9498-86699deea912,2024-05-28,Toys,Smartphone,4,399.94,Credit Card,Philadelphia,1599.76
+5147adb3-0de4-49cd-96c8-5e1a28a9a769,2c87872a-d8f9-442f-a497-2d45240d2976,2024-03-10,Books,Laptop,1,446.1,PayPal,Los Angeles,446.1
+2d3cf46a-1db4-4683-b5af-1e11b121c662,81c902cd-bea9-40bd-9e5d-015148472dbf,2024-06-03,Toys,Doll,1,175.62,Credit Card,Philadelphia,175.62
+3fdb9037-c727-42d7-98e3-c12c3acc585d,f3fe11e8-e0f5-46e7-9355-d735b24b3520,2024-09-24,Home Goods,Blender,4,194.04,Bank Transfer,Chicago,776.16
+4a743ebc-7919-4dd2-b607-e9623f8441ad,f2ec5da1-d56a-4f39-9bd9-04a3581a90e9,2024-11-09,Books,Smartphone,2,56.05,Credit Card,New York,112.1
+2fe0054d-8ce4-4448-b78b-d476aeb76841,a4785292-d41f-4f51-9018-8b3a94f18410,2024-05-19,Clothing,Doll,2,293.36,Credit Card,Philadelphia,586.72
+87e8c631-5db9-4a20-99f9-5088e83f0f00,68ae80a8-6ebd-4e8f-9942-c2284093e24c,2024-12-29,Home Goods,Fiction Book,1,27.61,Debit Card,Chicago,27.61
+fb420290-20e0-4768-8832-4ef8ad4f3b45,6f40e600-e875-4402-84eb-f0b8a305d308,2025-01-06,Books,Smartphone,4,238.14,Credit Card,Philadelphia,952.56
+675207ec-181e-46f2-b586-81c879a3764f,02b14990-6569-4d67-bb59-b3b72aae1d0a,2025-01-05,Toys,Doll,1,275.9,PayPal,Chicago,275.9
+ed52e494-086a-4e02-971f-32a6c448862c,9b39bb14-b9c0-493d-8f6d-5775551a2134,2025-01-11,Books,Fiction Book,1,150.41,Credit Card,New York,150.41
+16550dc6-fa75-4931-8f92-4664de9ce269,d89b34ad-1af1-4f41-9e06-4c877df113b4,2024-06-17,Home Goods,Laptop,3,299.51,Credit Card,Phoenix,898.53
+80e1b00a-a39b-45f9-8b16-bd12e5423b8b,76ad7806-2e40-43db-9c7e-38d984848e78,2024-04-16,Toys,Fiction Book,3,24.95,Bank Transfer,Philadelphia,74.85
+195f77aa-edf9-4af9-b77a-ce845d8931d0,1df7f7bb-2a62-40a1-80f7-846b1a700de5,2024-03-19,Electronics,Non-Fiction Book,3,28.3,Bank Transfer,Los Angeles,84.9
+ccfaa765-4608-4cfb-918a-f5d9cc43152e,68e538b4-58d3-498f-bf81-d36d7009e14d,2024-03-04,Clothing,Laptop,2,413.07,Bank Transfer,Chicago,826.14
+e4c2c8a6-4c2f-4273-b67c-e3d857d0e972,c21acd11-b109-434e-9a4a-449b4e396d92,2024-10-06,Clothing,Laptop,4,186.49,PayPal,New York,745.96
+646ed8d2-7fe6-469b-ac0d-49001c2f1021,08549140-83ab-43c4-afc2-24b077c16032,2024-11-05,Electronics,T-shirt,4,72.26,Debit Card,Houston,289.04
+6f1a41d8-8d63-49d4-bfb3-7c80b76a9a47,12d0d4ad-5e50-4dbb-b620-3cde4c17fe1c,2024-12-16,Clothing,Doll,4,265.9,Bank Transfer,Philadelphia,1063.6
+390a1d43-ff2e-4bab-b898-82fc467cb49f,58d924e3-4990-46a9-b8c7-a23c16c0955a,2024-05-26,Electronics,Non-Fiction Book,4,387.3,Credit Card,Philadelphia,1549.2
+5f630617-cc5b-407f-856f-c84b925e87ad,fcc8fe5f-4471-4e5b-b231-de1a9db4d4ba,2024-07-19,Clothing,T-shirt,3,115.75,Bank Transfer,Phoenix,347.25
+3d246c61-5d0c-4258-a07e-0684afa29b2e,2d70a2eb-6808-4fca-ab7e-f415d0549195,2024-03-19,Toys,Fiction Book,2,315.22,Debit Card,Philadelphia,630.44
+c0c37809-337c-4918-975a-8885eb055f34,6fc89ed1-88be-431a-b357-81eb94478344,2024-04-21,Clothing,Laptop,2,51.82,Credit Card,Houston,103.64
+87fc69ba-829a-47d0-ab99-99faeaab8be5,ac256ae5-2a82-4f6d-b017-5c4801cd3a45,2024-06-27,Clothing,Doll,3,35.32,Debit Card,Phoenix,105.96
+93abee02-0ed3-48e3-a7a6-94c93e3750ff,6bdca46d-113e-4892-bc72-e7ae46e96e44,2024-08-19,Clothing,Doll,2,270.36,Debit Card,Houston,540.72
+5d35af13-dd38-40a4-81e3-3afa7891a689,40c19438-4221-4557-a89a-683abebb9a51,2024-05-13,Clothing,Laptop,3,274.91,Bank Transfer,New York,824.73
+b911d938-59ac-45f1-802c-6763c9127aa8,f01c95af-bafc-4516-9a3b-04fd371db1fa,2024-04-23,Books,Fiction Book,4,322.34,PayPal,Los Angeles,1289.36
+448cc820-4cd3-4aee-8e9e-16ff49491634,724042e2-33f6-43d7-be77-a40e606d638f,2024-07-26,Toys,Fiction Book,3,365.78,Debit Card,New York,1097.34
+9b9b90df-60cf-4875-b809-e5b0e20fc6f8,8798894a-27c2-4055-aa0e-d4ccc120c5f1,2024-03-05,Toys,Doll,4,488.17,Credit Card,Phoenix,1952.68
+718a6d7e-3283-4aff-8885-7dc5fa80ab70,0c82584b-a199-4325-9b1e-709b8ef2559d,2024-04-29,Electronics,Laptop,4,262.99,PayPal,New York,1051.96
+63bdeb8a-9152-4b0f-8519-c623b69c22b2,e20ffccb-c238-4b9c-9c3c-b3a585694c44,2024-11-21,Toys,Non-Fiction Book,1,168.25,PayPal,Houston,168.25
+c45992b8-0bba-4eb8-b7cd-36e15dc37431,b0d360de-b003-4da2-b47e-2e26b7025e2f,2025-01-20,Electronics,Fiction Book,3,399.64,Bank Transfer,Chicago,1198.92
+d05063ec-2283-4fab-8b81-ffd14e5c75b9,979de5c0-1bca-44b6-8b40-2cb92e9af05e,2024-09-21,Clothing,T-shirt,1,142.71,PayPal,Phoenix,142.71
+b3abb4de-8143-4f31-90ea-1f049716ead7,d48de585-37b8-45ef-88ac-fba80c240e67,2024-11-30,Books,T-shirt,3,225.1,Debit Card,Houston,675.3
+aa85078a-826b-47c4-bd7a-b76725aa938c,dba67b7b-477a-4ab4-9e7a-4f38e876921f,2024-12-29,Toys,T-shirt,3,48.44,Credit Card,Houston,145.32
+62b079dd-aee3-42dd-9057-d04f3ff16290,180ffebc-7783-4ab9-8458-3381bdde07a6,2024-03-01,Home Goods,Blender,1,22.42,Credit Card,New York,22.42
+05d2be4b-a342-4c92-b261-464ad0b9a38b,0a0ccbb0-391d-4d42-9f4a-963ed51dbfc5,2024-07-27,Toys,T-shirt,1,481.7,Bank Transfer,Los Angeles,481.7
+deaadf30-ed33-46f1-9818-78f913d27605,ab5708fa-8de3-4455-a471-8ab7dc3e0e81,2024-05-17,Books,Fiction Book,3,419.63,Credit Card,Philadelphia,1258.89
+c579b3d0-66ee-476b-8b42-6a0d4517bb7f,f27371a0-cc25-42fc-b181-27945908c2eb,2024-08-25,Toys,Fiction Book,2,351.03,PayPal,Phoenix,702.06
+1c2d0e3a-87ae-4b42-b933-ea6a1cc8b5ce,cce662d9-5564-47ec-939f-cd1d87071238,2024-12-02,Clothing,Laptop,4,210.39,Bank Transfer,Houston,841.56
+88334fee-08df-4640-a490-7888a5d09b90,e7c6992b-82df-44ec-9512-267d35709c9d,2024-12-12,Electronics,Non-Fiction Book,1,94.91,Bank Transfer,Phoenix,94.91
+05d8da42-103e-4100-85c8-6389fc5ab2e2,a5279c59-b689-4aa2-b4aa-780583321dcd,2024-04-17,Clothing,Doll,4,86.65,PayPal,Phoenix,346.6
+e4b5f3d7-7d2e-4efe-8517-25b7f0ec8974,2b3c4661-856a-4322-94c2-78bf860f8e56,2024-06-13,Clothing,Fiction Book,2,132.62,Debit Card,New York,265.24
+584e8699-ee32-4b4c-9d98-77b1e781d31c,f2e8f707-080b-4ff8-98f7-947a751caeb1,2024-03-14,Clothing,Doll,2,279.12,Bank Transfer,Philadelphia,558.24
+23a51ea9-46cb-440f-bcf6-15a6e8f5c6f3,fce2e3ba-c21a-46da-aacb-0204e541095e,2024-09-15,Books,Blender,2,360.15,PayPal,Houston,720.3
+fa098bea-59d9-42af-ab6a-967c52942e45,a648b3c4-27ab-4704-ab6f-a6d219c2af5d,2024-05-15,Books,Fiction Book,1,333.5,Bank Transfer,Chicago,333.5
+98a115c5-969e-41a2-bc8c-76f4f2f7ef9f,79790369-82b0-48e6-b1f3-17b70036aa98,2024-07-04,Clothing,Non-Fiction Book,2,147.17,Credit Card,Phoenix,294.34
+59ec1a56-452e-47d1-9a1f-f38a7da3a18b,7880a21a-f0f4-49b4-84e0-82ecd5f13985,2024-09-30,Toys,Smartphone,1,477.88,Bank Transfer,Chicago,477.88
+f793c475-4b3d-44ed-b4a6-579791b23972,55dbe08c-c1c5-4618-a11e-e2c1f201e9c9,2024-12-11,Clothing,Fiction Book,2,371.57,Debit Card,Philadelphia,743.14
+c1d2de24-adae-43b1-891a-ccd0edf2786d,281ff033-692a-44b9-8929-62c1d4c466e0,2024-09-26,Books,Blender,4,281.63,Bank Transfer,Phoenix,1126.52
+6260cdfd-59a8-41c7-a995-88de723b98ab,7f528def-39bb-4b8d-96f4-e0f3a8f6bba5,2024-07-11,Home Goods,Blender,4,309.74,Debit Card,Houston,1238.96
+aca37cdf-ba2d-476d-b0c9-2a62db230b6c,75608aee-8740-4ca1-9a3c-bf22da23a72c,2024-06-16,Clothing,Blender,3,215.6,Bank Transfer,Los Angeles,646.8
+10005172-5092-434f-8ede-7a06890c0251,d69fee45-e3da-4bc7-872d-86f671595c02,2024-02-19,Clothing,Fiction Book,4,131.39,Credit Card,Philadelphia,525.56
+3edc216b-423f-4f38-836c-3a2785527e42,771bfd3e-d8ea-4d03-93a8-9f134b486124,2024-05-02,Home Goods,Smartphone,3,184.43,PayPal,Chicago,553.29
+4af5ca4c-d18d-44c4-ba05-dfa2b2f37a7e,e6fc8ea8-bdc3-43db-8a6d-917486b8f047,2024-03-04,Clothing,Fiction Book,4,381.34,Credit Card,Philadelphia,1525.36
+6abc2437-2f61-4f02-84fb-3e8f88231b7d,921a00dd-7b9b-441d-b577-83f0d8aec923,2024-03-27,Home Goods,Fiction Book,1,17.05,PayPal,New York,17.05
+d775e29e-8785-4dd8-976d-671e915c7ba3,f82c517f-e978-46ec-a19e-5788f3d9456d,2024-09-05,Books,Laptop,4,66.88,PayPal,New York,267.52
+5355f003-e5dd-464e-9fbc-10279f488129,bffca160-8c83-4c4e-898d-cabf9dcd6c34,2024-11-19,Clothing,Non-Fiction Book,3,32.54,PayPal,New York,97.62
+c6c1369d-a912-47a4-8070-362323f9263f,be0cbf6a-d2b2-4bad-a36e-735fb8e67f58,2024-12-09,Clothing,Smartphone,3,29.96,Credit Card,New York,89.88
+68c96d45-3b1e-48d2-b7d1-4b8d83a9599d,bfd4c2d9-4a7a-4c71-96ca-6fe474c67721,2024-07-13,Books,Blender,2,429.18,PayPal,Los Angeles,858.36
+35508693-559a-4a47-a12d-7cc0b82e0760,e5e54139-1a67-4b29-9544-8f3c6b8311eb,2024-06-05,Home Goods,Doll,1,354.79,Bank Transfer,Phoenix,354.79
+ab9528d6-fe51-4b33-82ac-4b969dd67d0b,f22b733c-d661-4ebb-b79c-182c4d22bea8,2024-11-06,Electronics,T-shirt,4,242.35,PayPal,Chicago,969.4
+c7cb819f-07da-4d0f-b2c7-f8a7a8102636,835d31e3-97f9-4413-b844-e0dcf553bbc4,2024-08-01,Electronics,Laptop,2,57.94,Credit Card,Philadelphia,115.88
+1dabc848-27a5-4381-9b1c-78a1519330ee,ffb75980-ea0a-4dee-b393-ef1448adec69,2024-07-24,Electronics,Fiction Book,4,250.89,Debit Card,Philadelphia,1003.56
+d4a9a1f1-9017-4b1e-8185-a3b0bc6f9c41,488e0b21-a2f2-4619-b12c-47871a7f018b,2024-04-25,Toys,Smartphone,4,242.0,Credit Card,Philadelphia,968.0
+9a8b1331-0355-476b-8906-90cb4c82c437,9275d3cd-077c-4a44-9be6-0bf03a46fee4,2024-10-22,Toys,Smartphone,2,94.87,Debit Card,Los Angeles,189.74
+667c0f05-6070-4f88-bb30-4c98b0947f36,31d35b28-1995-4496-862a-ad146a8e31b9,2024-04-29,Home Goods,Fiction Book,2,222.59,Credit Card,Houston,445.18
+f9ce6aae-5a1f-42ae-8b61-24327a81b61d,07fbc727-31f1-44f1-9713-e2e426f92774,2024-06-20,Electronics,T-shirt,2,205.27,Credit Card,Houston,410.54
+cf1c4b91-9a03-423b-908d-ead617f6abb1,e9770104-97d5-48a4-97dc-79a30972a2c3,2024-08-03,Clothing,Non-Fiction Book,2,311.77,Bank Transfer,New York,623.54
+4bf773d4-e931-41cc-9526-96850c686455,1cafbd57-407f-4af4-86c5-63ecea127fbe,2024-05-15,Books,Doll,2,321.2,Debit Card,Los Angeles,642.4
+e9974cc5-b736-42bc-9264-5cc2183385eb,9fa72c39-bf4c-4234-8b7e-78018651f9a2,2024-03-24,Home Goods,Smartphone,4,32.2,Bank Transfer,Houston,128.8
+9e432aeb-5718-43ef-b36e-a1253eb2e691,77117190-38a0-4843-b1c8-eff351532281,2024-05-14,Books,Laptop,2,193.56,Bank Transfer,Houston,387.12
+3e0595bf-436d-492c-8f38-8e6c09099579,eebb3872-8305-4b79-afc9-3701c2ae665d,2025-01-17,Books,Non-Fiction Book,1,316.67,Bank Transfer,Los Angeles,316.67
+cab2fd91-5e72-4324-8079-396b7deae7ab,36c5f344-edc0-40f2-82fb-af045b5bc315,2025-01-12,Electronics,Laptop,3,256.54,PayPal,Philadelphia,769.62
+4cf2c09c-23e0-4004-bdb3-736ddbd453e2,6bc3123e-4e8a-4bfd-a8ee-c1611a036481,2024-03-05,Toys,Fiction Book,2,429.68,Credit Card,New York,859.36
+5845495f-fa43-4d83-a918-6381d049d593,c33a04ad-bcc0-4cbe-b122-de46da2c5bbf,2024-05-20,Toys,Blender,2,332.76,PayPal,Houston,665.52
+bb049eea-f3d5-41b5-bddb-f8ea5c202316,a1f426bf-9f5e-44e5-9317-984f604995fe,2024-09-04,Home Goods,Fiction Book,4,89.84,Bank Transfer,Phoenix,359.36
+edead899-f328-4caf-a65f-76b1c1f006b7,08a55c15-bbab-42fd-9fc0-4ea9a6c0eac8,2024-09-26,Clothing,Doll,2,44.58,Debit Card,Houston,89.16
+c45ddd59-50eb-448e-8654-ea28459f5d13,87f61bcd-1e4c-41b6-9b29-3dd30560679d,2024-08-05,Toys,Doll,2,324.79,Debit Card,Philadelphia,649.58
+9ba43289-8810-48c1-9cc5-a1b02d8208ff,cb72949d-3427-48c0-bead-8f8d1a43678a,2024-08-22,Electronics,Blender,2,22.99,Bank Transfer,Houston,45.98
+fca42629-46cc-4092-96ff-608a55c8b782,f09703dd-f7b7-4c55-90fc-05fbdf859fa2,2024-09-27,Home Goods,Fiction Book,4,297.03,Debit Card,Phoenix,1188.12
+03694f3e-95e9-4fd5-91cc-c8f2f7207656,1b7845be-ee5d-44c9-b752-f3b081a8f057,2024-09-03,Home Goods,Laptop,2,470.71,Bank Transfer,New York,941.42
+3d36362f-5641-46c0-b30d-ed93f50779ef,d58dd857-34b6-4241-b27b-bd5f9a74b2ed,2024-09-02,Books,Smartphone,3,291.98,PayPal,New York,875.94
+3a203867-50b3-4adf-9caa-b5102e7c5a6e,4efee722-b8ec-44ed-922b-3c25b2c45818,2024-06-13,Books,Doll,4,200.2,Bank Transfer,Houston,800.8
+e1a83fd8-f8cc-4531-a505-e7035ae46230,988e4c34-c97d-4236-b8a3-c78725370c15,2024-08-04,Clothing,T-shirt,3,325.21,Credit Card,Houston,975.63
+b6265ce1-d9b8-436c-b8e1-5a67ef704c8f,1128efbf-1151-4bb8-ab41-d238714eb60d,2024-04-14,Home Goods,Doll,4,234.54,Bank Transfer,Houston,938.16
+134e5cd1-53d8-4e35-beb4-6f49c8641ec2,90382c5c-820a-4c12-8188-11e0874c1a1b,2024-08-21,Electronics,Blender,2,277.35,Credit Card,Phoenix,554.7
+75759f2e-6107-4fbc-b055-dc763606fc70,20aea204-e38c-4cd5-947d-325072c555cb,2024-07-13,Books,Blender,3,471.32,Credit Card,Chicago,1413.96
+39a814a3-47f7-4346-9ef3-42317948718e,ca41d76c-3edf-467d-8268-d60a7a45d809,2024-09-16,Books,T-shirt,4,199.19,Debit Card,Houston,796.76
+e1cfde3c-adf1-435d-ba42-eabdf97bd138,2b3ffdec-0f03-48b7-b912-a79d936dd67f,2024-09-07,Clothing,Fiction Book,1,480.98,PayPal,Chicago,480.98
+86841c1f-da71-4c29-bf5b-51f810adfefb,b507d343-2a50-4200-8467-ff3d5723bb52,2024-05-02,Toys,T-shirt,2,453.62,Debit Card,Houston,907.24
+25aa288a-4c96-4377-a2fe-f8e5176106bf,2f60d303-c298-434d-988f-d42f4ebfbbb4,2024-11-16,Toys,Doll,4,105.94,Bank Transfer,Los Angeles,423.76
+7b98221e-13cd-4b34-a0d1-eabd6c7072df,f42e5907-5b22-46c6-97e0-070d9408a0f5,2024-04-05,Electronics,Smartphone,1,43.99,Debit Card,Philadelphia,43.99
+b6b04756-3970-49d3-b930-1fbf067bfb61,b2cd7bb1-8f53-4669-a983-1dce43858e7d,2024-03-05,Toys,Smartphone,4,59.38,Debit Card,Chicago,237.52
+732c0102-101a-4ed5-ae76-784af1eb1679,044f17c5-61bf-4e8a-a976-72276a1dbb84,2024-11-28,Home Goods,Laptop,1,18.93,Debit Card,Phoenix,18.93
+83c554c0-15ab-4fcf-ac71-49cfc5082d92,b8353ede-681a-4039-a20d-6b7b90187712,2024-06-23,Toys,Smartphone,2,56.28,Debit Card,Phoenix,112.56
+20009308-9e2a-4b31-85d6-fcf3786a5da2,b3875a40-b9ea-42f6-ba78-38c0771e7c6e,2025-01-16,Home Goods,Laptop,3,344.67,Bank Transfer,Los Angeles,1034.01
+84825e98-c1da-4582-b280-cc6a1624beeb,62704df4-fd6d-48ef-90bf-d9bc21f6c09f,2024-04-18,Electronics,Blender,1,44.88,Bank Transfer,New York,44.88
+f84cfb14-fc2b-47ff-9577-f9804587f24f,5ab02860-1a63-4236-9b28-6650db375c04,2024-04-01,Clothing,Fiction Book,4,166.3,Credit Card,New York,665.2
+6d60dfb9-c330-4b3e-a9ae-7f5c95534519,334b98c3-fea2-4c9e-b5be-c5c1bc93ab54,2025-01-02,Electronics,Smartphone,2,423.99,Debit Card,Chicago,847.98
+15dc019d-53fe-4b2f-b40e-a170752a8cb8,d6fc6928-f3d4-4312-bd57-386bfca10822,2024-11-19,Books,Smartphone,1,21.4,Debit Card,Chicago,21.4
+8d98fa07-564a-4dbd-a63c-b53ce3389a6b,045ec875-b526-489f-93c0-abf49401a77d,2024-12-22,Books,Blender,4,409.09,PayPal,Los Angeles,1636.36
+ad1a29d1-3048-45a7-bf1c-2f88b5b49d78,5c6c4bc2-876b-4953-8900-c1c7c7ef7012,2024-05-12,Books,Fiction Book,4,148.11,Credit Card,Houston,592.44
+adf429ee-61cf-43ff-817d-50fbf990d776,ea260d0f-4a32-48e3-81ce-3df07ea5366a,2024-02-02,Clothing,Non-Fiction Book,4,67.9,Bank Transfer,Los Angeles,271.6
+1a90d387-a35e-4491-8dcc-4c1452ccb5eb,5560f0a5-bd5f-44c5-8b53-31cd92571afe,2024-05-23,Electronics,Blender,1,351.4,PayPal,Phoenix,351.4
+8276cd53-dfcb-49c5-bc78-ab5a14d06ec9,3e6f4277-acd0-4d87-bb54-eb74296304d4,2024-09-30,Books,Smartphone,1,318.18,PayPal,Phoenix,318.18
+786f5827-e02e-4686-a6d3-ded3a57bbba6,6a05a971-2fe6-4434-a1cd-c14d2f3c25a3,2024-05-31,Books,Laptop,1,439.96,Credit Card,Philadelphia,439.96
+508fd5e7-07c8-468d-be4f-e11979896113,161af646-e399-4a00-89fe-539d9cade8fd,2025-01-24,Electronics,Smartphone,3,370.18,Debit Card,Philadelphia,1110.54
+c7540d89-b8aa-4a09-ad73-a2efaff83696,89827307-6de4-4a11-b4f7-433d37c71c49,2024-09-16,Home Goods,Smartphone,1,403.71,Bank Transfer,New York,403.71
+3c02b246-d601-4630-931e-03340b730151,d806ca7d-2418-4674-8731-d4fb06b4f9a7,2024-08-06,Electronics,Smartphone,1,148.2,PayPal,Chicago,148.2
+5fa27ba2-03b6-4514-a1a2-3d35b6aac9d7,4251beed-548f-41ca-94b1-9fe0976b6b93,2024-02-13,Toys,Laptop,1,96.95,Credit Card,Houston,96.95
+416a228b-f078-4d00-9080-8f49aa1edda3,deb79a12-ba2e-43d4-927c-15acca674089,2024-12-25,Toys,Blender,3,377.8,Bank Transfer,Los Angeles,1133.4
+a2922d1d-9f58-4992-95d6-9326d52652b1,e61210be-30d4-41ca-9667-7c9cff1ab492,2024-11-22,Electronics,Smartphone,1,405.35,Credit Card,Chicago,405.35
+4f2b3999-6a8e-42d2-9d54-6567d65df589,9c9332d6-af07-4dab-b1b5-994ba6499a57,2024-04-05,Home Goods,Non-Fiction Book,4,495.35,Bank Transfer,Los Angeles,1981.4
+d1a75f5d-06cd-4f82-9ceb-d0caf6b05d19,3010de33-72bd-4806-b6c6-684bf9a54f3a,2025-01-18,Home Goods,Blender,1,212.18,Credit Card,Los Angeles,212.18
+c132d028-6284-4a67-a479-f55a6cac6092,dc72e77c-abc3-4400-a44a-b370e640cb91,2024-05-02,Clothing,Doll,4,192.29,PayPal,New York,769.16
+77d756b4-a2ba-42e8-95ea-59c49a058934,f682a179-c04e-4fc7-89ac-31071ba9cd18,2025-01-27,Books,Laptop,4,390.44,PayPal,Los Angeles,1561.76
+5c72be83-3208-47c3-8173-da6234121907,4b66df91-ada2-45ad-b471-51b5ba8351a8,2024-05-04,Home Goods,Non-Fiction Book,4,176.99,PayPal,Chicago,707.96
+28dc7311-56bd-4a2e-b9d8-9dd2dca2ba9f,7def7764-c126-4fb8-bddc-778254444b15,2024-08-07,Clothing,Blender,3,466.07,Bank Transfer,Houston,1398.21
+7ae0f0d3-baf5-4524-8b28-a91e075617b9,c502e9ba-bdac-4d26-994b-7ad2a87544a2,2025-01-17,Home Goods,Non-Fiction Book,3,430.62,Debit Card,Los Angeles,1291.86
+cb35c973-00e9-489d-86fd-ff97258d0e37,ea5cc61c-174b-48bf-a985-875e6deeb96a,2024-07-27,Toys,Doll,3,220.21,Bank Transfer,Philadelphia,660.63
+00d8fafc-b7d0-4f32-ad29-eb91ea2ed7a8,ae4addc9-6635-4d91-9aa3-2287c6afd523,2024-12-01,Clothing,Blender,1,377.93,Credit Card,New York,377.93
+c83a658a-9d30-4339-9761-16135ac6fd68,4aa7698d-3e4d-43eb-b650-02384fee8872,2024-11-06,Clothing,Blender,4,379.73,Credit Card,Los Angeles,1518.92
+938138dd-2d89-4d18-a365-00751bdb63bb,b90033aa-6e26-4473-a514-37a953ce3512,2024-08-04,Books,Smartphone,3,60.53,Credit Card,Houston,181.59
+f9fad03d-a4eb-4da6-9778-9df2a5059a2d,cb25599c-c71d-4bcb-9757-1d91f200c376,2024-11-20,Toys,Laptop,3,452.25,Bank Transfer,Los Angeles,1356.75
+d927e6ca-5082-41a8-86ba-9dde5e215203,bc6a9b8a-2fdf-4bed-8d91-680714adfc65,2024-06-07,Home Goods,Non-Fiction Book,1,257.57,Bank Transfer,Phoenix,257.57
+cc7024d3-5f16-4b28-97ed-1611f314bbc3,5cb05464-c443-4d2c-a440-3aad92147a17,2024-12-15,Home Goods,Blender,3,414.96,PayPal,Chicago,1244.88
+02c4d4ae-5901-4596-9811-646a98e45043,dbf2732b-c498-47ac-a594-cdb88e79af4c,2024-09-24,Electronics,Fiction Book,1,166.82,Bank Transfer,Houston,166.82
+4ec78bf3-d2f3-48ee-9c85-82fb6cd2bcfd,c514f445-0422-4e07-a750-5551f7861b7b,2025-01-21,Clothing,T-shirt,2,448.81,PayPal,Chicago,897.62
+ed373795-3e32-4672-a395-e49b39f1824e,60c64fb3-1455-4ab2-9865-a78f613b9222,2024-12-17,Clothing,Laptop,3,200.71,PayPal,Los Angeles,602.13
+575a2f47-fe9a-4a74-bcbc-86f3399316a9,33075179-8115-469b-a131-06bd2873bf8d,2024-08-29,Home Goods,Doll,2,15.31,PayPal,New York,30.62
+1c322664-7d87-4560-9f1d-8ebcb31c35ca,cb9485d6-7050-4712-b26d-f9594cc119bd,2024-05-16,Clothing,Laptop,1,453.64,Debit Card,Philadelphia,453.64
+8b990e88-416b-48f2-bda2-051d3eb93a13,e977d19a-8928-4e2a-bb88-86a47668c8be,2024-06-16,Clothing,Smartphone,4,54.73,Credit Card,Houston,218.92
+610f00ae-c2db-4af8-97f6-4a20653931b8,fd83d653-6d94-41a5-a60f-4a11e35232cc,2024-04-02,Electronics,Blender,3,166.46,PayPal,Philadelphia,499.38
+e3e71827-f455-45b1-af82-d4ffcd6363d7,69ded05b-2f27-418f-aab6-c6576a1d757a,2025-01-24,Toys,T-shirt,1,475.53,PayPal,Los Angeles,475.53
+b0e39990-8f18-45ec-ab54-5e6b36ab4c24,d035fa1c-a355-4c45-99ed-643de04f6cbd,2024-03-20,Clothing,Non-Fiction Book,4,475.8,Bank Transfer,Chicago,1903.2
+9a87843a-3a2c-4196-84ca-4fa2da962b08,2414197d-c02d-4373-8c17-f7967a71b614,2024-06-14,Books,Laptop,4,290.98,PayPal,New York,1163.92
+d1c90c04-d0ee-46db-8b20-2183ec1c0d90,af208189-9862-49bb-96c2-ce5aab60f963,2024-05-17,Books,Fiction Book,2,319.6,Bank Transfer,Chicago,639.2
+3a8afc31-6335-40bb-b969-9643f152b1c6,6cd7753a-1fb0-4597-8233-7109159590e8,2024-06-07,Electronics,Doll,1,229.74,Credit Card,Philadelphia,229.74
+6a06aaaa-3be5-4bce-bab6-0d13c7db682c,fb06ab6e-f35f-4d21-8e7d-49fe8c6eae79,2024-11-12,Clothing,Fiction Book,4,153.67,PayPal,Houston,614.68
+aa62f63c-4e8b-4269-bde9-3a7564b5f364,96bbabd9-0f36-4941-ac21-f42d487daf9d,2024-02-15,Toys,Smartphone,3,171.05,Bank Transfer,Chicago,513.15
+85035746-9455-40b6-b141-f7984a18ff75,fadaeade-3e87-47ed-8914-d1177d469889,2024-08-05,Clothing,Blender,3,339.53,Credit Card,Houston,1018.59
+245b9b92-cc67-48ab-90f7-41ff13c15090,dee38967-436f-4bb7-b9b7-c595560d44f0,2024-05-12,Electronics,Blender,2,378.66,PayPal,Philadelphia,757.32
+48c5fd26-6f7c-4750-a5f6-12e469769a44,feb080fc-eb82-48f9-bd62-c4f25af5449b,2024-09-02,Books,Blender,4,397.87,Credit Card,Chicago,1591.48
+861f90ee-563b-442e-8b9a-97f914b041dd,0302e5b4-e10d-42d0-b7de-7546da5e274a,2025-01-10,Home Goods,Non-Fiction Book,1,396.91,Credit Card,Philadelphia,396.91
+80eab033-c005-4530-8f03-d1605c007c34,3fa4ce18-fc6b-4392-9d60-30acbf97c9a7,2024-02-29,Home Goods,Non-Fiction Book,3,54.69,PayPal,Phoenix,164.07
+aafe2452-9ea5-4bb6-a2a5-8c110ea74b43,08f54594-b567-44be-9206-d7bc0832945c,2025-01-08,Toys,T-shirt,4,252.27,PayPal,Phoenix,1009.08
+6772b4a8-58d2-460a-a93c-ca2b7ac2aaed,d784d6fe-c464-4724-a9f3-7d313f930d91,2024-03-22,Books,Doll,4,38.2,Credit Card,Chicago,152.8
+9d6d5ad9-a73c-4e6b-a00c-a5966789fcd9,c5ad7c6b-7b07-4469-8254-006752071062,2024-05-03,Electronics,Doll,2,279.27,Bank Transfer,Chicago,558.54
+55681328-e841-42f7-9400-a931759ebc35,d4db90f7-d9c3-4981-b185-ab85e00d1b4a,2024-03-02,Electronics,Fiction Book,3,226.35,Credit Card,Houston,679.05
+753d2c8a-e53f-4f6c-8fb2-cebdc1c85792,ee74fe43-9145-4680-b3a5-105573e68de8,2024-01-28,Home Goods,Non-Fiction Book,3,444.98,PayPal,Los Angeles,1334.94
+7f205c20-ec05-43dc-a01c-8fba29929f9e,91cd013e-2bea-4966-92fc-738bce61a0aa,2024-07-03,Home Goods,Smartphone,1,181.95,Bank Transfer,Houston,181.95
+eb08df31-68d5-4027-89c2-13de86895f84,80da95f5-e949-4191-8b59-5be5f7be7e39,2024-10-21,Home Goods,Smartphone,3,67.36,Bank Transfer,New York,202.08
+2f25b88d-4d5f-4f21-9b47-da1f215f34f0,b24d6e6a-6c45-47db-b3e6-2f6b510d9841,2024-05-30,Toys,Doll,1,80.07,Debit Card,Houston,80.07
+a4da2912-7837-4c37-9499-2aaa4b09e954,c277992c-7d78-4eb1-964c-07f66f8f775f,2024-01-29,Toys,Smartphone,3,383.14,Debit Card,Phoenix,1149.42
+74583c6c-1014-488c-91e4-b8273c5a6951,043db1bd-a614-4426-ad70-6e3c04ec4072,2024-03-26,Books,Smartphone,2,312.93,Credit Card,Los Angeles,625.86
+207458d3-2850-4fb1-9082-69fcc95322d5,13a0e8cd-c70a-4e9a-a0db-4a197350fdd6,2024-04-25,Electronics,Laptop,3,59.55,Debit Card,Philadelphia,178.65
+71943ec3-7325-4c7e-a705-68acac99fe92,79d33634-ea44-48f7-bc65-e2b538e7f5fb,2024-02-20,Home Goods,Laptop,1,51.21,Credit Card,Phoenix,51.21
+029a16d2-7d57-4049-9e17-aeaaabb32110,a86b13c0-a1c2-4ef2-980e-059f806a4a30,2025-01-12,Clothing,Blender,1,353.47,Credit Card,New York,353.47
+05e5c0b7-dff4-4452-823a-6c28d2cdac61,49ea18a7-4fd5-49e9-a11b-6d8772c34d07,2024-12-23,Books,Doll,2,45.65,Debit Card,Philadelphia,91.3
+95c396df-8149-4413-b7cb-6a40556eb8c2,50131f7f-df30-499c-a601-39a4ef99ac86,2025-01-05,Clothing,T-shirt,3,412.71,Debit Card,Chicago,1238.13
+689e92b5-ecff-41bc-aa00-d2c9ff9f3b43,9ca77312-eedf-4848-aad4-0f83fff98d17,2024-03-05,Electronics,Smartphone,3,356.06,Bank Transfer,Phoenix,1068.18
+a61eb6c0-47c1-4727-a3c5-df45caab745f,64fa7b8d-55da-49de-ab00-5ccb04a548e2,2024-04-14,Home Goods,Doll,2,49.86,Bank Transfer,Chicago,99.72
+1fd0568b-eeb0-478a-9568-8c2f34996b8b,295c24b5-7e85-45de-b199-ee49797928b7,2024-08-08,Home Goods,Doll,3,51.57,Bank Transfer,Philadelphia,154.71
+540d50a9-deb4-4005-b3c0-51e1eed663c4,3bc867a7-0810-490c-bdc7-c7079074d68a,2024-08-15,Clothing,Blender,3,493.45,PayPal,Phoenix,1480.35
+2c619546-297f-4823-87e4-d67242c58a78,e04b8388-75b3-43aa-b61e-73694e4ae5d3,2024-05-16,Clothing,Doll,1,193.39,Credit Card,Los Angeles,193.39
+177422f6-9d25-4913-9b9b-706ccec8b71c,b92a66ba-17d6-455e-95a1-0544b13082c2,2024-05-05,Books,Non-Fiction Book,3,191.61,Credit Card,Houston,574.83
+d3860deb-e816-4ce6-8535-deb83b2a0d2e,863230b1-3193-4870-a16e-3e54af6e3ac0,2024-11-10,Home Goods,Fiction Book,3,408.27,PayPal,Houston,1224.81
+d6fc92a3-6a89-4dd3-ab73-b114ab7e0e3f,5e66bf21-211a-447c-8561-fdb99733b5b5,2025-01-09,Books,Doll,2,474.15,Debit Card,New York,948.3
+dc7a9d90-4e19-47ef-a86a-8f11de057eb0,edf8240e-317d-4ef3-9509-0911603cd220,2025-01-13,Home Goods,Doll,2,493.14,Bank Transfer,New York,986.28
+f7c31693-c9ae-48cf-9eb4-f396918aa634,b1cad246-c1a1-4c79-9e37-05f2d4bc82eb,2024-06-12,Electronics,Non-Fiction Book,4,379.16,Debit Card,Los Angeles,1516.64
+2298f995-ec2e-4ed2-9dc7-8bbc93facf13,a5d4b433-72dc-4bcf-a22a-673ed18a5bd7,2025-01-26,Books,T-shirt,1,194.37,Debit Card,Chicago,194.37
+b2d24014-cf96-4eca-b22f-e2f103bb7f00,e9bceab5-6837-442f-a1d3-4d4b6ee7a09f,2024-05-07,Books,Blender,3,50.92,Credit Card,Chicago,152.76
+babdf16b-05ef-4fd7-a3ab-9e9dc833323a,e726d40d-4b9d-42d4-bc62-08dba7cf4d3f,2024-08-29,Books,Doll,3,390.8,Debit Card,Houston,1172.4
+3a2344f6-07bf-45b6-9a8d-3ced67330344,d2741a6c-c32a-41ce-b65e-0acc8b24134b,2024-11-15,Books,Non-Fiction Book,4,283.62,Credit Card,Houston,1134.48
+8e02fdb8-2a5e-4f38-b6ba-001f53c2ddb9,43fa526a-6931-4b30-becf-3b642c9b49dc,2024-03-26,Books,Fiction Book,3,217.87,Bank Transfer,Los Angeles,653.61
+5e12ac7a-4027-420c-bd58-ad3be9292116,e8d4aae4-124f-459f-9278-1df9fa894ba0,2024-12-28,Electronics,Laptop,1,454.11,Bank Transfer,Houston,454.11
+3a910c3d-afb7-49c7-a4b4-428e1724f86c,1b39042c-51ab-41fa-a6e8-737abd6700ca,2024-01-31,Home Goods,Smartphone,4,64.49,PayPal,New York,257.96
+34f59aca-1ea0-4077-a588-35ce8fe50c02,d74f3ec1-edde-477d-a978-2ed19ce7b009,2024-09-18,Clothing,T-shirt,1,251.39,PayPal,Philadelphia,251.39
+4481521d-3b58-4979-ac88-696ced889427,3a423847-480b-4599-908d-03fd60457392,2025-01-26,Home Goods,Fiction Book,4,15.56,PayPal,Phoenix,62.24
+ffd98cc5-d2de-45fe-b598-763e0c8bd057,98905eed-3d2f-4c25-9bb1-97715874b561,2024-12-05,Electronics,Blender,4,239.64,PayPal,Los Angeles,958.56
+300354fd-a898-4883-85b0-abcc62e4f81d,821c2a97-c0fa-4c26-9960-7b7b7c8f2b69,2024-12-20,Clothing,T-shirt,2,37.59,Credit Card,Chicago,75.18
+3566c4a5-b69a-4b9b-aea7-ae2594bcdaeb,e69a6ab7-bd76-4719-85b3-04e2fccf2ce0,2024-02-05,Books,Laptop,1,68.22,Bank Transfer,Phoenix,68.22
+7c0daa84-de54-4c1b-b906-0788fa2673cf,45fdab31-2ac6-4a40-a272-bbb573b5a659,2024-04-10,Clothing,Doll,3,67.59,Credit Card,Houston,202.77
+d71179ac-7c22-4902-9a28-49b6095be161,3c773ad7-8425-4988-acca-802aa1788264,2024-02-20,Toys,Doll,3,328.11,Bank Transfer,Phoenix,984.33
+c2a8de52-4997-47a9-a6c8-2646d2ec5f93,0bd07b97-7f97-4f90-a5a4-4b079e4a6d39,2024-08-19,Home Goods,Non-Fiction Book,1,375.56,Debit Card,Los Angeles,375.56
+f7fae4d3-5557-4c36-aae2-a56285a79aac,d60be024-8f79-4678-a498-bac198b40827,2024-11-02,Home Goods,Blender,3,295.85,PayPal,Phoenix,887.55
+e6fccf6c-dc27-45cf-9e27-4cb9bb1c6612,3b0a05b3-cb1b-44c2-856b-0a9c239a43cb,2024-11-03,Books,Blender,3,481.46,Bank Transfer,Chicago,1444.38
+7953dda9-cf36-4559-a191-bc6929f311df,a5a67633-6bac-4142-95a3-9b0571402baf,2024-05-12,Books,Laptop,1,193.69,Debit Card,Phoenix,193.69
+2c375708-e97c-4262-90ff-d62e05184b2c,0b8b5c7b-bae7-41e4-81d6-2855e11b5948,2024-07-22,Home Goods,Laptop,4,150.0,Debit Card,Philadelphia,600.0
+3088b31b-5f1f-417f-9ea4-56810562e390,b45c42c2-32b6-47d7-a8f3-d5c96c469819,2024-03-07,Toys,Blender,1,435.61,Credit Card,Houston,435.61
+68f6d921-9824-4f66-ba18-be9977c2c10b,dc9b8649-d299-4a5c-9bfd-261c98680322,2024-06-01,Electronics,T-shirt,4,119.56,Credit Card,Phoenix,478.24
+3f5ce20b-b66a-4f24-a6de-e075f595157b,699dcfa8-6355-4e9d-a855-c30e13d16f44,2024-12-26,Clothing,Smartphone,3,481.98,Credit Card,Phoenix,1445.94
+fdee0538-f914-4c13-8685-006bba2687ef,04fcb090-ef66-4376-b565-44f7edf08bb3,2024-06-19,Books,Laptop,3,15.96,Bank Transfer,Phoenix,47.88
+3e23e664-342c-45ba-8380-7c213a3624e8,64b2491d-b686-4c7e-994d-cc4ad1351f5d,2024-04-20,Home Goods,Non-Fiction Book,3,485.24,Debit Card,New York,1455.72
+15223ce0-5682-4feb-95c7-0d5a77094e48,46495119-b30c-423c-98a8-0502e83af3f6,2024-01-29,Home Goods,Fiction Book,2,31.15,Bank Transfer,Chicago,62.3
+4b98161c-49f5-4c27-be6f-8d5791488b73,a27eebdd-8a39-43cc-a2ec-4fa035ffe78b,2024-08-06,Toys,Doll,4,446.66,Credit Card,Philadelphia,1786.64
+061fc713-09b1-4e52-8ac2-557552eee940,f451ed2f-a98c-4a9c-a862-0b1491227573,2024-02-18,Electronics,Non-Fiction Book,2,268.57,Debit Card,Phoenix,537.14
+240e951d-ba1f-417c-8d77-db64bea9a7d2,2341a891-6a27-4136-9321-dcf1d38680b4,2024-09-20,Home Goods,Non-Fiction Book,2,496.55,PayPal,Phoenix,993.1
+b0d0b683-8ca4-4968-8d49-4dc9ba4e5efa,09831c88-d588-4323-bdb4-9e7c44352a16,2025-01-02,Home Goods,Doll,1,46.16,Debit Card,Houston,46.16
+e9c05bf1-5217-40b2-8133-e6141c632d0c,129bfde4-2d94-4fbd-9f3a-13f9156fb263,2024-07-06,Books,Smartphone,2,281.39,Debit Card,Phoenix,562.78
+fe1c20eb-dc33-44d1-9f54-3d10c96b1ddf,1b9465e4-4b41-4f0f-a603-1de4e5444aed,2024-03-08,Electronics,Laptop,1,484.96,PayPal,Houston,484.96
+9b2b7cd8-3d9b-4fd9-a65c-caad6ba57c2b,aeec27d7-c8d8-45d5-9bf6-8b998573d38d,2024-08-29,Books,Fiction Book,1,266.32,Debit Card,Los Angeles,266.32
+2c4b2109-2984-4e93-9e51-b90f439cf2d0,83246d11-0044-406c-9f8a-79c83e6bd84d,2024-06-20,Electronics,Blender,2,318.41,Bank Transfer,Houston,636.82
+f3f49c0e-8fba-435b-bc04-84aebc80df9b,fbce92f1-8cad-4649-bab6-f3e4b3b72f63,2025-01-21,Electronics,Doll,4,350.92,Bank Transfer,Houston,1403.68
+f2ada3e2-fa32-4026-be25-00c06546c60f,54e21abd-3782-45b3-a4cb-456ae3b8b099,2024-02-26,Home Goods,Non-Fiction Book,4,232.73,Bank Transfer,Philadelphia,930.92
+d1e2a44a-8879-479e-ada4-9918588e778f,10f9e1b4-bc86-4f3d-abee-573b8219490c,2024-07-30,Toys,Smartphone,4,317.5,Debit Card,New York,1270.0
+60509967-cd99-4498-8c52-2844534593e1,804fd342-f699-4e23-877c-e4bf3b2fe2a8,2024-06-03,Clothing,Doll,4,296.31,Bank Transfer,Phoenix,1185.24
+21ff1c52-c974-478c-8f33-9d2df1c5e354,e27f3f32-d440-452c-a2b3-eee841c00cd3,2024-09-30,Electronics,Doll,4,451.57,Credit Card,New York,1806.28
+e2c69ff7-8bce-4027-85b2-842c33dcc86e,bd4193e6-424c-4c65-9705-da9788148fc3,2024-10-26,Books,Blender,2,32.27,Credit Card,Philadelphia,64.54
+6c8f014f-d041-476c-b4f0-c8d96bba8b38,c4f5b74c-3e46-4323-ae7e-61c088064ced,2024-09-30,Clothing,Laptop,2,147.67,PayPal,New York,295.34
+b24ccd67-8eb2-48c4-acdb-2fe19142f044,c3768999-b431-4719-a2c4-edaa2574fd2e,2024-03-11,Home Goods,T-shirt,3,475.7,PayPal,New York,1427.1
+3b2484bc-708a-4639-80d8-fee3d5fce44a,2962ea70-f4ab-426b-b151-96670ad3ccaa,2024-10-06,Toys,T-shirt,4,446.23,PayPal,Los Angeles,1784.92
+be4f7d07-de9b-4083-810f-43739df3e40d,89148977-c911-4cee-9f3f-0be9a11aab07,2024-07-08,Home Goods,Doll,2,233.27,Credit Card,New York,466.54
+df28fd4d-e1ed-400b-941e-3b401e684828,749f4605-b8d5-4641-a887-6787a7ee6ddc,2024-08-13,Home Goods,Non-Fiction Book,3,313.86,Bank Transfer,Phoenix,941.58
+2f08ff65-56bb-45a1-9bd2-eaeb2ef325ef,63d8ac04-58ba-4062-9204-14b4f4bc0618,2024-04-05,Home Goods,T-shirt,4,145.92,PayPal,Chicago,583.68
+14529832-f60e-486e-86b3-05d39ad4e096,ba9a9736-3d0a-49bf-86f7-fc30ec15dffb,2024-12-25,Books,Doll,1,102.18,PayPal,Phoenix,102.18
+944efe67-ffc2-44cf-86b7-3b3649922d08,c7c46450-4ee1-4298-abdd-54bfafa779e8,2024-05-04,Clothing,T-shirt,3,237.21,Credit Card,Philadelphia,711.63
+050d203a-98ca-4fd6-a5bc-59d0a609c309,0e1e70a4-169b-414e-a08d-6f23afe568e9,2024-10-13,Toys,Non-Fiction Book,2,183.14,Debit Card,Philadelphia,366.28
+26d5377c-67a6-4cf6-b796-6b4f868725ef,fb541bff-f33f-4143-9b66-d8c706d2370e,2024-03-25,Clothing,Fiction Book,1,295.99,Credit Card,Phoenix,295.99
+82eda3c8-eec0-4462-9b5d-e1bc40ae14f6,4ef2a451-5746-427b-a057-3c78682484c0,2024-05-18,Clothing,Blender,1,48.09,Debit Card,New York,48.09
+d154369c-a7ac-4248-b96b-dfadb504f4dc,e85c4812-a951-49e0-b8f8-6c3bdd3164b7,2024-03-05,Toys,Blender,1,487.45,Debit Card,New York,487.45
+15188dbf-1923-47db-bb52-1a622a61f139,5aa9ca88-afa0-4b95-bc05-3c7ee1d41554,2024-07-15,Clothing,T-shirt,3,493.24,Bank Transfer,Los Angeles,1479.72
+217a4d9c-4fb1-4ea0-9e15-96c2dd5bca29,5a85877c-d9dc-4ce2-8d2d-2ee6ac909098,2024-06-26,Clothing,T-shirt,2,352.1,Bank Transfer,Los Angeles,704.2
+ca0b5405-58c0-43d8-bef3-3fc2fdf3dffa,53e6ea9d-fd80-42f8-bcf8-048ba0973500,2024-08-31,Toys,Non-Fiction Book,1,272.69,PayPal,Houston,272.69
+e8d5eb37-9987-49a9-a123-b2f9cbe67c9e,206b23ae-af01-460f-9cf7-f6b2e206680e,2024-12-14,Electronics,T-shirt,4,161.67,Bank Transfer,Houston,646.68
+76748615-5f86-4b76-ad2c-24dab8894e8d,822fcc2c-d89d-48bf-8cb8-b6b11bc6df04,2024-09-12,Home Goods,Blender,1,408.76,Debit Card,Los Angeles,408.76
+cc9daade-feab-4bfd-9ba5-ea50f4432f1d,47a7bdee-e7ca-41a5-ae16-4128a854d4a3,2024-11-14,Books,Non-Fiction Book,1,345.52,Debit Card,Los Angeles,345.52
+ead82d70-c46a-45ff-adff-ff9d2309aa5e,050dd50d-91a3-4889-8648-1f3612a0f1a5,2024-09-13,Books,Doll,3,89.68,PayPal,Philadelphia,269.04
+4a9c45da-e724-4fb7-a71b-d2b5979bc72f,4cd133f1-64c1-4bd0-893a-ac6470e73712,2024-10-01,Electronics,Blender,3,456.35,Debit Card,Chicago,1369.05
+cb984da7-2844-4405-a69f-3b3caaf81289,e6baa6ff-e4a3-4442-a40f-a8dfe7eb0714,2024-04-22,Clothing,T-shirt,2,413.04,Bank Transfer,Chicago,826.08
+349fdbe1-795a-4a0f-9252-9d84f1ed9e5f,ca331ac9-cba6-4ba0-b833-ff4f1f3e6013,2024-10-13,Clothing,Smartphone,4,475.4,PayPal,Phoenix,1901.6
+b026e9b9-a567-42fd-b786-7eee3ddaa409,fe42a267-21ed-4847-bddd-ae5b2c9ef135,2024-09-18,Books,T-shirt,3,365.6,PayPal,Phoenix,1096.8
+15eb96ac-66a0-4e2e-9b05-58ff08a44657,1179dca6-0506-46c7-8845-78d601019c82,2024-10-27,Books,Fiction Book,1,310.57,Credit Card,Houston,310.57
+eec95046-1bc4-43cf-996f-392b7481661d,048db757-064c-4269-958c-d2a1e362a3d4,2024-02-18,Books,Doll,2,214.94,Credit Card,Phoenix,429.88
+c170f261-702f-49cc-b734-337990752ef8,8bf5ad9f-624e-40e1-8f6d-2d75914ff14f,2024-05-29,Clothing,Fiction Book,1,467.04,Credit Card,Houston,467.04
+51748767-a24e-4267-b33e-fbb08c72ae88,371a3ead-75b7-4846-adcb-057cd1c24a4c,2024-07-20,Electronics,Smartphone,1,434.37,Debit Card,Los Angeles,434.37
+6419a73c-b9d1-46fc-9441-48ce89643701,940e9238-c7ab-45da-b96e-071a23abe745,2024-05-02,Books,Blender,3,32.16,PayPal,Los Angeles,96.48
+c0216e3d-74c5-44b4-850b-9b0669022448,030af44c-6c7a-4fdd-9785-a2069a4a1658,2024-12-08,Toys,Non-Fiction Book,2,22.92,Bank Transfer,Houston,45.84
+33fbaef5-f917-450e-b7ba-3d23431ec8d6,0fa26ff0-61e7-412f-87d0-2c12ecda5e66,2024-03-27,Toys,Blender,4,194.47,Bank Transfer,Los Angeles,777.88
+5eafbbf5-0032-4f9b-9a58-30192f6128f9,8830c899-157d-4fda-8c78-e39bc867e16e,2024-04-06,Books,Doll,4,407.17,Credit Card,Philadelphia,1628.68
+71b875eb-f89a-42fa-b8b6-9226cb15d216,8241d296-6963-4261-9e09-5cbc5bff8cda,2024-07-11,Toys,Laptop,3,493.77,Credit Card,Los Angeles,1481.31
+bd30b031-cbdd-408e-a719-c9abe22cd344,0c80d517-f015-4086-ad24-8174c587c607,2024-10-09,Electronics,Non-Fiction Book,3,83.7,PayPal,Los Angeles,251.1
+0900dd32-d034-40d9-9971-b181ffa870c1,08b48e4c-8ba7-4b98-bbfa-bcc31eff5e3f,2024-03-12,Books,Doll,2,301.12,PayPal,Los Angeles,602.24
+f0b589bd-1c9d-4999-9bbf-e4fdbc784ae1,67fffe52-ef2f-4f44-9301-0be8bc53539a,2025-01-17,Clothing,Smartphone,4,196.64,Bank Transfer,Phoenix,786.56
+4f4090d2-cf55-42cf-b06b-43971d19f01d,105496d6-f54e-4411-89f2-71ae4d3b58c6,2024-02-01,Toys,Smartphone,4,485.26,Credit Card,Los Angeles,1941.04
+7083069b-900a-4b58-9b7b-aef9e3897464,46ef627e-f565-4908-9e4f-4ccd8f5eede5,2024-06-27,Books,Blender,4,422.64,PayPal,Chicago,1690.56
+7080a4fa-2c7a-499e-bc90-d535fbb8c622,e821000b-3fb2-4894-b4a2-a76756052a72,2024-08-24,Electronics,Blender,1,420.78,PayPal,Philadelphia,420.78
+667fd13e-450c-4023-bfa9-60a641ffa42d,a70ca83d-3c15-4d6c-a0d9-cf4bc8b7c3bd,2024-05-02,Electronics,Laptop,4,239.66,PayPal,Phoenix,958.64
+a396e10b-e462-4d39-a534-ecbdc02abdf1,8d11f683-af3c-4048-b1ee-b8e4bffae1fb,2024-06-15,Electronics,Non-Fiction Book,1,213.26,PayPal,Los Angeles,213.26
+c78c21ee-07c5-405f-8458-7fa052d4ac1d,6f245c53-8926-4d0d-8038-6a93ae084291,2024-02-25,Home Goods,Non-Fiction Book,2,143.97,Bank Transfer,New York,287.94
+b8903072-30cd-4387-9dc5-a69b7d5b2377,ff0d8eaf-65c4-45e9-885c-5b1776f8c712,2024-08-12,Clothing,Blender,1,37.62,Debit Card,Phoenix,37.62
+80a75f70-dd9f-4602-b5ce-98ecb578d77f,0159631a-963a-4615-97d5-e905244ed1dd,2024-12-22,Toys,Laptop,2,433.71,Bank Transfer,Chicago,867.42
+4ed45659-637f-4ff9-85ad-38cbd4f0025c,079c20b1-04c9-458d-818a-57fafaf206e7,2024-06-01,Toys,Fiction Book,4,408.32,Credit Card,Philadelphia,1633.28
+f181357e-1958-4381-8884-ba6c99ee8a90,85634b35-0f3a-4d93-a34c-93fb520dc40b,2024-11-02,Clothing,Blender,4,499.86,Credit Card,Phoenix,1999.44
+8690b0fd-3239-4fe9-bae1-e83ad6fa4f95,d12dd455-ec58-451f-a98b-ddc6623d9561,2024-09-04,Toys,Fiction Book,2,498.35,Bank Transfer,Philadelphia,996.7
+75fe6f79-764e-4dd1-a562-4db819b8320c,2ccd953c-b08a-4941-8409-c17023458a96,2024-08-21,Clothing,Blender,3,282.16,PayPal,Phoenix,846.48
+a013af82-d02e-417a-8d66-a7f03cf44eb5,009c5e66-b84e-4b60-b86d-80e105f93bcb,2024-05-08,Home Goods,Smartphone,2,386.8,Bank Transfer,Los Angeles,773.6
+d68cb621-b874-45fa-b100-1e07d61cf3ec,b0d4cf8c-ae94-4288-9c6e-46c046da15d1,2024-10-09,Books,Fiction Book,3,472.94,Bank Transfer,Los Angeles,1418.82
+60492bc0-3022-46da-9e78-1eaeb9cb6c1a,1c0da268-1a99-45c0-a53a-9a5ab7f3ce99,2024-07-13,Books,Non-Fiction Book,1,426.33,Debit Card,Phoenix,426.33
+02d798b0-ebf4-47fe-a0e8-e36ba06b15bb,9d2a57cb-2616-4eaa-9e9a-cbdb81bf9b89,2024-06-25,Electronics,Smartphone,1,131.2,Debit Card,Chicago,131.2
+fa6f14b9-399b-4cbb-8f37-e4eae88e2fe7,cfba60e6-63c5-4e4c-b40e-f2b1a6933b34,2024-08-17,Home Goods,Blender,1,230.77,PayPal,Chicago,230.77
+954c8707-f698-49b8-ab31-a72909a58f53,e408c2e3-686b-452e-9be2-500d7d5ad211,2024-03-17,Clothing,T-shirt,4,73.29,Bank Transfer,Los Angeles,293.16
+3eb3de28-2cb3-4fb5-a8d8-51c99bde960a,42701823-81e3-495b-a1ac-bdcd50f1298d,2025-01-01,Electronics,Non-Fiction Book,1,477.49,Credit Card,Chicago,477.49
+ab4ae038-d6fd-4fe2-b3b3-448a3f2d9c82,2777bcb2-02d0-47df-8efc-75c711955605,2024-08-10,Toys,Blender,3,307.03,PayPal,Los Angeles,921.09
+c5bb6fc0-268a-47e5-a2df-3df7f958ff8e,f7b4d206-e754-480f-95bd-43236dd1bf22,2024-05-17,Toys,Non-Fiction Book,1,122.03,Debit Card,Houston,122.03
+410cb307-a35a-4c7c-ba91-02cca8693dfd,1a3e0022-36c0-4f33-aabb-146c654e0263,2024-03-23,Clothing,Non-Fiction Book,2,339.13,Bank Transfer,Philadelphia,678.26
+25e247d9-3409-4f0f-b5bf-d655f88aee33,49c123e0-2cfe-4318-808e-07febc143903,2024-03-08,Toys,Smartphone,2,312.88,PayPal,Phoenix,625.76
+4438f0fd-16a1-4ac0-9c15-324f3bcc55cd,8769b22f-662e-4d9b-811c-716dbdebf2ea,2024-12-17,Home Goods,Fiction Book,4,185.5,Bank Transfer,New York,742.0
+aa96d4ce-1967-4dc5-8d73-d93ff9b13869,52138ee5-e748-4aca-b1d8-e88284e21818,2025-01-20,Home Goods,T-shirt,2,65.64,Debit Card,Houston,131.28
+ff9fd480-1494-4a62-a144-816555f6c9b5,1ee61ade-bde6-45d9-a047-4caf1eb06df7,2024-06-10,Electronics,Non-Fiction Book,3,339.07,PayPal,Houston,1017.21
+216969da-e908-49f7-af51-160e6111d121,1226a6c7-6c89-4579-8a0d-14c6ad480345,2024-07-12,Electronics,Blender,1,264.95,PayPal,Los Angeles,264.95
+7892278f-82f6-44b3-be92-5e41bf5f255e,f559f365-3e88-4435-a09d-e1c830db6cb5,2024-05-11,Books,Fiction Book,4,388.44,Debit Card,Phoenix,1553.76
+289beb18-54ac-4902-9000-940deefdf75f,87965de6-7293-4390-98d7-13a3c0f57ba4,2024-09-12,Books,Smartphone,1,264.88,Debit Card,Houston,264.88
+03bc2d1b-2a73-44fb-9a29-c77c124a36db,e6a0c027-4e6b-42bd-ae43-6c41610c5731,2024-04-11,Home Goods,T-shirt,1,427.57,Bank Transfer,Houston,427.57
+b94cfcb7-8080-4be5-be8e-97cb373f759a,e9997994-a651-4a4a-a2db-9171ad1d0f4e,2024-04-28,Books,Doll,3,280.43,Debit Card,New York,841.29
+8d5b39da-6808-4494-b281-242c7bd28f4a,3f6c961f-d328-4f65-aaae-6d9826d36cf5,2024-02-29,Home Goods,Non-Fiction Book,2,284.86,Bank Transfer,Chicago,569.72
+eff1c3cd-6854-41ca-b179-c36fa2950363,9b4478ae-de33-4f8c-a679-593a90487ee1,2024-02-19,Electronics,Blender,2,439.56,Bank Transfer,Phoenix,879.12
+44052946-ef77-469f-85a6-58f92f24c652,130cb41b-8b0b-411c-ab71-ab54917cc5c5,2024-05-15,Electronics,Smartphone,1,207.71,Bank Transfer,New York,207.71
+2ff87637-9ec7-4c16-88ab-1c04974c497a,36d7b472-fa5b-44c1-ab45-e9d15dbc1a66,2024-03-22,Clothing,Blender,4,75.67,Bank Transfer,Phoenix,302.68
+b79b2f65-e0fa-4f54-8469-7b18a582c531,e1255d02-4d18-4271-89e6-71a33a0d960c,2024-08-25,Books,T-shirt,2,24.1,PayPal,New York,48.2
+530d58a7-6140-4656-bda6-450c0e9fb4a8,eb6a619c-0347-40fd-843c-7d538972d498,2024-07-20,Toys,Blender,4,380.02,PayPal,Houston,1520.08
+8838b055-5b1b-48aa-9738-b07980ad7bef,ef33c599-332b-46da-819f-56b6fd6d6703,2024-11-22,Books,Blender,2,313.95,PayPal,Philadelphia,627.9
+593dd2af-f37b-4899-b1ec-c9ce5075bb3b,f7fc21cd-6bb4-4428-8b06-5ad59867d4a8,2024-10-20,Books,Blender,4,355.0,Credit Card,Chicago,1420.0
+ea9752a0-f514-481d-8014-86fb3b2c9956,9401d972-9015-4a82-8728-a7da408d5d8c,2024-03-22,Clothing,T-shirt,3,114.35,Credit Card,Philadelphia,343.05
+2f66a17f-87f5-4457-b39c-b17db1d5ce61,f2c55c5b-4286-4fae-b7e2-470a0b2f9124,2024-08-13,Clothing,Smartphone,4,76.82,Debit Card,Philadelphia,307.28
+d2656168-6e97-45d0-803a-8d50a65acb0b,41a8aa82-f2f4-4ea4-8ea9-7aecd01bfc5d,2024-10-27,Electronics,Doll,3,17.13,PayPal,Chicago,51.39
+5794605f-6601-4e75-9e3d-1cdb606faafd,3cac9e2c-1693-48e5-bfd8-fe9fc0713ba1,2024-09-20,Toys,Doll,3,181.79,Credit Card,Los Angeles,545.37
+dc313588-4f87-4fd9-adea-8e3e4114a12f,0fb1f8f2-8e53-4ff2-a6bf-039ff60b542b,2024-11-26,Books,Smartphone,4,299.06,Credit Card,Philadelphia,1196.24
+877b196e-659d-4ca8-82d9-cfb521c211d1,29afa95e-3d6d-4af5-8135-dd1135a19c44,2024-03-01,Home Goods,Fiction Book,3,202.2,Credit Card,Los Angeles,606.6
+32a2639b-a6e5-4f80-b61e-5a1ab42b597b,05a419b2-642d-4de5-aac1-b4dc9cd8070c,2024-08-29,Toys,Laptop,1,224.36,Debit Card,Houston,224.36
+360a95b8-db20-4fe8-8110-ceef70a81c85,dafac2af-beb1-4a90-84e2-d48aa8b4b805,2024-07-08,Electronics,Fiction Book,3,453.04,Credit Card,Philadelphia,1359.12
+a519ba59-96ff-420f-8c2e-d4029e68cf2f,89b9ac06-d3f3-4fa2-b26c-c15584b2d10b,2024-09-03,Books,Doll,2,180.65,Debit Card,New York,361.3
+6884f879-e8d7-48b4-97b9-966ae1695b09,1b6062f1-e1b0-4e67-9264-9ea300f7ee0f,2024-02-02,Books,Fiction Book,4,261.85,Debit Card,Houston,1047.4
+ce9e008b-3788-4e51-a8ab-8650ac5c5bcc,a09f06dc-9539-41fb-a388-64667ccec7f0,2024-05-21,Books,T-shirt,1,393.99,Debit Card,Houston,393.99
+6466046c-474d-4a7a-8272-3e42f83a255c,da2138d0-4e40-4409-a410-c8bca22ee755,2025-01-18,Books,Doll,4,204.31,Credit Card,Phoenix,817.24
+97acf9ba-c9d6-4265-b582-560e3a1fcd0d,9c50c38f-4f00-4523-aff7-96eda0eba30e,2025-01-01,Books,Fiction Book,2,314.82,PayPal,Philadelphia,629.64
+70729bb6-86f7-4760-97c7-453e4a6d4cb9,772286dd-8072-4df4-b922-e4a2358ec0cf,2024-09-29,Electronics,Non-Fiction Book,2,432.56,Debit Card,Philadelphia,865.12
+44239e8b-2304-4906-84e8-61f6ab2d5ca1,133b8672-adff-43d6-bb57-225a895ce895,2024-10-23,Toys,Blender,2,475.27,Credit Card,Los Angeles,950.54
+3dcc7e60-09a2-4a17-a738-ac303e4cbe72,63eac99d-ec61-43ce-aecf-7f35fbc05cd1,2024-12-01,Clothing,Laptop,3,82.07,PayPal,Philadelphia,246.21
+95f8ed52-9628-4f45-b506-140c27d67c2e,326093b7-3980-4dbb-81e8-8dcb34a38f0d,2024-02-25,Books,Blender,3,464.03,Credit Card,Los Angeles,1392.09
+55a87ec4-6170-4588-a71c-0ce8a629df81,058e15c3-9539-4e5b-bf2f-d0493b8c7731,2024-07-25,Books,Doll,4,251.14,Debit Card,Philadelphia,1004.56
+cf55103d-1394-49d1-9748-8707a1b244f4,a69d8ea6-5881-4a3e-8536-a53ca2cba2f7,2024-06-23,Books,Non-Fiction Book,4,136.54,Debit Card,Philadelphia,546.16
+0d8fb0bb-729d-4da6-9339-f3421ed4e6a0,a0e68d7b-eddf-49b4-874a-6bdde53fb8f7,2025-01-23,Books,Non-Fiction Book,1,234.98,Debit Card,Chicago,234.98
+9ed497ce-7cc3-4ce2-a652-8c8f000634d3,243ecc32-c27a-4954-89b3-c84034fcab89,2024-02-11,Clothing,Blender,1,490.22,Credit Card,Chicago,490.22
+50eed230-6810-4855-a877-3ece9a973bb1,f3b5de20-517e-4248-bf72-1e0d9b9d9621,2024-04-09,Toys,Blender,4,251.38,PayPal,Philadelphia,1005.52
+c3566b49-2821-4a44-b38a-fe5bdd43c048,85c31833-006e-42b3-8a35-996b15033a81,2024-02-25,Electronics,Blender,3,171.09,PayPal,Philadelphia,513.27
+5fd3480f-eda3-47d8-8467-c4d08c536b3c,1e5d5c19-15db-410a-ad56-00df5ec4ceff,2024-06-22,Books,Fiction Book,2,320.37,Bank Transfer,Philadelphia,640.74
+6b3c777d-ab48-4abd-9cc9-b10ff4dddd8a,303dc709-213f-464b-b602-1439de294b9a,2024-11-18,Books,T-shirt,4,127.67,Credit Card,Philadelphia,510.68
+9a3b89a5-f41c-4afc-bfef-4d25ff39b8ff,c69292a1-78dc-450e-95dd-ed4083d2914d,2024-02-11,Clothing,Doll,1,47.17,PayPal,New York,47.17
+450abf4a-f6af-441c-8f98-995d9fd2c092,3e738ff0-4e21-4a46-afab-ab2b9bbd7905,2024-09-30,Books,Smartphone,3,73.15,PayPal,Houston,219.45
+ce6414fb-0276-40f7-a6ff-3f25b711e626,4d7a7bf8-64b6-42d0-8cdd-7632e9733e8d,2024-11-10,Home Goods,Blender,4,72.74,Bank Transfer,New York,290.96
+d56653a8-4ccb-4b8c-b8af-9b97900f816f,3763d7b7-47d6-4eb9-81d4-d899f82f5178,2024-09-29,Clothing,Non-Fiction Book,4,84.43,PayPal,Philadelphia,337.72
+91929d12-6cda-44aa-8aa9-1f731c7e6740,c9163565-81ae-4a44-a67e-f906f1afae86,2024-04-23,Toys,T-shirt,3,78.03,Bank Transfer,Los Angeles,234.09
+8fb3c827-eddb-4aca-950a-b2bd8b9e2319,37d939c3-0cc8-4057-ac57-dda7d848116f,2024-11-28,Clothing,Doll,4,324.03,PayPal,Philadelphia,1296.12
+fefa6f5a-2837-48e8-9560-abe11ff60269,ee1f4b52-9c86-44b6-9051-b537625bbbed,2024-12-20,Electronics,Doll,3,99.12,Debit Card,Houston,297.36
+308a4f98-bdfe-49f3-ac9e-0b957b71f8b5,c3d49f6e-98d2-4a22-9a88-7ba536330f8a,2024-06-23,Electronics,Fiction Book,2,179.38,PayPal,Chicago,358.76
+c36e9b25-a246-405d-8f79-5b5cc9c28d45,73242f35-7b2a-4ddf-9513-9b1d6a2a54a5,2024-02-02,Clothing,Fiction Book,3,449.43,Debit Card,Philadelphia,1348.29
+5ad8219a-c193-4425-aa81-2b9fe1d8598b,7c51842e-9dac-4cb3-af3d-166f0451102a,2024-04-12,Books,Non-Fiction Book,3,242.24,PayPal,Philadelphia,726.72
+5ca462e5-b5e1-4a53-a804-34c5e42d485d,3b099ab1-ce43-42c9-9076-cbd64ad851dd,2024-07-23,Books,T-shirt,3,337.1,Debit Card,Chicago,1011.3
+91456a3c-0a4a-4c0a-8146-4255e6a1edd6,b6183486-c404-4d1d-8366-99373bb052f1,2024-02-05,Clothing,T-shirt,4,94.44,Debit Card,Los Angeles,377.76
+1f65add6-a51d-4902-ac50-c03efc86890b,6d12c9d5-4713-48af-a5d2-b8fc3810668b,2024-12-27,Toys,Fiction Book,4,104.22,PayPal,New York,416.88
+f7da87aa-f059-49ed-93e9-c459946d6ed7,002d7776-608f-4fb0-80f0-1c3a3e64f8c3,2024-09-28,Clothing,Fiction Book,3,30.03,PayPal,New York,90.09
+288df042-fd92-456c-8491-3e3fca8b4139,42a6279a-442d-4731-ae8c-362a84dd1d32,2024-07-10,Books,Non-Fiction Book,4,92.78,PayPal,Chicago,371.12
+a4c0bad6-4c2e-4e6d-83de-e04b78039d97,5c9e8660-91f3-48f9-8822-25fb9b24c724,2024-06-22,Home Goods,Laptop,1,146.51,Bank Transfer,Los Angeles,146.51
+fd996dc8-da41-46ed-8422-e95d51d80b79,2132cec7-089b-426b-a891-de6202cef370,2024-11-02,Books,Laptop,1,96.74,Debit Card,Los Angeles,96.74
+a890da5a-583a-405d-af0b-040ce6da7041,275dcc5f-8749-49a9-92b6-0dfd48899f60,2024-08-21,Electronics,Doll,4,53.46,Debit Card,Phoenix,213.84
+022f0f99-ac28-417d-9827-27e2802c7619,22d8b4b2-766f-4fdf-863b-f9dbfcfd095b,2024-06-10,Books,Non-Fiction Book,4,69.11,Debit Card,Phoenix,276.44
+df83b0f2-593d-4cd6-b328-8828532f27e5,759dfe82-9623-4e62-aec7-87327f21e6d2,2025-01-23,Electronics,Non-Fiction Book,3,235.78,Credit Card,Houston,707.34
+8fd64251-c9c7-4538-b705-f2d0d52d471c,8088c6b3-e641-4041-aaad-18acecd344b3,2024-08-16,Books,Fiction Book,2,111.1,PayPal,Phoenix,222.2
+ed9ec883-53c2-4838-b768-dad6ea92f347,423a1748-aa82-4d9b-b1a7-b2dffb2c4c30,2024-03-14,Clothing,Blender,4,188.49,Bank Transfer,Los Angeles,753.96
+573b607c-6894-4184-b51a-6d7f004d5e34,e801e408-13f0-4939-99f6-f2e4625e1da4,2024-09-14,Electronics,Laptop,1,256.67,Debit Card,Philadelphia,256.67
+66c46ad4-2492-4bbf-83a5-ae27f51bcd58,128eb2eb-6a60-400b-b350-6bc5cc2b02f7,2024-12-20,Home Goods,Doll,3,348.29,Bank Transfer,Philadelphia,1044.87
+c009d0f9-073f-4e4f-b933-794f5e36af59,53001ce2-5017-4179-ade6-13577467ba03,2024-08-15,Toys,Non-Fiction Book,4,29.26,Credit Card,Phoenix,117.04
+7ed3f4cd-6051-4357-9041-39e0b186e406,9d2c33d0-8025-4f7f-a92e-bcce693bb424,2024-04-15,Clothing,Blender,1,401.71,Debit Card,Houston,401.71
+573338d6-2dd7-4aa5-ab0d-70dfeebb4a99,7f34cb33-b057-472f-84f2-8def21ddaad9,2024-02-25,Toys,Doll,1,317.67,Debit Card,New York,317.67
+8ff196ff-ec68-438a-9d08-1c015eee9570,008a1208-8632-4126-8225-1ae931907aea,2024-12-19,Home Goods,Non-Fiction Book,2,50.06,PayPal,Phoenix,100.12
+64caa0df-5fba-411a-baaf-a9d3f3a303ba,a266d63d-9eba-46a4-a3f3-63c73083e4e2,2024-04-10,Clothing,Laptop,3,438.05,Debit Card,Los Angeles,1314.15
+3bfaf750-8ea6-437a-9917-6b5402fb0454,dea09faa-103c-47c8-8157-c55b05835b32,2024-06-20,Home Goods,Fiction Book,3,461.23,PayPal,New York,1383.69
+3e3d3cf2-8b7f-4b87-addd-cc150886367b,92bd8f83-58ae-44d9-8b6b-99bb6d1e6c42,2024-12-14,Clothing,T-shirt,2,39.93,Debit Card,Los Angeles,79.86
+fb48d4db-d638-4a13-929a-8b641e7065fe,5f5277ee-8b3f-4498-8d1b-34ca0bcd636b,2024-09-08,Toys,T-shirt,2,145.67,Credit Card,Los Angeles,291.34
+3f1ab439-cdcd-400a-8fc1-200768d82b7b,34a05c0b-ce3c-4ec5-9af4-9809e9abaccd,2024-10-29,Electronics,Smartphone,3,405.04,PayPal,Los Angeles,1215.12
+497c14a1-08a7-4810-bf0b-9b5054a44697,755599d8-4196-4695-a963-0e0413e76e38,2025-01-03,Books,Blender,3,376.65,Debit Card,Los Angeles,1129.95
+917453aa-48d8-4d27-a7c2-422f27288045,612b8081-77b3-4efc-97f8-4de551706c30,2024-06-22,Home Goods,Blender,4,100.42,Credit Card,Phoenix,401.68
+e55560c3-a83f-4642-b6a0-c15e7f531a8f,b957b6fb-e93e-452c-a4d0-bca8dbba29f1,2024-08-23,Toys,Fiction Book,4,112.58,PayPal,Philadelphia,450.32
+f2fb647b-58a9-4bec-9cb9-6f01ae396382,4db5568c-725d-49cc-8810-d1c55ed62995,2024-08-16,Toys,Smartphone,2,191.53,PayPal,Los Angeles,383.06
+55141389-3709-46ae-ba09-9158bd9390f3,91778fb2-07b6-4072-bf4f-e609aadb5550,2024-11-27,Toys,Laptop,4,247.42,Credit Card,Phoenix,989.68
+3bb24a85-def3-4948-8f8c-10adf4f0da27,a6edb702-f68f-4146-8f27-7cda58c8f5a6,2024-07-31,Clothing,Non-Fiction Book,1,312.94,Credit Card,New York,312.94
+df0f070c-663c-4712-95f0-c883b42a3a89,8f944f2c-c665-4eaf-bdb4-5c3cc139a0f8,2024-10-10,Electronics,Doll,4,190.77,Bank Transfer,Houston,763.08
+7ee15099-f5a3-46df-bf00-64dbab8be0c7,f8fcd4cc-df11-4df2-af83-cd29432acd1a,2025-01-07,Toys,Smartphone,4,236.64,Credit Card,Phoenix,946.56
+c82f5edc-9516-4aeb-8840-a5c0c5d45198,a25de8a8-012a-4572-9006-2725e57ba761,2024-09-17,Clothing,Non-Fiction Book,1,376.26,Debit Card,New York,376.26
+b73bdc05-78b5-49d5-961b-fbd0250df4a5,50c9c6df-aa54-41a2-a34f-0b90acd42625,2024-12-02,Clothing,Smartphone,2,27.97,PayPal,New York,55.94
+e6b6d81a-e049-4ed3-a2e9-68be3ddcf9cf,a129326a-1a71-4cac-bf2c-6073f722933d,2024-07-16,Books,Blender,1,133.69,Credit Card,Los Angeles,133.69
+65884a35-6fb9-44bc-ade6-1dbf34c5d9b4,e3674f56-a514-4903-83ab-b3b652d82569,2024-04-14,Toys,Smartphone,4,359.54,Debit Card,Chicago,1438.16
+b0825a3e-1f05-4ead-92a1-6c0142454d4b,c2180309-b6ba-46db-ac21-13b6e6941313,2024-02-22,Clothing,Smartphone,2,448.65,Debit Card,Houston,897.3
+2ffa2a15-df04-48d9-b374-d07a1632f6cd,734c3c27-0f40-4618-b19c-bae75c26ea07,2024-10-17,Clothing,Laptop,4,260.72,Bank Transfer,Philadelphia,1042.88
+e8c8996b-8b8b-4638-81f3-aa911a1d4c55,b82cf8f0-a1c2-407f-9208-df719318a2d2,2024-07-10,Home Goods,Fiction Book,1,270.74,Debit Card,Phoenix,270.74
+6c04bba2-bb62-450b-899c-44061e8f1acc,1336457e-3c3d-44a9-b867-16ed34601b9b,2024-05-11,Home Goods,Non-Fiction Book,1,62.51,Credit Card,Los Angeles,62.51
+2186ed6b-f174-4b33-be40-67db0ed1f6cf,39bcef48-8ffb-4868-b99a-130b6277c0ad,2024-09-30,Clothing,Doll,4,229.23,PayPal,New York,916.92
+4fc8867a-bf39-48a2-ba85-102536265cd1,f2828816-c821-47e5-908e-c543c0b64e80,2024-05-26,Electronics,Smartphone,3,270.98,Debit Card,Philadelphia,812.94
+9b522829-4fae-49c3-b3d5-40ee00e72eeb,4a57cdd8-03e3-433b-9ad9-4e446db34f87,2024-12-02,Home Goods,Blender,3,128.81,Bank Transfer,Los Angeles,386.43
+20e699b2-8eb0-4c33-9120-a04f105266eb,34f369bf-abe4-4946-8e7d-2abc39486e52,2024-04-10,Books,T-shirt,1,141.93,Credit Card,Houston,141.93
+3f52a21d-1464-42c2-8814-da946106b4a3,9c7ed62f-4081-40a8-9d88-b47b42b092d4,2025-01-23,Toys,Doll,1,194.87,Bank Transfer,Los Angeles,194.87
+2a0d1130-8b02-4525-9f3f-7cb5ac259018,ff4ee00c-6648-4d39-9533-776692244096,2024-12-12,Books,Doll,3,19.83,PayPal,New York,59.49
+07b85216-99bd-4ac2-96a2-22f924e3de88,ae7070ef-b15c-4806-9e41-33bb0abee307,2024-09-15,Toys,T-shirt,3,167.82,Credit Card,New York,503.46
+8aae4db8-d129-4e92-a51a-15433eb8ab33,007abfd1-db5d-4b43-b8d1-de8255606b83,2024-07-08,Clothing,Smartphone,4,113.61,Credit Card,Phoenix,454.44
+e9516771-1d68-490e-8fbe-ede38b1196e1,4e6b0a89-79dc-420a-8786-dd48b9b223fd,2024-11-01,Home Goods,Fiction Book,4,170.47,PayPal,Houston,681.88
+3cc2c108-2f29-4838-abeb-13b0a387c0b8,aeedcde5-ad63-4696-8136-01c97eadb127,2024-07-20,Electronics,Smartphone,3,68.68,Debit Card,Chicago,206.04
+32523400-dbc9-49ea-b0cd-c59413844051,bc85a4fb-28e4-4fc2-b571-b141179c7c72,2025-01-17,Clothing,T-shirt,4,446.36,Bank Transfer,Houston,1785.44
+9abbd8e1-59e4-4cc2-bfa8-c0cf4bb45ac9,a391b1da-e518-4f79-b90c-7eda1a1fbcb1,2024-09-05,Home Goods,Blender,4,300.86,Bank Transfer,Chicago,1203.44
+b5a65a37-07ca-494e-921a-7322a27d03a5,0e4954b4-bb1c-49bf-9bdb-bde3d8de19fd,2024-04-03,Home Goods,Smartphone,2,342.76,Bank Transfer,Houston,685.52
+15fc4b3a-5266-4cc1-adf8-b64cc29b09df,ae8b926f-4269-4256-af1c-5a8472d71214,2024-11-13,Toys,Doll,4,396.69,Credit Card,Houston,1586.76
+05a474ff-0538-46b9-b9a9-2f39cf73ffd3,88ff7c30-c8cc-4a2e-9186-a9c8e8b10489,2024-02-09,Home Goods,Doll,1,254.24,PayPal,Los Angeles,254.24
+ea03a579-5212-4784-9c67-9c8362b47cdb,605b66f8-6f99-43a4-a30d-090ca874d03e,2024-07-21,Home Goods,Non-Fiction Book,4,52.59,PayPal,Los Angeles,210.36
+aa5ad8cc-1d6b-4511-a117-7832ddda4a6b,88c404d2-b574-4ab9-8350-7cfcfe4d524a,2024-05-02,Clothing,T-shirt,4,273.18,Credit Card,Phoenix,1092.72
+5cdf714f-4e90-4bac-b63a-cbc9053dfeec,1f57ced3-c52c-452d-9980-727ee3797ff1,2024-12-17,Home Goods,Non-Fiction Book,3,297.55,PayPal,Philadelphia,892.65
+e3a31051-a6ae-411e-9740-04dbebcab743,3e54a6b5-876e-4257-8938-3042f6c4490c,2024-05-12,Books,Doll,1,375.27,Debit Card,New York,375.27
+50a41793-0f58-49d6-9541-0b901bb91498,0c7fc009-4b3f-438d-b699-65609913bfe8,2024-11-25,Toys,Smartphone,4,221.51,PayPal,Chicago,886.04
+e0b825d4-b578-4a24-9140-881c7304e030,d633f208-a9a3-4b21-a161-4104c51289fa,2024-04-01,Electronics,Blender,4,72.51,Credit Card,Phoenix,290.04
+a8b38874-998f-4e5e-9125-635da30d8c4a,7005c7d6-556a-4f89-945e-f28e89da34af,2024-12-22,Electronics,Doll,2,149.05,Debit Card,New York,298.1
+eda47344-4379-483c-aafa-3a42f2b27341,2cdec35d-6fee-4afa-84db-e5c079d74366,2024-07-04,Home Goods,Fiction Book,4,187.91,Bank Transfer,Houston,751.64
+84ed87a3-4945-4cff-a74f-4b51d45ef9fa,b5b2ef15-dd83-4bb4-8aaf-e4404e176838,2024-05-01,Toys,Laptop,4,326.5,Credit Card,New York,1306.0
+cf6ad26b-db26-4cea-81ca-f6cd9c057995,b87324cc-d661-49c9-a9d3-2975d980cd29,2024-09-07,Clothing,Doll,2,289.68,Bank Transfer,Houston,579.36
+36227a9d-0d4f-46d8-912d-90bad55815cd,b41bd5ed-4c75-4156-93cc-782a1299eca9,2024-12-30,Books,Blender,3,184.49,Credit Card,Houston,553.47
+5b7ac4d4-df32-42bd-a01b-ac0a5118e75c,061fd081-7c27-48aa-91ab-355734b31662,2024-10-06,Toys,Non-Fiction Book,4,493.39,Credit Card,Houston,1973.56
+23999e23-b85f-4ab2-bef2-bb9ad94b13c9,674a15eb-6d4b-4cdc-a07b-b284762733d6,2024-08-14,Toys,T-shirt,2,306.83,PayPal,New York,613.66
+b1dae8ce-9f18-4982-9dd2-fa37d4ae6fb7,6e81fafc-5863-4b61-806d-92b69ca85d8a,2024-12-01,Clothing,Fiction Book,1,126.24,Bank Transfer,Los Angeles,126.24
+d6c896a3-c087-4c6f-b8db-ec922de7ccfd,1078aded-e2b0-4a08-b0fb-47e1c3c1eb6e,2024-08-15,Electronics,Doll,3,59.87,Credit Card,Houston,179.61
+e914f5e4-943b-4b2d-b81b-a43c8887f716,53f1dbe0-b8e7-430a-a7b4-fc7f8daeab2d,2024-06-24,Electronics,T-shirt,1,84.9,PayPal,New York,84.9
+da795e94-02ec-4fb5-8d3c-66de0defd263,f37d9743-b8a3-4d55-bbb5-13740301f372,2024-09-19,Clothing,Doll,1,130.52,Bank Transfer,Los Angeles,130.52
+779f49b2-7ed5-42fd-9c3f-72d94902a6fb,3dbedbc2-546b-4b02-bf45-afd038ffc839,2024-11-30,Home Goods,Doll,2,88.73,Credit Card,Houston,177.46
+b18aabd6-9f46-40f6-a387-108111ec2bd1,83abb05a-a2bc-4305-b7dc-8a38d57cd844,2024-07-10,Books,Doll,4,101.42,Debit Card,New York,405.68
+1ccf0e1d-b77a-4090-9ae8-a25952e09592,f2092152-fdf6-4fbf-84f3-3d1a0cd43961,2024-06-10,Electronics,Fiction Book,2,149.7,Credit Card,Houston,299.4
+3737f8d2-cb0c-4114-8005-f19c31d83913,7856de32-dcee-4705-b55b-abe4f09fafee,2024-11-22,Home Goods,Doll,2,94.95,Bank Transfer,Phoenix,189.9
+31d240d6-13dd-4f40-95cb-e604c31e8ed4,a9edc3c8-14bd-4505-84e8-47d8d378c5d6,2024-04-18,Toys,Fiction Book,2,449.42,Bank Transfer,Chicago,898.84
+e526f4c3-3df7-4716-8bcf-1745356b416d,22c0ebce-bd78-4019-8438-6be217537ae0,2024-07-12,Electronics,Doll,2,49.31,Debit Card,Houston,98.62
+b8a6a8e2-ee12-4e1f-8616-bf9fbd071fed,4e164306-e725-47a6-9c13-d1f4cbd935dc,2024-03-03,Toys,Non-Fiction Book,3,267.01,Bank Transfer,Chicago,801.03
+800ae021-d230-4e4e-bec2-9343e333e1cb,3e913b30-ae94-4655-85bf-da2d08df30ed,2024-10-05,Home Goods,Doll,4,211.09,PayPal,New York,844.36
+5b3a0a25-0fb5-4aec-a607-f78433fb0336,92ad57e3-da12-4435-92eb-52386359c63c,2024-03-25,Clothing,T-shirt,1,491.37,PayPal,Chicago,491.37
+f0fe0fc6-0c1d-4389-891f-aa5d0621e6fd,6b25282b-ff3d-4532-a0fb-96360b235aca,2024-06-17,Toys,Blender,1,64.9,Bank Transfer,Phoenix,64.9
+782c4174-eaad-46dd-9fe1-5a36f3e1a2ae,5b8dcc38-90da-4322-92e5-142e20e572ff,2024-03-01,Electronics,Doll,4,204.95,Debit Card,Phoenix,819.8
+5c9ed8e8-c80a-4fdc-874e-2cda582e0c7b,9b877358-04aa-456c-af53-7896bacdce46,2024-11-07,Toys,Fiction Book,1,485.04,PayPal,Chicago,485.04
+c044c2e0-a2cb-44a3-8ef5-281f3e685f2f,09206bde-25e4-4173-8deb-2849cce018d6,2024-06-13,Toys,Laptop,4,434.1,Credit Card,Phoenix,1736.4
+7d7ce3a4-7d0a-4163-a384-02cd1b67d84b,2b88a0f7-ae3d-4da1-b3e3-badbeded9646,2024-06-18,Electronics,T-shirt,1,410.37,Debit Card,Phoenix,410.37
+546ecdec-1817-4e7c-8d45-851558dc3696,63f01b41-71a1-4ae7-9c2a-47d2126eed76,2024-03-18,Home Goods,Fiction Book,2,136.37,PayPal,Houston,272.74
+f16c5763-6107-45f9-9ead-136618f90070,e968b7c3-e34d-4f39-8537-af313f19ce51,2024-05-03,Electronics,Smartphone,1,93.73,Bank Transfer,New York,93.73
+1a740569-e3a1-4bc6-9a18-ec6692d4883c,36930284-5795-4d12-899e-ebba3f3f2441,2024-01-30,Books,Laptop,4,337.64,Bank Transfer,Chicago,1350.56
+8e0c5e7c-63b7-4bd8-8fc8-7bcf0af21519,59a793d7-bffa-4e77-9e59-25ab383a51aa,2024-10-10,Home Goods,Blender,4,465.39,Debit Card,New York,1861.56
+5d3b770f-82ee-4a9c-9d44-3c1232ae20bb,24125a55-09e3-457a-8a95-549f0e3c2ffd,2024-09-26,Electronics,Non-Fiction Book,4,282.81,Bank Transfer,Philadelphia,1131.24
+7df8854e-3ffd-45be-88b0-c3b7b00590d5,41413c82-83aa-4fe1-b9ff-ae992ad2df89,2024-07-12,Clothing,Blender,4,290.09,PayPal,Philadelphia,1160.36
+9d6dba1d-4198-4777-a5d7-0445c49f5287,2ad99f77-59ca-48c2-b42e-57232d279d81,2024-11-13,Books,Non-Fiction Book,4,147.19,Credit Card,New York,588.76
+dca6c6d9-a469-46a1-9adf-0ae19391bf8c,14f508d0-32f3-4abc-bc03-96788afa559b,2024-04-25,Home Goods,Fiction Book,3,387.05,Bank Transfer,Philadelphia,1161.15
+34470707-a643-45b1-895c-48a7156dcb8c,18c3103e-cec6-48cb-8b42-a020e9e45040,2024-11-26,Books,Smartphone,3,101.65,Debit Card,New York,304.95
+937eb70c-f28f-48f0-a887-5d4a155f18e7,4fd43e85-2468-4081-9201-92f69dfffa38,2025-01-17,Toys,Fiction Book,1,168.6,Credit Card,Chicago,168.6
+253b9048-4e8d-4708-8b3b-0d2ee1d2b3bf,9f27770b-c9d7-4b13-9a7c-48ef963ba41e,2025-01-25,Books,Blender,4,218.46,Debit Card,Phoenix,873.84
+4db194a4-73de-4494-b6bb-6b298c720bcf,f2bae670-6d55-454e-a2d6-bb10eba2130f,2024-12-11,Home Goods,Fiction Book,1,258.73,PayPal,Phoenix,258.73
+33868c98-668f-4420-9a36-8ae9f548e777,94d109de-34af-419d-8d4c-11a0c1649a47,2024-07-19,Books,Fiction Book,4,128.78,Bank Transfer,Philadelphia,515.12
+0f713e77-bea7-4cc5-90de-923117303ecd,5699b78c-5c1a-41cf-8493-e9b0601043af,2024-09-23,Books,T-shirt,4,66.27,Bank Transfer,Houston,265.08
+16f33929-45fa-4196-ac81-7330e72cef37,81ee709b-df7a-43a4-b24e-6db627a6e3b9,2024-03-14,Toys,Laptop,3,309.2,Debit Card,Chicago,927.6
+e514eef9-3815-4f47-83a9-a93d600f80ad,87fef4d0-bd29-47e5-833d-415f88987725,2024-09-27,Toys,Non-Fiction Book,3,151.43,Credit Card,Philadelphia,454.29
+214bcb0e-ddfd-4470-87dc-4335a3aa0b6a,94a4d663-dc04-4ba9-8268-f744a8c6aa6e,2024-11-30,Home Goods,Laptop,2,294.81,Debit Card,Chicago,589.62
+ba7a8d79-a78e-4ccc-911b-9e0884d2298c,93411b93-486f-4314-a6a2-71946486972c,2024-07-02,Books,Non-Fiction Book,3,85.64,PayPal,Philadelphia,256.92
+9f6f0aff-4901-4df1-9764-bdd4eecf74cb,e4f93e2c-59c4-43a8-beea-46e6967e42c8,2024-03-08,Home Goods,Non-Fiction Book,2,245.76,PayPal,Philadelphia,491.52
+db36be8b-ac12-4931-aada-e1edd2008ed8,ed49ca5f-02b7-4576-91df-f0909d64b55e,2024-06-19,Books,Fiction Book,2,270.97,Credit Card,Chicago,541.94
+95d216cf-3882-4c21-b8cc-c73ce5a9f205,ec6f161e-7fcb-485f-91f0-97bad5e86ceb,2024-09-25,Toys,Non-Fiction Book,2,35.39,Credit Card,Phoenix,70.78
+c052f31d-f2f3-43dd-865a-6b09e309d9dd,c7098a19-983e-48a5-80eb-25043b90fd83,2024-03-26,Home Goods,Non-Fiction Book,2,174.94,Credit Card,Houston,349.88
+69deacbf-519f-465b-a1e5-bca15b2de074,adbae026-6ea6-40ad-89c6-d45771cac334,2024-03-24,Clothing,Fiction Book,2,75.86,Debit Card,Houston,151.72
+9a9e9ada-df3a-4050-8d43-3776975b6d56,0add69de-83bb-476f-9f36-eb58655bdd68,2024-05-20,Clothing,T-shirt,1,41.05,Bank Transfer,Houston,41.05
+1e90c092-2bc8-45eb-a37b-1e483808fa82,bff5f0d4-add6-4c28-98d5-f9bb869e209a,2024-10-11,Toys,Fiction Book,3,495.08,Debit Card,Chicago,1485.24
+3e014292-6a1c-420e-ae54-02366a078fdd,9c3b735d-15f6-45b3-aebd-1c61de186d64,2024-02-12,Toys,Laptop,2,167.95,Bank Transfer,Los Angeles,335.9
+14caf145-5de2-437b-ae47-732b63a1f340,d8443cc5-c3cf-4653-ba75-d78cb00f2f2d,2024-11-16,Home Goods,Blender,4,406.84,PayPal,Houston,1627.36
+9b09fc3e-6df5-4955-90b7-4f8d8b6dc3d1,109881e9-2cfb-45ed-8129-73c1fbfecff4,2024-03-10,Toys,Blender,3,134.77,Debit Card,Houston,404.31
+8afb4b6c-e456-4662-a7c3-c3337f496cd3,e3967de1-d665-4434-b45c-a82faf8ceded,2024-12-26,Clothing,Doll,3,343.94,Credit Card,Phoenix,1031.82
+91eac148-e1ea-45d2-bbe3-9e625e45480b,a9e1a799-062e-4f1d-8d5a-79934025b357,2024-08-29,Electronics,Doll,2,382.51,PayPal,Los Angeles,765.02
+6598db83-b0fd-4266-8201-24a1913c7a47,08dedc4d-6d7a-416d-9fc0-0f948639f98c,2024-11-14,Clothing,Doll,1,301.86,Debit Card,New York,301.86
+e262de79-877e-4281-94f0-fe552141c7c2,7f0011d7-6f93-4143-bbe6-ea12816c35ce,2024-05-31,Clothing,Fiction Book,2,241.07,Debit Card,New York,482.14
+279b2905-a19e-4bbe-b895-00649243ce05,afe73c88-4a40-4e6b-bd3c-658e46499366,2024-10-10,Clothing,Non-Fiction Book,1,211.8,PayPal,Los Angeles,211.8
+78230e07-a6a6-4bff-a2ba-06cf04aa35a4,7bb7dd7c-b4b0-4965-8273-4dc22b4d3042,2024-11-05,Home Goods,Laptop,4,180.95,Credit Card,Phoenix,723.8
+ce5cf310-311a-427a-80c4-bde0909e71be,f4b8e636-d384-4cf2-a917-dad0a7dc5834,2024-09-07,Electronics,Smartphone,3,465.47,PayPal,Houston,1396.41
+7ec331a5-946b-4b92-ae72-5a5cd4b62941,a93bf81f-d3c3-4cb9-9117-2b7fa858dd54,2024-12-28,Clothing,Laptop,4,417.0,Debit Card,Houston,1668.0
+7850cc4d-dbe2-44af-8dd1-e05377ed12bc,cbedb982-97f2-4ae7-aaab-1b2bd8742dcc,2024-12-14,Toys,Non-Fiction Book,1,482.86,Bank Transfer,Phoenix,482.86
+ad6caf87-788d-45b3-b290-f380828b8ee3,82c4de03-ad1d-42b4-ba9f-7743252bc4c7,2024-10-25,Toys,Blender,1,70.91,Debit Card,Los Angeles,70.91
+a34092bf-8b08-47f6-979b-bb39869f7be7,58b7a413-5184-4d2c-9a15-c44702ebaa4a,2024-10-17,Electronics,Non-Fiction Book,4,368.13,PayPal,Chicago,1472.52
+6905ddf0-0aeb-4516-9e3d-ff716c54c3b5,2ae9f8f9-2b39-4798-a4a8-2ab3dea1bdf1,2025-01-10,Home Goods,Smartphone,1,469.79,Debit Card,Los Angeles,469.79
+3dc49ed6-927e-4285-9c75-c40608182e49,76571445-9148-40e7-ba7a-538957b53263,2024-07-13,Home Goods,Laptop,4,98.8,PayPal,Philadelphia,395.2
+b9e9ac53-1d88-4dd2-98bc-0b2b4682d192,acb6114b-960c-430c-8220-06ecc28ea3d6,2024-05-03,Home Goods,Fiction Book,3,42.58,PayPal,Phoenix,127.74
+e03f8523-3aee-4de8-8f82-7bb27486163e,6c8d9c31-1256-42ed-a673-9c5ffafef510,2024-02-09,Clothing,Non-Fiction Book,4,373.15,Debit Card,New York,1492.6
+45cf47c3-92e3-4539-98e0-0aa9027ac794,315365d5-de67-4d7c-b42e-048d8ff8a5a6,2024-08-04,Home Goods,T-shirt,3,291.49,Bank Transfer,Phoenix,874.47
+461055c7-baec-4009-b585-4d9e05a7ef84,4459d0db-b5c2-47bd-b7aa-1e6feb3e4f2e,2024-08-29,Books,T-shirt,4,422.5,Debit Card,Chicago,1690.0
+8b1dee46-3eb9-43ac-be26-8e8ebdb2fe04,162aeae2-b0b1-4ba8-a0f9-8670f8a74b92,2024-02-23,Home Goods,Laptop,1,78.49,Bank Transfer,Phoenix,78.49
+ae5a19e5-bef1-4a35-b69c-83698229c6e3,eba8d98d-c160-4e8b-9e67-30bde7bc981f,2024-12-30,Toys,Non-Fiction Book,4,399.68,Credit Card,Philadelphia,1598.72
+b03b3435-07e9-4beb-8b69-bcf9269a2576,3081fb8e-706c-43cd-b416-b7eac173bf2b,2024-08-25,Books,T-shirt,1,108.8,Bank Transfer,New York,108.8
+de63a0a5-b0de-4bd5-be07-ceab9b428218,349d05db-4d2b-43f0-86b8-3d588d65db3d,2024-03-22,Toys,Blender,4,90.19,Debit Card,Los Angeles,360.76
+a0fd528d-e347-454f-9f53-79288993d090,ecac8959-d430-4d45-a321-9d1a0648aa97,2024-11-09,Clothing,Laptop,4,90.49,Bank Transfer,New York,361.96
+314ad663-2946-483a-baf3-655dc597a4f0,90b1e396-1a06-4b02-b3c9-d516d9f75ab8,2024-05-04,Electronics,Non-Fiction Book,2,409.14,PayPal,New York,818.28
+1fa95bfb-2e90-4b06-918b-dc9c5e511ba7,ed5c5e4e-4db9-4155-99c2-8063fe65cad8,2024-06-29,Clothing,Laptop,1,335.95,Credit Card,Houston,335.95
+070a9118-3e31-4163-abd5-5b95bc07dafd,9b45147e-38f1-4fc0-94b9-dafea101b4d0,2024-11-10,Toys,Blender,2,266.3,Bank Transfer,Phoenix,532.6
+025908aa-fa9b-4d8e-9d85-d5b412a1e778,8a84e37f-f465-40db-ad69-6484e9b8b5b8,2024-01-29,Books,Doll,1,185.83,PayPal,New York,185.83
+1e2742f6-9d0c-4178-9d78-6c533a7882f4,b2747ee6-196e-456b-981a-2486deebffc9,2024-09-01,Books,Fiction Book,2,439.83,Bank Transfer,Phoenix,879.66
+f0071933-8e80-49f4-800a-119a94ff7112,f8ceedd5-9224-4a77-ac54-7ff7d412e7b9,2024-08-12,Home Goods,Non-Fiction Book,3,202.3,PayPal,Chicago,606.9
+8f8f1d81-a46a-411c-a3b7-fba561591c37,b06ef95c-71a5-4ceb-9f6d-b0d91b16a9b9,2024-10-25,Toys,T-shirt,4,410.13,Bank Transfer,Los Angeles,1640.52
+a57b45d5-3af1-458e-989c-6e7f6a05e725,fcade455-1e3b-4415-9afb-0efad5a0fc51,2024-03-19,Home Goods,Fiction Book,1,225.18,PayPal,Los Angeles,225.18
+126f0406-9bff-4040-b81e-829968f473ec,3f261960-e6c4-4d00-b3f2-924278760412,2024-10-30,Toys,Smartphone,1,194.7,Credit Card,Philadelphia,194.7
+141e3af5-cb6b-4213-82e6-71cf3824bb04,f6af0d4e-b241-4abe-b04a-6e92805059c5,2024-07-30,Clothing,T-shirt,4,236.71,Debit Card,New York,946.84
+d19962e7-d5fc-42d9-a14a-8a907e9189c7,9ececa14-0d5d-47a3-8b69-1018eb618530,2024-08-22,Clothing,Laptop,1,157.68,PayPal,Houston,157.68
+638a5b4c-bcdc-4023-98b4-0b375e5e983b,486e1053-157d-4385-b804-65969e835508,2024-11-22,Home Goods,Blender,1,376.33,Debit Card,Los Angeles,376.33
+745de3c6-af48-43af-8af2-fcaf2da54e26,e9a5efc0-7b46-4e7c-92e9-d6d6f8aa7eec,2024-06-30,Electronics,T-shirt,2,256.33,PayPal,Phoenix,512.66
+7f3f0f11-3788-4edc-a2d4-fa585a5c8c6a,842b9d56-af18-469d-b8b1-bd6b97498438,2024-09-20,Clothing,Non-Fiction Book,1,123.78,Debit Card,Phoenix,123.78
+1b9fcddf-5936-4dcc-be44-acbca6826f61,cbba88e1-3938-421d-a6bb-d108937d1d98,2024-06-03,Toys,Laptop,3,450.79,Debit Card,Los Angeles,1352.37
+50f2a1ba-a1fe-461b-8c2e-10adeeb166b9,82ce930a-5fc0-4a6e-89c2-1ddd787e35aa,2024-06-30,Home Goods,T-shirt,3,198.11,Credit Card,Houston,594.33
+8d9ccf66-4aea-4105-a5ff-58f2f5cf7427,90ea08d7-8c2d-4921-8605-a0e8bdee46d4,2024-08-06,Electronics,Blender,4,276.34,Bank Transfer,Phoenix,1105.36
+b6e2ce1f-80ef-484f-8737-c554ab8d661f,307aa57a-6b95-470d-ae49-aeff402ce62a,2025-01-09,Home Goods,Non-Fiction Book,1,454.17,PayPal,Los Angeles,454.17
+94891894-488f-4dff-b180-2e4527978ef2,a0b28ce5-b81e-47d4-a4e3-8ca85ed1db52,2025-01-19,Electronics,Fiction Book,4,315.88,Debit Card,Los Angeles,1263.52

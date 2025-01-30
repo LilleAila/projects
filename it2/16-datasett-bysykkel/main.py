@@ -34,3 +34,10 @@ for route in data:
 print(days)
 
 # TODO diagram. idk how to matplotlib heller
+
+fig, ax = plt.subplots()
+plt.title("Sykkelturer med Oslo bysykkel per dag")
+plt.xlabel("Dag")
+plt.ylabel("Antall turer")
+ax.bar(["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"], days)
+plt.show()
