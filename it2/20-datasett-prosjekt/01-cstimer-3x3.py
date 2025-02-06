@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import re
 
-df = pd.read_csv("cstimer-3x3.csv", delimiter=";")
+df = pd.read_csv("01-cstimer-3x3.csv", delimiter=";")
 df["Date"] = pd.to_datetime(df["Date"])
 
 
@@ -31,7 +31,7 @@ df.plot(
     ax=ax,
     x="No.",
     y=["Seconds"],
-    title="Solve time in seconds",
+    title="3x3 Rubik's cube solves over time",
     xlabel="Solve number",
     ylabel="Time in seconds",
 )
