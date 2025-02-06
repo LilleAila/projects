@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 df = pd.read_csv("03-monkeytype-all.csv")
-
 df["date"] = pd.to_datetime(df["timestamp"])
 
 # print(df)
@@ -21,5 +20,3 @@ ax.scatter(pbs_x, pbs_y, color="red", label="Personal best", zorder=3)
 ax.legend()
 
 plt.show()
-
-print(df["isPb"])
