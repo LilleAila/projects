@@ -119,9 +119,12 @@ class Downloader {
   //   "Enchanté",
   //   "https://les.unibok.no/#cappelendamm/p193917/2430/1",
   // );
-  // await downloader.download_books([
-  //   ["Enchanté", "https://les.unibok.no/#cappelendamm/p193917/2430/1"],
-  // ]);
-  await downloader.download_library();
+  await downloader.download_books([
+    // ["Enchanté", "https://les.unibok.no/#cappelendamm/p193917/2430/1"],
+    ["Momente 1", "https://les.unibok.no/#aschehoug/9788203316173/4632/1"],
+    ["Matematikk 2P", "https://les.unibok.no/#aschehoug/9788203408786/5130/1"],
+    ["Matematikk R1", "https://les.unibok.no/#aschehoug/9788203408878/5470/1"],
+  ]);
+  // await downloader.download_library();
   await downloader.stop();
 })();

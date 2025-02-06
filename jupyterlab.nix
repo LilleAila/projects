@@ -4,11 +4,11 @@
     enable = true;
     extraPackages =
       ps: with ps; [
-        # numpy
-        # sympy
+        numpy
+        sympy
         # matplotlib
-        # pandas
-        # requests
+        pandas
+        requests
       ];
   };
 }

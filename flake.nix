@@ -10,15 +10,16 @@
     };
   };
 
-  nixConfig.extra-substituters = [ "https://tweag-jupyter.cachix.org" ];
-  nixConfig.extra-trusted-public-keys = [
-    "tweag-jupyter.cachix.org-1:UtNH4Zs6hVUFpFBTLaA4ejYavPo5EFFqgd7G7FxGW9g="
-  ];
+  # Configured system-wide
+  # nixConfig.extra-substituters = [ "https://tweag-jupyter.cachix.org" ];
+  # nixConfig.extra-trusted-public-keys = [
+  #   "tweag-jupyter.cachix.org-1:UtNH4Zs6hVUFpFBTLaA4ejYavPo5EFFqgd7G7FxGW9g="
+  # ];
 
   outputs =
-    { nixpkgs, ... }@inputs:
+    { nixpkgs, self, ... }@inputs:
     let
-      lib = nixpkgs.lib;
+      inherit (nixpkgs) lib;
       systems = lib.systems.flakeExposed;
       pkgsFor = lib.genAttrs systems (system: import nixpkgs { inherit system; });
       forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
@@ -32,6 +33,14 @@
             imports = [ (import ./jupyterlab.nix) ];
           }
         );
+      });
+
+      # idk why it needs to be in apps and cannot just nix run the packages /shrug
+      apps = forEachSystem (pkgs: {
+        default = {
+          program = "${self.packages.${pkgs.system}.jupyterlab}/bin/jupyter-lab";
+          type = "app";
+        };
       });
 
       devShells = forEachSystem (
