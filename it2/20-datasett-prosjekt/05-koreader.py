@@ -8,12 +8,21 @@ from kindle (1st ereader), and kobo (2nd ereader)
 
 The data was manually modified to combine the two datasets and remove unimportant data (books that are not actually read, etc.)
 Original data is still available, and the combined data is under the files called `-combined`
+
+The original file is sorted by time first opened.
 """
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 books = pd.read_csv("05-koreader-combined-books.csv")
 pages = pd.read_csv("05-koreader-combined-pages.csv")
 
+books["minutes_per_page"] = books["total_read_time"] / books["total_read_pages"] / 60
+books = books.sort_values("minutes_per_page")
+
 print(books)
-print(pages)
+
+books.plot(kind="barh", x="title", y="minutes_per_page", ylabel="")
+plt.subplots_adjust(left=0.4)
+plt.show()
