@@ -10,10 +10,13 @@ The data was manually modified to combine the two datasets and remove unimportan
 Original data is still available, and the combined data is under the files called `-combined`
 
 The original file is sorted by time first opened.
+
+Unfortunately, the limit for time per page is 120 seconds, so no data is recorded above that.
 """
 
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 books = pd.read_csv("05-koreader-combined-books.csv")
 pages = pd.read_csv("05-koreader-combined-pages.csv")
@@ -25,7 +28,9 @@ books = books.sort_values("minutes_per_page")
 
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
 
-books.plot(ax=ax1, kind="barh", x="title", y="minutes_per_page", ylabel="")
+books.plot(
+    ax=ax1, kind="barh", x="title", y="minutes_per_page", ylabel="", legend=False
+)
 # plt.subplots_adjust(left=0.4)
 # ax1.set_position([0.35, 0.1, 0.15, 0.8])
 pos = ax1.get_position()
@@ -38,21 +43,44 @@ ax1.set_title("Average time spent per page by book")
 # Visualize time spent on each page over time
 # pages_fr = pages[pages["id_book"] == 7]
 pages_by_book = pages.groupby("id_book")
-pages_fr = pages_by_book.get_group(6).sort_values("page")  # thhgttg
-pages_fr.plot(ax=ax2, kind="line", x="page", y="duration")
-pages_fr["rolling_avg"] = pages_fr["duration"].rolling(window=20).mean()
-pages_fr.plot(
-    ax=ax2, kind="line", x="page", y="rolling_avg", color="orange", linewidth=2
+pages_book = pages_by_book.get_group(6).sort_values("page")  # thhgttg
+pages_book.plot(ax=ax2, kind="line", x="page", y="duration", legend=False)
+pages_book["rolling_avg"] = pages_book["duration"].rolling(window=20).mean()
+pages_book.plot(
+    ax=ax2,
+    kind="line",
+    x="page",
+    y="rolling_avg",
+    color="orange",
+    linewidth=3,
+    legend=False,
 )
+trend_line = np.polyval(
+    np.polyfit(pages_book["page"], pages_book["duration"], 1), pages_book["page"]
+)
+ax2.plot(pages_book["page"], trend_line, linestyle="--", color="red", linewidth=3)
+ax2.set_xlabel("")
 ax2.set_title("Time spent per page: The hitchhiker's guide to the galaxy")
 
 # Most productive days
 pages["weekday"] = pages["date"].dt.day_name()
-weekdays = pages["weekday"].value_counts(sort=False)
-weekdays.plot(ax=ax3, kind="bar")
+weekday_order = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+]
+weekdays = pages["weekday"].value_counts().reindex(weekday_order)
+weekdays.plot(ax=ax3, kind="bar", xlabel="")
 ax3.set_xticklabels(
     ax3.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor"
 )
 ax3.set_title("Pages read by day")
+
+pages["date"].hist(ax=ax4, bins=20, grid=False)
+ax4.set_title("Pages read over time")
 
 plt.show()
