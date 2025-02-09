@@ -48,7 +48,7 @@ ax4.set_title("Time spent per review in seconds")
 ax4.set_xlabel("Seconds")
 ax4.set_ylabel("Reviews")
 
-cards["ivl"].dt.days.hist(ax=ax5, grid=False)
+cards["ivl"].dt.days.hist(ax=ax5, bins=20, grid=False)
 ax5.set_title("Card interval distribution")
 ax5.set_xlabel("Interval in days")
 ax5.set_ylabel("Cards")
@@ -69,7 +69,7 @@ ax7.set_ylabel("Reviews")
 
 df.groupby("hour")["efficiency"].mean().plot(ax=ax8, kind="bar")
 ax8.set_title("Review efficiency time of day")
-ax8.set_xlabel("")
+ax8.set_xlabel("Hour")
 ax8.set_ylabel("Average efficiency (ease / time)")
 
 fig.subplots_adjust(wspace=0.3, hspace=0.25)
