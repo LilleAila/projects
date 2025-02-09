@@ -7,7 +7,7 @@ import pandas as pd
 
 df = pd.read_csv("04-anki-reviews.csv")
 df["date"] = pd.to_datetime(df["id"], unit="ms")
-df["time"] = df["time"] / 1000  # ms -> s
+df["time"] = pd.to_timedelta(df["time"], unit="ms")  # type: ignore # lsp complains again, idk why
 df["ivl"] = df["ivl"].apply(
     lambda x: pd.to_timedelta(x, unit="D") if x > 0 else pd.to_timedelta(-x, unit="s")
 )
@@ -19,24 +19,30 @@ fig.suptitle("Anki review statistics")
 
 df["date"].hist(ax=ax1, bins=20, grid=False)
 ax1.set_title("Review distribution over time")
-ax1.tick_params("x", labelsize=8)
+ax1.tick_params("x", labelsize=7)
 ax1.set_xticks(ax1.get_xticks())  # needed to stop a warning on the next line /shrug
 ax1.set_xticklabels(ax1.get_xticklabels(), rotation=45, ha="right")
+ax1.set_ylabel("Reviews")
 
 cards["type"].value_counts().plot(ax=ax2, kind="bar", xlabel="")
 ax2.set_xticklabels(["Learning", "Review", "Relearning", "Cram"], rotation=0)
-ax2.set_title("Card type")
+ax2.set_title("Card type distribution")
+ax2.set_ylabel("Cards")
 
 df["ease"].value_counts().sort_index().plot(ax=ax3, kind="bar", xlabel="")
-ax3.set_title("Ease")
+ax3.set_title("Review ease distribution")
 ax3.set_xticklabels(["Again", "Hard", "Good", "Easy"], rotation=0)
+ax3.set_ylabel("Reviews")
 
-df["time"].hist(ax=ax4, grid=False)
-ax4.set_title("Time spent per card in seconds")
+df["time"].dt.total_seconds().hist(ax=ax4, grid=False)
+ax4.set_title("Time spent per review in seconds")
+ax4.set_xlabel("Seconds")
+ax4.set_ylabel("Reviews")
 
 cards["ivl"].dt.days.hist(ax=ax5, grid=False)
 ax5.set_title("Card interval distribution")
 ax5.set_xlabel("Interval in days")
+ax5.set_ylabel("Cards")
 
 df["date"].dt.weekday.value_counts().sort_index().plot(ax=ax6, kind="bar", xlabel="")
 ax6.set_title("Total reviews by weekday")
@@ -45,7 +51,6 @@ ax6.set_xticklabels(
     rotation=45,
     ha="right",
 )
-
-print(df["cid"].value_counts())
+ax6.set_ylabel("Reviews")
 
 plt.show()
