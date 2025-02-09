@@ -1,14 +1,20 @@
 { pkgs, ... }:
 {
-  kernel.python.default = {
+  jupyterlab.runtimePackages = with pkgs.python312Packages; [
+    pandas
+  ];
+  kernel.python.test = {
     enable = true;
-    extraPackages =
-      ps: with ps; [
-        numpy
-        sympy
-        # matplotlib
-        pandas
-        requests
-      ];
+    requiredRuntimePackages = with pkgs.python312Packages; [
+      pandas
+    ];
+    # extraPackages =
+    #   ps: with ps; [
+    #     # numpy
+    #     # sympy
+    #     # matplotlib
+    #     pandas
+    #     # requests
+    #   ];
   };
 }

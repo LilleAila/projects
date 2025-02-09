@@ -41,6 +41,40 @@
           program = "${self.packages.${pkgs.system}.jupyterlab}/bin/jupyter-lab";
           type = "app";
         };
+        test = {
+          program =
+            let
+              jupyter = pkgs.jupyter-all.override {
+                definitions = {
+                  python =
+                    let
+                      pythonPackage = pkgs.python312.withPackages (
+                        ps: with ps; [
+                          pandas
+                          numpy
+                          matplotlib
+
+                          ipykernel
+                        ]
+                      );
+                    in
+                    pkgs.jupyter-kernel.default.python3
+                    // {
+                      displayName = "Python kernel";
+                      argv = [
+                        "${pythonPackage}/bin/python3"
+                        "-m"
+                        "ipykernel_launcher"
+                        "-f"
+                        "{connection_file}"
+                      ];
+                    };
+                };
+              };
+            in
+            "${jupyter}/bin/jupyter-lab";
+          type = "app";
+        };
       });
 
       devShells = forEachSystem (
