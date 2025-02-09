@@ -20,13 +20,20 @@ import numpy as np
 
 books = pd.read_csv("05-koreader-combined-books.csv")
 pages = pd.read_csv("05-koreader-combined-pages.csv")
-pages["date"] = pd.to_datetime(pages["start_time"], unit="s")
+pages["date"] = (
+    pd.to_datetime(pages["start_time"], unit="s")
+    .dt.tz_localize("UTC")
+    .dt.tz_convert("Europe/Oslo")
+)
+pages["hour"] = pages["date"].dt.hour
 
 # Visualize minutes per page, for each book.
 books["minutes_per_page"] = books["total_read_time"] / books["total_read_pages"] / 60
 books = books.sort_values("minutes_per_page")
 
-fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+fig, ((ax1, ax2), (ax3, ax4), (ax5, ax6)) = plt.subplots(3, 2)
+fig.suptitle("Book reading statistics")
+fig.subplots_adjust(wspace=0.2, hspace=0.3)
 
 books.plot(
     ax=ax1, kind="barh", x="title", y="minutes_per_page", ylabel="", legend=False
@@ -35,9 +42,8 @@ books.plot(
 # ax1.set_position([0.35, 0.1, 0.15, 0.8])
 pos = ax1.get_position()
 ax1.set_position([pos.x0 + 0.15, pos.y0, pos.width - 0.15, pos.height])
-ax1.set_yticklabels(
-    ax1.get_yticklabels(), rotation=15, ha="right", rotation_mode="anchor"
-)
+ax1.set_yticklabels(ax1.get_yticklabels())
+ax1.set_xlabel("Minutes per pgae")
 ax1.set_title("Average time spent per page by book")
 
 # Visualize time spent on each page over time
@@ -60,6 +66,7 @@ trend_line = np.polyval(
 )
 ax2.plot(pages_book["page"], trend_line, linestyle="--", color="red", linewidth=3)
 ax2.set_xlabel("")
+ax2.set_ylabel("Seconds per page")
 ax2.set_title("Time spent per page: The hitchhiker's guide to the galaxy")
 
 # Most productive days
@@ -75,12 +82,21 @@ weekday_order = [
 ]
 weekdays = pages["weekday"].value_counts().reindex(weekday_order)
 weekdays.plot(ax=ax3, kind="bar", xlabel="")
-ax3.set_xticklabels(
-    ax3.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor"
-)
+ax3.set_xticklabels(ax3.get_xticklabels(), rotation=0)
+ax3.set_ylabel("Total pages")
 ax3.set_title("Pages read by day")
 
 pages["date"].hist(ax=ax4, bins=20, grid=False)
 ax4.set_title("Pages read over time")
+
+pages["hour"].value_counts().sort_index().plot(ax=ax5, kind="bar", xlabel="")
+ax5.set_xlabel("Hour")
+ax5.set_ylabel("Total pages")
+ax5.set_title("Pages read by time of day")
+
+pages.groupby("hour")["duration"].mean().plot(ax=ax6, kind="bar")
+ax6.set_xlabel("Hour")
+ax6.set_ylabel("Seconds per page")
+ax6.set_title("Average time per page by time of day")
 
 plt.show()

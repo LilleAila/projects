@@ -25,6 +25,7 @@ cards = df.drop_duplicates(subset="cid", keep="last")
 
 fig, ((ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8)) = plt.subplots(2, 4)
 fig.suptitle("Anki review statistics")
+fig.subplots_adjust(wspace=0.3, hspace=0.25)
 
 df["date"].hist(ax=ax1, bins=20, grid=False)
 ax1.set_title("Review distribution over time")
@@ -62,7 +63,7 @@ ax6.set_xticklabels(
 )
 ax6.set_ylabel("Reviews")
 
-df["date"].dt.hour.value_counts().sort_index().plot(ax=ax7, kind="bar", xlabel="")
+df["hour"].value_counts().sort_index().plot(ax=ax7, kind="bar", xlabel="")
 ax7.set_title("Reviews by time of day")
 ax7.set_xlabel("Hour")
 ax7.set_ylabel("Reviews")
@@ -72,5 +73,4 @@ ax8.set_title("Review efficiency time of day")
 ax8.set_xlabel("Hour")
 ax8.set_ylabel("Average efficiency (ease / time)")
 
-fig.subplots_adjust(wspace=0.3, hspace=0.25)
 plt.show()
