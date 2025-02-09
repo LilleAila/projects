@@ -43,7 +43,7 @@ ax1.set_title("Average time spent per page by book")
 # Visualize time spent on each page over time
 # pages_fr = pages[pages["id_book"] == 7]
 pages_by_book = pages.groupby("id_book")
-pages_book = pages_by_book.get_group(6).sort_values("page")  # thhgttg
+pages_book = pages_by_book.get_group(6).sort_values("page")  # type: ignore # thhgttg, lsp complains?
 pages_book.plot(ax=ax2, kind="line", x="page", y="duration", legend=False)
 pages_book["rolling_avg"] = pages_book["duration"].rolling(window=20).mean()
 pages_book.plot(
