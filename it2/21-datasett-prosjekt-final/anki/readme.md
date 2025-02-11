@@ -19,3 +19,8 @@ Datasettet har en rad for hver review gjort (et kort kan reviewes flere ganger).
   1: "Review"
   2: "Relearning"
   3: "Cram"
+
+## Analyse og behandling av data
+
+- [pandas.ipynb](./pandas.ipynb) inneholder en løsning ved hjelp av pandas.
+- [native.ipynb](./native.ipynb) inneholder en løsning ved hjelp av kun innebygde biblioteker i python, i tillegg til matplotlib.
