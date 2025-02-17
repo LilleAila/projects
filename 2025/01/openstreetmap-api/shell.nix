@@ -10,6 +10,8 @@ mkShell {
         numpy
         trimesh
         mapbox-earcut
+        networkx
+        scipy
       ]
     ))
   ];

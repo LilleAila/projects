@@ -10,16 +10,17 @@ import math
 
 
 class AreaMap:
-    def __init__(self) -> None:
+    def __init__(self, size=140, walkway_width=2, road_width=3) -> None:
         self.overpass = Overpass()
         self.bounding_box = None
         self.bounding_box_polygon = None
         self.buildings = None
         self.roads = None
         self.walkways = None
-        self.size = 170
-        self.walkway_width = 2
-        self.road_width = 3
+
+        self.size = size
+        self.walkway_width = walkway_width
+        self.road_width = road_width
 
     def get_coords(self, prompt: str) -> list[float]:
         while True:
@@ -189,11 +190,13 @@ class AreaMap:
             geometry=walkway_lines, crs="EPSG:4326"
         ).to_crs(epsg=self.epsg)
 
-    def normalize_geometries(self):
-        combined_gdf = pd.concat(
+    def get_combined_gdf(self):
+        return pd.concat(
             [self.buildings.geometry, self.roads.geometry, self.walkways.geometry]
         )
-        combined_geometry = combined_gdf.union_all()
+
+    def normalize_geometries(self):
+        combined_geometry = self.get_combined_gdf().union_all()
         self.buildings = self.normalize_geometry(combined_geometry, self.buildings)
         self.roads = self.normalize_geometry(combined_geometry, self.roads)
         self.walkways = self.normalize_geometry(combined_geometry, self.walkways)
@@ -212,8 +215,16 @@ class AreaMap:
 
 
 class AreaMap3D(AreaMap):
-    def __init__(self):
+    def __init__(self, base_plate_height=1.5, wall_width=1.5, wall_height=2.5, buildings_height=5, roads_height=2, walkways_height=1):
         super().__init__()
+        self.base_plate_height = base_plate_height
+        self.wall_width = wall_width
+        self.wall_height = wall_height
+        self.buildings_height = buildings_height
+        self.roads_height = roads_height
+        self.walkways_height = walkways_height
+
+        self.size = self.size - self.wall_width * 2
 
     def extrude_polygon(self, polygon, height):
         if isinstance(polygon, MultiPolygon):
@@ -234,43 +245,44 @@ class AreaMap3D(AreaMap):
             extruded.append(mesh)
         return trimesh.util.concatenate(extruded)
 
-    def extrude_lines(self, lines, width, height):
-        extruded = []
-        for line in lines.geometry:
-            polygon = line.buffer(width / 2, cap_style=2)
-            mesh = self.extrude_polygon(polygon, height)
-            extruded.append(mesh)
-        return trimesh.util.concatenate(extruded)
-
-    def create_base_plate(self, height=2, wall_width=2, wall_height=5):
-        assert self.bounding_box_polygon is not None, "Bounding box is not set!"
-        gdf = gpd.GeoDataFrame(
-            geometry=[self.bounding_box_polygon], crs="EPSG:4326"
-        ).to_crs(epsg=self.epsg)
-        assert gdf is not None, "Invalid bounding box!"
-        base_plate = gdf.geometry[0]
-
-        outer_wall = base_plate.buffer(wall_width, join_style=2)
+    def create_base_plate(self):
+        minx, miny, maxx, maxy = self.get_combined_gdf().total_bounds
+        base_plate = box(minx, miny, maxx, maxy)
+        outer_wall = base_plate.buffer(self.wall_width, join_style="mitre")
         wall = outer_wall.difference(base_plate)
 
         meshes = [
-            self.extrude_polygon(base_plate, -height),
-            self.extrude_polygon(wall, height + wall_height).apply_translation(
-                [0, 0, -height]
-            ),
+            self.extrude_polygon(base_plate, -self.base_plate_height),
+            self.extrude_polygon(
+                wall, self.base_plate_height + self.wall_height
+            ).apply_translation([0, 0, -self.base_plate_height]),
         ]
 
         return trimesh.util.concatenate(meshes)
 
     def export_stl(self, output_file):
         meshes = [
-            # self.create_base_plate(5, 6, 14),
-            self.extrude_polygons(self.buildings, 5),
-            self.extrude_polygons(self.roads, 2),
-            self.extrude_polygons(self.walkways, 1),
+            self.create_base_plate(),
+            self.extrude_polygons(self.buildings, self.buildings_height),
+            self.extrude_polygons(self.roads, self.roads_height),
+            self.extrude_polygons(self.walkways, self.walkways_height),
         ]
         mesh = trimesh.util.concatenate(meshes)
         mesh.export(output_file)
+
+    def export_obj(self, output_file):
+        base_plate_mesh = self.create_base_plate()
+        buildings_mesh = self.extrude_polygons(self.buildings, self.buildings_height)
+        roads_mesh = self.extrude_polygons(self.roads, self.roads_height)
+        walkways_mesh = self.extrude_polygons(self.walkways, self.walkways_height)
+
+        base_plate_mesh.visual.face_colors = [255, 255, 0, 255] # base plate: yellow
+        buildings_mesh.visual.face_colors = [255, 0, 0, 255] # buildings: red
+        roads_mesh.visual.face_colors = [0, 255, 0, 255] # roads: green
+        walkways_mesh.visual.face_colors = [0, 0, 255, 255] # walkway: blue
+
+        meshes = [base_plate_mesh, buildings_mesh, roads_mesh, walkways_mesh]
+        trimesh.util.concatenate(meshes).export(output_file, file_type='obj')
 
 
 if __name__ == "__main__":
@@ -279,4 +291,4 @@ if __name__ == "__main__":
     area_map.build_map()
     area_map.normalize_geometries()
     # area_map.plot_map()
-    area_map.export_stl("output.stl")
+    area_map.export_obj("output.obj")
