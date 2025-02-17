@@ -1,8 +1,12 @@
+from shapely.geometry import Polygon, MultiPolygon, LineString, box
 from OSMPythonTools.overpass import Overpass
 import matplotlib.pyplot as plt
-from shapely.geometry import Polygon, MultiPolygon, LineString, box
+import shapely.affinity as aff
 import geopandas as gpd
+import pandas as pd
+import numpy as np
 import trimesh
+import math
 
 
 class AreaMap:
@@ -13,6 +17,9 @@ class AreaMap:
         self.buildings = None
         self.roads = None
         self.walkways = None
+        self.size = 170
+        self.walkway_width = 2
+        self.road_width = 3
 
     def get_coords(self, prompt: str) -> list[float]:
         while True:
@@ -68,12 +75,54 @@ class AreaMap:
         assert response is not None, "No features found!"
         return response.toJSON()["elements"]
 
+    def normalize_geometry(self, combined_geometry, gdf):
+        min_rect = combined_geometry.minimum_rotated_rectangle
+        x, y = min_rect.exterior.coords.xy
+        dx = x[1] - x[0]
+        dy = y[1] - y[0]
+        angle = -np.arctan2(dy, dx)
+
+        centroid = combined_geometry.centroid
+
+        gdf["geometry"] = gdf["geometry"].apply(
+            lambda geom: aff.rotate(geom, angle, origin=centroid, use_radians=True)
+        )
+
+        minx, miny, maxx, maxy = gdf.total_bounds
+        width, height = maxx - minx, maxy - miny
+
+        scale_factor = self.size / max(width, height)
+        gdf["geometry"] = gdf["geometry"].apply(
+            lambda geom: aff.scale(geom, scale_factor, scale_factor, origin=centroid)
+        )
+
+        minx, miny, _, _ = gdf.total_bounds
+        gdf["geometry"] = gdf["geometry"].apply(
+            lambda geom: aff.translate(geom, xoff=-minx, yoff=-miny)
+        )
+
+        return gdf
+
+    def meters_to_degrees(self, meters: float) -> float:
+        # Approximation
+        assert self.bounding_box is not None, "Bounding box is not set!"
+        south_lat, _, north_lat, _ = self.bounding_box
+        avg_lat = (south_lat + north_lat) / 2
+        lat_to_meters = 111320
+        lon_to_meters = lat_to_meters * math.cos(math.radians(avg_lat))
+        lat_degrees = meters / lat_to_meters
+        lon_degrees = meters / lon_to_meters
+        return (lat_degrees + lon_degrees) / 2
+
     def build_map(self) -> None:
         features = self.get_features()
 
         building_polygons = []
         road_lines = []
         walkway_lines = []
+
+        walkway_width = self.meters_to_degrees(self.walkway_width)
+        road_width = self.meters_to_degrees(self.road_width)
 
         for feature in features:
             if "geometry" in feature:
@@ -99,7 +148,9 @@ class AreaMap:
                         "cycleway",
                     }:
                         walkway_lines.append(
-                            LineString(points).intersection(self.bounding_box_polygon)
+                            LineString(points)
+                            .buffer(walkway_width / 2, cap_style="flat")
+                            .intersection(self.bounding_box_polygon)
                         )
                     elif highway_type in {
                         "motorway",
@@ -122,7 +173,9 @@ class AreaMap:
                         "busway",
                     }:
                         road_lines.append(
-                            LineString(points).intersection(self.bounding_box_polygon)
+                            LineString(points)
+                            .buffer(road_width / 2, cap_style="flat")
+                            .intersection(self.bounding_box_polygon)
                         )
 
         # 4326 is lat/lon
@@ -135,6 +188,15 @@ class AreaMap:
         self.walkways = gpd.GeoDataFrame(
             geometry=walkway_lines, crs="EPSG:4326"
         ).to_crs(epsg=self.epsg)
+
+    def normalize_geometries(self):
+        combined_gdf = pd.concat(
+            [self.buildings.geometry, self.roads.geometry, self.walkways.geometry]
+        )
+        combined_geometry = combined_gdf.union_all()
+        self.buildings = self.normalize_geometry(combined_geometry, self.buildings)
+        self.roads = self.normalize_geometry(combined_geometry, self.roads)
+        self.walkways = self.normalize_geometry(combined_geometry, self.walkways)
 
     def plot_map(self) -> None:
         _, ax = plt.subplots(figsize=(10, 10))
@@ -202,10 +264,10 @@ class AreaMap3D(AreaMap):
 
     def export_stl(self, output_file):
         meshes = [
-            self.create_base_plate(5, 6, 14),
-            self.extrude_polygons(self.buildings, 24),
-            self.extrude_lines(self.roads, 6, 5),
-            self.extrude_lines(self.walkways, 4, 3),
+            # self.create_base_plate(5, 6, 14),
+            self.extrude_polygons(self.buildings, 5),
+            self.extrude_polygons(self.roads, 2),
+            self.extrude_polygons(self.walkways, 1),
         ]
         mesh = trimesh.util.concatenate(meshes)
         mesh.export(output_file)
@@ -215,5 +277,6 @@ if __name__ == "__main__":
     area_map = AreaMap3D()
     area_map.set_bounding_box_interactive()
     area_map.build_map()
+    area_map.normalize_geometries()
     # area_map.plot_map()
     area_map.export_stl("output.stl")
