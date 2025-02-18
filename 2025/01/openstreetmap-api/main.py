@@ -10,7 +10,7 @@ import math
 
 
 class AreaMap:
-    def __init__(self, size=140, walkway_width=2, road_width=3) -> None:
+    def __init__(self, map_size=200, map_offset_north=0, map_offset_east=0, size=140, walkway_width=2, road_width=3) -> None:
         self.nominatim = Nominatim()
 
         self.overpass = Overpass()
@@ -20,12 +20,15 @@ class AreaMap:
         self.roads = None
         self.walkways = None
 
-        self.map_size = 200
-        self.map_offset_north = 0
-        self.map_offset_east = 0
-        self.size = size
+        # Meters, from real world map
+        self.map_size = map_size
+        self.map_offset_north = map_offset_north
+        self.map_offset_east = map_offset_east
         self.walkway_width = walkway_width
         self.road_width = road_width
+
+        # Millimeters, in the result
+        self.size = size
 
     def get_coords(self, prompt: str) -> list[float]:
         while True:
@@ -66,43 +69,45 @@ class AreaMap:
         )
         self.set_utm_epsg()
 
-    def set_bounding_square(self) -> None:
+    def set_bounding_square(self, address) -> None:
+        location = self.nominatim.query(address)
+        if not location or len(location.toJSON()) == 0:
+            raise ValueError("Location not found!")
+        coords = location.toJSON()[0]
+        lat, lon = float(coords["lat"]), float(coords["lon"])
+
+        lat_to_meters, lon_to_meters = self.meters_at_coord(lat)
+        delta_lat, delta_lon = self.map_size / lat_to_meters, self.map_size / lon_to_meters
+
+        offset_delta_lat, offset_delta_lon = self.map_offset_north / lat_to_meters, self.map_offset_east / lon_to_meters
+        lat += offset_delta_lat
+        lon += offset_delta_lon
+
+        self.bounding_box = [
+            lat - delta_lat,
+            lon - delta_lon,
+            lat + delta_lat,
+            lon + delta_lon,
+        ]
+
+        self.bounding_box_polygon = box(
+            self.bounding_box[1],
+            self.bounding_box[0],
+            self.bounding_box[3],
+            self.bounding_box[2],
+        )
+        self.set_utm_epsg()
+
+    def set_bounding_square_interactive(self):
         while True:
             try:
-                address = input("Address: ")
+                self.set_bounding_square(input("Address: "))
+                break
             except EOFError:
                 print(":(")
                 exit()
-            location = self.nominatim.query(address)
-            if not location or len(location.toJSON()) == 0:
-                print("Location not found!")
+            except ValueError:
                 continue
-            coords = location.toJSON()[0]
-            lat, lon = float(coords["lat"]), float(coords["lon"])
-
-            lat_to_meters, lon_to_meters = self.meters_at_coord(lat)
-            delta_lat, delta_lon = self.map_size / lat_to_meters, self.map_size / lon_to_meters
-
-            offset_delta_lat, offset_delta_lon = self.map_offset_north / lat_to_meters, self.map_offset_east / lon_to_meters
-            lat += offset_delta_lat
-            lon += offset_delta_lon
-
-            self.bounding_box = [
-                lat - delta_lat,
-                lon - delta_lon,
-                lat + delta_lat,
-                lon + delta_lon,
-            ]
-
-            self.bounding_box_polygon = box(
-                self.bounding_box[1],
-                self.bounding_box[0],
-                self.bounding_box[3],
-                self.bounding_box[2],
-            )
-            self.set_utm_epsg()
-
-            break
 
     def get_features(self):
         bb = self.bounding_box
@@ -262,8 +267,9 @@ class AreaMap:
 
 
 class AreaMap3D(AreaMap):
-    def __init__(self, base_plate_height=1.5, wall_width=1.5, wall_height=2.5, buildings_height=5, roads_height=2, walkways_height=1):
-        super().__init__()
+    def __init__(self, base_plate_height=1.5, wall_width=1.5, wall_height=2.5, buildings_height=5, roads_height=2, walkways_height=1, **kwargs):
+        super().__init__(**kwargs)
+        # In millimeters
         self.base_plate_height = base_plate_height
         self.wall_width = wall_width
         self.wall_height = wall_height
@@ -340,7 +346,7 @@ class AreaMap3D(AreaMap):
 if __name__ == "__main__":
     area_map = AreaMap3D()
     # area_map.set_bounding_box_interactive()
-    area_map.set_bounding_square()
+    area_map.set_bounding_square_interactive()
     area_map.build_map()
     area_map.normalize_geometries()
     area_map.export_obj("output.obj")
