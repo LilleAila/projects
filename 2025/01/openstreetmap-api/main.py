@@ -1,5 +1,5 @@
 from shapely.geometry import Polygon, MultiPolygon, LineString, box
-from OSMPythonTools.overpass import Overpass
+from OSMPythonTools.overpass import Overpass, Nominatim
 import matplotlib.pyplot as plt
 import shapely.affinity as aff
 import geopandas as gpd
@@ -11,6 +11,8 @@ import math
 
 class AreaMap:
     def __init__(self, size=140, walkway_width=2, road_width=3) -> None:
+        self.nominatim = Nominatim()
+
         self.overpass = Overpass()
         self.bounding_box = None
         self.bounding_box_polygon = None
@@ -18,6 +20,9 @@ class AreaMap:
         self.roads = None
         self.walkways = None
 
+        self.map_size = 200
+        self.map_offset_north = 0
+        self.map_offset_east = 0
         self.size = size
         self.walkway_width = walkway_width
         self.road_width = road_width
@@ -60,6 +65,44 @@ class AreaMap:
             self.bounding_box[2],
         )
         self.set_utm_epsg()
+
+    def set_bounding_square(self) -> None:
+        while True:
+            try:
+                address = input("Address: ")
+            except EOFError:
+                print(":(")
+                exit()
+            location = self.nominatim.query(address)
+            if not location or len(location.toJSON()) == 0:
+                print("Location not found!")
+                continue
+            coords = location.toJSON()[0]
+            lat, lon = float(coords["lat"]), float(coords["lon"])
+
+            lat_to_meters, lon_to_meters = self.meters_at_coord(lat)
+            delta_lat, delta_lon = self.map_size / lat_to_meters, self.map_size / lon_to_meters
+
+            offset_delta_lat, offset_delta_lon = self.map_offset_north / lat_to_meters, self.map_offset_east / lon_to_meters
+            lat += offset_delta_lat
+            lon += offset_delta_lon
+
+            self.bounding_box = [
+                lat - delta_lat,
+                lon - delta_lon,
+                lat + delta_lat,
+                lon + delta_lon,
+            ]
+
+            self.bounding_box_polygon = box(
+                self.bounding_box[1],
+                self.bounding_box[0],
+                self.bounding_box[3],
+                self.bounding_box[2],
+            )
+            self.set_utm_epsg()
+
+            break
 
     def get_features(self):
         bb = self.bounding_box
@@ -104,13 +147,17 @@ class AreaMap:
 
         return gdf
 
+    def meters_at_coord(self, lat):
+        lat_to_meters = 111320
+        lon_to_meters = lat_to_meters * math.cos(math.radians(lat))
+        return lat_to_meters, lon_to_meters
+
     def meters_to_degrees(self, meters: float) -> float:
         # Approximation
         assert self.bounding_box is not None, "Bounding box is not set!"
         south_lat, _, north_lat, _ = self.bounding_box
         avg_lat = (south_lat + north_lat) / 2
-        lat_to_meters = 111320
-        lon_to_meters = lat_to_meters * math.cos(math.radians(avg_lat))
+        lat_to_meters, lon_to_meters = self.meters_at_coord(avg_lat)
         lat_degrees = meters / lat_to_meters
         lon_degrees = meters / lon_to_meters
         return (lat_degrees + lon_degrees) / 2
@@ -281,14 +328,19 @@ class AreaMap3D(AreaMap):
         roads_mesh.visual.face_colors = [0, 255, 0, 255] # roads: green
         walkways_mesh.visual.face_colors = [0, 0, 255, 255] # walkway: blue
 
-        meshes = [base_plate_mesh, buildings_mesh, roads_mesh, walkways_mesh]
+        meshes = [
+            base_plate_mesh,
+            buildings_mesh,
+            roads_mesh,
+            # walkways_mesh,
+        ]
         trimesh.util.concatenate(meshes).export(output_file, file_type='obj')
 
 
 if __name__ == "__main__":
     area_map = AreaMap3D()
-    area_map.set_bounding_box_interactive()
+    # area_map.set_bounding_box_interactive()
+    area_map.set_bounding_square()
     area_map.build_map()
     area_map.normalize_geometries()
-    # area_map.plot_map()
     area_map.export_obj("output.obj")
