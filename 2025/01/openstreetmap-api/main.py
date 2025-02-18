@@ -133,9 +133,9 @@ class AreaMap:
 
         centroid = combined_geometry.centroid
 
-        gdf["geometry"] = gdf["geometry"].apply(
-            lambda geom: aff.rotate(geom, angle, origin=centroid, use_radians=True)
-        )
+        # gdf["geometry"] = gdf["geometry"].apply(
+        #     lambda geom: aff.rotate(geom, angle, origin=centroid, use_radians=True)
+        # )
 
         minx, miny, maxx, maxy = gdf.total_bounds
         width, height = maxx - minx, maxy - miny
@@ -344,7 +344,7 @@ class AreaMap3D(AreaMap):
 
 
 if __name__ == "__main__":
-    area_map = AreaMap3D()
+    area_map = AreaMap3D(map_offset_east=-50, map_offset_north=-20)
     # area_map.set_bounding_box_interactive()
     area_map.set_bounding_square_interactive()
     area_map.build_map()
