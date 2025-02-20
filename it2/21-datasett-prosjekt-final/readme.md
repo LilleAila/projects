@@ -2,5 +2,7 @@
 
 Jeg har valgt å løse oppgaven for to ulike datasett:
 
-- Anki: Reviews av flashcards
-- Koreader: bøker lest på e-reader
+- `anki`: Reviews av flashcards
+- `koreader`: bøker lest på e-reader
+
+Jeg har også sammenlignet kjøretiden til ulike snippets i `time_comparison`.
