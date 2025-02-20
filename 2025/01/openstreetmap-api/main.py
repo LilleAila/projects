@@ -224,6 +224,7 @@ class AreaMap:
                         "raceway",
                         "road",
                         "busway",
+                        # "cycleway",
                     }:
                         road_lines.append(
                             LineString(points)
@@ -349,4 +350,5 @@ if __name__ == "__main__":
     area_map.set_bounding_square_interactive()
     area_map.build_map()
     area_map.normalize_geometries()
-    area_map.export_obj("output.obj")
+    area_map.plot_map()
+    # area_map.export_obj("output.obj")

@@ -9,7 +9,7 @@
 
 ### Bakgrunn
 
-Anki er et program som brukes til flashcards. Det fungerer slik at når man får opp et kort, tenker man først på hva som er på baksiden. Deretter trykker man en knapp for å se baksiden, og programmet registrerer hvor lang tid det tok. Etter det velger jeg et tall fra 1-4 på hvor godt jeg mener jeg husket kortet, med alternativene "Again", "Hard", "Good" og "Easy". Dette blir brukt til å bestemme intervallet for når jeg skal se kortet neste gang, slik at kort jeg kan godt tar lengre tid før jeg må gjøre det på nytt, mens det jeg kan dårlig får jeg etter kort tid. Dette datasettet ble ekstrahert fra sqlite-filen til anki ved hjelp av `sqlitebrowser`, slik [dokumentasjonen](https://docs.ankiweb.net/stats.html#manual-analysis) forklarer.
+[Anki](https://github.com/ankitects/anki) er et program som brukes til flashcards. Det fungerer slik at når man får opp et kort, tenker man først på hva som er på baksiden. Deretter trykker man en knapp for å se baksiden, og programmet registrerer hvor lang tid det tok. Etter det velger jeg et tall fra 1-4 på hvor godt jeg mener jeg husket kortet, med alternativene "Again", "Hard", "Good" og "Easy". Dette blir brukt til å bestemme intervallet for når jeg skal se kortet neste gang, slik at kort jeg kan godt tar lengre tid før jeg må gjøre det på nytt, mens det jeg kan dårlig får jeg etter kort tid. Dette datasettet ble ekstrahert fra sqlite-filen til anki ved hjelp av `sqlitebrowser`, slik [dokumentasjonen](https://docs.ankiweb.net/stats.html#manual-analysis) forklarer.
 
 Jeg ønsker å finne ut på hvilke tidspunkter jeg lærer mest, og hvor godt jeg husker kortene.
 
