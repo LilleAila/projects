@@ -30,9 +30,15 @@ class AreaMap:
         self.overpass = Overpass()
         self.bounding_box = None
         self.bounding_box_polygon = None
+
         self.buildings = None
         self.roads = None
         self.walkways = None
+
+        self.base_plate_color = [0, 255, 0, 255]
+        self.buildings_color = [255, 255, 255, 255]
+        self.roads_color = [40, 40, 40, 255]
+        self.walkways_color = [100, 100, 100, 255]
 
         # Meters, from real world map
         self.map_size = map_size
@@ -68,13 +74,6 @@ class AreaMap:
         southwest = self.get_coords("Southwest corner: ")
         northeast = self.get_coords("Northeast corner: ")
         self.bounding_box = southwest + northeast
-        # Example for testing
-        # self.bounding_box = [
-        #     60.38631650365599,
-        #     5.321381765736868,
-        #     60.387874780588064,
-        #     5.328217556584907,
-        # ]
         self.bounding_box_polygon = box(
             self.bounding_box[1],
             self.bounding_box[0],
@@ -153,9 +152,9 @@ class AreaMap:
 
         centroid = combined_geometry.centroid
 
-        # gdf["geometry"] = gdf["geometry"].apply(
-        #     lambda geom: aff.rotate(geom, angle, origin=centroid, use_radians=True)
-        # )
+        gdf["geometry"] = gdf["geometry"].apply(
+            lambda geom: aff.rotate(geom, angle, origin=centroid, use_radians=True)
+        )
 
         minx, miny, maxx, maxy = gdf.total_bounds
         width, height = maxx - minx, maxy - miny
@@ -265,7 +264,8 @@ class AreaMap:
 
     def get_combined_gdf(self):
         return pd.concat(
-            [self.buildings.geometry, self.roads.geometry, self.walkways.geometry]
+            # TODO: proper function for checking that these are set
+            [self.buildings.geometry, self.roads.geometry, self.walkways.geometry]  # type: ignore
         )
 
     def normalize_geometries(self):
@@ -280,9 +280,17 @@ class AreaMap:
             and self.roads is not None
             and self.walkways is not None
         )
-        self.buildings.plot(ax=ax, color="black", edgecolor="white", label="Buildings")
-        self.roads.plot(ax=ax, color="blue", linewidth=0.5, label="Roads")
-        self.walkways.plot(ax=ax, color="green", linewidth=0.5, label="Walkways")
+        to_color = lambda cs: [c / 255 for c in cs]
+        ax.set_facecolor(to_color(self.base_plate_color))
+        self.buildings.plot(
+            ax=ax, color=to_color(self.buildings_color), label="Buildings"
+        )
+        self.roads.plot(
+            ax=ax, color=to_color(self.roads_color), linewidth=0.5, label="Roads"
+        )
+        self.walkways.plot(
+            ax=ax, color=to_color(self.walkways_color), linewidth=0.5, label="Walkways"
+        )
 
 
 class AreaMap3D(AreaMap):
@@ -360,10 +368,10 @@ class AreaMap3D(AreaMap):
         roads_mesh = self.extrude_polygons(self.roads, self.roads_height)
         walkways_mesh = self.extrude_polygons(self.walkways, self.walkways_height)
 
-        base_plate_mesh.visual.face_colors = [255, 255, 0, 255]  # base plate: yellow
-        buildings_mesh.visual.face_colors = [255, 0, 0, 255]  # buildings: red
-        roads_mesh.visual.face_colors = [0, 255, 0, 255]  # roads: green
-        walkways_mesh.visual.face_colors = [0, 0, 255, 255]  # walkway: blue
+        base_plate_mesh.visual.face_colors = self.base_plate_color
+        buildings_mesh.visual.face_colors = self.buildings_color
+        roads_mesh.visual.face_colors = self.roads_color
+        walkways_mesh.visual.face_colors = self.walkways_color
 
         meshes = [
             base_plate_mesh,
