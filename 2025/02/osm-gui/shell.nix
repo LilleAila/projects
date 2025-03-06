@@ -5,6 +5,7 @@ mkShell {
     pyright
     (python312.withPackages (
       ps: with ps; [
+        tkinter
         osmpythontools
         matplotlib
         shapely
