@@ -26,7 +26,6 @@ class App(tk.Tk):
         self.image_label = tk.Label(self.frame, pady=10)
         self.image_label.grid(row=1, column=0)
         self.images = [
-            "images/img0.png",
             "images/img1.png",
             "images/img2.png",
             "images/img3.png",
