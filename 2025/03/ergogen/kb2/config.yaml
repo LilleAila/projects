@@ -19,21 +19,21 @@ points:
       columns:
         # Left to right
         pinky:
-          key.column_net: GP4
+          key.column_net: GP1
         ring:
-          key.column_net: GP5
+          key.column_net: GP2
         middle:
-          key.column_net: GP6
+          key.column_net: GP3
         index:
-          key.column_net: GP7
+          key.column_net: GP4
         inner:
-          key.column_net: GP8
+          key.column_net: GP5
       rows:
         # Bottom to top
         bottom:
-          row_net: GP0
+          row_net: GP10
         top:
-          row_net: GP1
+          row_net: GP6
 
     right:
       key:
@@ -44,22 +44,22 @@ points:
         shift: [3ky, 0]
       columns:
         inner:
-          key.column_net: GP8
-        index:
-          key.column_net: GP7
-        middle:
-          key.column_net: GP6
-        ring:
           key.column_net: GP5
-        pinky:
+        index:
           key.column_net: GP4
-        outer:
+        middle:
           key.column_net: GP3
+        ring:
+          key.column_net: GP2
+        pinky:
+          key.column_net: GP1
+        outer:
+          key.column_net: GP0
       rows:
         bottom:
-          row_net: GP0
+          row_net: GP10
         top:
-          row_net: GP1
+          row_net: GP6
 
     lthumbs:
       key:
@@ -70,12 +70,12 @@ points:
         shift: [kx, -2ky]
       columns:
         outer:
-          key.column_net: GP7
+          key.column_net: GP4
         inner:
-          key.column_net: GP8
+          key.column_net: GP5
       rows:
         top:
-          row_net: GP3
+          row_net: GP15
 
     rthumbs:
       key:
@@ -86,11 +86,12 @@ points:
         shift: [-2kx, -2ky]
       columns:
         inner:
-          key.column_net: GP8
+          key.column_net: GP5
         outer:
-          key.column_net: GP7
+          key.column_net: GP4
       rows:
         top:
+          row_net: GP15
 
 outlines:
   keys:
