@@ -10,7 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@jscad/cli": "^2.3.4",
+    "@jscad/cli": "^1.10.0",
     "ergogen": "^4.1.0"
   }
 }

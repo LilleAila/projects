@@ -1,0 +1,164 @@
+units:
+  # Choc keys
+  kx: cx
+  ky: cy
+  # Padding
+  p: 2 # padding per side
+  px: kx + p * 2
+  py: ky + p * 2
+
+points:
+  zones:
+    left:
+      # KiCAD placement
+      anchor:
+        shift: [100, -100]
+      key:
+        padding: 1ky
+        spread: 1kx
+      columns:
+        # Left to right
+        pinky:
+          key.column_net: GP4
+        ring:
+          key.column_net: GP5
+        middle:
+          key.column_net: GP6
+        index:
+          key.column_net: GP7
+        inner:
+          key.column_net: GP8
+      rows:
+        # Bottom to top
+        bottom:
+          row_net: GP0
+        top:
+          row_net: GP1
+
+    right:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: left_inner_bottom
+        shift: [3ky, 0]
+      columns:
+        inner:
+          key.column_net: GP8
+        index:
+          key.column_net: GP7
+        middle:
+          key.column_net: GP6
+        ring:
+          key.column_net: GP5
+        pinky:
+          key.column_net: GP4
+        outer:
+          key.column_net: GP3
+      rows:
+        bottom:
+          row_net: GP0
+        top:
+          row_net: GP1
+
+    lthumbs:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: left_middle_bottom
+        shift: [kx, -2ky]
+      columns:
+        outer:
+          key.column_net: GP7
+        inner:
+          key.column_net: GP8
+      rows:
+        top:
+          row_net: GP3
+
+    rthumbs:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: right_middle_bottom
+        shift: [-2kx, -2ky]
+      columns:
+        inner:
+          key.column_net: GP8
+        outer:
+          key.column_net: GP7
+      rows:
+        top:
+
+outlines:
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_pinky_top
+          shift: [-0.5px, 0.5py]
+        - ref: right_outer_top
+          shift: [0.5px, 0.5py]
+        - ref: right_outer_bottom
+          shift: [0.5px, -0.5py]
+        - ref: right_middle_bottom
+          shift: [-0.5kx + p, -0.5py]
+        - ref: rthumbs_outer_top
+          shift: [0.5kx + p, -0.5py]
+        - ref: lthumbs_outer_top
+          shift: [-0.5kx - p, -0.5py]
+        - ref: left_middle_bottom
+          shift: [0.5kx - p, -0.5py]
+        - ref: left_pinky_bottom
+          shift: [-0.5px, -0.5py]
+  combined:
+    - name: board
+    - operation: subtract
+      name: keys
+
+pcbs:
+  pcb:
+    outlines:
+      main:
+        outline: board
+
+    footprints:
+      choc_hotswap:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+
+      pipico:
+        what: pipico
+        where:
+          # ref.aggregate.parts: [left_inner_top, right_inner_top, lthumbs_inner_top, rthumbs_inner_top]
+          ref.aggregate.parts: [left_inner_top, right_inner_top]
+          shift: [0, -ky]
+
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RUN
+        where:
+          ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
