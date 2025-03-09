@@ -6,6 +6,14 @@ units:
   p: 2 # padding per side
   px: kx + p * 2
   py: ky + p * 2
+  # Double padding, for case
+  dpx: ky + p * 4
+  dpy: ky + p * 4
+  # Screws
+  screwSize: 1.5
+  standoffSize: 2.5
+  # Other values
+  pcbHeight: 1.6
 
 points:
   zones:
@@ -98,6 +106,7 @@ outlines:
     - what: rectangle
       where: true
       size: [kx-0.5,ky-0.5]
+
   board:
     - what: polygon
       operation: stack
@@ -118,10 +127,102 @@ outlines:
           shift: [0.5kx - p, -0.5py]
         - ref: left_pinky_bottom
           shift: [-0.5px, -0.5py]
+
+  xlBoard:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_pinky_top
+          shift: [-0.5dpx, 0.5dpy]
+        - ref: right_outer_top
+          shift: [0.5dpx, 0.5dpy]
+        - ref: right_outer_bottom
+          shift: [0.5dpx, -0.5dpy]
+        - ref: right_middle_bottom
+          shift: [-0.5kx + 2p, -0.5dpy]
+        - ref: rthumbs_outer_top
+          shift: [0.5kx + 2p, -0.5dpy]
+        - ref: lthumbs_outer_top
+          shift: [-0.5kx - 2p, -0.5dpy]
+        - ref: left_middle_bottom
+          shift: [0.5kx - 2p, -0.5dpy]
+        - ref: left_pinky_bottom
+          shift: [-0.5dpx, -0.5dpy]
+
   combined:
     - name: board
     - operation: subtract
       name: keys
+
+  mounting:
+    - what: circle
+      radius: screwSize
+      where:
+        ref: left_pinky_top
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: left_inner_top
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: right_inner_top
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: right_outer_top
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: screwSize
+      where:
+        ref.aggregate.parts: [left_index_bottom, lthumbs_inner_top]
+    - what: circle
+      radius: screwSize
+      where:
+        ref.aggregate.parts: [right_index_bottom, rthumbs_inner_top]
+    - what: circle
+      radius: screwSize
+      where:
+        ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
+        shift: [0, -5]
+
+  standoff:
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: left_pinky_top
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: left_inner_top
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: right_inner_top
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: right_outer_top
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref.aggregate.parts: [left_index_bottom, lthumbs_inner_top]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref.aggregate.parts: [right_index_bottom, rthumbs_inner_top]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
+        shift: [0, -5]
 
 pcbs:
   pcb:
@@ -163,3 +264,78 @@ pcbs:
           to: RUN
         where:
           ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
+          shift: [0, 3]
+
+      holeLeft:
+        what: mountinghole
+        where:
+          ref: left_pinky_top
+          shift: [0.5kx, -0.5kx]
+      holeMiddleLeft:
+        what: mountinghole
+        where:
+          ref: left_inner_top
+          shift: [-0.5kx, -0.5kx]
+      holeMiddleRight:
+        what: mountinghole
+        where:
+          ref: right_inner_top
+          shift: [0.5kx, -0.5kx]
+      holeRight:
+        what: mountinghole
+        where:
+          ref: right_outer_top
+          shift: [-0.5kx, -0.5kx]
+      holeLeftBottom:
+        what: mountinghole
+        where:
+          ref.aggregate.parts: [left_index_bottom, lthumbs_inner_top]
+      holeRightBottom:
+        what: mountinghole
+        where:
+          ref.aggregate.parts: [right_index_bottom, rthumbs_inner_top]
+      holeBottom:
+        what: mountinghole
+        where:
+          ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
+          shift: [0, -5]
+
+cases:
+  bottom:
+    - name: board
+      extrude: 1
+  xlBottom:
+    - name: xlBoard
+      extrude: 1
+  _outerWall:
+    - name: xlBoard
+      extrude: 4 + pcbHeight
+  _innerWall:
+    - name: board
+      extrude: 4 + pcbHeight
+  wall:
+    - what: case
+      name: _outerWall
+      operation: add
+    - what: case
+      name: _innerWall
+      operation: subtract
+  _holes:
+    - name: mounting
+      extrude: 4
+  _standoffs:
+    - name: standoff
+      extrude: 4
+  case:
+    - what: case
+      name: _standoffs
+      operation: add
+    - what: case
+      name: _holes
+      operation: subtract
+    - what: case
+      name: xlBottom
+      operation: add
+    - what: case
+      name: wall
+      operation: add

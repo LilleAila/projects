@@ -1,6 +1,6 @@
 all: build
 
-build: ergogen
+build: ergogen cases
 
 ergogen:
 	npx ergogen .

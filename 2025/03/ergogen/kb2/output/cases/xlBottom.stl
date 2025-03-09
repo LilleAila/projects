@@ -1,0 +1,198 @@
+solid csg.js
+facet normal 0 0 -1
+outer loop
+vertex 325.5 -70.5 0
+vertex 325.5 -112.5 0
+vertex 254 -112.5 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 325.5 -70.5 0
+vertex 254 -112.5 0
+vertex 141 -112.5 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 325.5 -70.5 0
+vertex 141 -112.5 0
+vertex 87.5 -112.5 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 325.5 -70.5 0
+vertex 87.5 -112.5 0
+vertex 87.5 -70.5 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 254 -112.5 0
+vertex 254 -146.5 0
+vertex 141 -146.5 0
+endloop
+endfacet
+facet normal 0 0 -1
+outer loop
+vertex 254 -112.5 0
+vertex 141 -146.5 0
+vertex 141 -112.5 0
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 254 -146.5 1
+vertex 254 -112.5 1
+vertex 141 -112.5 1
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 254 -146.5 1
+vertex 141 -112.5 1
+vertex 141 -146.5 1
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 141 -112.5 1
+vertex 254 -112.5 1
+vertex 325.5 -112.5 1
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 141 -112.5 1
+vertex 325.5 -112.5 1
+vertex 325.5 -70.5 1
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 141 -112.5 1
+vertex 325.5 -70.5 1
+vertex 87.5 -70.5 1
+endloop
+endfacet
+facet normal 0 0 1
+outer loop
+vertex 141 -112.5 1
+vertex 87.5 -70.5 1
+vertex 87.5 -112.5 1
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 141 -112.5 0
+vertex 141 -112.5 1
+vertex 87.5 -112.5 1
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 141 -112.5 0
+vertex 87.5 -112.5 1
+vertex 87.5 -112.5 0
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 325.5 -112.5 0
+vertex 325.5 -112.5 1
+vertex 254 -112.5 1
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 325.5 -112.5 0
+vertex 254 -112.5 1
+vertex 254 -112.5 0
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 141 -112.5 1
+vertex 141 -112.5 0
+vertex 141 -146.5 0
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 141 -112.5 1
+vertex 141 -146.5 0
+vertex 141 -146.5 1
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 254 -146.5 0
+vertex 254 -146.5 1
+vertex 141 -146.5 1
+endloop
+endfacet
+facet normal 0 -1 0
+outer loop
+vertex 254 -146.5 0
+vertex 141 -146.5 1
+vertex 141 -146.5 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 254 -112.5 0
+vertex 254 -112.5 1
+vertex 254 -146.5 1
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 254 -112.5 0
+vertex 254 -146.5 1
+vertex 254 -146.5 0
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 325.5 -70.5 0
+vertex 325.5 -70.5 1
+vertex 325.5 -112.5 1
+endloop
+endfacet
+facet normal 1 0 0
+outer loop
+vertex 325.5 -70.5 0
+vertex 325.5 -112.5 1
+vertex 325.5 -112.5 0
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 325.5 -70.5 1
+vertex 325.5 -70.5 0
+vertex 87.5 -70.5 0
+endloop
+endfacet
+facet normal 0 1 0
+outer loop
+vertex 325.5 -70.5 1
+vertex 87.5 -70.5 0
+vertex 87.5 -70.5 1
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 87.5 -70.5 1
+vertex 87.5 -70.5 0
+vertex 87.5 -112.5 0
+endloop
+endfacet
+facet normal -1 0 0
+outer loop
+vertex 87.5 -70.5 1
+vertex 87.5 -112.5 0
+vertex 87.5 -112.5 1
+endloop
+endfacet
+endsolid csg.js
