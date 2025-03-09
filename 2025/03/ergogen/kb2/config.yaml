@@ -27,21 +27,21 @@ points:
       columns:
         # Left to right
         pinky:
-          key.column_net: GP1
+          key.column_net: GP10
         ring:
-          key.column_net: GP2
+          key.column_net: GP11
         middle:
-          key.column_net: GP3
+          key.column_net: GP12
         index:
-          key.column_net: GP4
+          key.column_net: GP13
         inner:
-          key.column_net: GP5
+          key.column_net: GP14
       rows:
         # Bottom to top
         bottom:
-          row_net: GP10
+          row_net: GP9
         top:
-          row_net: GP6
+          row_net: GP5
 
     right:
       key:
@@ -52,22 +52,22 @@ points:
         shift: [3ky, 0]
       columns:
         inner:
-          key.column_net: GP5
+          key.column_net: GP16
         index:
-          key.column_net: GP4
+          key.column_net: GP17
         middle:
-          key.column_net: GP3
+          key.column_net: GP18
         ring:
-          key.column_net: GP2
+          key.column_net: GP19
         pinky:
-          key.column_net: GP1
+          key.column_net: GP20
         outer:
-          key.column_net: GP0
+          key.column_net: GP21
       rows:
         bottom:
-          row_net: GP10
+          row_net: GP22
         top:
-          row_net: GP6
+          row_net: GP28
 
     lthumbs:
       key:
@@ -78,9 +78,9 @@ points:
         shift: [kx, -2ky]
       columns:
         outer:
-          key.column_net: GP4
+          key.column_net: GP13
         inner:
-          key.column_net: GP5
+          key.column_net: GP14
       rows:
         top:
           row_net: GP15
@@ -94,9 +94,9 @@ points:
         shift: [-2kx, -2ky]
       columns:
         inner:
-          key.column_net: GP5
+          key.column_net: GP16
         outer:
-          key.column_net: GP4
+          key.column_net: GP17
       rows:
         top:
           row_net: GP15
@@ -265,6 +265,7 @@ pcbs:
         where:
           ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
           shift: [0, 3]
+          rotate: 180
 
       holeLeft:
         what: mountinghole
