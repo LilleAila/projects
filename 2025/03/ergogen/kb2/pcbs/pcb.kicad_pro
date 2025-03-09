@@ -82,7 +82,7 @@
         "item_on_disabled_layer": "error",
         "items_not_allowed": "error",
         "length_out_of_range": "error",
-        "lib_footprint_issues": "warning",
+        "lib_footprint_issues": "ignore",
         "lib_footprint_mismatch": "warning",
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
@@ -266,7 +266,7 @@
       },
       {
         "netclass": "Default",
-        "pattern": "GP10"
+        "pattern": "GP14"
       },
       {
         "netclass": "Default",
@@ -278,7 +278,7 @@
       },
       {
         "netclass": "Default",
-        "pattern": "GP11"
+        "pattern": "GP13"
       },
       {
         "netclass": "Default",
@@ -302,7 +302,7 @@
       },
       {
         "netclass": "Default",
-        "pattern": "GP13"
+        "pattern": "GP11"
       },
       {
         "netclass": "Default",
@@ -314,7 +314,7 @@
       },
       {
         "netclass": "Default",
-        "pattern": "GP14"
+        "pattern": "GP10"
       },
       {
         "netclass": "Default",
@@ -326,19 +326,7 @@
       },
       {
         "netclass": "Default",
-        "pattern": "GP16"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "GP17"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "GP18"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "GP19"
+        "pattern": "GP21"
       },
       {
         "netclass": "Default",
@@ -346,7 +334,19 @@
       },
       {
         "netclass": "Default",
-        "pattern": "GP21"
+        "pattern": "GP19"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "GP18"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "GP17"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "GP16"
       },
       {
         "netclass": "Default",
