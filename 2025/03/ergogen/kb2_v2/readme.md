@@ -11,6 +11,7 @@ Best to buy from [VOEC-registered](https://www.skatteetaten.no/person/avgifter/k
 - Both JLCPCB and 42keebs are registered
 
 Total price for PCB + Parts + shipping is around 60€
+Key switches and keycaps under 50€ if 3d printed
 
 ### PCB Fabrication
 
@@ -42,6 +43,14 @@ RP2040-based pro-micro compatible.
 [Kailh Choc V1 Hot-swap Sockets](https://42keebs.eu/shop/parts/kailh-choc-hot-swap-sockets/)
 
 - 3x10 (same as diodes)
+
+### Key switches
+
+[Choc pink pro](https://www.maxgaming.no/no/switchar/choc-low-profile-pink-pro)
+
+20 gram actuation (lowest available)
+Bought in Norway, per switch
+Expensive :(
 
 ### Reset switch
 

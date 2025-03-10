@@ -251,22 +251,23 @@ pcbs:
         adjust:
           shift: [0, -5]
 
-      pipico:
-        what: pipico
+      promicro:
+        what: promicro
+        params:
+          orientation: up
         where:
-          # ref.aggregate.parts: [left_inner_top, right_inner_top, lthumbs_inner_top, rthumbs_inner_top]
           ref.aggregate.parts: [left_inner_top, right_inner_top]
-          shift: [0, -ky]
+          shift: [0, -10]
+          rotate: -90
 
       reset:
         what: button
         params:
           from: GND
-          to: RUN
+          to: RST
         where:
-          ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
-          shift: [0, 3]
-          rotate: 180
+          ref.aggregate.parts: [left_inner_bottom, right_inner_bottom]
+          shift: [0, -ky]
 
       holeLeft:
         what: mountinghole
@@ -300,7 +301,6 @@ pcbs:
         what: mountinghole
         where:
           ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
-          shift: [0, -5]
 
 cases:
   bottom:
