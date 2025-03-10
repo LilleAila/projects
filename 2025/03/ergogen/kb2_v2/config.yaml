@@ -253,12 +253,12 @@ pcbs:
           shift: [0, -5]
 
       promicro:
-        what: promicro
+        what: frood
         params:
-          orientation: down # usb port sticking down
+          orientation: up # usb port sticking down
         where:
           ref.aggregate.parts: [left_inner_ltop, right_inner_rtop]
-          shift: [0, -7.5]
+          shift: [0, -9]
           rotate: -90
 
       reset:
