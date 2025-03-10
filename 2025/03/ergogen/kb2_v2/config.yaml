@@ -258,7 +258,7 @@ pcbs:
           orientation: down # usb port sticking down
         where:
           ref.aggregate.parts: [left_inner_ltop, right_inner_rtop]
-          shift: [0, -10]
+          shift: [0, -7.5]
           rotate: -90
 
       reset:
