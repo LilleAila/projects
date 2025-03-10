@@ -28,22 +28,22 @@ points:
       columns:
         # Left to right
         pinky:
-          key.column_net: GP14
+          key.column_net: D20
         ring:
-          key.column_net: GP13
+          key.column_net: D22
         middle:
-          key.column_net: GP12
+          key.column_net: D26
         index:
-          key.column_net: GP11
+          key.column_net: D27
         inner:
-          key.column_net: GP10
+          key.column_net: D28
       rows:
         # Bottom to top
         # KiCad tries to connect different zones with same names in nets, so have to add a prefix
         lbottom:
-          row_net: GP9
+          row_net: D23
         ltop:
-          row_net: GP5
+          row_net: D29
 
     right:
       key:
@@ -54,22 +54,22 @@ points:
         shift: [3ky, 0]
       columns:
         inner:
-          key.column_net: GP21
+          key.column_net: D3
         index:
-          key.column_net: GP20
+          key.column_net: D4
         middle:
-          key.column_net: GP19
+          key.column_net: D5
         ring:
-          key.column_net: GP18
+          key.column_net: D6
         pinky:
-          key.column_net: GP17
+          key.column_net: D7
         outer:
-          key.column_net: GP16
+          key.column_net: D8
       rows:
         rbottom:
-          row_net: GP22
+          row_net: D9
         rtop:
-          row_net: GP28
+          row_net: D2
 
     lthumbs:
       key:
@@ -80,12 +80,12 @@ points:
         shift: [kx, -2ky]
       columns:
         outer:
-          key.column_net: GP11
+          key.column_net: D27
         inner:
-          key.column_net: GP10
+          key.column_net: D28
       rows:
         lttop:
-          row_net: GP15
+          row_net: D21
 
     rthumbs:
       key:
@@ -96,12 +96,12 @@ points:
         shift: [-2kx, -2ky]
       columns:
         inner:
-          key.column_net: GP21
+          key.column_net: D3
         outer:
-          key.column_net: GP20
+          key.column_net: D4
       rows:
         rttop:
-          row_net: GP15
+          row_net: D21
 
 outlines:
   keys:
@@ -255,7 +255,7 @@ pcbs:
       promicro:
         what: frood
         params:
-          orientation: up # usb port sticking down
+          orientation: down # usb port sticking down
         where:
           ref.aggregate.parts: [left_inner_ltop, right_inner_rtop]
           shift: [0, -9]

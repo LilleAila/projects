@@ -82,7 +82,7 @@
         "item_on_disabled_layer": "error",
         "items_not_allowed": "error",
         "length_out_of_range": "error",
-        "lib_footprint_issues": "ignore",
+        "lib_footprint_issues": "warning",
         "lib_footprint_mismatch": "warning",
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
@@ -96,7 +96,7 @@
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
-        "silk_over_copper": "warning",
+        "silk_over_copper": "ignore",
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
@@ -266,179 +266,179 @@
       },
       {
         "netclass": "Default",
-        "pattern": "GP14"
+        "pattern": "D20"
       },
       {
         "netclass": "Default",
-        "pattern": "pinky_bottom"
+        "pattern": "pinky_lbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "pinky_top"
+        "pattern": "pinky_ltop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP13"
+        "pattern": "D22"
       },
       {
         "netclass": "Default",
-        "pattern": "ring_bottom"
+        "pattern": "ring_lbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "ring_top"
+        "pattern": "ring_ltop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP12"
+        "pattern": "D26"
       },
       {
         "netclass": "Default",
-        "pattern": "middle_bottom"
+        "pattern": "middle_lbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "middle_top"
+        "pattern": "middle_ltop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP11"
+        "pattern": "D27"
       },
       {
         "netclass": "Default",
-        "pattern": "index_bottom"
+        "pattern": "index_lbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "index_top"
+        "pattern": "index_ltop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP10"
+        "pattern": "D28"
       },
       {
         "netclass": "Default",
-        "pattern": "inner_bottom"
+        "pattern": "inner_lbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "inner_top"
+        "pattern": "inner_ltop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP21"
+        "pattern": "D3"
       },
       {
         "netclass": "Default",
-        "pattern": "GP20"
+        "pattern": "inner_rbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "GP19"
+        "pattern": "inner_rtop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP18"
+        "pattern": "D4"
       },
       {
         "netclass": "Default",
-        "pattern": "GP17"
+        "pattern": "index_rbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "GP16"
+        "pattern": "index_rtop"
       },
       {
         "netclass": "Default",
-        "pattern": "outer_bottom"
+        "pattern": "D5"
       },
       {
         "netclass": "Default",
-        "pattern": "outer_top"
+        "pattern": "middle_rbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "GP9"
+        "pattern": "middle_rtop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP5"
+        "pattern": "D6"
       },
       {
         "netclass": "Default",
-        "pattern": "GP22"
+        "pattern": "ring_rbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "GP28"
+        "pattern": "ring_rtop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP15"
+        "pattern": "D7"
       },
       {
         "netclass": "Default",
-        "pattern": "GP0"
+        "pattern": "pinky_rbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "GP1"
+        "pattern": "pinky_rtop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP2"
+        "pattern": "D8"
       },
       {
         "netclass": "Default",
-        "pattern": "GP3"
+        "pattern": "outer_rbottom"
       },
       {
         "netclass": "Default",
-        "pattern": "GP4"
+        "pattern": "outer_rtop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP6"
+        "pattern": "outer_lttop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP7"
+        "pattern": "inner_lttop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP8"
+        "pattern": "inner_rttop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP26"
+        "pattern": "outer_rttop"
       },
       {
         "netclass": "Default",
-        "pattern": "GP27"
+        "pattern": "D23"
       },
       {
         "netclass": "Default",
-        "pattern": "RUN"
+        "pattern": "D29"
       },
       {
         "netclass": "Default",
-        "pattern": "ADC_VREF"
+        "pattern": "D9"
       },
       {
         "netclass": "Default",
-        "pattern": "3V3"
+        "pattern": "D2"
       },
       {
         "netclass": "Default",
-        "pattern": "3V3_EN"
+        "pattern": "D21"
       },
       {
         "netclass": "Default",
-        "pattern": "VSYS"
+        "pattern": "Dm"
       },
       {
         "netclass": "Default",
-        "pattern": "VBUS"
+        "pattern": "RAW"
       },
       {
         "netclass": "Default",
@@ -446,15 +446,43 @@
       },
       {
         "netclass": "Default",
-        "pattern": "AGND"
+        "pattern": "RST"
       },
       {
         "netclass": "Default",
-        "pattern": "SWCLK"
+        "pattern": "VCC"
       },
       {
         "netclass": "Default",
-        "pattern": "SWDIO"
+        "pattern": "D12"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D13"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D14"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D15"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D16"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "Dp"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D0"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D1"
       }
     ]
   },
