@@ -29,7 +29,9 @@ RP2040-based pro-micro compatible.
 
 - Black
 - With standard header pins
-- With `Medium Profile Sockets [Frood]`
+- TODO: Find out which socket type to use
+
+[Socketed microcontroller](https://42keebs.eu/build-guides/socketing-the-frood-nice-nano-controllers/)
 
 ### Diodes
 

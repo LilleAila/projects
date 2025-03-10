@@ -39,9 +39,10 @@ points:
           key.column_net: GP10
       rows:
         # Bottom to top
-        bottom:
+        # KiCad tries to connect different zones with same names in nets, so have to add a prefix
+        lbottom:
           row_net: GP9
-        top:
+        ltop:
           row_net: GP5
 
     right:
@@ -49,7 +50,7 @@ points:
         padding: 1ky
         spread: 1kx
       anchor:
-        ref: left_inner_bottom
+        ref: left_inner_lbottom
         shift: [3ky, 0]
       columns:
         inner:
@@ -65,9 +66,9 @@ points:
         outer:
           key.column_net: GP16
       rows:
-        bottom:
+        rbottom:
           row_net: GP22
-        top:
+        rtop:
           row_net: GP28
 
     lthumbs:
@@ -75,7 +76,7 @@ points:
         padding: 1ky
         spread: 1kx
       anchor:
-        ref: left_middle_bottom
+        ref: left_middle_lbottom
         shift: [kx, -2ky]
       columns:
         outer:
@@ -83,7 +84,7 @@ points:
         inner:
           key.column_net: GP10
       rows:
-        top:
+        lttop:
           row_net: GP15
 
     rthumbs:
@@ -91,7 +92,7 @@ points:
         padding: 1ky
         spread: 1kx
       anchor:
-        ref: right_middle_bottom
+        ref: right_middle_rbottom
         shift: [-2kx, -2ky]
       columns:
         inner:
@@ -99,7 +100,7 @@ points:
         outer:
           key.column_net: GP20
       rows:
-        top:
+        rttop:
           row_net: GP15
 
 outlines:
@@ -112,42 +113,42 @@ outlines:
     - what: polygon
       operation: stack
       points:
-        - ref: left_pinky_top
+        - ref: left_pinky_ltop
           shift: [-0.5px, 0.5py]
-        - ref: right_outer_top
+        - ref: right_outer_rtop
           shift: [0.5px, 0.5py]
-        - ref: right_outer_bottom
+        - ref: right_outer_rbottom
           shift: [0.5px, -0.5py]
-        - ref: right_middle_bottom
+        - ref: right_middle_rbottom
           shift: [-0.5kx + p, -0.5py]
-        - ref: rthumbs_outer_top
+        - ref: rthumbs_outer_rttop
           shift: [0.5kx + p, -0.5py]
-        - ref: lthumbs_outer_top
+        - ref: lthumbs_outer_lttop
           shift: [-0.5kx - p, -0.5py]
-        - ref: left_middle_bottom
+        - ref: left_middle_lbottom
           shift: [0.5kx - p, -0.5py]
-        - ref: left_pinky_bottom
+        - ref: left_pinky_lbottom
           shift: [-0.5px, -0.5py]
 
   xlBoard:
     - what: polygon
       operation: stack
       points:
-        - ref: left_pinky_top
+        - ref: left_pinky_ltop
           shift: [-0.5dpx, 0.5dpy]
-        - ref: right_outer_top
+        - ref: right_outer_rtop
           shift: [0.5dpx, 0.5dpy]
-        - ref: right_outer_bottom
+        - ref: right_outer_rbottom
           shift: [0.5dpx, -0.5dpy]
-        - ref: right_middle_bottom
+        - ref: right_middle_rbottom
           shift: [-0.5kx + 2p, -0.5dpy]
-        - ref: rthumbs_outer_top
+        - ref: rthumbs_outer_rttop
           shift: [0.5kx + 2p, -0.5dpy]
-        - ref: lthumbs_outer_top
+        - ref: lthumbs_outer_lttop
           shift: [-0.5kx - 2p, -0.5dpy]
-        - ref: left_middle_bottom
+        - ref: left_middle_lbottom
           shift: [0.5kx - 2p, -0.5dpy]
-        - ref: left_pinky_bottom
+        - ref: left_pinky_lbottom
           shift: [-0.5dpx, -0.5dpy]
 
   combined:
@@ -159,70 +160,70 @@ outlines:
     - what: circle
       radius: screwSize
       where:
-        ref: left_pinky_top
+        ref: left_pinky_ltop
         shift: [0.5kx, -0.5kx]
     - what: circle
       radius: screwSize
       where:
-        ref: left_inner_top
+        ref: left_inner_ltop
         shift: [-0.5kx, -0.5kx]
     - what: circle
       radius: screwSize
       where:
-        ref: right_inner_top
+        ref: right_inner_rtop
         shift: [0.5kx, -0.5kx]
     - what: circle
       radius: screwSize
       where:
-        ref: right_outer_top
+        ref: right_outer_rtop
         shift: [-0.5kx, -0.5kx]
     - what: circle
       radius: screwSize
       where:
-        ref.aggregate.parts: [left_index_bottom, lthumbs_outer_top]
+        ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
     - what: circle
       radius: screwSize
       where:
-        ref.aggregate.parts: [right_index_bottom, rthumbs_outer_top]
+        ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
     - what: circle
       radius: screwSize
       where:
-        ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
         shift: [0, -5]
 
   standoff:
     - what: circle
       radius: standoffSize
       where:
-        ref: left_pinky_top
+        ref: left_pinky_ltop
         shift: [0.5kx, -0.5kx]
     - what: circle
       radius: standoffSize
       where:
-        ref: left_inner_top
+        ref: left_inner_ltop
         shift: [-0.5kx, -0.5kx]
     - what: circle
       radius: standoffSize
       where:
-        ref: right_inner_top
+        ref: right_inner_rtop
         shift: [0.5kx, -0.5kx]
     - what: circle
       radius: standoffSize
       where:
-        ref: right_outer_top
+        ref: right_outer_rtop
         shift: [-0.5kx, -0.5kx]
     - what: circle
       radius: standoffSize
       where:
-        ref.aggregate.parts: [left_index_bottom, lthumbs_outer_top]
+        ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
     - what: circle
       radius: standoffSize
       where:
-        ref.aggregate.parts: [right_index_bottom, rthumbs_outer_top]
+        ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
     - what: circle
       radius: standoffSize
       where:
-        ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
         shift: [0, -5]
 
 pcbs:
@@ -254,9 +255,9 @@ pcbs:
       promicro:
         what: promicro
         params:
-          orientation: up
+          orientation: down # usb port sticking down
         where:
-          ref.aggregate.parts: [left_inner_top, right_inner_top]
+          ref.aggregate.parts: [left_inner_ltop, right_inner_rtop]
           shift: [0, -10]
           rotate: -90
 
@@ -266,41 +267,41 @@ pcbs:
           from: GND
           to: RST
         where:
-          ref.aggregate.parts: [left_inner_bottom, right_inner_bottom]
+          ref.aggregate.parts: [left_inner_lbottom, right_inner_rbottom]
           shift: [0, -ky]
 
       holeLeft:
         what: mountinghole
         where:
-          ref: left_pinky_top
+          ref: left_pinky_ltop
           shift: [0.5kx, -0.5kx]
       holeMiddleLeft:
         what: mountinghole
         where:
-          ref: left_inner_top
+          ref: left_inner_ltop
           shift: [-0.5kx, -0.5kx]
       holeMiddleRight:
         what: mountinghole
         where:
-          ref: right_inner_top
+          ref: right_inner_rtop
           shift: [0.5kx, -0.5kx]
       holeRight:
         what: mountinghole
         where:
-          ref: right_outer_top
+          ref: right_outer_rtop
           shift: [-0.5kx, -0.5kx]
       holeLeftBottom:
         what: mountinghole
         where:
-          ref.aggregate.parts: [left_index_bottom, lthumbs_outer_top]
+          ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
       holeRightBottom:
         what: mountinghole
         where:
-          ref.aggregate.parts: [right_index_bottom, rthumbs_outer_top]
+          ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
       holeBottom:
         what: mountinghole
         where:
-          ref.aggregate.parts: [lthumbs_inner_top, rthumbs_inner_top]
+          ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
 
 cases:
   bottom:
