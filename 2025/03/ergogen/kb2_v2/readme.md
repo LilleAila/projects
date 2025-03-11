@@ -29,7 +29,7 @@ RP2040-based pro-micro compatible.
 
 - Black
 - With standard header pins
-- TODO: Find out which socket type to use
+- With `Medium Profile Sockets + Pins (30) [Frood]`
 
 [Socketed microcontroller](https://42keebs.eu/build-guides/socketing-the-frood-nice-nano-controllers/)
 
@@ -67,4 +67,4 @@ Expensive :(
 
 ### Keycaps
 
-3D-printed custom-bade choc V1 keycaps
+3D-printed custom-made choc V1 keycaps
