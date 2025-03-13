@@ -1,8 +1,13 @@
 Steno keyboard
 
-Difference from v1: switched from pi pico to [frood rp2040](https://42keebs.eu/shop/parts/controllers/frood-rp2040-pro-micro-controller/) (pro micro-compatible)
+## TODO
 
-^ TODO
+- [ ] Better position the reset button on the PCB
+- [ ] Route PCB
+- [ ] Make case with proper cutouts for microcontroller, etc.
+- [x] Find a way to mount the PCB to the case
+- [ ] Add more spacing between the case edge and the PCB
+- [ ] Test case with actual screws and inserts (with mock PCB)
 
 ## BOM
 

@@ -14,11 +14,17 @@ units:
   # Double padding, for case
   dpx: ky + p * 4
   dpy: ky + p * 4
-  # Screws
-  screwSize: 1.5
-  standoffSize: 2.5
+
+  # Screws (radius)
+  screwHeadSize: 3.8 / 2 # NOT: Might have to add a bit of extra room
+  standoffInner: 3 / 2
+  standoffOuter: 5 / 2
   # Other values
+  bottomHeight: 1
+  standoffHeight: 3
   pcbHeight: 1.6
+  topHeight: 2.2
+  screwHeadHeight: 1.55
 
 points:
   # NOTE: Using same names, e.g. inner_top in multiple zones, causes KiCAD to want to have them connected, even though they're not supposed to, because the keys have the same name.
@@ -171,72 +177,107 @@ outlines:
     - operation: subtract
       name: switches
 
-  mounting:
+  mountingHoles:
     - what: circle
-      radius: screwSize
+      radius: standoffInner
       where:
         ref: left_pinky_ltop
         shift: [0.5kx, -0.5kx]
     - what: circle
-      radius: screwSize
+      radius: standoffInner
       where:
         ref: left_inner_ltop
         shift: [-0.5kx, -0.5kx]
     - what: circle
-      radius: screwSize
+      radius: standoffInner
       where:
         ref: right_inner_rtop
         shift: [0.5kx, -0.5kx]
     - what: circle
-      radius: screwSize
+      radius: standoffInner
       where:
         ref: right_outer_rtop
         shift: [-0.5kx, -0.5kx]
     - what: circle
-      radius: screwSize
+      radius: standoffInner
       where:
         ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
     - what: circle
-      radius: screwSize
+      radius: standoffInner
       where:
         ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
     - what: circle
-      radius: screwSize
+      radius: standoffInner
       where:
         ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
         shift: [0, -5]
 
-  standoff:
+  standoffs:
     - what: circle
-      radius: standoffSize
+      radius: standoffOuter
       where:
         ref: left_pinky_ltop
         shift: [0.5kx, -0.5kx]
     - what: circle
-      radius: standoffSize
+      radius: standoffOuter
       where:
         ref: left_inner_ltop
         shift: [-0.5kx, -0.5kx]
     - what: circle
-      radius: standoffSize
+      radius: standoffOuter
       where:
         ref: right_inner_rtop
         shift: [0.5kx, -0.5kx]
     - what: circle
-      radius: standoffSize
+      radius: standoffOuter
       where:
         ref: right_outer_rtop
         shift: [-0.5kx, -0.5kx]
     - what: circle
-      radius: standoffSize
+      radius: standoffOuter
       where:
         ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
     - what: circle
-      radius: standoffSize
+      radius: standoffOuter
       where:
         ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
     - what: circle
-      radius: standoffSize
+      radius: standoffOuter
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [0, -5]
+
+  screwHoles:
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref: left_pinky_ltop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref: left_inner_ltop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref: right_inner_rtop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref: right_outer_rtop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
+    - what: circle
+      radius: screwHeadSize
       where:
         ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
         shift: [0, -5]
@@ -320,59 +361,55 @@ pcbs:
           ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
 
 cases:
-  bottom:
-    - name: board
-      extrude: 1
-  xlBottom:
+  # Bottom case
+  _bottomWall:
     - name: xlBoard
-      extrude: 1
-  _outerWall:
-    - name: xlBoard
-      extrude: 4 + pcbHeight
-  _innerWall:
+      extrude: standoffHeight
     - name: board
-      extrude: 4 + pcbHeight
-  wall:
-    - what: case
-      name: _outerWall
-      operation: add
-    - what: case
-      name: _innerWall
+      extrude: standoffHeight
       operation: subtract
-  _holes:
-    - name: mounting
-      extrude: 4
   _standoffs:
-    - name: standoff
-      extrude: 4
-  case:
+    - name: standoffs
+      extrude: standoffHeight
+      operation: add
+    - name: mountingHoles
+      extrude: standoffHeight
+      operation: subtract
+  bottom:
+    - name: xlBoard
+      extrude: bottomHeight
     - what: case
       name: _standoffs
       operation: add
+      shift: [0, 0, bottomHeight]
     - what: case
-      name: _holes
-      operation: subtract
-    - what: case
-      name: xlBottom
+      name: _bottomWall
       operation: add
-    - what: case
-      name: wall
-      operation: add
+      shift: [0, 0, bottomHeight]
 
-  _switches:
-    - name: topPlate
-      extrude: 2
-  topCase:
-    - what: case
-      name: _standoffs
-      operation: add
-    - what: case
-      name: _holes
+  # Top case
+  _topWall:
+    - name: xlBoard
+      extrude: pcbHeight
+    - name: board
+      extrude: pcbHeight
       operation: subtract
+  top:
+    - name: topPlate
+      extrude: topHeight
+      shift: [0, 0, pcbHeight]
+    - name: screwHoles
+      extrude: screwHeadHeight
+      operation: subtract
+      shift: [0, 0, pcbHeight]
     - what: case
-      name: _switches
+      name: _topWall
+      operation: add
 
   # Mock pcb
   pcb:
     - name: board
-      extrude: 1.6
+      extrude: pcbHeight
+    - name: mountingHoles
+      extrude: pcbHeight
+      operation: subtract
