@@ -1,0 +1,378 @@
+units:
+  # Choc keys
+  kx: cx
+  ky: cy
+  # Switch size (below the lip)
+  # 13.8 + some padding
+  sx: 14.3
+  sy: 14.3
+  sz: 2
+  # Padding
+  p: 2 # padding per side
+  px: kx + p * 2
+  py: ky + p * 2
+  # Double padding, for case
+  dpx: ky + p * 4
+  dpy: ky + p * 4
+  # Screws
+  screwSize: 1.5
+  standoffSize: 2.5
+  # Other values
+  pcbHeight: 1.6
+
+points:
+  # NOTE: Using same names, e.g. inner_top in multiple zones, causes KiCAD to want to have them connected, even though they're not supposed to, because the keys have the same name.
+  zones:
+    left:
+      # KiCAD placement
+      anchor:
+        shift: [100, -100]
+      key:
+        padding: 1ky
+        spread: 1kx
+      columns:
+        # Left to right
+        pinky:
+          key.column_net: D20
+        ring:
+          key.column_net: D22
+        middle:
+          key.column_net: D26
+        index:
+          key.column_net: D27
+        inner:
+          key.column_net: D28
+      rows:
+        # Bottom to top
+        # KiCad tries to connect different zones with same names in nets, so have to add a prefix
+        lbottom:
+          row_net: D23
+        ltop:
+          row_net: D29
+
+    right:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: left_inner_lbottom
+        shift: [3ky, 0]
+      columns:
+        inner:
+          key.column_net: D3
+        index:
+          key.column_net: D4
+        middle:
+          key.column_net: D5
+        ring:
+          key.column_net: D6
+        pinky:
+          key.column_net: D7
+        outer:
+          key.column_net: D8
+      rows:
+        rbottom:
+          row_net: D9
+        rtop:
+          row_net: D2
+
+    lthumbs:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: left_middle_lbottom
+        shift: [kx, -2ky]
+      columns:
+        outer:
+          key.column_net: D27
+        inner:
+          key.column_net: D28
+      rows:
+        lttop:
+          row_net: D21
+
+    rthumbs:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: right_middle_rbottom
+        shift: [-2kx, -2ky]
+      columns:
+        inner:
+          key.column_net: D3
+        outer:
+          key.column_net: D4
+      rows:
+        rttop:
+          row_net: D21
+
+outlines:
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+
+  switches:
+    - what: rectangle
+      where: true
+      size: [sx, sy]
+
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_pinky_ltop
+          shift: [-0.5px, 0.5py]
+        - ref: right_outer_rtop
+          shift: [0.5px, 0.5py]
+        - ref: right_outer_rbottom
+          shift: [0.5px, -0.5py]
+        - ref: right_middle_rbottom
+          shift: [-0.5kx + p, -0.5py]
+        - ref: rthumbs_outer_rttop
+          shift: [0.5kx + p, -0.5py]
+        - ref: lthumbs_outer_lttop
+          shift: [-0.5kx - p, -0.5py]
+        - ref: left_middle_lbottom
+          shift: [0.5kx - p, -0.5py]
+        - ref: left_pinky_lbottom
+          shift: [-0.5px, -0.5py]
+
+  xlBoard:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_pinky_ltop
+          shift: [-0.5dpx, 0.5dpy]
+        - ref: right_outer_rtop
+          shift: [0.5dpx, 0.5dpy]
+        - ref: right_outer_rbottom
+          shift: [0.5dpx, -0.5dpy]
+        - ref: right_middle_rbottom
+          shift: [-0.5kx + 2p, -0.5dpy]
+        - ref: rthumbs_outer_rttop
+          shift: [0.5kx + 2p, -0.5dpy]
+        - ref: lthumbs_outer_lttop
+          shift: [-0.5kx - 2p, -0.5dpy]
+        - ref: left_middle_lbottom
+          shift: [0.5kx - 2p, -0.5dpy]
+        - ref: left_pinky_lbottom
+          shift: [-0.5dpx, -0.5dpy]
+
+  combined:
+    - name: board
+    - operation: subtract
+      name: keys
+
+  topPlate:
+    - name: xlBoard
+    - operation: subtract
+      name: switches
+
+  mounting:
+    - what: circle
+      radius: screwSize
+      where:
+        ref: left_pinky_ltop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: left_inner_ltop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: right_inner_rtop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: right_outer_rtop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: screwSize
+      where:
+        ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
+    - what: circle
+      radius: screwSize
+      where:
+        ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
+    - what: circle
+      radius: screwSize
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [0, -5]
+
+  standoff:
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: left_pinky_ltop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: left_inner_ltop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: right_inner_rtop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: right_outer_rtop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [0, -5]
+
+pcbs:
+  pcb:
+    outlines:
+      main:
+        outline: board
+
+    footprints:
+      choc_hotswap:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+
+      promicro:
+        what: frood
+        params:
+          orientation: down # usb port sticking down
+        where:
+          ref.aggregate.parts: [left_inner_ltop, right_inner_rtop]
+          shift: [0, -7.5]
+          rotate: -90
+
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RST
+          side: B
+        where:
+          ref.aggregate.parts: [left_inner_ltop, right_inner_rbottom]
+          shift: [0, 0]
+
+      holeLeft:
+        what: mounthole
+        where:
+          ref: left_pinky_ltop
+          shift: [0.5kx, -0.5kx]
+      holeMiddleLeft:
+        what: mounthole
+        where:
+          ref: left_inner_ltop
+          shift: [-0.5kx, -0.5kx]
+      holeMiddleRight:
+        what: mounthole
+        where:
+          ref: right_inner_rtop
+          shift: [0.5kx, -0.5kx]
+      holeRight:
+        what: mounthole
+        where:
+          ref: right_outer_rtop
+          shift: [-0.5kx, -0.5kx]
+      holeLeftBottom:
+        what: mounthole
+        where:
+          ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
+      holeRightBottom:
+        what: mounthole
+        where:
+          ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
+      holeBottom:
+        what: mounthole
+        where:
+          ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+
+cases:
+  bottom:
+    - name: board
+      extrude: 1
+  xlBottom:
+    - name: xlBoard
+      extrude: 1
+  _outerWall:
+    - name: xlBoard
+      extrude: 4 + pcbHeight
+  _innerWall:
+    - name: board
+      extrude: 4 + pcbHeight
+  wall:
+    - what: case
+      name: _outerWall
+      operation: add
+    - what: case
+      name: _innerWall
+      operation: subtract
+  _holes:
+    - name: mounting
+      extrude: 4
+  _standoffs:
+    - name: standoff
+      extrude: 4
+  case:
+    - what: case
+      name: _standoffs
+      operation: add
+    - what: case
+      name: _holes
+      operation: subtract
+    - what: case
+      name: xlBottom
+      operation: add
+    - what: case
+      name: wall
+      operation: add
+
+  _switches:
+    - name: topPlate
+      extrude: 2
+  topCase:
+    - what: case
+      name: _standoffs
+      operation: add
+    - what: case
+      name: _holes
+      operation: subtract
+    - what: case
+      name: _switches
+
+  # Mock pcb
+  pcb:
+    - name: board
+      extrude: 1.6
