@@ -2,6 +2,11 @@ units:
   # Choc keys
   kx: cx
   ky: cy
+  # Switch size (below the lip)
+  # 13.8 + some padding
+  sx: 14.3
+  sy: 14.3
+  sz: 2
   # Padding
   p: 2 # padding per side
   px: kx + p * 2
@@ -109,6 +114,11 @@ outlines:
       where: true
       size: [kx-0.5,ky-0.5]
 
+  switches:
+    - what: rectangle
+      where: true
+      size: [sx, sy]
+
   board:
     - what: polygon
       operation: stack
@@ -155,6 +165,11 @@ outlines:
     - name: board
     - operation: subtract
       name: keys
+
+  topPlate:
+    - name: xlBoard
+    - operation: subtract
+      name: switches
 
   mounting:
     - what: circle
@@ -342,3 +357,21 @@ cases:
     - what: case
       name: wall
       operation: add
+
+  _switches:
+    - name: topPlate
+      extrude: 2
+  topCase:
+    - what: case
+      name: _standoffs
+      operation: add
+    - what: case
+      name: _holes
+      operation: subtract
+    - what: case
+      name: _switches
+
+  # Mock pcb
+  pcb:
+    - name: board
+      extrude: 1.6
