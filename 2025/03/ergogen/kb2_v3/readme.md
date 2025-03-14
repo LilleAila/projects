@@ -8,6 +8,7 @@ Steno keyboard
 - [x] Find a way to mount the PCB to the case
 - [x] Add more spacing between the case edge and the PCB
 - [ ] Test case with actual screws and inserts (with mock PCB)
+- [ ] Move the standoffs such that there are two right next to each other so that the case can be split down the middle for printing
 
 ## BOM
 
