@@ -4,7 +4,7 @@ Steno keyboard
 
 - [ ] Better position the reset button on the PCB
 - [ ] Route PCB
-- [ ] Make case with proper cutouts for microcontroller, etc.
+- [x] Make case with proper cutouts for microcontroller, etc.
 - [x] Find a way to mount the PCB to the case
 - [ ] Add more spacing between the case edge and the PCB
 - [ ] Test case with actual screws and inserts (with mock PCB)

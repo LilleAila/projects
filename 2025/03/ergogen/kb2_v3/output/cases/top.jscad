@@ -74,6 +74,12 @@ function screwHoles_extrude_1_55_outline_fn(){
 }
 
 
+function microcontroller_extrude_3_8000000000000003_outline_fn(){
+    return new CSG.Path2D([[181,-108.5],[181,-70.5]]).appendPoint([214,-70.5]).appendPoint([214,-108.5]).appendPoint([181,-108.5]).close().innerToCAG()
+.extrude({ offset: [0, 0, 3.8000000000000003] });
+}
+
+
 function xlBoard_extrude_1_6_outline_fn(){
     return new CSG.Path2D([[87.5,-112.5],[87.5,-70.5]]).appendPoint([325.5,-70.5]).appendPoint([325.5,-112.5]).appendPoint([254,-112.5]).appendPoint([254,-146.5]).appendPoint([141,-146.5]).appendPoint([141,-112.5]).appendPoint([87.5,-112.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 1.6] });
@@ -175,6 +181,22 @@ function board_extrude_1_6_outline_fn(){
 
                 top__part_2 = translate([0,0,0], top__part_2);
                 result = result.union(top__part_2);
+                
+            
+
+                // creating part 3 of case top
+                let top__part_3 = microcontroller_extrude_3_8000000000000003_outline_fn();
+
+                // make sure that rotations are relative
+                let top__part_3_bounds = top__part_3.getBounds();
+                let top__part_3_x = top__part_3_bounds[0].x + (top__part_3_bounds[1].x - top__part_3_bounds[0].x) / 2
+                let top__part_3_y = top__part_3_bounds[0].y + (top__part_3_bounds[1].y - top__part_3_bounds[0].y) / 2
+                top__part_3 = translate([-top__part_3_x, -top__part_3_y, 0], top__part_3);
+                top__part_3 = rotate([0,0,0], top__part_3);
+                top__part_3 = translate([top__part_3_x, top__part_3_y, 0], top__part_3);
+
+                top__part_3 = translate([0,0,0], top__part_3);
+                result = result.subtract(top__part_3);
                 
             
                     return result;

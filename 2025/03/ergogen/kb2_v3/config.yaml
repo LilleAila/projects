@@ -125,6 +125,19 @@ outlines:
       where: true
       size: [sx, sy]
 
+  microcontroller:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_inner_ltop
+          shift: [0.5kx, 0.5dpx]
+        - ref: right_inner_rtop
+          shift: [-0.5kx, 0.5dpx]
+        - ref: right_inner_rbottom
+          shift: [-0.5kx, -0.5ky]
+        - ref: left_inner_lbottom
+          shift: [0.5kx, -0.5ky]
+
   board:
     - what: polygon
       operation: stack
@@ -405,6 +418,9 @@ cases:
     - what: case
       name: _topWall
       operation: add
+    - name: microcontroller
+      extrude: topHeight + pcbHeight
+      operation: subtract
 
   # Mock pcb
   pcb:
