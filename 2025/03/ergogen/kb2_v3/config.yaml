@@ -11,9 +11,11 @@ units:
   p: 2 # padding per side
   px: kx + p * 2
   py: ky + p * 2
-  # Double padding, for case
-  dpx: ky + p * 4
-  dpy: ky + p * 4
+  # Case outer and inner (distance from center of key)
+  cix: 0.5ky + p * 2
+  ciy: 0.5ky + p * 2
+  cox: 0.5ky + p * 3
+  coy: 0.5ky + p * 3
 
   # Screws (radius)
   screwHeadSize: 3.8 / 2 # NOT: Might have to add a bit of extra room
@@ -130,9 +132,9 @@ outlines:
       operation: stack
       points:
         - ref: left_inner_ltop
-          shift: [0.5kx, 0.5dpx]
+          shift: [0.5kx, cox]
         - ref: right_inner_rtop
-          shift: [-0.5kx, 0.5dpx]
+          shift: [-0.5kx, cox]
         - ref: right_inner_rbottom
           shift: [-0.5kx, -0.5ky]
         - ref: left_inner_lbottom
@@ -159,26 +161,47 @@ outlines:
         - ref: left_pinky_lbottom
           shift: [-0.5px, -0.5py]
 
-  xlBoard:
+  outerCase:
     - what: polygon
       operation: stack
       points:
         - ref: left_pinky_ltop
-          shift: [-0.5dpx, 0.5dpy]
+          shift: [-cox, coy]
         - ref: right_outer_rtop
-          shift: [0.5dpx, 0.5dpy]
+          shift: [cox, coy]
         - ref: right_outer_rbottom
-          shift: [0.5dpx, -0.5dpy]
+          shift: [cox, -coy]
         - ref: right_middle_rbottom
-          shift: [-0.5kx + 2p, -0.5dpy]
+          shift: [-0.5kx + 4p, -coy]
         - ref: rthumbs_outer_rttop
-          shift: [0.5kx + 2p, -0.5dpy]
+          shift: [0.5kx + 4p, -coy]
         - ref: lthumbs_outer_lttop
-          shift: [-0.5kx - 2p, -0.5dpy]
+          shift: [-0.5kx - 4p, -coy]
         - ref: left_middle_lbottom
-          shift: [0.5kx - 2p, -0.5dpy]
+          shift: [0.5kx - 4p, -coy]
         - ref: left_pinky_lbottom
-          shift: [-0.5dpx, -0.5dpy]
+          shift: [-cox, -coy]
+
+  innerCase:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_pinky_ltop
+          shift: [-cix, ciy]
+        - ref: right_outer_rtop
+          shift: [cix, ciy]
+        - ref: right_outer_rbottom
+          shift: [cix, -ciy]
+        - ref: right_middle_rbottom
+          shift: [-0.5kx + 2p, -ciy]
+        - ref: rthumbs_outer_rttop
+          shift: [0.5kx + 2p, -ciy]
+        - ref: lthumbs_outer_lttop
+          shift: [-0.5kx - 2p, -ciy]
+        - ref: left_middle_lbottom
+          shift: [0.5kx - 2p, -ciy]
+        - ref: left_pinky_lbottom
+          shift: [-cix, -ciy]
 
   combined:
     - name: board
@@ -186,7 +209,7 @@ outlines:
       name: keys
 
   topPlate:
-    - name: xlBoard
+    - name: outerCase
     - operation: subtract
       name: switches
 
@@ -376,9 +399,9 @@ pcbs:
 cases:
   # Bottom case
   _bottomWall:
-    - name: xlBoard
+    - name: outerCase
       extrude: standoffHeight
-    - name: board
+    - name: innerCase
       extrude: standoffHeight
       operation: subtract
   _standoffs:
@@ -389,7 +412,7 @@ cases:
       extrude: standoffHeight
       operation: subtract
   bottom:
-    - name: xlBoard
+    - name: outerCase
       extrude: bottomHeight
     - what: case
       name: _standoffs
@@ -402,9 +425,9 @@ cases:
 
   # Top case
   _topWall:
-    - name: xlBoard
+    - name: outerCase
       extrude: pcbHeight
-    - name: board
+    - name: innerCase
       extrude: pcbHeight
       operation: subtract
   top:

@@ -6,7 +6,7 @@ Steno keyboard
 - [ ] Route PCB
 - [x] Make case with proper cutouts for microcontroller, etc.
 - [x] Find a way to mount the PCB to the case
-- [ ] Add more spacing between the case edge and the PCB
+- [x] Add more spacing between the case edge and the PCB
 - [ ] Test case with actual screws and inserts (with mock PCB)
 
 ## BOM

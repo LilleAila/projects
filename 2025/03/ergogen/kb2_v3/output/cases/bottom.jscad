@@ -1,5 +1,5 @@
-function xlBoard_extrude_1_outline_fn(){
-    return new CSG.Path2D([[87.5,-112.5],[87.5,-70.5]]).appendPoint([325.5,-70.5]).appendPoint([325.5,-112.5]).appendPoint([254,-112.5]).appendPoint([254,-146.5]).appendPoint([141,-146.5]).appendPoint([141,-112.5]).appendPoint([87.5,-112.5]).close().innerToCAG()
+function outerCase_extrude_1_outline_fn(){
+    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([327.5,-68.5]).appendPoint([327.5,-114.5]).appendPoint([258,-114.5]).appendPoint([258,-148.5]).appendPoint([137,-148.5]).appendPoint([137,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 1] });
 }
 
@@ -40,14 +40,14 @@ function mountingHoles_extrude_3_outline_fn(){
 }
 
 
-function xlBoard_extrude_3_outline_fn(){
-    return new CSG.Path2D([[87.5,-112.5],[87.5,-70.5]]).appendPoint([325.5,-70.5]).appendPoint([325.5,-112.5]).appendPoint([254,-112.5]).appendPoint([254,-146.5]).appendPoint([141,-146.5]).appendPoint([141,-112.5]).appendPoint([87.5,-112.5]).close().innerToCAG()
+function outerCase_extrude_3_outline_fn(){
+    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([327.5,-68.5]).appendPoint([327.5,-114.5]).appendPoint([258,-114.5]).appendPoint([258,-148.5]).appendPoint([137,-148.5]).appendPoint([137,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 3] });
 }
 
 
-function board_extrude_3_outline_fn(){
-    return new CSG.Path2D([[89,-110.5],[89,-72.5]]).appendPoint([324,-72.5]).appendPoint([324,-110.5]).appendPoint([252,-110.5]).appendPoint([252,-144.5]).appendPoint([143,-144.5]).appendPoint([143,-110.5]).appendPoint([89,-110.5]).close().innerToCAG()
+function innerCase_extrude_3_outline_fn(){
+    return new CSG.Path2D([[87.5,-112.5],[87.5,-70.5]]).appendPoint([325.5,-70.5]).appendPoint([325.5,-112.5]).appendPoint([254,-112.5]).appendPoint([254,-146.5]).appendPoint([141,-146.5]).appendPoint([141,-112.5]).appendPoint([87.5,-112.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 3] });
 }
 
@@ -97,7 +97,7 @@ function board_extrude_3_outline_fn(){
                     
 
                 // creating part 0 of case _bottomWall
-                let _bottomWall__part_0 = xlBoard_extrude_3_outline_fn();
+                let _bottomWall__part_0 = outerCase_extrude_3_outline_fn();
 
                 // make sure that rotations are relative
                 let _bottomWall__part_0_bounds = _bottomWall__part_0.getBounds();
@@ -113,7 +113,7 @@ function board_extrude_3_outline_fn(){
             
 
                 // creating part 1 of case _bottomWall
-                let _bottomWall__part_1 = board_extrude_3_outline_fn();
+                let _bottomWall__part_1 = innerCase_extrude_3_outline_fn();
 
                 // make sure that rotations are relative
                 let _bottomWall__part_1_bounds = _bottomWall__part_1.getBounds();
@@ -136,7 +136,7 @@ function board_extrude_3_outline_fn(){
                     
 
                 // creating part 0 of case bottom
-                let bottom__part_0 = xlBoard_extrude_1_outline_fn();
+                let bottom__part_0 = outerCase_extrude_1_outline_fn();
 
                 // make sure that rotations are relative
                 let bottom__part_0_bounds = bottom__part_0.getBounds();
