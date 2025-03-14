@@ -57,8 +57,10 @@ function topPlate_extrude_2_2_outline_fn(){
 
 
 function screwHoles_extrude_1_55_outline_fn(){
-    return CAG.circle({"center":[197.5,-139],"radius":1.9})
+    return CAG.circle({"center":[207.5,-134],"radius":1.9})
 .union(
+    CAG.circle({"center":[187.5,-134],"radius":1.9})
+).union(
     CAG.circle({"center":[241,-117],"radius":1.9})
 ).union(
     CAG.circle({"center":[154,-117],"radius":1.9})

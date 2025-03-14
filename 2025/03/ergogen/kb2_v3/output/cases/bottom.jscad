@@ -5,8 +5,10 @@ function outerCase_extrude_1_outline_fn(){
 
 
 function standoffs_extrude_3_outline_fn(){
-    return CAG.circle({"center":[197.5,-139],"radius":2.5})
+    return CAG.circle({"center":[207.5,-134],"radius":2.5})
 .union(
+    CAG.circle({"center":[187.5,-134],"radius":2.5})
+).union(
     CAG.circle({"center":[241,-117],"radius":2.5})
 ).union(
     CAG.circle({"center":[154,-117],"radius":2.5})
@@ -23,8 +25,10 @@ function standoffs_extrude_3_outline_fn(){
 
 
 function mountingHoles_extrude_3_outline_fn(){
-    return CAG.circle({"center":[197.5,-139],"radius":1.5})
+    return CAG.circle({"center":[207.5,-134],"radius":1.5})
 .union(
+    CAG.circle({"center":[187.5,-134],"radius":1.5})
+).union(
     CAG.circle({"center":[241,-117],"radius":1.5})
 ).union(
     CAG.circle({"center":[154,-117],"radius":1.5})

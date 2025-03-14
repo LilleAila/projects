@@ -2596,9 +2596,29 @@
         )
 
         (module "Mount_Hole_2.2mm_Pad_Via" (layer "F.Cu")
-          (at 197.5 134 0)
+          (at 187.5 134 0)
 
           (fp_text reference "_7" (at 0 -3.2) (layer "F.SilkS") hide
+            (effects (font (size 1 1) (thickness 0.15)))
+          )
+
+          (fp_circle (center 0 0) (end 2.45 0) (layer "F.CrtYd") (width 0.05) (fill none))
+          (pad "1" thru_hole circle locked (at 0 0) (size 4.4 4.4) (drill 2.2) (layers *.Cu *.Mask))
+          (pad "1" thru_hole circle locked (at 1.6296296296296298 0) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))
+(pad "1" thru_hole circle locked (at 1.1523221619336332 1.152322161933633) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))
+(pad "1" thru_hole circle locked (at 9.978603548608063e-17 1.6296296296296298) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))
+(pad "1" thru_hole circle locked (at -1.152322161933633 1.1523221619336332) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))
+(pad "1" thru_hole circle locked (at -1.6296296296296298 1.9957207097216127e-16) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))
+(pad "1" thru_hole circle locked (at -1.1523221619336335 -1.152322161933633) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))
+(pad "1" thru_hole circle locked (at -2.993581064582419e-16 -1.6296296296296298) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))
+(pad "1" thru_hole circle locked (at 1.1523221619336328 -1.1523221619336335) (size 0.7 0.7) (drill 0.4) (layers *.Cu *.Mask))
+
+        )
+
+        (module "Mount_Hole_2.2mm_Pad_Via" (layer "F.Cu")
+          (at 207.5 134 0)
+
+          (fp_text reference "_8" (at 0 -3.2) (layer "F.SilkS") hide
             (effects (font (size 1 1) (thickness 0.15)))
           )
 

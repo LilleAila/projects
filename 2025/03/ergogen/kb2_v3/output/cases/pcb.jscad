@@ -5,8 +5,10 @@ function board_extrude_1_6_outline_fn(){
 
 
 function mountingHoles_extrude_1_6_outline_fn(){
-    return CAG.circle({"center":[197.5,-139],"radius":1.5})
+    return CAG.circle({"center":[207.5,-134],"radius":1.5})
 .union(
+    CAG.circle({"center":[187.5,-134],"radius":1.5})
+).union(
     CAG.circle({"center":[241,-117],"radius":1.5})
 ).union(
     CAG.circle({"center":[154,-117],"radius":1.5})

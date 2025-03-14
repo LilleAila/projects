@@ -246,7 +246,12 @@ outlines:
       radius: standoffInner
       where:
         ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
-        shift: [0, -5]
+        shift: [-10, 0]
+    - what: circle
+      radius: standoffInner
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [10, 0]
 
   standoffs:
     - what: circle
@@ -281,7 +286,12 @@ outlines:
       radius: standoffOuter
       where:
         ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
-        shift: [0, -5]
+        shift: [-10, 0]
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [10, 0]
 
   screwHoles:
     - what: circle
@@ -316,7 +326,12 @@ outlines:
       radius: screwHeadSize
       where:
         ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
-        shift: [0, -5]
+        shift: [-10, 0]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [10, 0]
 
 pcbs:
   pcb:
@@ -391,10 +406,16 @@ pcbs:
         what: mounthole
         where:
           ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
-      holeBottom:
+      holeBottomLeft:
         what: mounthole
         where:
           ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+          shift: [-10, 0]
+      holeBottomRighy:
+        what: mounthole
+        where:
+          ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+          shift: [10, 0]
 
 cases:
   # Bottom case

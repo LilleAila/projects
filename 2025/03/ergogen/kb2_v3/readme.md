@@ -2,13 +2,13 @@ Steno keyboard
 
 ## TODO
 
-- [ ] Better position the reset button on the PCB
+- [x] Better position the reset button on the PCB
 - [ ] Route PCB
 - [x] Make case with proper cutouts for microcontroller, etc.
 - [x] Find a way to mount the PCB to the case
 - [x] Add more spacing between the case edge and the PCB
 - [ ] Test case with actual screws and inserts (with mock PCB)
-- [ ] Move the standoffs such that there are two right next to each other so that the case can be split down the middle for printing
+- [x] Move the standoffs such that there are two right next to each other so that the case can be split down the middle for printing
 
 ## BOM
 
