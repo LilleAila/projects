@@ -1,0 +1,477 @@
+units:
+  # Choc keys
+  kx: cx
+  ky: cy
+  # Switch size (below the lip)
+  # 13.8 + some padding
+  sx: 14.3
+  sy: 14.3
+  sz: 2
+  # Padding
+  p: 2 # padding per side
+  px: kx + p * 2
+  py: ky + p * 2
+  # Case outer and inner (distance from center of key)
+  cix: 0.5ky + p * 2
+  ciy: 0.5ky + p * 2
+  cox: 0.5ky + p * 3
+  coy: 0.5ky + p * 3
+
+  # Screws (radius)
+  screwHeadSize: 3.8 / 2 # NOT: Might have to add a bit of extra room
+  standoffInner: 3 / 2
+  standoffOuter: 5 / 2
+  # Other values
+  bottomHeight: 1
+  standoffHeight: 3
+  pcbHeight: 1.6
+  topHeight: 2.2
+  screwHeadHeight: 1.55
+
+points:
+  # NOTE: Using same names, e.g. inner_top in multiple zones, causes KiCAD to want to have them connected, even though they're not supposed to, because the keys have the same name.
+  zones:
+    left:
+      # KiCAD placement
+      anchor:
+        shift: [100, -100]
+      key:
+        padding: 1ky
+        spread: 1kx
+      columns:
+        # Left to right
+        outer:
+          key.column_net: D23
+        pinky:
+          key.column_net: D20
+        ring:
+          key.column_net: D22
+        middle:
+          key.column_net: D26
+        index:
+          key.column_net: D27
+        inner:
+          key.column_net: D28
+      rows:
+        # Bottom to top
+        # KiCad tries to connect different zones with same names in nets, so have to add a prefix
+        lbottom:
+          row_net: D21
+        ltop:
+          row_net: D29
+
+    right:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: left_inner_lbottom
+        shift: [3ky, 0]
+      columns:
+        inner:
+          key.column_net: D3
+        index:
+          key.column_net: D4
+        middle:
+          key.column_net: D5
+        ring:
+          key.column_net: D6
+        pinky:
+          key.column_net: D7
+        outer:
+          key.column_net: D8
+      rows:
+        rbottom:
+          row_net: D9
+        rtop:
+          row_net: D2
+
+    lthumbs:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: left_middle_lbottom
+        shift: [kx, -2ky]
+      columns:
+        outer:
+          key.column_net: D27
+        inner:
+          key.column_net: D28
+      rows:
+        lttop:
+          row_net: D1
+
+    rthumbs:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: right_middle_rbottom
+        shift: [-2kx, -2ky]
+      columns:
+        inner:
+          key.column_net: D3
+        outer:
+          key.column_net: D4
+      rows:
+        rttop:
+          row_net: D1
+
+outlines:
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+
+  switches:
+    - what: rectangle
+      where: true
+      size: [sx, sy]
+
+  microcontroller:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_inner_ltop
+          shift: [0.5kx, cox]
+        - ref: right_inner_rtop
+          shift: [-0.5kx, cox]
+        - ref: right_inner_rbottom
+          shift: [-0.5kx, -0.5ky]
+        - ref: left_inner_lbottom
+          shift: [0.5kx, -0.5ky]
+
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_outer_ltop
+          shift: [-0.5px, 0.5py]
+        - ref: right_outer_rtop
+          shift: [0.5px, 0.5py]
+        - ref: right_outer_rbottom
+          shift: [0.5px, -0.5py]
+        - ref: right_middle_rbottom
+          shift: [-0.5kx + p, -0.5py]
+        - ref: rthumbs_outer_rttop
+          shift: [0.5kx + p, -0.5py]
+        - ref: lthumbs_outer_lttop
+          shift: [-0.5kx - p, -0.5py]
+        - ref: left_middle_lbottom
+          shift: [0.5kx - p, -0.5py]
+        - ref: left_outer_lbottom
+          shift: [-0.5px, -0.5py]
+
+  outerCase:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_outer_ltop
+          shift: [-cox, coy]
+        - ref: right_outer_rtop
+          shift: [cox, coy]
+        - ref: right_outer_rbottom
+          shift: [cox, -coy]
+        - ref: right_middle_rbottom
+          shift: [-0.5kx + 4p, -coy]
+        - ref: rthumbs_outer_rttop
+          shift: [0.5kx + 4p, -coy]
+        - ref: lthumbs_outer_lttop
+          shift: [-0.5kx - 4p, -coy]
+        - ref: left_middle_lbottom
+          shift: [0.5kx - 4p, -coy]
+        - ref: left_outer_lbottom
+          shift: [-cox, -coy]
+
+  innerCase:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_outer_ltop
+          shift: [-cix, ciy]
+        - ref: right_outer_rtop
+          shift: [cix, ciy]
+        - ref: right_outer_rbottom
+          shift: [cix, -ciy]
+        - ref: right_middle_rbottom
+          shift: [-0.5kx + 2p, -ciy]
+        - ref: rthumbs_outer_rttop
+          shift: [0.5kx + 2p, -ciy]
+        - ref: lthumbs_outer_lttop
+          shift: [-0.5kx - 2p, -ciy]
+        - ref: left_middle_lbottom
+          shift: [0.5kx - 2p, -ciy]
+        - ref: left_outer_lbottom
+          shift: [-cix, -ciy]
+
+  combined:
+    - name: board
+    - operation: subtract
+      name: keys
+
+  topPlate:
+    - name: outerCase
+    - operation: subtract
+      name: switches
+
+  mountingHoles:
+    - what: circle
+      radius: standoffInner
+      where:
+        ref: left_outer_ltop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffInner
+      where:
+        ref: left_inner_ltop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffInner
+      where:
+        ref: right_inner_rtop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffInner
+      where:
+        ref: right_outer_rtop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffInner
+      where:
+        ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
+    - what: circle
+      radius: standoffInner
+      where:
+        ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
+    - what: circle
+      radius: standoffInner
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [-10, 0]
+    - what: circle
+      radius: standoffInner
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [10, 0]
+
+  standoffs:
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref: left_outer_ltop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref: left_inner_ltop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref: right_inner_rtop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref: right_outer_rtop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [-10, 0]
+    - what: circle
+      radius: standoffOuter
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [10, 0]
+
+  screwHoles:
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref: left_outer_ltop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref: left_inner_ltop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref: right_inner_rtop
+        shift: [0.5kx, -0.5kx]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref: right_outer_rtop
+        shift: [-0.5kx, -0.5kx]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [-10, 0]
+    - what: circle
+      radius: screwHeadSize
+      where:
+        ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+        shift: [10, 0]
+
+pcbs:
+  pcb:
+    outlines:
+      main:
+        outline: board
+
+    footprints:
+      choc_hotswap:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+
+      promicro:
+        what: frood
+        params:
+          orientation: down # usb port sticking down
+        where:
+          ref.aggregate.parts: [left_inner_ltop, right_inner_rtop]
+          shift: [0, -7.5]
+          rotate: -90
+
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RST
+          side: B
+        where:
+          ref.aggregate.parts: [left_inner_ltop, right_inner_rbottom]
+          shift: [0, 0]
+
+      holeLeft:
+        what: mounthole
+        where:
+          ref: left_outer_ltop
+          shift: [0.5kx, -0.5kx]
+      holeMiddleLeft:
+        what: mounthole
+        where:
+          ref: left_inner_ltop
+          shift: [-0.5kx, -0.5kx]
+      holeMiddleRight:
+        what: mounthole
+        where:
+          ref: right_inner_rtop
+          shift: [0.5kx, -0.5kx]
+      holeRight:
+        what: mounthole
+        where:
+          ref: right_outer_rtop
+          shift: [-0.5kx, -0.5kx]
+      holeLeftBottom:
+        what: mounthole
+        where:
+          ref.aggregate.parts: [left_index_lbottom, lthumbs_outer_lttop]
+      holeRightBottom:
+        what: mounthole
+        where:
+          ref.aggregate.parts: [right_index_rbottom, rthumbs_outer_rttop]
+      holeBottomLeft:
+        what: mounthole
+        where:
+          ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+          shift: [-10, 0]
+      holeBottomRighy:
+        what: mounthole
+        where:
+          ref.aggregate.parts: [lthumbs_inner_lttop, rthumbs_inner_rttop]
+          shift: [10, 0]
+
+cases:
+  # Bottom case
+  _bottomWall:
+    - name: outerCase
+      extrude: standoffHeight
+    - name: innerCase
+      extrude: standoffHeight
+      operation: subtract
+  _standoffs:
+    - name: standoffs
+      extrude: standoffHeight
+      operation: add
+    - name: mountingHoles
+      extrude: standoffHeight
+      operation: subtract
+  bottom:
+    - name: outerCase
+      extrude: bottomHeight
+    - what: case
+      name: _standoffs
+      operation: add
+      shift: [0, 0, bottomHeight]
+    - what: case
+      name: _bottomWall
+      operation: add
+      shift: [0, 0, bottomHeight]
+
+  # Top case
+  _topWall:
+    - name: outerCase
+      extrude: pcbHeight
+    - name: innerCase
+      extrude: pcbHeight
+      operation: subtract
+  top:
+    - name: topPlate
+      extrude: topHeight
+      shift: [0, 0, pcbHeight]
+    - name: screwHoles
+      extrude: screwHeadHeight
+      operation: subtract
+      shift: [0, 0, pcbHeight]
+    - what: case
+      name: _topWall
+      operation: add
+    - name: microcontroller
+      extrude: topHeight + pcbHeight
+      operation: subtract
+
+  # Mock pcb
+  pcb:
+    - name: board
+      extrude: pcbHeight
+    - name: mountingHoles
+      extrude: pcbHeight
+      operation: subtract
