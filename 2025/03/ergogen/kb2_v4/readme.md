@@ -3,7 +3,7 @@ Simple steno keyboard with 6x2 on left and right, and 2x1 thumb clusters.
 ## TODO
 
 - [x] Better position the reset button on the PCB
-- [ ] Route PCB
+- [x] Route PCB
 - [x] Make case with proper cutouts for microcontroller, etc.
 - [x] Find a way to mount the PCB to the case
 - [x] Add more spacing between the case edge and the PCB
