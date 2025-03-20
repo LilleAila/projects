@@ -9,6 +9,7 @@ with import <nixpkgs> {}; mkShell {
       tkinter
       pillow
       scipy
+      httpagentparser
       # sklearn-deap
 
       # Run with python3 -m jupyterlab. Don't know which of the three are actually needed.
