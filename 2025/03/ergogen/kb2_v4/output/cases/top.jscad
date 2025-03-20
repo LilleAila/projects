@@ -1,5 +1,5 @@
 function topPlate_extrude_2_2_outline_fn(){
-    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([345.5,-68.5]).appendPoint([345.5,-114.5]).appendPoint([276,-114.5]).appendPoint([276,-148.5]).appendPoint([155,-148.5]).appendPoint([155,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
+    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([345.5,-68.5]).appendPoint([345.5,-114.5]).appendPoint([274,-114.5]).appendPoint([274,-148.5]).appendPoint([157,-148.5]).appendPoint([157,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
 .subtract(
     new CSG.Path2D([[251.85,-141.15],[266.15,-141.15]]).appendPoint([266.15,-126.85]).appendPoint([251.85,-126.85]).appendPoint([251.85,-141.15]).close().innerToCAG()
 .union(
@@ -61,21 +61,21 @@ function topPlate_extrude_2_2_outline_fn(){
 
 
 function screwHoles_extrude_1_55_outline_fn(){
-    return CAG.circle({"center":[225.5,-134],"radius":1.9})
+    return CAG.circle({"center":[225.5,-134],"radius":2})
 .union(
-    CAG.circle({"center":[205.5,-134],"radius":1.9})
+    CAG.circle({"center":[205.5,-134],"radius":2})
 ).union(
-    CAG.circle({"center":[259,-117],"radius":1.9})
+    CAG.circle({"center":[259,-117],"radius":2})
 ).union(
-    CAG.circle({"center":[172,-117],"radius":1.9})
+    CAG.circle({"center":[172,-117],"radius":2})
 ).union(
-    CAG.circle({"center":[322,-92],"radius":1.9})
+    CAG.circle({"center":[322,-92],"radius":2})
 ).union(
-    CAG.circle({"center":[250,-92],"radius":1.9})
+    CAG.circle({"center":[250,-92],"radius":2})
 ).union(
-    CAG.circle({"center":[181,-92],"radius":1.9})
+    CAG.circle({"center":[181,-92],"radius":2})
 ).union(
-    CAG.circle({"center":[109,-92],"radius":1.9})
+    CAG.circle({"center":[109,-92],"radius":2})
 ).extrude({ offset: [0, 0, 1.55] });
 }
 
@@ -87,7 +87,7 @@ function microcontroller_extrude_3_8000000000000003_outline_fn(){
 
 
 function outerCase_extrude_1_6_outline_fn(){
-    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([345.5,-68.5]).appendPoint([345.5,-114.5]).appendPoint([276,-114.5]).appendPoint([276,-148.5]).appendPoint([155,-148.5]).appendPoint([155,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
+    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([345.5,-68.5]).appendPoint([345.5,-114.5]).appendPoint([274,-114.5]).appendPoint([274,-148.5]).appendPoint([157,-148.5]).appendPoint([157,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 1.6] });
 }
 

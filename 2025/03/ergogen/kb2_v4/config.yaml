@@ -18,9 +18,9 @@ units:
   coy: 0.5ky + p * 3
 
   # Screws (radius)
-  screwHeadSize: 3.8 / 2 # NOT: Might have to add a bit of extra room
-  standoffInner: 3 / 2
-  standoffOuter: 5 / 2
+  screwHeadSize: 4 / 2
+  standoffInner: 3.3 / 2
+  standoffOuter: 5.8 / 2
   # Other values
   bottomHeight: 1
   standoffHeight: 3
@@ -29,7 +29,6 @@ units:
   screwHeadHeight: 1.55
 
 points:
-  # NOTE: Using same names, e.g. inner_top in multiple zones, causes KiCAD to want to have them connected, even though they're not supposed to, because the keys have the same name.
   zones:
     left:
       # KiCAD placement
@@ -174,13 +173,13 @@ outlines:
         - ref: right_outer_rbottom
           shift: [cox, -coy]
         - ref: right_middle_rbottom
-          shift: [-0.5kx + 4p, -coy]
+          shift: [-0.5kx + 3p, -coy]
         - ref: rthumbs_outer_rttop
-          shift: [0.5kx + 4p, -coy]
+          shift: [0.5kx + 3p, -coy]
         - ref: lthumbs_outer_lttop
-          shift: [-0.5kx - 4p, -coy]
+          shift: [-0.5kx - 3p, -coy]
         - ref: left_middle_lbottom
-          shift: [0.5kx - 4p, -coy]
+          shift: [0.5kx - 3p, -coy]
         - ref: left_outer_lbottom
           shift: [-cox, -coy]
 

@@ -5,21 +5,21 @@ function board_extrude_1_6_outline_fn(){
 
 
 function mountingHoles_extrude_1_6_outline_fn(){
-    return CAG.circle({"center":[225.5,-134],"radius":1.5})
+    return CAG.circle({"center":[225.5,-134],"radius":1.65})
 .union(
-    CAG.circle({"center":[205.5,-134],"radius":1.5})
+    CAG.circle({"center":[205.5,-134],"radius":1.65})
 ).union(
-    CAG.circle({"center":[259,-117],"radius":1.5})
+    CAG.circle({"center":[259,-117],"radius":1.65})
 ).union(
-    CAG.circle({"center":[172,-117],"radius":1.5})
+    CAG.circle({"center":[172,-117],"radius":1.65})
 ).union(
-    CAG.circle({"center":[322,-92],"radius":1.5})
+    CAG.circle({"center":[322,-92],"radius":1.65})
 ).union(
-    CAG.circle({"center":[250,-92],"radius":1.5})
+    CAG.circle({"center":[250,-92],"radius":1.65})
 ).union(
-    CAG.circle({"center":[181,-92],"radius":1.5})
+    CAG.circle({"center":[181,-92],"radius":1.65})
 ).union(
-    CAG.circle({"center":[109,-92],"radius":1.5})
+    CAG.circle({"center":[109,-92],"radius":1.65})
 ).extrude({ offset: [0, 0, 1.6] });
 }
 

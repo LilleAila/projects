@@ -1,6 +1,6 @@
 with import <nixpkgs> {}; mkShell {
   packages = [
-    (python311.withPackages (ps: with ps; [
+    (python3.withPackages (ps: with ps; [
       numpy
       sympy
       matplotlib
@@ -8,6 +8,8 @@ with import <nixpkgs> {}; mkShell {
       requests
       tkinter
       pillow
+      scipy
+      # sklearn-deap
 
       # Run with python3 -m jupyterlab. Don't know which of the three are actually needed.
       jupyter

@@ -1,51 +1,51 @@
 function outerCase_extrude_1_outline_fn(){
-    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([345.5,-68.5]).appendPoint([345.5,-114.5]).appendPoint([276,-114.5]).appendPoint([276,-148.5]).appendPoint([155,-148.5]).appendPoint([155,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
+    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([345.5,-68.5]).appendPoint([345.5,-114.5]).appendPoint([274,-114.5]).appendPoint([274,-148.5]).appendPoint([157,-148.5]).appendPoint([157,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 1] });
 }
 
 
 function standoffs_extrude_3_outline_fn(){
-    return CAG.circle({"center":[225.5,-134],"radius":2.5})
+    return CAG.circle({"center":[225.5,-134],"radius":2.9})
 .union(
-    CAG.circle({"center":[205.5,-134],"radius":2.5})
+    CAG.circle({"center":[205.5,-134],"radius":2.9})
 ).union(
-    CAG.circle({"center":[259,-117],"radius":2.5})
+    CAG.circle({"center":[259,-117],"radius":2.9})
 ).union(
-    CAG.circle({"center":[172,-117],"radius":2.5})
+    CAG.circle({"center":[172,-117],"radius":2.9})
 ).union(
-    CAG.circle({"center":[322,-92],"radius":2.5})
+    CAG.circle({"center":[322,-92],"radius":2.9})
 ).union(
-    CAG.circle({"center":[250,-92],"radius":2.5})
+    CAG.circle({"center":[250,-92],"radius":2.9})
 ).union(
-    CAG.circle({"center":[181,-92],"radius":2.5})
+    CAG.circle({"center":[181,-92],"radius":2.9})
 ).union(
-    CAG.circle({"center":[109,-92],"radius":2.5})
+    CAG.circle({"center":[109,-92],"radius":2.9})
 ).extrude({ offset: [0, 0, 3] });
 }
 
 
 function mountingHoles_extrude_3_outline_fn(){
-    return CAG.circle({"center":[225.5,-134],"radius":1.5})
+    return CAG.circle({"center":[225.5,-134],"radius":1.65})
 .union(
-    CAG.circle({"center":[205.5,-134],"radius":1.5})
+    CAG.circle({"center":[205.5,-134],"radius":1.65})
 ).union(
-    CAG.circle({"center":[259,-117],"radius":1.5})
+    CAG.circle({"center":[259,-117],"radius":1.65})
 ).union(
-    CAG.circle({"center":[172,-117],"radius":1.5})
+    CAG.circle({"center":[172,-117],"radius":1.65})
 ).union(
-    CAG.circle({"center":[322,-92],"radius":1.5})
+    CAG.circle({"center":[322,-92],"radius":1.65})
 ).union(
-    CAG.circle({"center":[250,-92],"radius":1.5})
+    CAG.circle({"center":[250,-92],"radius":1.65})
 ).union(
-    CAG.circle({"center":[181,-92],"radius":1.5})
+    CAG.circle({"center":[181,-92],"radius":1.65})
 ).union(
-    CAG.circle({"center":[109,-92],"radius":1.5})
+    CAG.circle({"center":[109,-92],"radius":1.65})
 ).extrude({ offset: [0, 0, 3] });
 }
 
 
 function outerCase_extrude_3_outline_fn(){
-    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([345.5,-68.5]).appendPoint([345.5,-114.5]).appendPoint([276,-114.5]).appendPoint([276,-148.5]).appendPoint([155,-148.5]).appendPoint([155,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
+    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([345.5,-68.5]).appendPoint([345.5,-114.5]).appendPoint([274,-114.5]).appendPoint([274,-148.5]).appendPoint([157,-148.5]).appendPoint([157,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 3] });
 }
 
