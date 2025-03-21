@@ -60,7 +60,7 @@ function topPlate_extrude_2_2_outline_fn(){
 }
 
 
-function screwHoles_extrude_1_55_outline_fn(){
+function screwHoles_extrude_1_6_outline_fn(){
     return CAG.circle({"center":[225.5,-134],"radius":2})
 .union(
     CAG.circle({"center":[205.5,-134],"radius":2})
@@ -76,7 +76,7 @@ function screwHoles_extrude_1_55_outline_fn(){
     CAG.circle({"center":[181,-92],"radius":2})
 ).union(
     CAG.circle({"center":[109,-92],"radius":2})
-).extrude({ offset: [0, 0, 1.55] });
+).extrude({ offset: [0, 0, 1.6] });
 }
 
 
@@ -159,7 +159,7 @@ function innerCase_extrude_1_6_outline_fn(){
             
 
                 // creating part 1 of case top
-                let top__part_1 = screwHoles_extrude_1_55_outline_fn();
+                let top__part_1 = screwHoles_extrude_1_6_outline_fn();
 
                 // make sure that rotations are relative
                 let top__part_1_bounds = top__part_1.getBounds();

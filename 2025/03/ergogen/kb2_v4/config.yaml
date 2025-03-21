@@ -26,7 +26,7 @@ units:
   standoffHeight: 3
   pcbHeight: 1.6
   topHeight: 2.2
-  screwHeadHeight: 1.55
+  screwHeadHeight: 1.6
 
 points:
   zones:
