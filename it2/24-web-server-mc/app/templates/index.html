@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Restart minecraft serveren</title>
+    <script>
+      function runPythonCode() {
+        fetch("/restart", { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => alert(data.message));
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="runPythonCode()">Restart serveren</button>
+  </body>
+</html>
