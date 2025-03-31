@@ -14,6 +14,9 @@ with import <nixpkgs> {}; mkShell {
 
       flask
 
+      ipdb
+      pytest
+
       # Run with python3 -m jupyterlab. Don't know which of the three are actually needed.
       jupyter
       jupyterlab
