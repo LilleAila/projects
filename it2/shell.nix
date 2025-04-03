@@ -16,6 +16,7 @@ with import <nixpkgs> {}; mkShell {
 
       ipdb
       pytest
+      pytest-html
 
       # Run with python3 -m jupyterlab. Don't know which of the three are actually needed.
       jupyter
