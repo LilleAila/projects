@@ -24,5 +24,7 @@ mkShell {
         ipykernel
       ]
     ))
+    pandoc
+    texliveFull
   ];
 }
