@@ -23,6 +23,7 @@
 
             nodejs
             nodePackages.npm
+            typescript-language-server
           ];
         };
       });
