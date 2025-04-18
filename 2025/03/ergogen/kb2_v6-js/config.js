@@ -34,50 +34,48 @@ const mkWhere = (ref, a, b) => ({ ref, shift: [a, b] });
 const mkAgg = (a, b) => ({ ref: { aggregate: { parts: [a, b] } } });
 
 const mountingLocations = [
+  // Left
   mkAgg("left_outer_ltop", "left_pinky_lbottom"),
+  mkAgg("left_index_ltop", "left_inner_lbottom"),
+  {
+    ...mkAgg("left_index_lbottom", "left_inner_lbottom"),
+    shift: [0, -0.5 * ky],
+  },
   {
     ...mkAgg("left_inner_ltop", "left_inner_lbottom"),
     shift: [0.5 * kx, 0],
   },
   {
-    ...mkAgg("left_index_ltop", "left_inner_ltop"),
-    shift: [-0.5, -0.1 * ky],
-  },
-  {
-    ...mkAgg("left_index_lbottom", "left_inner_lbottom"),
-    shift: [-1, -0.4 * ky],
-  },
-  {
     ...mkAgg("left_inner_lbottom", "lthumbs_inner_lttop"),
     shift: [0.5 * kx, 0],
   },
+  {
+    ...mkAgg("lthumbs_outer_lttop", "lthumbs_inner_lttop"),
+    shift: [0, 0.5 * ky],
+  },
 
+  // Right
   mkAgg("right_outer_rtop", "right_pinky_rbottom"),
+  mkAgg("right_index_rtop", "right_inner_rbottom"),
+  {
+    ...mkAgg("right_index_rbottom", "right_inner_rbottom"),
+    shift: [0, -0.5 * ky],
+  },
   {
     ...mkAgg("right_inner_rtop", "right_inner_rbottom"),
     shift: [-0.5 * kx, 0],
   },
   {
-    ...mkAgg("right_index_rtop", "right_inner_rtop"),
-    shift: [-0.5, -0.1 * ky],
-  },
-  {
-    ...mkAgg("right_index_rbottom", "right_inner_rbottom"),
-    shift: [1, -0.4 * ky],
-  },
-  {
     ...mkAgg("right_inner_rbottom", "rthumbs_inner_rttop"),
     shift: [-0.5 * kx, 0],
   },
+  {
+    ...mkAgg("rthumbs_outer_rttop", "rthumbs_inner_rttop"),
+    shift: [0, 0.5 * ky],
+  },
 
-  {
-    ...mkAgg("lthumbs_inner_lttop", "lthumbs_outer_lttop"),
-    shift: [0, -0.1 * ky],
-  },
-  {
-    ...mkAgg("rthumbs_inner_rttop", "rthumbs_outer_rttop"),
-    shift: [0, -0.1 * ky],
-  },
+  // Bottom center
+  mkAgg("lthumbs_inner_lttop", "rthumbs_inner_rttop"),
 ];
 
 return {
