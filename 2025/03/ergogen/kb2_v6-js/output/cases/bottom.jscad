@@ -1,5 +1,5 @@
 function outerCase_extrude_1_outline_fn(){
-    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([348.5,-68.5]).appendPoint([348.5,-114.5]).appendPoint([277,-114.5]).appendPoint([277,-148.5]).appendPoint([157,-148.5]).appendPoint([157,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
+    return new CSG.Path2D([[85.5,-116.5],[85.5,-66.5]]).appendPoint([348.5,-66.5]).appendPoint([348.5,-116.5]).appendPoint([277,-116.5]).appendPoint([277,-150.5]).appendPoint([157,-150.5]).appendPoint([157,-116.5]).appendPoint([85.5,-116.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 1] });
 }
 
@@ -65,7 +65,7 @@ function mountingHoles_extrude_3_outline_fn(){
 
 
 function outerCase_extrude_3_outline_fn(){
-    return new CSG.Path2D([[85.5,-114.5],[85.5,-68.5]]).appendPoint([348.5,-68.5]).appendPoint([348.5,-114.5]).appendPoint([277,-114.5]).appendPoint([277,-148.5]).appendPoint([157,-148.5]).appendPoint([157,-114.5]).appendPoint([85.5,-114.5]).close().innerToCAG()
+    return new CSG.Path2D([[85.5,-116.5],[85.5,-66.5]]).appendPoint([348.5,-66.5]).appendPoint([348.5,-116.5]).appendPoint([277,-116.5]).appendPoint([277,-150.5]).appendPoint([157,-150.5]).appendPoint([157,-116.5]).appendPoint([85.5,-116.5]).close().innerToCAG()
 .extrude({ offset: [0, 0, 3] });
 }
 
