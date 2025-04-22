@@ -7,7 +7,7 @@ Simple steno keyboard with 6x2 on left and right, and 2x1 thumb clusters.
 - [x] Make case with proper cutouts for microcontroller, etc.
 - [x] Find a way to mount the PCB to the case
 - [x] Add more spacing between the case edge and the PCB
-- [ ] Test case with actual screws and inserts (with mock PCB)
+- [x] Test case with actual screws and inserts (with mock PCB)
 - [x] Move the standoffs such that there are two right next to each other so that the case can be split down the middle for printing
 
 ## BOM
@@ -30,14 +30,11 @@ Using all default settings, with gerber files from kicad
 
 RP2040-based pro-micro compatible.
 
-> [!NOTE]
-> Using pro micro footprint in ergogen. Works the same, except the five bottom pins are not present. Has no effect for this project.
-
 - Black
 - With standard header pins
 - With `Medium Profile Sockets + Pins (30) [Frood]`
 
-[Socketed microcontroller](https://42keebs.eu/build-guides/socketing-the-frood-nice-nano-controllers/)
+[Microcontroller socket guide](https://42keebs.eu/build-guides/socketing-the-frood-nice-nano-controllers/) ([alt guide](https://docs.splitkb.com/product-guides/aurora-series/build-guide/microcontrollers))
 
 ### Diodes
 
@@ -46,27 +43,27 @@ RP2040-based pro-micro compatible.
 - 3x10 (keyboard has 28 keys)
 - SMD
 
+[Diode soldering guide](https://docs.splitkb.com/product-guides/aurora-series/build-guide/diodes#smd-diodes)
+
+Also see [soldering joints](https://docs.splitkb.com/resources/soldering/healthy-joints#reworking-a-joint) and [iron temperature](https://docs.splitkb.com/resources/soldering/dialling-in-your-iron)
+
 ### Sockets
 
 [Kailh Choc V1 Hot-swap Sockets](https://42keebs.eu/shop/parts/kailh-choc-hot-swap-sockets/)
 
 - 3x10 (same as diodes)
 
+[Socket soldering guide](https://docs.splitkb.com/product-guides/aurora-series/build-guide/switch-sockets)
+
 ### Key switches
 
-[Choc pink pro](https://www.maxgaming.no/no/switchar/choc-low-profile-pink-pro)
+Any choc v1 compatible switches will work.
 
-20 gram actuation (lowest available)
-Bought in Norway, per switch
-Expensive :(
+[Choc pink pro](https://www.maxgaming.no/no/switchar/choc-low-profile-pink-pro) - 20 gram actuation (lowest available)
 
 ### Reset switch
 
 [Reset switch](https://42keebs.eu/shop/parts/components/reset-switch/)
-
-> [!NOTE]
-> Might remove in the future, in favor of the on-board switch?
-> Redundancy is not bad though
 
 - SMD 4-pin Flat
 - Silver
