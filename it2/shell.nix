@@ -10,7 +10,7 @@ with import <nixpkgs> {}; mkShell {
       pillow
       scipy
       httpagentparser
-      # sklearn-deap
+      pygame
 
       flask
 
