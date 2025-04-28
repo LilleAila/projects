@@ -1,0 +1,43 @@
+@startuml
+
+title Smarthus
+
+class RoomUnit {
+  + Str name
+  + Str room
+}
+
+class Light extends RoomUnit {
+  + Bool state
+  + Void toggle()
+  + Void on()
+  + Void off()
+  + {static} Str state_str()
+}
+
+class Thermostat extends RoomUnit {
+  + Float temp
+  - Float min_temp
+  - Float max_temp
+  + Void temp(temp: Float)
+}
+
+class SmartHouse {
+  - Dict[Str, Light[]] lights
+  - Dict[Str, Thermostat] thermostats
+  + Void add_light(room: Str)
+  + Void set_lights(room: Str, state: Bool)
+  + Void set_all_lights(state: Bool)
+  + Void add_thermostat(room: Room)
+  + Void set_temperature(room: Str, temperature: Float)
+}
+
+class AutomatedHouse extends SmartHouse {
+  + Void add_units()
+  + Void update(time: Time)
+}
+
+SmartHouse::lights *-- Light
+SmartHouse::thermostats *-- Thermostat
+
+@enduml

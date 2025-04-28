@@ -23,5 +23,6 @@ with import <nixpkgs> {}; mkShell {
       jupyterlab
       ipykernel
     ]))
+    plantuml
   ];
 }
