@@ -1,8 +1,19 @@
 import datetime
+from typing import Callable
+from random import randint
 
 
-class Light:
-    def __init__(self, state=False):
+class Unit:
+    __slots__ = ("room", "name")
+
+    def __init__(self, room: str, name: str) -> None:
+        self.room = room
+        self.name = name
+
+
+class Light(Unit):
+    def __init__(self, room: str, state=False):
+        super().__init__(room, "Light")
         self.state = state
 
     def set_state(self, state):
@@ -12,8 +23,9 @@ class Light:
         return f"Light {self.state}"
 
 
-class Thermostat:
-    def __init__(self, temp=22):
+class Thermostat(Unit):
+    def __init__(self, room: str, temp=22):
+        super().__init__(room, "Light")
         self.temp = temp
 
     def set_temp(self, temp):
@@ -21,6 +33,16 @@ class Thermostat:
 
     def __repr__(self):
         return f"Thermostat {self.temp}°C"
+
+
+class MovementSensor(Unit):
+    def __init__(self, room: str, action: Callable) -> None:
+        super().__init__(room, "Movement sensor")
+        self.action = action
+
+    def poll(self):
+        if randint(1, 10) == 5:
+            self.action()
 
 
 class SmartHouse:
@@ -51,9 +73,9 @@ class AutomatedHouse(SmartHouse):
         self.add_units()
 
     def add_units(self):
-        self.set_thermostat(21)
-        self.add_light(True)
-        self.add_light(True)
+        self.set_thermostat("stue", 21)
+        self.add_light("stue", True)
+        self.add_light("stue", True)
 
     def update(self, time):
         if datetime.time(7, 0) < time < datetime.time(22, 0):
@@ -63,11 +85,31 @@ class AutomatedHouse(SmartHouse):
             self.set_lights(False)
             self.set_thermostat(20)
 
+    def run(self):
+        while True:
+            time = datetime.datetime.now().time()
+            self.update(time)
+
 
 if __name__ == "__main__":
     house = AutomatedHouse()
-    print(house)
-    house.update(datetime.time(3, 0))
-    print(house)
-    house.update(datetime.time(14, 0))
-    print(house)
+    # house.run()
+
+    # print(house)
+    # house.update(datetime.time(3, 0))
+    # print(house)
+    # house.update(datetime.time(14, 0))
+    # print(house)
+
+    sensor = MovementSensor("garasje", self.handle_camera)
+    [sensor.poll() for i in range(100)]
+
+    sensor = MovementSensor("kjøkken", lambda: print("kjøkken!!!!!"))
+    [sensor.poll() for i in range(100)]
+
+
+def add(a, b):
+    return a + b
+
+
+_add = lambda a, b: a + b
