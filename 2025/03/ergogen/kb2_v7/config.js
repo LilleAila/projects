@@ -3,8 +3,8 @@ const kx = 18,
   ky = 17;
 
 // Switch size
-const sx = 14.3,
-  sy = 14.3,
+const sx = 14.5,
+  sy = 14.4,
   sz = 2;
 
 // Padding
@@ -18,7 +18,7 @@ const tolerance = 0.5; // Tolerance between PCB and case edge
 const wall_width = 2; // also spacing between pcb and wall
 
 // Screw size (M2x4)
-const screwHeadSize = 4 / 2,
+const screwHeadSize = 4 / 2 + 0.1, // plus some margin
   standoffInner = 3.3 / 2,
   standoffOuter = 5.8 / 2;
 
@@ -27,7 +27,7 @@ const bottomHeight = 1,
   standoffHeight = 3,
   pcbHeight = 1.6,
   topInset = 0.4,
-  topHeight = 2.2,
+  topHeight = sz,
   screwHeadHeight = 1.6;
 
 const fillet = 3;
@@ -154,16 +154,28 @@ return {
         points: [
           mkWhere(
             "left_inner_ltop",
-            kx / 2 + (kx - sx) / 2,
+            1.5 * kx - 10,
+            // kx / 2 + (kx - sx) / 2,
             ky / 2 + p + wall_width * 2,
           ),
           mkWhere(
             "right_inner_rtop",
-            -kx / 2 - (kx - sx) / 2,
+            // -kx / 2 - (kx - sx) / 2,
+            -(1.5 * kx - 10),
             ky / 2 + p + wall_width * 2,
           ),
-          mkWhere("right_inner_rbottom", -kx / 2 - (kx - sx) / 2, -ky / 2),
-          mkWhere("left_inner_lbottom", kx / 2 + (kx - sx) / 2, -ky / 2),
+          mkWhere(
+            "right_inner_rbottom",
+            // -kx / 2 - (kx - sx) / 2,
+            -(1.5 * kx - 10),
+            -ky / 2 + 1.5,
+          ),
+          mkWhere(
+            "left_inner_lbottom",
+            // kx / 2 + (kx - sx) / 2,
+            1.5 * kx - 10,
+            -ky / 2 + 1.5,
+          ),
         ],
       },
     ],
