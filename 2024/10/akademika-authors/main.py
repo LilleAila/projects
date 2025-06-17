@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 
 names = os.popen("wl-paste").read().strip()
