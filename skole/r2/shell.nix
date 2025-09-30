@@ -11,5 +11,14 @@ mkShell {
         scipy
       ]
     ))
+
+    (ghc.withPackages (ps: with ps; [
+      gnuplot
+    ]))
+    haskell-language-server
+    ormolu
+    ghcid
+    stack
+    cabal-install
   ];
 }
