@@ -4,6 +4,8 @@ mkShell {
     black
     pyright
 
+    gnuplot
+
     (python313.withPackages (
       ps: with ps; [
         numpy

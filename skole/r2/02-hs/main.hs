@@ -12,4 +12,6 @@ main :: IO ()
 main = do
   -- print $ take 20 $ map fibonacci [1 ..]
   -- print $ take 20 fibonacci'
-  putStrLn $ intercalate "\n" ((take 10000 . map show) fibonacci')
+  let fibs = take 500 fibonacci'
+  let results = zip [1 ..] fibs
+  writeFile "fibonacci.dat" $ unlines [show x ++ " " ++ show y | (x, y) <- results]
