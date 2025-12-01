@@ -12,15 +12,14 @@ head' xs = case uncons xs of
 
 handleCommand :: ([String], String) -> (String, Maybe String) -> ([String], String)
 handleCommand (stack, key) command =
-  -- NOTE: This is O(n) but could be done O(1) if using reversed lists and : instead of ++
   case command of
-    ("ADD", Just x) -> (stack ++ [x], key)
-    ("PROCESS", _) -> (drop 1 stack, key ++ [head' (head' stack)])
-    ("COUNT", _) -> (stack, key ++ [(last . show . length) stack])
+    ("ADD", Just x) -> (x : stack, key)
+    ("PROCESS", _) -> (init stack, head' (last stack) : key)
+    ("COUNT", _) -> (stack, (last . show . length) stack : key)
 
 main :: IO ()
 main = do
   content <- readFile "input.txt"
   let commands = map splitCommand $ lines content
   let result = foldl handleCommand ([], "") commands
-  print $ snd result
+  print $ reverse $ snd result
