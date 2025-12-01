@@ -7,9 +7,9 @@ handleInput ('A' : 'D' : 'D' : ' ' : x) = Add x
 handleInput ('P' : 'R' : 'O' : 'C' : 'E' : 'S' : 'S' : _) = Process
 handleInput ('C' : 'O' : 'U' : 'N' : 'T' : _) = Count
 
-head' xs = case uncons xs of
-  Just (x, _) -> x
-  Nothing -> error "wtf"
+head' :: [a] -> a
+head' (x : _) = x
+head' [] = error "wtf"
 
 handleCommand :: ([String], String) -> Command -> ([String], String)
 handleCommand (stack, key) command =
