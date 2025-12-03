@@ -23,4 +23,4 @@ main = do
   content <- readFile "input.txt"
   let commands = map handleInput $ lines content
   let result = foldl handleCommand ([], "") commands
-  print $ reverse $ snd result
+  putStrLn $ reverse $ snd result

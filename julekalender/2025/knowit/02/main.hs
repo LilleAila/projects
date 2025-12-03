@@ -1,5 +1,5 @@
 import Data.Char (isLower, toLower, toUpper)
-import Data.List (elemIndex, intercalate)
+import Data.List (concat, elemIndex)
 
 alphabet = "abcdefghijklmnopqrstuvwxyzæøå"
 
@@ -9,9 +9,9 @@ shift n x = if isLower x then shift' n x else (toUpper . shift' n . toLower) x
       Nothing -> error "wtf"
       Just i -> alphabet !! ((i + n) `mod` length alphabet)
 
-solve = intercalate "" . zipWith (map . shift) [-1, -2 ..] . lines
+solve = concat . zipWith (map . shift) [-1, -2 ..] . lines
 
 main :: IO ()
 main = do
   content <- readFile "input.txt"
-  print $ solve content
+  putStrLn $ solve content
