@@ -8,10 +8,11 @@ parseContent = map parseContent' . init
     parseContent' 'I' = Ice
     parseContent' 'P' = Gingerbread
 
-solve e ys [] = 0
+solve :: Int -> [Int] -> [Tile] -> Int
+solve _ _ [] = 0
 solve e ys (x : xs)
-  | e' >= 0 = 10 + solve e' (de : ys) xs
-  | otherwise = 0
+  | e' < 0 = 0
+  | otherwise = 10 + solve e' (de : ys) xs
   where
     e' = e + de
     de = case x of
@@ -19,9 +20,7 @@ solve e ys (x : xs)
       Bush -> -10
       Deepsnow -> -15
       Ice -> 0
-      Gingerbread -> if all (< 0) ys' then -(2 * sum ys') else 0
-        where
-          ys' = take 2 ys
+      Gingerbread -> -(sum . filter (< 0) . take 2) ys
 
 main :: IO ()
 main = do
