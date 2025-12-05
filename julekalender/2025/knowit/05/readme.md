@@ -1,0 +1,17 @@
+Input:
+
+```
+Hooo_Hooo_Ho Hooo_Hooo_Hooo Hooo_Ho_Ho Ho_Hooo_Hooo_Hooo Ho_Ho_Hooo Ho_Hooo_Ho_Ho
+```
+
+```
+:%s/_//g
+:%s/Hooo/-/g
+:%s/Ho/_/g
+```
+
+Output:
+
+```
+--. --- -.. .--- ..- .-..
+```
