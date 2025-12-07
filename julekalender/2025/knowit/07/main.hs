@@ -2,28 +2,25 @@
 
 import Data.List (tails)
 
-substr :: String -> Int -> Int -> Int -> String -> Bool
-substr [] _ _ _ _ = True
-substr _ _ _ _ [] = False
-substr ts@(t : ts') min max n (x : xs)
-  | n > max = False
-  | x == t && n >= min = substr ts' min max 0 xs || next
+substr :: String -> Int -> Int -> Int -> Bool -> String -> Bool
+substr [] _ _ _ _ _ = True
+substr _ _ _ _ _ [] = False
+substr ts@(t : ts') min max n start (x : xs)
+  | n > max && not start = False
+  | x == t && n >= min = substr ts' min max 0 False xs || next
   | otherwise = next
   where
-    next = substr ts min max (n + 1) xs
-
-substrAll :: (String -> Bool) -> String -> Bool
-substrAll f = any f . tails
+    next = substr ts min max (n + 1) start xs
 
 troll :: String -> Bool
 troll xs
   | length xs < 9 = False
-  | otherwise = substrAll (substr "troll" 1 5 5) xs
+  | otherwise = substr "troll" 1 5 0 True xs
 
 nisse :: String -> Bool
 nisse xs
   | length xs <= 5 = False
-  | otherwise = substrAll (substr "nisse" 0 2 2) xs && head xs /= 'n' && last xs /= 'e'
+  | otherwise = substr "nisse" 0 2 0 True xs && head xs /= 'n' && last xs /= 'e'
 
 assert :: Bool -> String -> IO ()
 assert True _ = return ()
