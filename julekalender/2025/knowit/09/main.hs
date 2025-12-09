@@ -3,6 +3,7 @@ import Data.Char (isDigit)
 isConsonant :: Char -> Bool
 isConsonant = (`elem` "bcdfghjklmnpqrstvwxz")
 
+bean :: [Char] -> Int -> Bool
 bean xs i
   | isDigit x = False
   | isConsonant x = (i + 2 < length xs && i - 2 >= 0) && (isDigit (xs !! (i + 2)) && isDigit (xs !! (i - 2)))
