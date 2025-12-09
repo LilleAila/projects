@@ -13,4 +13,4 @@ bean xs i
 main :: IO ()
 main = do
   input <- readFile "input.txt"
-  print $ map (input !!) (filter (bean input) [0 .. length input - 1])
+  putStr $ map (input !!) (filter (bean input) [0 .. length input - 1])
