@@ -9,6 +9,7 @@ mkShell {
         pandas
         scipy
         httpagentparser
+        seaborn
 
         ipdb
         pytest
