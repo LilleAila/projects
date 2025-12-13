@@ -1,0 +1,5 @@
+Start 2
+Mix 3
+AddSugar 2
+Bake 5
+Decorate 3
