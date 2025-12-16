@@ -7,6 +7,8 @@ mkShell {
     ghcid
     black
     pyright
-    (python3.withPackages (ps: with ps; [ ]))
+    (python3.withPackages (ps: with ps; [
+      pillow
+    ]))
   ];
 }
