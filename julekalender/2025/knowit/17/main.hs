@@ -9,13 +9,13 @@ data Snowman = Snowman
   }
   deriving (Show, Eq)
 
-data Command = Roll Int | Stack | Hat | Carrot deriving (Show, Eq)
+data Command = Roll | Stack | Hat | Carrot deriving (Show, Eq)
 
 parseCommand :: String -> Command
 parseCommand "STACK" = Stack
 parseCommand "HAT" = Hat
 parseCommand "CARROT" = Carrot
-parseCommand x = Roll (length (words x))
+parseCommand "ROLL" = Roll
 
 addSnowball :: [Snowball] -> [Snowman] -> ([Snowball], [Snowman])
 addSnowball snowballs snowmen = tryStack . sort $ snowballs
@@ -58,17 +58,18 @@ addCarrot snowmen = case break hatNeedsCarrot snowmen of
     needsCarrot x = size x == 3 && not (carrot x)
     hatNeedsCarrot x = needsCarrot x && hat x
 
-rollSnowball :: Int -> [Snowball] -> [Snowman] -> ([Snowball], [Snowman])
-rollSnowball x snowballs snowmen
-  | x == 3 = (snowballs, Snowman 1 False False : snowmen)
-  | otherwise = (Snowball x : snowballs, snowmen)
+rollSnowball :: [Snowball] -> [Snowman] -> ([Snowball], [Snowman])
+rollSnowball snowballs snowmen = case break (\(Snowball s) -> s < 3) (sort snowballs) of
+  (before, Snowball 1 : after) -> (before ++ [Snowball 2] ++ after, snowmen)
+  (before, Snowball 2 : after) -> (before ++ after, Snowman 1 False False : snowmen)
+  (_, []) -> (Snowball 1 : snowballs, snowmen)
 
 go :: [Command] -> [Snowball] -> [Snowman] -> ([Snowball], [Snowman])
 go [] snowballs snowmen = (snowballs, snowmen)
 go (x : xs) snowballs snowmen = case x of
-  Roll x -> go xs snowballs' snowmen'
+  Roll -> go xs snowballs' snowmen'
     where
-      (snowballs', snowmen') = rollSnowball x snowballs snowmen
+      (snowballs', snowmen') = rollSnowball snowballs snowmen
   Stack -> go xs snowballs' snowmen'
     where
       (snowballs', snowmen') = addSnowball snowballs snowmen
@@ -84,7 +85,7 @@ finished s = size s == 3 && hat s && carrot s
 
 main :: IO ()
 main = do
-  commands <- map parseCommand . lines <$> readFile "input.txt"
+  commands <- map parseCommand . words <$> readFile "input.txt"
   -- let commands = [Roll 3, Roll 2, Stack, Roll 1, Stack, Carrot, Roll 3, Roll 2, Stack, Roll 1, Stack, Hat]
   let (snowballs, snowmen) = go commands [] []
   -- print snowballs
