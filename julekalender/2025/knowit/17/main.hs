@@ -85,8 +85,5 @@ finished s = size s == 3 && hat s && carrot s
 main :: IO ()
 main = do
   commands <- map parseCommand . lines <$> readFile "input.txt"
-  -- let commands = [Roll 3, Roll 2, Stack, Roll 1, Stack, Carrot, Roll 3, Roll 2, Stack, Roll 1, Stack, Hat]
   let (snowballs, snowmen) = go commands [] []
-  -- print snowballs
-  -- print snowmen
   print $ length . filter finished $ snowmen
