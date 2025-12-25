@@ -7,6 +7,7 @@ mkShell {
     ghcid
     black
     pyright
+    ruff
     (python3.withPackages (ps: with ps; [
       pillow
       numpy
