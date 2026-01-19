@@ -23,5 +23,7 @@ mkShell {
         ipykernel
       ]
     ))
+
+    texliveFull
   ];
 }

@@ -3,6 +3,7 @@ mkShell {
   packages = [
     black
     pyright
+    ruff
 
     gnuplot
 
@@ -11,6 +12,7 @@ mkShell {
         numpy
         matplotlib
         scipy
+        pandas
       ]
     ))
 
