@@ -1,0 +1,7 @@
+pandas
+numpy
+open3d
+trimesh
+scipy
+pyvista
+pymeshlab

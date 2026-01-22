@@ -25,5 +25,9 @@ mkShell {
     ))
 
     texliveFull
+
+    ruff
+    pyright
+    black
   ];
 }
