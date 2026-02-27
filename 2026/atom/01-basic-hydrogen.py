@@ -6,7 +6,7 @@ n, l, m = 4, 2, 0 # Quantum numbers
 a0 = 1.0 # Bohr radius (only for visualization)
 threshold = 0.05
 
-grid_resolution = 40
+grid_resolution = 50
 grid_size = 30
 
 x = np.linspace(-grid_size*a0, grid_size*a0, grid_resolution)
