@@ -13,3 +13,4 @@ monitor:
 dependencies:
 	arduino-cli core install "esp32:esp32"
 	arduino-cli lib install "NimBLE-Arduino"
+	arduino-cli lib install "HijelHID_BLEKeyboard"

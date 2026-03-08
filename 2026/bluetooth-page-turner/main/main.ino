@@ -1,6 +1,11 @@
-#include <NimBLEDevice.h>
+#include <HijelHID_BLEKeyboard.h>
 
-uint8_t keyReport[8] = {0};
+const int buttonPin = 4;
+const unsigned long pairingThreshold = 5000;
+bool lastButtonState = HIGH;
+unsigned long pressedTime = 0;
+
+HijelHID_BLEKeyboard keyboard("ESP32-C6 Page Turner", "ESP32", 100);
 
 void setup() {
   delay(500);
@@ -10,41 +15,43 @@ void setup() {
   while (!Serial && millis() - start < 3000) {}
   Serial.println("Initialized Serial");
 
-  NimBLEDevice::init("ESP32-C6 Page Turner");
-  NimBLEServer *pServer = NimBLEDevice::createServer();
-  NimBLEService *pService = pServer->createService(NimBLEUUID((uint16_t)0x1812));
-  NimBLECharacteristic *pInput = pService->createCharacteristic(
-      NimBLEUUID((uint16_t)0x2A4D),
-      NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::NOTIFY
-  );
-  pInput->setValue((uint8_t*)keyReport, sizeof(keyReport));
-  pService->start();
-  NimBLEAdvertising *pAdvertising = NimBLEDevice::getAdvertising();
-  pAdvertising->addServiceUUID(pService->getUUID());
-  pAdvertising->setName("ESP32-C6 Page Turner");
-  pAdvertising->start();
-  Serial.println("Initialized BLE HID");
+  pinMode(buttonPin, INPUT_PULLUP);
+  Serial.println("Initialized Button");
+
+  keyboard.setDebugLevel(HIDLogLevel::Normal);
+  keyboard.begin();
+  Serial.println("Initialized BLE Keyboard");
 }
 
 void loop() {
-  static unsigned long lastPress = 0;
-  if (millis() - lastPress > 5000) {
-    lastPress = millis();
+  bool buttonState = digitalRead(buttonPin);
+  unsigned long now = millis();
+  unsigned long duration = now - pressedTime;
 
-    keyReport[2] = 0x2C;
-    NimBLEDevice::getAdvertising()->getServer()->getServiceByUUID(0x1812)
-        ->getCharacteristicByUUID(0x2A4D)->setValue(keyReport, sizeof(keyReport));
-    NimBLEDevice::getAdvertising()->getServer()->getServiceByUUID(0x1812)
-        ->getCharacteristicByUUID(0x2A4D)->notify();
-
-    delay(100);
-
-    keyReport[2] = 0x00;
-    NimBLEDevice::getAdvertising()->getServer()->getServiceByUUID(0x1812)
-        ->getCharacteristicByUUID(0x2A4D)->setValue(keyReport, sizeof(keyReport));
-    NimBLEDevice::getAdvertising()->getServer()->getServiceByUUID(0x1812)
-        ->getCharacteristicByUUID(0x2A4D)->notify();
-
-    Serial.println("Page Down sent");
+  // Button pressed
+  if (lastButtonState == HIGH && buttonState == LOW) {
+    Serial.println("Button pressed");
+    pressedTime = now;
   }
+
+  // Button released
+  if (lastButtonState == LOW && buttonState == HIGH) {
+    Serial.print("Button released after ");
+    Serial.print(duration);
+    Serial.println("ms");
+
+    if (duration < pairingThreshold) {
+      // Turn page
+      if (keyboard.isConnected()) {
+        Serial.println("Turning page");
+        keyboard.tap(KEY_SPACE);
+      }
+    } else {
+      // Enter pairing mode
+      Serial.println("Entering pairing mode");
+      keyboard.clearBonds();
+    }
+  }
+
+  lastButtonState = buttonState;
 }
