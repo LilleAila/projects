@@ -1,0 +1,1258 @@
+{
+    "content": {
+        "dictionary": [
+            {
+                "question": "innenfor",
+                "answers": [
+                    "innanfor",
+                    "innafor"
+                ]
+            },
+            {
+                "question": "dem",
+                "answers": [
+                    "dei"
+                ]
+            },
+            {
+                "question": "dessuten",
+                "answers": [
+                    "dessutan"
+                ]
+            },
+            {
+                "question": "disse",
+                "answers": [
+                    "desse"
+                ]
+            },
+            {
+                "question": "dårlig",
+                "answers": [
+                    "dårleg"
+                ]
+            },
+            {
+                "question": "egen",
+                "answers": [
+                    "eigen",
+                    "eiga"
+                ]
+            },
+            {
+                "question": "egentlig",
+                "answers": [
+                    "eigentleg"
+                ]
+            },
+            {
+                "question": "eget",
+                "answers": [
+                    "eige"
+                ]
+            },
+            {
+                "question": "egne",
+                "answers": [
+                    "eigne"
+                ]
+            },
+            {
+                "question": "ellers",
+                "answers": [
+                    "elles"
+                ]
+            },
+            {
+                "question": "en",
+                "answers": [
+                    "ein",
+                    "ei"
+                ]
+            },
+            {
+                "question": "eneste",
+                "answers": [
+                    "einaste"
+                ]
+            },
+            {
+                "question": "et",
+                "answers": [
+                    "eit"
+                ]
+            },
+            {
+                "question": "fant",
+                "answers": [
+                    "fann"
+                ]
+            },
+            {
+                "question": "fikk",
+                "answers": [
+                    "fekk"
+                ]
+            },
+            {
+                "question": "flere",
+                "answers": [
+                    "fleire"
+                ]
+            },
+            {
+                "question": "flest",
+                "answers": [
+                    "flest"
+                ]
+            },
+            {
+                "question": "foran",
+                "answers": [
+                    "framfor",
+                    "framføre",
+                    "framanfor",
+                    "føre"
+                ]
+            },
+            {
+                "question": "foreløpig",
+                "answers": [
+                    "førebels"
+                ]
+            },
+            {
+                "question": "forrige",
+                "answers": [
+                    "førre"
+                ]
+            },
+            {
+                "question": "fortsatt",
+                "answers": [
+                    "framleis"
+                ]
+            },
+            {
+                "question": "fra",
+                "answers": [
+                    "frå"
+                ]
+            },
+            {
+                "question": "fremdeles",
+                "answers": [
+                    "framleis"
+                ]
+            },
+            {
+                "question": "ga",
+                "answers": [
+                    "gav"
+                ]
+            },
+            {
+                "question": "gå i gang",
+                "answers": [
+                    "gå i gang"
+                ]
+            },
+            {
+                "question": "det var en gang",
+                "answers": [
+                    "det var ein gong"
+                ]
+            },
+            {
+                "question": "gjelder",
+                "answers": [
+                    "gjeld"
+                ]
+            },
+            {
+                "question": "gjøre",
+                "answers": [
+                    "gjere"
+                ]
+            },
+            {
+                "question": "hele",
+                "answers": [
+                    "heile"
+                ]
+            },
+            {
+                "question": "henne",
+                "answers": [
+                    "ho",
+                    "henne"
+                ]
+            },
+            {
+                "question": "hennes",
+                "answers": [
+                    "hennar"
+                ]
+            },
+            {
+                "question": "hjem",
+                "answers": [
+                    "heim"
+                ]
+            },
+            {
+                "question": "hjemme",
+                "answers": [
+                    "heime"
+                ]
+            },
+            {
+                "question": "holde",
+                "answers": [
+                    "halde",
+                    "halda"
+                ]
+            },
+            {
+                "question": "holder",
+                "answers": [
+                    "held"
+                ]
+            },
+            {
+                "question": "hva",
+                "answers": [
+                    "kva"
+                ]
+            },
+            {
+                "question": "hvem",
+                "answers": [
+                    "kven"
+                ]
+            },
+            {
+                "question": "hvilken",
+                "answers": [
+                    "kva",
+                    "kva for",
+                    "kva for ein",
+                    "kva for ei"
+                ]
+            },
+            {
+                "question": "hvor",
+                "answers": [
+                    "kvar",
+                    "kor"
+                ]
+            },
+            {
+                "question": "hvordan",
+                "answers": [
+                    "korleis",
+                    "kor"
+                ]
+            },
+            {
+                "question": "hvorfor",
+                "answers": [
+                    "kvifor"
+                ]
+            },
+            {
+                "question": "høyere",
+                "answers": [
+                    "høgare",
+                    "høgre"
+                ]
+            },
+            {
+                "question": "høyt",
+                "answers": [
+                    "høgt"
+                ]
+            },
+            {
+                "question": "ikke",
+                "answers": [
+                    "ikkje"
+                ]
+            },
+            {
+                "question": "innen",
+                "answers": [
+                    "innan"
+                ]
+            },
+            {
+                "question": "jeg",
+                "answers": [
+                    "eg"
+                ]
+            },
+            {
+                "question": "kommer",
+                "answers": [
+                    "kjem"
+                ]
+            },
+            {
+                "question": "lavere",
+                "answers": [
+                    "lågare",
+                    "lægre"
+                ]
+            },
+            {
+                "question": "løsning",
+                "answers": [
+                    "løysing"
+                ]
+            },
+            {
+                "question": "mener",
+                "answers": [
+                    "meiner"
+                ]
+            },
+            {
+                "question": "mer",
+                "answers": [
+                    "meir"
+                ]
+            },
+            {
+                "question": "mest",
+                "answers": [
+                    "mest"
+                ]
+            },
+            {
+                "question": "mulig",
+                "answers": [
+                    "mogleg",
+                    "mogeleg"
+                ]
+            },
+            {
+                "question": "mulighet",
+                "answers": [
+                    "moglegheit",
+                    "mogelegheit"
+                ]
+            },
+            {
+                "question": "mye",
+                "answers": [
+                    "mykje"
+                ]
+            },
+            {
+                "question": "navn",
+                "answers": [
+                    "namn"
+                ]
+            },
+            {
+                "question": "nemlig",
+                "answers": [
+                    "nemleg"
+                ]
+            },
+            {
+                "question": "noe",
+                "answers": [
+                    "noko"
+                ]
+            },
+            {
+                "question": "Norge",
+                "answers": [
+                    "Noreg"
+                ]
+            },
+            {
+                "question": "regne med",
+                "answers": [
+                    "rekne med",
+                    "rekna med"
+                ]
+            },
+            {
+                "question": "det regnet",
+                "answers": [
+                    "det regna"
+                ]
+            },
+            {
+                "question": "samme",
+                "answers": [
+                    "same"
+                ]
+            },
+            {
+                "question": "samt",
+                "answers": [
+                    "og"
+                ]
+            },
+            {
+                "question": "se",
+                "answers": [
+                    "sjå"
+                ]
+            },
+            {
+                "question": "selv",
+                "answers": [
+                    "sjølv",
+                    "sjølve"
+                ]
+            },
+            {
+                "question": "senere",
+                "answers": [
+                    "seinare"
+                ]
+            },
+            {
+                "question": "si",
+                "answers": [
+                    "seie"
+                ]
+            },
+            {
+                "question": "sier",
+                "answers": [
+                    "seier"
+                ]
+            },
+            {
+                "question": "sitter",
+                "answers": [
+                    "sit"
+                ]
+            },
+            {
+                "question": "skole",
+                "answers": [
+                    "skole",
+                    "skule"
+                ]
+            },
+            {
+                "question": "skrevet bok",
+                "answers": [
+                    "skrive bok"
+                ]
+            },
+            {
+                "question": "skriver",
+                "answers": [
+                    "skriv"
+                ]
+            },
+            {
+                "question": "spille",
+                "answers": [
+                    "spele",
+                    "spela"
+                ]
+            },
+            {
+                "question": "sted",
+                "answers": [
+                    "stad"
+                ]
+            },
+            {
+                "question": "tall",
+                "answers": [
+                    "tal"
+                ]
+            },
+            {
+                "question": "tidlig",
+                "answers": [
+                    "tidleg"
+                ]
+            },
+            {
+                "question": "tidligere",
+                "answers": [
+                    "tidlegare"
+                ]
+            },
+            {
+                "question": "trolig",
+                "answers": [
+                    "truleg"
+                ]
+            },
+            {
+                "question": "tror",
+                "answers": [
+                    "trur"
+                ]
+            },
+            {
+                "question": "uke",
+                "answers": [
+                    "veke"
+                ]
+            },
+            {
+                "question": "uten",
+                "answers": [
+                    "utan"
+                ]
+            },
+            {
+                "question": "utenfor",
+                "answers": [
+                    "utanfor"
+                ]
+            },
+            {
+                "question": "valg",
+                "answers": [
+                    "val"
+                ]
+            },
+            {
+                "question": "vanskelig",
+                "answers": [
+                    "vanskeleg"
+                ]
+            },
+            {
+                "question": "vei",
+                "answers": [
+                    "veg"
+                ]
+            },
+            {
+                "question": "vet",
+                "answers": [
+                    "veit"
+                ]
+            },
+            {
+                "question": "videre",
+                "answers": [
+                    "vidare"
+                ]
+            },
+            {
+                "question": "være",
+                "answers": [
+                    "vere",
+                    "vera"
+                ]
+            },
+            {
+                "question": "vært",
+                "answers": [
+                    "vore"
+                ]
+            },
+            {
+                "question": "åpen",
+                "answers": [
+                    "open"
+                ]
+            },
+            {
+                "question": "er",
+                "answers": [
+                    "er"
+                ]
+            },
+            {
+                "question": "var",
+                "answers": [
+                    "var"
+                ]
+            },
+            {
+                "question": "bør",
+                "answers": [
+                    "bør"
+                ]
+            },
+            {
+                "question": "skal",
+                "answers": [
+                    "skal"
+                ]
+            },
+            {
+                "question": "burde",
+                "answers": [
+                    "burde"
+                ]
+            },
+            {
+                "question": "eller",
+                "answers": [
+                    "eller"
+                ]
+            },
+            {
+                "question": "fordi",
+                "answers": [
+                    "fordi"
+                ]
+            },
+            {
+                "question": "når",
+                "answers": [
+                    "når"
+                ]
+            },
+            {
+                "question": "og",
+                "answers": [
+                    "og"
+                ]
+            },
+            {
+                "question": "du",
+                "answers": [
+                    "du"
+                ]
+            },
+            {
+                "question": "han",
+                "answers": [
+                    "han"
+                ]
+            },
+            {
+                "question": "av",
+                "answers": [
+                    "av"
+                ]
+            },
+            {
+                "question": "for",
+                "answers": [
+                    "for"
+                ]
+            },
+            {
+                "question": "om",
+                "answers": [
+                    "om"
+                ]
+            },
+            {
+                "question": "også",
+                "answers": [
+                    "også"
+                ]
+            },
+            {
+                "question": "dette",
+                "answers": [
+                    "dette"
+                ]
+            },
+            {
+                "question": "mot",
+                "answers": [
+                    "mot"
+                ]
+            },
+            {
+                "question": "andre",
+                "answers": [
+                    "andre"
+                ]
+            },
+            {
+                "question": "må",
+                "answers": [
+                    "må"
+                ]
+            },
+            {
+                "question": "enn",
+                "answers": [
+                    "enn"
+                ]
+            },
+            {
+                "question": "mange",
+                "answers": [
+                    "mange"
+                ]
+            },
+            {
+                "question": "sine",
+                "answers": [
+                    "sine"
+                ]
+            },
+            {
+                "question": "først",
+                "answers": [
+                    "først",
+                    "fyrst"
+                ]
+            },
+            {
+                "question": "første",
+                "answers": [
+                    "første",
+                    "fyrste"
+                ]
+            },
+            {
+                "question": "mene",
+                "answers": [
+                    "meine",
+                    "meina"
+                ]
+            },
+            {
+                "question": "heller",
+                "answers": [
+                    "heller"
+                ]
+            },
+            {
+                "question": "tiden",
+                "answers": [
+                    "tida"
+                ]
+            },
+            {
+                "question": "ser",
+                "answers": [
+                    "ser"
+                ]
+            },
+            {
+                "question": "vi",
+                "answers": [
+                    "vi",
+                    "me"
+                ]
+            },
+            {
+                "question": "går",
+                "answers": [
+                    "går"
+                ]
+            },
+            {
+                "question": "eksempel",
+                "answers": [
+                    "eksempel",
+                    "døme"
+                ]
+            },
+            {
+                "question": "liker",
+                "answers": [
+                    "liker",
+                    "likar"
+                ]
+            },
+            {
+                "question": "aldri",
+                "answers": [
+                    "aldri"
+                ]
+            },
+            {
+                "question": "tenker",
+                "answers": [
+                    "tenker",
+                    "tenkjer"
+                ]
+            },
+            {
+                "question": "står",
+                "answers": [
+                    "står"
+                ]
+            },
+            {
+                "question": "virket",
+                "answers": [
+                    "verka"
+                ]
+            },
+            {
+                "question": "skaper",
+                "answers": [
+                    "skaper",
+                    "skapar"
+                ]
+            },
+            {
+                "question": "handler",
+                "answers": [
+                    "handlar"
+                ]
+            },
+            {
+                "question": "inneholder",
+                "answers": [
+                    "inneheld"
+                ]
+            },
+            {
+                "question": "betyr",
+                "answers": [
+                    "betyr",
+                    "tyder"
+                ]
+            },
+            {
+                "question": "komme",
+                "answers": [
+                    "komme",
+                    "kome",
+                    "komma",
+                    "koma"
+                ]
+            },
+            {
+                "question": "delene",
+                "answers": [
+                    "delane"
+                ]
+            },
+            {
+                "question": "likevel",
+                "answers": [
+                    "likevel"
+                ]
+            },
+            {
+                "question": "over",
+                "answers": [
+                    "over"
+                ]
+            },
+            {
+                "question": "bilde",
+                "answers": [
+                    "bilde",
+                    "bilete"
+                ]
+            },
+            {
+                "question": "annerledes",
+                "answers": [
+                    "annleis"
+                ]
+            },
+            {
+                "question": "han ba",
+                "answers": [
+                    "han bad"
+                ]
+            },
+            {
+                "question": "bedre",
+                "answers": [
+                    "betre"
+                ]
+            },
+            {
+                "question": "begrep",
+                "answers": [
+                    "omgrep"
+                ]
+            },
+            {
+                "question": "bo",
+                "answers": [
+                    "bu"
+                ]
+            },
+            {
+                "question": "dere er",
+                "answers": [
+                    "dokker er",
+                    "de er"
+                ]
+            },
+            {
+                "question": "til dere",
+                "answers": [
+                    "til dokker",
+                    "til dykk"
+                ]
+            },
+            {
+                "question": "dro",
+                "answers": [
+                    "drog"
+                ]
+            },
+            {
+                "question": "forfatter",
+                "answers": [
+                    "forfattar"
+                ]
+            },
+            {
+                "question": "fortelle",
+                "answers": [
+                    "fortelje",
+                    "fortelja"
+                ]
+            },
+            {
+                "question": "en forteller",
+                "answers": [
+                    "ein forteljar"
+                ]
+            },
+            {
+                "question": "du forteller",
+                "answers": [
+                    "du fortel"
+                ]
+            },
+            {
+                "question": "fravær",
+                "answers": [
+                    "fråvær",
+                    "fråvære",
+                    "fråvering"
+                ]
+            },
+            {
+                "question": "fremst",
+                "answers": [
+                    "fremst"
+                ]
+            },
+            {
+                "question": "greit",
+                "answers": [
+                    "greitt"
+                ]
+            },
+            {
+                "question": "gutt",
+                "answers": [
+                    "gut"
+                ]
+            },
+            {
+                "question": "heter",
+                "answers": [
+                    "heiter"
+                ]
+            },
+            {
+                "question": "hilsen",
+                "answers": [
+                    "helsing"
+                ]
+            },
+            {
+                "question": "hjalp",
+                "answers": [
+                    "hjelpte"
+                ]
+            },
+            {
+                "question": "hverandre",
+                "answers": [
+                    "kvarandre"
+                ]
+            },
+            {
+                "question": "huske",
+                "answers": [
+                    "hugse",
+                    "hugsa"
+                ]
+            },
+            {
+                "question": "høy",
+                "answers": [
+                    "høg"
+                ]
+            },
+            {
+                "question": "kilde",
+                "answers": [
+                    "kjelde"
+                ]
+            },
+            {
+                "question": "kjærlighet",
+                "answers": [
+                    "kjærleik"
+                ]
+            },
+            {
+                "question": "klær",
+                "answers": [
+                    "klede"
+                ]
+            },
+            {
+                "question": "du leser",
+                "answers": [
+                    "du les"
+                ]
+            },
+            {
+                "question": "leseren",
+                "answers": [
+                    "lesaren"
+                ]
+            },
+            {
+                "question": "lest",
+                "answers": [
+                    "lese"
+                ]
+            },
+            {
+                "question": "leste",
+                "answers": [
+                    "las"
+                ]
+            },
+            {
+                "question": "læreren",
+                "answers": [
+                    "læraren"
+                ]
+            },
+            {
+                "question": "man",
+                "answers": [
+                    "ein"
+                ]
+            },
+            {
+                "question": "mening",
+                "answers": [
+                    "meining"
+                ]
+            },
+            {
+                "question": "meningen",
+                "answers": [
+                    "meininga"
+                ]
+            },
+            {
+                "question": "mennesker",
+                "answers": [
+                    "menneske",
+                    "menneskje"
+                ]
+            },
+            {
+                "question": "menneskene",
+                "answers": [
+                    "menneska"
+                ]
+            },
+            {
+                "question": "motsatt",
+                "answers": [
+                    "motsett"
+                ]
+            },
+            {
+                "question": "muntlig",
+                "answers": [
+                    "munnleg"
+                ]
+            },
+            {
+                "question": "oppgave",
+                "answers": [
+                    "oppgåve"
+                ]
+            },
+            {
+                "question": "påvirke",
+                "answers": [
+                    "påverke",
+                    "påverka"
+                ]
+            },
+            {
+                "question": "sammen",
+                "answers": [
+                    "saman"
+                ]
+            },
+            {
+                "question": "sang",
+                "answers": [
+                    "song"
+                ]
+            },
+            {
+                "question": "satt",
+                "answers": [
+                    "sat"
+                ]
+            },
+            {
+                "question": "satte",
+                "answers": [
+                    "sette"
+                ]
+            },
+            {
+                "question": "setter",
+                "answers": [
+                    "set"
+                ]
+            },
+            {
+                "question": "skriftlig",
+                "answers": [
+                    "skriftleg"
+                ]
+            },
+            {
+                "question": "spill",
+                "answers": [
+                    "spel"
+                ]
+            },
+            {
+                "question": "spørre",
+                "answers": [
+                    "spørje",
+                    "spørja"
+                ]
+            },
+            {
+                "question": "du så",
+                "answers": [
+                    "du såg"
+                ]
+            },
+            {
+                "question": "trener",
+                "answers": [
+                    "trenar"
+                ]
+            },
+            {
+                "question": "trengte",
+                "answers": [
+                    "trong"
+                ]
+            },
+            {
+                "question": "tro",
+                "answers": [
+                    "tru"
+                ]
+            },
+            {
+                "question": "trodde",
+                "answers": [
+                    "trudde"
+                ]
+            },
+            {
+                "question": "vann",
+                "answers": [
+                    "vatn"
+                ]
+            },
+            {
+                "question": "verden rundt",
+                "answers": [
+                    "verda rundt"
+                ]
+            },
+            {
+                "question": "virkemiddel",
+                "answers": [
+                    "verkemiddel"
+                ]
+            },
+            {
+                "question": "vitenskap",
+                "answers": [
+                    "vitskap"
+                ]
+            },
+            {
+                "question": "vær",
+                "answers": [
+                    "ver"
+                ]
+            },
+            {
+                "question": "ødelegge",
+                "answers": [
+                    "øydelegge",
+                    "øydeleggje"
+                ]
+            },
+            {
+                "question": "åpne",
+                "answers": [
+                    "opne"
+                ]
+            },
+            {
+                "question": "formen",
+                "answers": [
+                    "forma"
+                ]
+            },
+            {
+                "question": "en form",
+                "answers": [
+                    "ei form"
+                ]
+            },
+            {
+                "question": "begynnelse",
+                "answers": [
+                    "begynning",
+                    "byrjing"
+                ]
+            },
+            {
+                "question": "begynnelsen",
+                "answers": [
+                    "begynninga",
+                    "byrjinga"
+                ]
+            },
+            {
+                "answers": [
+                    "ho"
+                ],
+                "question": "hun"
+            }
+        ],
+        "gameTime": 120,
+        "wordTime": 7,
+        "toggleTimerOnText": "Tid på (2 minutter)",
+        "toggleTimerOffText": "Tid av",
+        "welcomeText": "Oversett så mange ord du klarer, fra bokmål til nynorsk. Husk at flere av ordene er like på begge målformer."
+    },
+    "namespace": "c609bff0-1ff6-4f86-ba5c-80d1d2ced09d",
+    "type": "OBJECT",
+    "schemaId": "53e75839-7abf-4213-a0f0-9344c8a4f7ee",
+    "createdAt": "2022-06-23T12:17:39.608Z",
+    "updatedAt": "2022-11-18T23:31:22.504Z",
+    "id": "8e7a7102-1b8d-463f-8334-624a995905be"
+}

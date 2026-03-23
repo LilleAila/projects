@@ -1,11 +1,12 @@
-#include <HijelHID_BLEKeyboard.h>
+#include <BleCompositeHID.h>
+#include <KeyboardDevice.h>
 
 const int buttonPin = 4;
-const unsigned long pairingThreshold = 5000;
 bool lastButtonState = HIGH;
-unsigned long pressedTime = 0;
 
-HijelHID_BLEKeyboard keyboard("ESP32-C6 Page Turner", "ESP32", 100);
+KeyboardDevice* keyboard;
+BLEHostConfiguration bleHostConfig;
+BleCompositeHID compositeHID("ESP32-C6 Page Turner", "Espressif", 100);
 
 void setup() {
   delay(500);
@@ -18,38 +19,31 @@ void setup() {
   pinMode(buttonPin, INPUT_PULLUP);
   Serial.println("Initialized Button");
 
-  keyboard.setDebugLevel(HIDLogLevel::Normal);
-  keyboard.begin();
-  Serial.println("Initialized BLE Keyboard");
+  bleHostConfig.setHidType(HID_KEYBOARD);
+  keyboard = new KeyboardDevice();
+  compositeHID.addDevice(keyboard);
+  compositeHID.begin(bleHostConfig);
+  Serial.println("Initialized BLE HID");
 }
 
 void loop() {
   bool buttonState = digitalRead(buttonPin);
   unsigned long now = millis();
-  unsigned long duration = now - pressedTime;
 
-  // Button pressed
   if (lastButtonState == HIGH && buttonState == LOW) {
+    // Button pressed
     Serial.println("Button pressed");
-    pressedTime = now;
   }
 
-  // Button released
   if (lastButtonState == LOW && buttonState == HIGH) {
-    Serial.print("Button released after ");
-    Serial.print(duration);
-    Serial.println("ms");
+    // Button released
+    Serial.print("Button released");
 
-    if (duration < pairingThreshold) {
-      // Turn page
-      if (keyboard.isConnected()) {
-        Serial.println("Turning page");
-        keyboard.tap(KEY_SPACE);
-      }
-    } else {
-      // Enter pairing mode
-      Serial.println("Entering pairing mode");
-      keyboard.clearBonds();
+    // Turn page
+    if (compositeHID.isConnected()) {
+      Serial.println("Turning page");
+      keyboard->keyPress(KEY_SPACE);
+      keyboard->keyRelease(KEY_SPACE);
     }
   }
 

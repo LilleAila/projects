@@ -14,3 +14,5 @@ dependencies:
 	arduino-cli core install "esp32:esp32"
 	arduino-cli lib install "NimBLE-Arduino"
 	arduino-cli lib install "HijelHID_BLEKeyboard"
+	arduino-cli lib install "Callback"
+	git clone git@github.com:Mystfit/ESP32-BLE-CompositeHID ~/Documents/arduino/libraries/
