@@ -42,7 +42,7 @@ $
   $
 ]
 
-Videre kombinerer jeg dette med Newtons første lov:
+Videre kombinerer jeg dette med Newtons andre lov:
 
 $
   F = m dot a
@@ -51,8 +51,8 @@ $
 Og finner et uttrykk for akselerasjonen
 
 $
-  m a & = k (|q_1 dot q_2|)/(r^2) \
-    a & = k (|q_1 dot q_2|)/(r^2 dot m)
+  m dot a & = k (|q_1 dot q_2|)/(r^2) \
+        a & = k (|q_1 dot q_2|)/(r^2 dot m)
 $
 
 Jeg bruker det at $a = r''(t)$ og setter det opp som en differensiallikning:

@@ -5,7 +5,8 @@ import numpy as np
 k = 8.99e9
 
 m1, q1 = constants.m_p, constants.e
-m2, q2 = constants.m_p, constants.e
+# m2, q2 = constants.m_p, constants.e
+m2, q2 = 2 * constants.m_p + 2 * constants.m_n, 2 * constants.e # alpha particle
 
 dt = 1e-18
 T = 1e-14
