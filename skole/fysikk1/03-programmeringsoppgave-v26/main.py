@@ -13,7 +13,6 @@ T = 1e-14
 MAXN = int(T / dt) + 1
 
 ts = np.zeros(MAXN)
-
 delta_r = np.zeros(MAXN)
 r1 = np.zeros(MAXN)
 r2 = np.zeros(MAXN)
@@ -63,14 +62,14 @@ while n < MAXN - 1:
     ek2[n] = 1/2 * m2 * dr2[n] ** 2
     ep[n] = k * (q1 * q2) / (delta_r[n])
 
-fig, ax = plt.subplots()
-labels = ["$E_{K1}$", "$E_{K2}$", "$E_{P}$"]
-ax.stackplot(ts, ek1, ek2, ep, labels=labels)
-ax.set_title("Energibevaring for partiklene")
-ax.set_xlabel("Tid (s)")
-ax.set_ylabel("Energi (J)")
-ax.legend()
-plt.show()
+# fig, ax = plt.subplots()
+# labels = ["$E_{K1}$", "$E_{K2}$", "$E_{P}$"]
+# ax.stackplot(ts, ek1, ek2, ep, labels=labels)
+# ax.set_title("Energibevaring for partiklene")
+# ax.set_xlabel("Tid (s)")
+# ax.set_ylabel("Energi (J)")
+# ax.legend()
+# plt.show()
 
 # fig, ax = plt.subplots()
 # ax.plot(ts, delta_r, label="Simulert avstand")
@@ -81,11 +80,11 @@ plt.show()
 # ax.legend()
 # plt.show()
 
-# fig, ax = plt.subplots()
-# ax.plot(ts, r1, label="Proton 1")
-# ax.plot(ts, r2, label="Proton 2")
-# ax.set_title("Kollisjon mellom to protoner")
-# ax.set_xlabel("Tid (s)")
-# ax.set_ylabel("Posisjon (m)")
-# ax.legend()
-# plt.show()
+fig, ax = plt.subplots()
+ax.plot(ts, r1, label="Proton 1")
+ax.plot(ts, r2, label="Proton 2")
+ax.set_title("Kollisjon mellom to protoner")
+ax.set_xlabel("Tid (s)")
+ax.set_ylabel("Posisjon (m)")
+ax.legend()
+plt.show()

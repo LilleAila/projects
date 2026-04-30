@@ -17,6 +17,10 @@ mkShell {
         numpy
         matplotlib
         scipy
+
+        jupyterlab
+        jupyter
+        ipykernel
       ]
     ))
   ];
