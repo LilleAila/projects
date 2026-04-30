@@ -1,0 +1,9 @@
+bruk terminal
+
+gjer kvadrat(nummer) {
+    gjevTilbake nummer * nummer
+}
+
+forKvart nummer i [1, 2, 3, 4, 5] {
+    terminal.skriv(kvadrat(nummer))
+}

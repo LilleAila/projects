@@ -1,0 +1,15 @@
+bruk terminal
+bruk nettverk
+
+gjer minApplikasjon(metode, sti) {
+  terminal.skriv(metode + " førespurnad til: " + sti)
+
+  viss (metode er "GET" og sti er "/") gjer {
+    terminal.skriv("Førespurnad til /")
+    gjevTilbake "<h1>Test</h1>"
+  }
+}
+
+låst port er 8080
+terminal.skriv("Køyrer server på port " + port)
+nettverk.lytt(port, minApplikasjon)
