@@ -326,3 +326,128 @@ TODO putte inn kodeblokk, resultat og forklare hvorfor resultatet blir som det b
 = Simulering i 2D
 
 Basert på den samme logikken, vil jeg nå utvide programmet mitt til å simulere Rutherfords forsøk. Forsøket går ut på at alfapartikler sendes mot en gullkjerne, og så ser man på hvordan alfapartikkelen avbøyes. Dette beviste da at et atom ikke er en "rosinbolle", slik man trodde før. For å gjøre dette, må jeg utvide implementasjonen min til å fungere i to dimensjoner. Da beregner jeg nå avstanden ved hjelp av pytagoras med $r = sqrt(Delta x^2 + Delta y^2)$, og kraften $F$ må dekomponeres for å kunne finne akselerasjonen (og dermed også fart og posisjon ved hjelp av numerisk integrasjon). Så kan jeg plotte banen som en kurve med x- og y- posisjonene til partiklene. Ved å variere avstanden fra sentrumlinjen som alfapartikkelen sendes inn, kan jeg plotte de ulike banene den vil avbøyes langs, slik som i Rutherfords forsøk.
+
+== Teori
+
+Jeg bruker fortsatt Coulombs lov til dette, definert ved
+
+$
+  |F| = k (|q_1 dot q_2|) / (r^2)
+$
+
+Forskjellen er at når jeg skal simulere i to dimensjoner, kan jeg ikke lenger bruke kraften som en skalar. Nå må jeg skrive dette som en vektor. Jeg kan da skrive
+
+$
+        arrow(Delta r) & = r_2 - r_1 = [x_2 - x_1, y_2 - y_1] \
+  r = |arrow(Delta r)| & = sqrt(Delta x^2 + Delta y^2)
+$
+
+Deretter finner jeg en enhetsvektor (altså en vektor med lengde 1), og multipliserer dette med magnituden som jeg fikk fra Coulombs lov. Dette gir meg
+
+$
+  hat(r) & = (arrow(Delta r))/r \
+       F & = |F| dot hat(r)
+$
+
+== Implementasjon
+
+Med dette kan jeg bruke den samme Ruler-Cromer logikken for den samme differensiallikningen som tidligere, der den eneste forskjellen er at jeg nå bruker vektorer i stedet for skalarer. Da vil også tabellene mine inneholde todimensjonale punkter i stedet for en skalar.
+
+I Rutherfords forsøk ble en alfapartikkel ($""^4_2"He"^(2+)$) sendt mot en gullkjerne ($""^197_79"Au"$). Selv om det i forsøket ble brukt et nøytralt gullatom, simulerer jeg her i stedet $""^197_79"Au"^(79+)$. Dette er fordi at med farten alfapartikkelen bevegde seg med i det originale eksperimentet ($1.5 dot 10^7 unit(m dot s^(-1))$) var den kinetiske energien svært stor ($approx 5 unit(M e V)$), som er ekstremt mye sterkere enn bindingsenergien til elektronene, der selv de innerste kun er bundet med omtrent $80 unit(k e V)$. I tillegg er Bohr-radien omtrent $5.29 dot 10^(-11) unit(m)$. Min simulering starter alfapartikkelen med en avstand fra kjernen $r = 4 dot 10^(-11) unit(m)$. Dette er allerede innenfor elektronene, så det vil derfor uansett ikke ha noe å si. Altså ville forskjellen vært negligerbar hvis jeg hadde inkludert elektronene, som er det samme resultatet Rutherford fikk basert på sine eksperimenter.
+
+#note[
+  I denne implementasjonen simulerer jeg begge partiklene. Da gullkjernen har mye større masse enn alfapartikkelen, ville det vært mulig å forenkle ved å anta at denne står fast i origo, da den store masseforskjellen vil gjøre at den dyttes minimalt i forhold til alfapartikkelen. Likevel har jeg valgt å beholde denne kompleksiteten for å få mer nøyaktige resultater selv om det i praksis er negligerbart.
+]
+
+Her starter alfapartikkelen fra punktet $(-4 dot 10^(-11), y)$. Her er $y$ variabelen som bestemmer avstanden fra sentrum av gullatomet prosjektilen skytes. Dette parameteret bestemmer hvor stor avbøyningsvinkel alfapartikkelen får. Radien av gullkjernen er omtrent $7 dot 10^(-15) unit(m)$. Jeg velger ulike verdier innenfor dette infervallet for å se på avbøyningen.
+
+```py
+from matplotlib import pyplot as plt
+from scipy import constants
+import numpy as np
+
+k = 8.99e9
+
+# Mål: gullkjerne
+m1, q1 = 79 * constants.m_p + 118 * constants.m_n, 79 * constants.e
+# Prosjektil: alfapartikkel
+m2, q2 = 2 * constants.m_p + 2 * constants.m_n, 2 * constants.e
+
+# Velger gunstig tidsintervall og steg for forsøket
+dt = 1e-22
+T = 5e-18
+MAXN = int(T / dt) + 1
+
+# Definerer DP-tabeller
+ts = np.zeros(MAXN)
+r1 = np.zeros((MAXN, 2))
+r2 = np.zeros((MAXN, 2))
+dr1 = np.zeros((MAXN, 2))
+dr2 = np.zeros((MAXN, 2))
+ddr1 = np.zeros((MAXN, 2))
+ddr2 = np.zeros((MAXN, 2))
+
+# Startbetingelser som beskrevet over
+r1[0] = [0, 0]
+r2[0] = [-4e-11, 5e-15]
+dr1[0] = [0, 0]
+dr2[0] = [1.5e7, 0]
+
+for n in range(1, MAXN):
+    dr_vec = r2[n-1] - r1[n-1]
+    dist = np.linalg.norm(dr_vec)
+
+    # Scalar of force magnitude
+    F_mag = k * (q1 * q2) / (dist ** 2)
+    force_vec = (dr_vec / dist) * F_mag
+
+    ddr1[n] = -force_vec / m1
+    ddr2[n] = force_vec / m2
+
+    dr1[n] = dr1[n-1] + ddr1[n] * dt
+    dr2[n] = dr2[n-1] + ddr2[n] * dt
+
+    r1[n] = r1[n-1] + dr1[n] * dt
+    r2[n] = r2[n-1] + dr2[n] * dt
+```
+
+Dette kan jeg plotte ved
+
+```py
+fig, ax = plt.subplots()
+ax.plot(r1[:, 0], r1[:, 1], color="red", label="Gullkjerne")
+ax.scatter(0, 0, color="red", zorder=5, label="Gullkjerne")
+ax.plot(r2[:, 0], r2[:, 1], label="Alfapartikkel")
+ax.set_xlabel("x (m)")
+ax.set_ylabel("y (m)")
+ax.set_title("2D Rutherford Simulering")
+ax.axis("equal")
+ax.legend()
+plt.show()
+```
+
+TODO insert figur
+
+== Utregning av vinkel
+
+Jeg kan nå også regne ut avbøyningevinkelen etter å ha simulert forsøket. Jeg har to fartsvektorer $v$ og $v_0$, som er henholdsvis farten ved starten og slutten av simuleringen. Da kan jeg bruke skalarproduktet til å finne vinkelen:
+
+$
+  v_0 dot v & = |v_0| dot |v| dot cos theta \
+  cos theta & = (v_0 dot v)/(|v_0| dot |v|) \
+      theta & = cos^(-1)( (v_0 dot v) / (|v_0| dot |v|) )
+$
+
+Dette kan jeg regne ut i python med følgende kode:
+
+```py
+v = dr2[-1]
+v0 = dr2[0]
+cos_theta = np.dot(v0, v) / (np.linalg.norm(v0) * np.linalg.norm(v))
+theta = np.degrees(np.arccos(np.clip(cos_theta, -1.0, 1.0)))
+print(f"Avbøyningsvinkel: {theta}")
+```
+
+== Simulering med ulike verdier for støtparameteret
+
+TODO skrive kode og insert figur
