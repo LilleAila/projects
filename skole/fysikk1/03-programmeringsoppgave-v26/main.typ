@@ -30,7 +30,13 @@
   inset: 10pt,
   radius: 4pt,
   width: 100%,
-  x,
+  {
+    set par(
+      hanging-indent: 1.5em,
+      leading: 0.6em,
+    )
+    x
+  },
 )
 #show raw.where(block: false): x => {
   h(1pt)
@@ -47,7 +53,11 @@
 
 #set heading(numbering: "1.1")
 
-#let note(body) = colorbox(title: "Merk", color: "blue", body)
+#let note(body) = block(breakable: false)[#colorbox(
+  title: "Merk",
+  color: "blue",
+  body,
+)]
 
 #let Unit(u) = [$upright(#u)$]
 #let unit(u) = [$thin Unit(#u)$]
@@ -63,6 +73,8 @@
 #outline()
 
 = Simulering i én dimensjon
+
+== Teori
 
 I denne oppgaven skal jeg ved hjelp av Coulombs lov simulere kollisjonen mellom to partikler. Jeg starter ved å sette opp uttrykket for Coulombs lov:
 
@@ -98,7 +110,7 @@ $
 
 == Implementasjon
 
-I dette tilfellet velger jeg å simulere to protoner som går mot hverandre. Jeg starter dem parallelt om sentrum med posisjon $2 dot 10^(-10)$ i hver retning. Startfarten til partiklene er satt som $5 dot 10^4 unit(m dot s^(-2))$. Kollisjonen skjer innen et ekstremt lite tidsrom.
+I dette tilfellet velger jeg å simulere to protoner som går mot hverandre. Jeg starter dem parallelt om sentrum med posisjon $2 dot 10^(-10)$ i hver retning. Startfarten til partiklene er satt som $5 dot 10^4 unit(m dot s^(-1))$. Kollisjonen skjer innen et ekstremt lite tidsrom.
 
 Dette kan jeg implementere med programmering ved hjelp av eulers metode som bruker numerisk integrasjon som følger. Her bruker jeg også dynamisk programering (DP) som en metode for å effektivisere den kjøringen som i utgangspunktet er definert som en rekursiv funksjon. Med dynamisk programmering kan man løse dette i lineær tid.
 
@@ -180,7 +192,7 @@ plt.show()
   caption: [Visualisering av kollisjonen mellom to protoner],
 )
 
-Her ser jeg at de to protonene går mot hverandre nærmest lineært. Mens de nærmer seg hverandre, reduseres farten gradvis, helt til punktet der den snur og akselererer før den beveger seg lineært. Dette skjer når den kommer ut av rekkevidden til de elektriske kreftene som virker mellom partiklene. Da er det ikke lenger noen krefter som virker mellom dem, og da vil partikkelen etter Newtons første lov fortsette å bevege seg med konstant hastighet.
+Her ser jeg at de to protonene går mot hverandre nærmest lineært. Mens de nærmer seg hverandre, reduseres farten gradvis, helt til punktet der den snur og akselererer før den beveger seg lineært. Dette skjer når den kommer ut av rekkevidden til de elektriske kreftene som virker mellom partiklene. Da er det ikke lenger noen krefter som virker mellom dem, og da vil partikkelen etter Newtons første lov fortsette å bevege seg med konstant hastighet. Den store krummingen komme fra den sterke repulsive kraften i Coulombs lov, som er proporsjonal med $r^(-2)$.
 
 Dette kan vi også se tydelig når vi plotter akselerasjonen:
 
@@ -315,13 +327,38 @@ Videre plotter jeg summen av disse verdiene gjennom simuleringen:
   caption: [Energibevaring i kollisjonen],
 )
 
-Denne figurn viser den kinetiske energien til det første protonet, det andre protonet, og den potensielle energien mellom de to protonene i henholdsvis blå, oransje og grønn farge. Vi kan se at i kollisjonsøyeblikket, der farten er lik $0$, er den kinetiske energien lik $0$, mens den potensielle energien er høy. Deretter ser vi at den potensielle energien blir gjort tilbake om til kinetisk energi idet partiklene beveger ser fra hverandre igjen. Viktigst av alt kan vi her se hvordan summen av energien holder seg konstant gjennom hele simuleringen. Dette bekrefter teorien om at energisummen er bevart.
+Denne figuren viser den kinetiske energien til det første protonet, det andre protonet, og den potensielle energien mellom de to protonene i henholdsvis blå, oransje og grønn farge. Vi kan se at i kollisjonsøyeblikket, der farten er lik $0$, er den kinetiske energien lik $0$, mens den potensielle energien er høy. Deretter ser vi at den potensielle energien blir gjort tilbake om til kinetisk energi idet partiklene beveger ser fra hverandre igjen. Viktigst av alt kan vi her se hvordan summen av energien holder seg konstant gjennom hele simuleringen. Dette bekrefter teorien om at energisummen er bevart.
 
 == Kollisjoner mellom andre nuklider
 
-Videre kan jeg bruke samme koden til å simulere andre kollisjoner, for eksempel kollisjonen mellom et proton og en alfapartikkel:
+Videre kan jeg bruke samme koden til å simulere andre kollisjoner, for eksempel kollisjonen mellom et proton og en alfapartikkel. Jeg bruker da den samme koden som over, men endrer verdiene for massen og ladningen til partiklene. I dette tilfellet vil jeg se på kollisjonen mellom et proton og en alfapartikkel.
 
-TODO putte inn kodeblokk, resultat og forklare hvorfor resultatet blir som det blir
+```py
+m1, q1 = constants.m_p, constants.e
+m2, q2 = 2 * constants.m_p + 2 * constants.m_n, 2 * constants.e
+```
+
+Dette gir mer interessante resultater. Posisjonen til partiklene over tid ser nå slik ut:
+
+#figure(
+  image("assets/alpha-collision-position.png"),
+  caption: [Posisjonen til partiklene over tid],
+)
+
+Her kan vi se at alfapartikkelen med omtrent $4 times$ så stor masse, får en mye lavere fart etter kollisjonen enn protonet. Dette skjer på grunn av bevaring av bevegelsesmengden.
+
+Energien er fortsatt bevart, men vi ser også her en mer interessant fordeling.
+
+#figure(
+  image("assets/alpha-collision-energy.png"),
+  caption: [Energibevaring i kollisjone med alfapartikkel],
+)
+
+Siden partiklene starter med lik fart, vil alfapartikkelen med $4 times$ så stor masse også ha $4 times$ så stor kinetisk energi. Etter støtet overføres mye av bevegelsesmengden fra alfapartikkelen til det mye letter protonet. For at bevegelsesmengden skal bli bevart må da protonet skytes ut med en mye høyere fart. Siden den kinetiske energien øker kvadratisk med farten ($E = 1/2 m v^2$) har protonet mot slutten mye mer kinetisk energi enn alfapartikkelen.
+
+#note[
+  Dette gjelder spesifikt for en sentral kollisjon, som er det jeg simulerer her når jeg kun regner med én dimensjon. Om alfapartikkelen ikke hadde truffet i sentrum av protonet, ville den beholdt mye mer av energien enn når de kolliderer rett på hverandre.
+]
 
 = Simulering i 2D
 
@@ -359,7 +396,7 @@ I Rutherfords forsøk ble en alfapartikkel ($""^4_2"He"^(2+)$) sendt mot en gull
   I denne implementasjonen simulerer jeg begge partiklene. Da gullkjernen har mye større masse enn alfapartikkelen, ville det vært mulig å forenkle ved å anta at denne står fast i origo, da den store masseforskjellen vil gjøre at den dyttes minimalt i forhold til alfapartikkelen. Likevel har jeg valgt å beholde denne kompleksiteten for å få mer nøyaktige resultater selv om det i praksis er negligerbart.
 ]
 
-Her starter alfapartikkelen fra punktet $(-4 dot 10^(-11), y)$. Her er $y$ variabelen som bestemmer avstanden fra sentrum av gullatomet prosjektilen skytes. Dette parameteret bestemmer hvor stor avbøyningsvinkel alfapartikkelen får. Radien av gullkjernen er omtrent $7 dot 10^(-15) unit(m)$. Jeg velger ulike verdier innenfor dette infervallet for å se på avbøyningen.
+Her starter alfapartikkelen fra punktet $(-4 dot 10^(-11), y)$. Her er $y$ variabelen som bestemmer avstanden fra sentrum av gullatomet prosjektilen skytes. Dette parameteret bestemmer hvor stor avbøyningsvinkel alfapartikkelen får. Radien av gullkjernen er omtrent $7 dot 10^(-15) unit(m)$. Jeg velger ulike verdier nær dette for å se på avbøyningen.
 
 ```py
 from matplotlib import pyplot as plt
@@ -426,7 +463,10 @@ ax.legend()
 plt.show()
 ```
 
-TODO insert figur
+#figure(
+  image("assets/rutherford1.png"),
+  caption: [Simulering av rutherfords forsøk med $y = 5 dot 10^(-15)$],
+)
 
 == Utregning av vinkel
 
@@ -445,9 +485,99 @@ v = dr2[-1]
 v0 = dr2[0]
 cos_theta = np.dot(v0, v) / (np.linalg.norm(v0) * np.linalg.norm(v))
 theta = np.degrees(np.arccos(np.clip(cos_theta, -1.0, 1.0)))
+print(f"Avbøyningsvinkel: {theta:.2f}°")
+```
+
+For startverdien av $y$ brukt over får jeg da:
+
+```
+Avbøyningsvinkel: 156.63°
+```
+
+== Generalisering av funksjonen
+
+Det overraskende resultatet fra Rutherfords eksperiment var at partiklene ikke bare ble avbøyd, men de ble også vinklet så sterkt at de snudde retning og bevegde seg tilbake i retningen de ble skutt. Jeg kan lage en mer generell funksjon basert på koden fra tidligere:
+
+```py
+def rutherford(y):
+  # eksisterende kode for simulering
+  # returner de simulerte verdiene
+  return r1, r2, theta
+```
+
+#figure(
+  image("assets/rutherford2.png"),
+  caption: [Simulering av Rutherfords forsøk med $y = 0$],
+) <rutherford-180deg>
+
+Hvis jeg da bruker støtparameteret $y = 0$, vil jeg se i @rutherford-180deg at partikkelen blir reflektert rett tilbake.
+
+```py
+r1, r2, theta = rutherford(0)
 print(f"Avbøyningsvinkel: {theta}")
 ```
 
-== Simulering med ulike verdier for støtparameteret
+```
+Avbøyningsvinkel: 180.00°
+```
 
-TODO skrive kode og insert figur
+
+== Simulering med flere ulike startverdier
+
+Jeg kan nå bruke den samme koden til å simulere flere ulike verdier for $y$. Merk at her tegner jeg gullkjernen som et statisk punkt, siden masseforskjellen er så stor at bevegelsen blir minimal.
+
+```py
+# De ulike verdiene for støtparameteret
+ys = [0, 2e-15, 5e-15, 1e-14, 5e-14, 1e-13, 5e-13, 1e-12]
+
+# Opprette en plot der alle linjene skal tegnes
+fig, ax = plt.subplots()
+ax.set_xlabel("x (m)")
+ax.set_ylabel("y (m)")
+ax.set_title("2D Rutherford Simulering")
+ax.axis("equal")
+
+# Tegne opp en ny linje for hver verdi av y
+for y in ys:
+    _, r2, theta = rutherford(y)
+    ax.plot(
+      r2[:, 0],
+      r2[:, 1],
+      label=f"y={y:>5.0g}m, θ={theta:>5.1f}°"
+    )
+
+# Tegne gullkjernen og vise grafen
+plt.scatter(0, 0, color="red", zorder=5, label="Gullkjerne")
+ax.legend(
+  bbox_to_anchor=(1, 1),
+  loc="upper left",
+  prop={"family": "monospace", "size": 9}
+)
+plt.tight_layout()
+plt.show()
+```
+
+#figure(
+  image("assets/rutherford-multi.png"),
+  // image("assets/rutherford-multi.png", width: 75%),
+  // placement: bottom,
+  // scope: "parent",
+  caption: [Rutherford-simulering med ulike verdier av $y$],
+) <rutherford-multi>
+
+Vi ser tydelig basert på disse resultatene vist i @rutherford-multi at større verdier av $y$ fører til lavere avbøyingsvinkler $theta$. Det vil si at når alfapartikkelen treffer nærmere sentrum av gullkjernen, vil den avbøyes med større vinkel. I @rutherford-multi2 ser vi hvordan alfapartiklene ikke blir avbøyd for store nok verdier av $y$, mens når partiklene nærmer seg atomkjernen, vil de avbøyes mer.
+
+#figure(
+  image("assets/rutherford-multi2.png"),
+  caption: [Rutherford-simulering med større verdier av $y$],
+) <rutherford-multi2>
+
+= Konklusjon
+
+I denne oppgaven har jeg simulert kollisjoner mellom ladde partikler i én og to dimensjoner ved hjelp av Euler-Cromers metode. Med disse simuleringene har jeg bekreftet samtlige sentrale prinsipper i fysikken:
+
+- Energibevaring: ved å plotte kinetisk og potensiell energi over tid, har jeg vist at den totale mekaniske energien i systemet forblir konstant.
+- Samsvar mellom teori og simulering: Den teoretiske beregnede minsteavstanden ved hjelp av energibevaring og bevegelsesmengde stemte nøyaktig overens med verdiene fra den simulerte modellen.
+- Rutherfords atommodell: Ved å utvide den samme modellen til to dimensjoner, har jeg visualisert hvordan alfapartikler avbøyes når de skytes mot en gullkjerne. Simuleringen gjenskaper observasjonene som førte til oppdagelsen av atomkjernen.
+
+Totalt sett viser dette hvor kraftig programmering som et verktøy kan være i fysikken der man må håndtere varierende verdier, og der dette kan settes opp som en differensiallikning.

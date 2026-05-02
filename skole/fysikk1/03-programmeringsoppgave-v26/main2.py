@@ -46,7 +46,7 @@ v = dr2[-1]
 v0 = dr2[0]
 cos_theta = np.dot(v0, v) / (np.linalg.norm(v0) * np.linalg.norm(v))
 theta = np.degrees(np.arccos(np.clip(cos_theta, -1.0, 1.0)))
-print(theta)
+print(f"Avbøyningsvinkel: {theta:.2f}°")
 
 fig, ax = plt.subplots()
 ax.plot(r2[:, 0], r2[:, 1], label="Alfapartikkel")

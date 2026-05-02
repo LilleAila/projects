@@ -62,6 +62,12 @@ while n < MAXN - 1:
     ek2[n] = 1/2 * m2 * dr2[n] ** 2
     ep[n] = k * (q1 * q2) / (delta_r[n])
 
+v1_pred = (dr1[0]*(m1 - m2) + 2*m2*dr2[0]) / (m1 + m2)
+v2_pred = (dr2[0]*(m2 - m1) + 2*m1*dr1[0]) / (m1 + m2)
+
+print(f"Simulated v1: {dr1[-1]:.2e} | Predicted v1: {v1_pred:.2e}")
+print(f"Simulated v2: {dr2[-1]:.2e} | Predicted v2: {v2_pred:.2e}")
+
 # fig, ax = plt.subplots()
 # labels = ["$E_{K1}$", "$E_{K2}$", "$E_{P}$"]
 # ax.stackplot(ts, ek1, ek2, ep, labels=labels)
