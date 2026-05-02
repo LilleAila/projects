@@ -62,6 +62,9 @@
 #let Unit(u) = [$upright(#u)$]
 #let unit(u) = [$thin Unit(#u)$]
 
+#show link: set text(fill: blue)
+#show link: underline
+
 #align(center)[
   #v(1em)
   #text(size: 14pt, weight: "bold")[Simulering av kollisjoner mellom partikler]
@@ -581,3 +584,5 @@ I denne oppgaven har jeg simulert kollisjoner mellom ladde partikler i én og to
 - Rutherfords atommodell: Ved å utvide den samme modellen til to dimensjoner, har jeg visualisert hvordan alfapartikler avbøyes når de skytes mot en gullkjerne. Simuleringen gjenskaper observasjonene som førte til oppdagelsen av atomkjernen.
 
 Totalt sett viser dette hvor kraftig programmering som et verktøy kan være i fysikken der man må håndtere varierende verdier, og der dette kan settes opp som en differensiallikning.
+
+Kjørbar kode er tilgjengelig på GitHub: #link("https://github.com/LilleAila/projects/tree/main/skole/fysikk1/03-programmeringsoppgave-v26") under `.ipynb`-filer (jupyter notebooks). Kildekoden ligger også vedlagt i en `.zip`-fil.
