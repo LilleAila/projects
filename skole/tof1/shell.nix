@@ -29,5 +29,9 @@ mkShell {
     ruff
     pyright
     black
+
+    typst
+    tinymist
+    typstyle
   ];
 }
