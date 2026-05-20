@@ -1,8 +1,41 @@
 code:
-    type: Book
-    title: "Code: The Hidden Language of Computer Hardware and Software"
-    author: Petzold, C.
-    page-total: 393
-    date: 2014-03-28
-    edition: 1
-    serial-number: 9780735611313
+  type: Book
+  title: "Code: The Hidden Language of Computer Hardware and Software"
+  author: Petzold, C.
+  page-total: 393
+  date: 2014-03-28
+  edition: 1
+  serial-number: 9780735611313
+
+wiki-telegraph:
+  type: Web
+  title: "Electrical telegraph"
+  author: "Wikipedia contributors"
+  date: 2026-05-12
+  url: "https://en.wikipedia.org/wiki/Electrical_telegraph"
+  publication: "Wikipedia"
+
+wiki-morse:
+  type: Web
+  title: "Morse code"
+  author: "Wikipedia contributors"
+  date: 2026-05-17
+  url: "https://en.wikipedia.org/wiki/Morse_code"
+  publication: "Wikipedia"
+
+wiki-vacuumtube:
+  type: Web
+  title: "Vacuum tube"
+  author: "Wikipedia contributors"
+  date: 2026-05-14
+  url: "https://en.wikipedia.org/wiki/Vacuum_tube"
+  publication: "Wikipedia"
+
+wiki-eniac:
+  type: Web
+  title: "ENIAC"
+  author: "Wikipedia contributors"
+  date: 2026-05-10
+  url: "https://en.wikipedia.org/wiki/ENIAC"
+  publication: "Wikipedia"
+
