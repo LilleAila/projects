@@ -39,3 +39,66 @@ wiki-eniac:
   url: "https://en.wikipedia.org/wiki/ENIAC"
   publication: "Wikipedia"
 
+wiki-transistor:
+  type: Web
+  title: "Transistor"
+  author: "Wikipedia contributors"
+  date: 2026-05-06
+  url: "https://en.wikipedia.org/wiki/Transistor"
+  publication: "Wikipedia"
+
+wiki-transistor-history:
+  type: Web
+  title: "History of the transistor"
+  author: "Wikipedia contributors"
+  date: 2026-05-15
+  url: "https://en.wikipedia.org/wiki/History_of_the_transistor"
+  publication: "Wikipedia"
+
+wiki-mosfet:
+  type: Web
+  title: "MOSFET"
+  author: "Wikipedia contributors"
+  date: 2026-05-10
+  url: "https://en.wikipedia.org/wiki/MOSFET"
+  publication: "Wikipedia"
+
+byjus-npn:
+  type: Web
+  title: "NPN Transistor"
+  author: "BYJU'S"
+  date: 2026
+  url: "https://byjus.com/physics/npn-transistor/"
+  publication: "BYJU'S Physics"
+
+electronics-tutorials-npn:
+  type: Web
+  title: "The NPN Bipolar Junction Transistor"
+  author: "Electronics Tutorials"
+  date: 2026
+  url: "https://www.electronics-tutorials.ws/transistor/tran_2.html"
+  publication: "Electronics Tutorials"
+
+wiki-doping:
+  type: Web
+  title: "Doping (semiconductor)"
+  author: "Wikipedia contributors"
+  date: 2026-02-13
+  url: "https://en.wikipedia.org/wiki/Doping_(semiconductor)"
+  publication: "Wikipedia"
+
+wiki-moores-law:
+  type: Web
+  title: "Moore's law"
+  author: "Wikipedia contributors"
+  date: 2026-05-12
+  url: "https://en.wikipedia.org/wiki/Moore%27s_law"
+  publication: "Wikipedia"
+
+apple-wiki-m5:
+  type: Web
+  title: "Apple M5"
+  author: "Apple Wiki contributors"
+  date: 2026-05-20
+  url: "https://apple.fandom.com/wiki/Apple_M5"
+  publication: "Apple Wiki"

@@ -3,8 +3,7 @@
 #import "@preview/touying:0.5.3": *
 #import themes.metropolis: *
 #import "@preview/callisto:0.2.5"
-// #import "@preview/cetz:0.5.2"
-// #import "@preview/cetz-plot:0.1.3": plot
+#import "@preview/cetz:0.5.2"
 #import "@preview/simple-plot:0.3.0": plot
 
 #show: metropolis-theme.with(
@@ -511,9 +510,13 @@
   Disse bruker 10-100 ns, altså opptil $1 thin 000 thin 000 times$ raskere.
 ][
   #figure(
-    image("assets/vacuumtube1.png", height: 9cm),
-    caption: [Vakuumrør-triode @wiki-vacuumtube],
+    image("assets/vacuumtube2.png", height: 9cm),
+    caption: [Den første vakuumrør-trioden @wiki-vacuumtube],
   )
+
+  #text(size: 8pt)[
+    By Gregory F. Maxwell <#link("gmaxwell@gmail.com")> PGP:0xB0413BFA - Photo by uploader, taken at The History of Audio: The Engineering of Sound, an exhibition of the San Francisco Airport Museums[1] in SFO Airport, Terminal 3 from 2006-09 to 2007-05., GFDL 1.2, #link("https://commons.wikimedia.org/w/index.php?curid=1365357")
+  ]
 ]
 
 #slide[
@@ -560,18 +563,146 @@
   )[By The original uploader was TexasDex at English Wikipedia. - Transferred from en.wikipedia to Commons by Andrei Stroe using CommonsHelper., CC BY-SA 3.0, #link("https://commons.wikimedia.org/w/index.php?curid=6480859"), #link("https://commons.wikimedia.org/w/index.php?curid=6557095")]
 ]
 
-== Solid-state brytere
+== Transistorer
+
+#slide(composer: (1fr, 1fr))[
+  Funnet opp i Bell Labs i 1947.
+
+  Halvledere: Germanium / Silisium
+
+  Tåler mye mer enn rør
+
+  Transistorer og hele kretser kan "tegnes" inn i en halvleder.
+
+  @wiki-transistor
+][
+  #figure(
+    image("assets/transistor1.png"),
+    caption: [Første fungerende transistor @wiki-transistor],
+  )
+]
+
+#slide[
+  Elektroner frigjøres tiltrekkes. Samme prinsipp som vakuumrør.
+
+  MOSFET #text(size: 8pt)[(metal-oxide-semiconductor field-effect transistor)] er dagens vanligste type, NPN er tidligere:
+
+  #grid(
+    columns: (auto, auto),
+    figure(
+      image("assets/npn-transistor.png", height: 8cm),
+      caption: [NPN-transistor @byjus-npn],
+    ),
+
+    figure(
+      image("assets/npn-transistor2.png", height: 8cm),
+      caption: [NPN-transistor @code[s.~248]],
+    ),
+  )
+]
+
+#slide[
+  Produseres ved doping av halvledere. Man kan "tegne" transistorer og kretser inn i en halvleder:
+
+  #figure(
+    image("assets/doping.png", height: 8cm),
+    caption: [Doping av halvleder @wiki-doping],
+  )
+]
+
+#slide(composer: (1fr, 1fr), align: horizon)[
+  Moores lov: antall transistorer per chip dobles annethvert år.
+
+  #figure(
+    image("assets/moores-law.png", height: 6cm),
+    caption: [
+      Semi-logaritmisk visualisering av Moores lov @wiki-moores-law
+
+      #text(
+        size: 8pt,
+      )[By Max Roser, Hannah Ritchie - https://ourworldindata.org/uploads/2020/11/Transistor-Count-over-time.png, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=98219918]
+    ],
+  )
+][
+  #set align(center)
+  #table(
+    columns: (auto, auto),
+    inset: 10pt,
+    table.header([*Årstall*], [*MOSFET-skalering*]),
+    [1968], [$20 unit(mu m)$],
+    [1984], [$1 unit(mu m)$],
+    [2001], [$130 unit(n m)$],
+    [2010], [$28 unit(n m)$],
+    [2025], [$2 unit(n m)$],
+  )
+
+  @wiki-moores-law
+
+  Kvantetunnellering kan oppstå nå.
+
+  Apple M5 har i dag 28 milliarder transistorer. @apple-wiki-m5
+]
 
 == Oppsummering
 
-- 1830: Telegrafrelé
-- 1906: Vakuumrør
-- 1945: ENIAC, verdens første datamaskin
-- 1947: Solid-state brytere
+#slide(align: center + horizon)[
+  #cetz.canvas(length: 0.8cm, {
+    import cetz.draw: *
 
-= Videre læring
+    let c = rgb("#23373a")
+    let pos = x => (x - 1830) / 10
 
-#slide(composer: (1fr, 1fr), align: center + horizon)[
+    line((pos(1800), 0), (pos(2100), 0), stroke: 1.5pt + c, mark: (
+      end: ">",
+    ))
+
+    // Above
+    let x = pos(1830)
+    circle((x, 0), radius: 0.1, fill: white, stroke: 1.5pt + c)
+    line((x, 0), (x, 1), stroke: 0.5pt + gray)
+    content((x, 2.5), [1830])
+    content((x, 1.5), [Telegrafrelé])
+
+    // Below
+    let x = pos(1906)
+    circle((x, 0), radius: 0.1, fill: white, stroke: 1.5pt + c)
+    line((x, 0), (x, -1), stroke: 0.5pt + gray)
+    content((x, -1.5), [1906])
+    content((x, -2.5), [Vakuumrør])
+
+    // Above
+    let x = pos(1945)
+    circle((x, 0), radius: 0.1, fill: white, stroke: 1.5pt + c)
+    line((x, 0), (x, 1), stroke: 0.5pt + gray)
+    content((x, 2.5), [1945])
+    content((x, 1.5), [ENIAC])
+
+    // Below
+    let x = pos(1947)
+    circle((x, 0), radius: 0.1, fill: white, stroke: 1.5pt + c)
+    line((x, 0), (x, -3), stroke: 0.5pt + gray)
+    content((x, -3.5), [1947])
+    content((x, -4.5), [Transistor])
+
+    // Above
+    let x = pos(2026)
+    circle((x, 0), radius: 0.1, fill: white, stroke: 1.5pt + c)
+    line((x, 0), (x, 1), stroke: 0.5pt + gray)
+    content((x, 2.5), [2026])
+    content((x, 1.5), [Datamaskiner overalt])
+
+    // Below
+    let x = pos(2060)
+    circle((x, 0), radius: 0.1, fill: white, stroke: 1.5pt + c)
+    line((x, 0), (x, -1), stroke: 0.5pt + gray)
+    content((x, -1.5), [...])
+    content((x, -2.5), [Kvantedatamaskiner?])
+  })
+]
+
+== Videre læring
+
+#slide(composer: (1fr, 1fr, 1fr), align: center + horizon)[
   Code - Charles Petzold
 
   #image("assets/code-cover.png", height: 8cm)
@@ -580,9 +711,15 @@
 ][
   Nandgame: Et spill der man bygger en datamaskin fra grunnen av.
 
-  #image("assets/nandgame-alu.png", height: 8cm)
+  #image("assets/nandgame-alu.png", height: 6cm)
 
   #link("https://nandgame.com/")
+][
+  Veritasium - The World's Most Important Machine
+
+  #image("assets/veritasium.png")
+
+  #link("https://www.youtube.com/watch?v=MiUHjLxm3V0")
 ]
 
 #slide(align: top + left)[
