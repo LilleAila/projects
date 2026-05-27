@@ -460,6 +460,49 @@
   )
 ]
 
+== Videre aritmetikk og logikk
+
+#slide(composer: (1fr, 1fr))[
+  #text(size: 24pt, weight: "bold")[74181]
+
+  #figure(
+    image("assets/74181.png"),
+    caption: [Texas Instruments 74181 @wiki-74181],
+  )
+][
+  #set text(size: 19pt)
+  Texas Instruments, 1970.
+
+  Første ALU på én chip
+
+  #line(length: 100%)
+
+  Aritmetiske og logiske operasjoner:
+
+  - Addisjon
+  - Subtraksjon
+
+  Logiske operasjoner:
+
+  - AND / NAND
+  - OR / NOR
+  - XOR
+  - Shift
+
+  Etc. totalt 16
+]
+
+#slide[
+  #figure(
+    image("assets/74181-circuit.png", height: 11cm),
+    caption: [74181-krets @wiki-74181],
+  )
+
+  #text(size: 12pt)[
+    CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=168473
+  ]
+]
+
 == Minne
 
 #slide(composer: (1fr, 1fr))[
@@ -490,11 +533,171 @@
 ]
 
 #slide[
-  Dette er veldig kult, men jeg rekker ikke å gå mer i dybden :/
+  #grid(
+    columns: (1fr, 1fr),
+    figure(
+      image("assets/r-s-flip-flop-hold.png"),
+      caption: [R-S-flip-flop med hold-signal @code[s.~164]],
+    ),
+    figure(
+      image("assets/d-type-flip-flop.png"),
+      caption: [D-type flip-flop @code[s.~166]],
+    ),
+  )
+]
+
+#slide(composer: (1fr, 1fr), align: center + horizon)[
+  #figure(
+    image("assets/d-type-flip-flop2.png"),
+    caption: [Fullstendig D-type flip-flop @code[s.~166]],
+  )
+][
+  #table(
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center,
+    table.header(
+      table.cell(colspan: 2, [*Inputs*]), table.cell(colspan: 2, [*Outputs*])
+    ),
+    [D], [Clk], [Q], [#overline([Q])],
+    [0], [1], [0], [1],
+    [1], [1], [1], [0],
+    [X], [0], [Q], [#overline([Q])],
+  )
+
+  Lagrer data etter klokken.
+]
+
+#slide(composer: (1fr, 1fr))[
+  Setter 8 av dem sammen til:
 
   #figure(
+    image("assets/8-bit-latch.png"),
+    caption: [8-bit D-latch @code[s.~167]],
+  )
+][
+  Et av de viktigste komponentene:
+
+  #figure(
+    image("assets/2-1-selector.png"),
+    caption: [2-to-1 selector @code[s.~169]],
+  )
+]
+
+#slide[
+  Klokke?
+
+  #figure(
+    image("assets/oscillator1.png"),
+    caption: [Simple oscillator @code[s.~157]],
+  )
+
+  #figure(
+    image("assets/oscillator-diagram.png"),
+    caption: [Oscillator output diagram @code[s.~158]],
+  )
+]
+
+#slide[
+  #figure(
+    image("assets/adder-with-latch.png", height: 12cm),
+    caption: [8-bit adder with latch @code[s.~168]],
+  )
+]
+
+#slide[
+  #grid(
+    columns: (1fr, 1fr),
+    inset: 10pt,
+    align: center,
+
+    figure(
+      image("assets/8-1-selector.png"),
+      caption: [8-1 selector @code[s.~195]],
+    ),
+
+    table(
+      columns: (1fr, 1fr, 1fr, 2fr),
+      inset: 10pt,
+      align: center,
+      table.header(table.cell(colspan: 3)[*Inputs*], [*Output*]),
+      [$S_2$], [$S_1$], [$S_0$], [$Q$],
+      [0], [0], [0], [$D_0$],
+      [0], [0], [1], [$D_1$],
+      [0], [1], [0], [$D_2$],
+      [0], [1], [1], [$D_3$],
+      [1], [0], [0], [$D_4$],
+      [1], [0], [1], [$D_5$],
+      [1], [1], [0], [$D_6$],
+      [1], [1], [1], [$D_7$],
+    ),
+  )
+]
+
+#slide(composer: (1fr, 1fr))[
+  #let D = table.cell(fill: rgb("#CCCCCC"))[D]
+
+  #grid(
+    columns: (1fr, 2fr),
+    inset: 10pt,
+    align: center,
+
+    figure(
+      image("assets/1-8-decoder.png"),
+      caption: [1-8 decoder @code[s.~197]],
+    ),
+
+    table(
+      columns: 11,
+      inset: 10pt,
+      align: center,
+      table.vline(x: 3, stroke: 3pt),
+      table.hline(y: 2, stroke: 3pt),
+      table.header(
+        table.cell(colspan: 3)[*Inputs*], table.cell(colspan: 8)[*Outputs*]
+      ),
+      [$S_2$],
+      [$S_1$],
+      [$S_0$],
+      [$O_7$],
+      [$O_6$],
+      [$O_5$],
+      [$O_4$],
+      [$O_3$],
+      [$O_2$],
+      [$O_1$],
+      [$O_0$],
+      [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], D,
+      [0], [0], [1], [0], [0], [0], [0], [0], [0], D, [0],
+      [0], [1], [0], [0], [0], [0], [0], [0], D, [0], [0],
+      [0], [1], [1], [0], [0], [0], [0], D, [0], [0], [0],
+      [1], [0], [0], [0], [0], [0], D, [0], [0], [0], [0],
+      [1], [0], [1], [0], [0], D, [0], [0], [0], [0], [0],
+      [1], [1], [0], [0], D, [0], [0], [0], [0], [0], [0],
+      [1], [1], [1], D, [0], [0], [0], [0], [0], [0], [0],
+    ),
+  )
+]
+
+#slide[
+  #figure(
+    image("assets/8-bit-memory-selector.png", height: 12cm),
+    caption: [8x8-bit memory @code[s.~198]],
+  )
+]
+
+== Kombinerer alt
+
+#slide(composer: (1fr, 1fr))[
+  - Klokke
+  - ALU
+  - Minne
+  - Velgere
+][
+  #pause
+  #figure(
     image("assets/computer-circuit.png", height: 10cm),
-    caption: [Alle komponentene kombinert: Datamaskin! @code[s.~208]],
+    caption: [Datamaskin!!! @code[s.~208]],
   )
 ]
 
@@ -678,6 +881,13 @@
     content((x, 1.5), [ENIAC])
 
     // Below
+    let x = pos(1970)
+    circle((x, 0), radius: 0.1, fill: white, stroke: 1.5pt + c)
+    line((x, 0), (x, -5.5), stroke: 0.5pt + gray)
+    content((x, -6), [1970])
+    content((x, -7), [74181 ALU IC])
+
+    // Below
     let x = pos(1947)
     circle((x, 0), radius: 0.1, fill: white, stroke: 1.5pt + c)
     line((x, 0), (x, -3), stroke: 0.5pt + gray)
@@ -723,5 +933,6 @@
 ]
 
 #slide(align: top + left)[
+  #set text(size: 14pt)
   #bibliography("bibliography.yaml", style: "apa")
 ]

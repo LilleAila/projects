@@ -102,3 +102,11 @@ apple-wiki-m5:
   date: 2026-05-20
   url: "https://apple.fandom.com/wiki/Apple_M5"
   publication: "Apple Wiki"
+
+wiki-74181:
+  type: Web
+  title: "74181"
+  author: "Wikipedia contributors"
+  date: 2026-05-11
+  url: "https://en.wikipedia.org/wiki/74181"
+  publication: "Wikipedia"
