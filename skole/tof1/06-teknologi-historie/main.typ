@@ -57,7 +57,9 @@
 
 = Innhold <touying:hidden>
 
-#outline(title: none, indent: 1em, depth: 2)
+#text(size: 16pt)[
+  #outline(title: none, indent: 1em, depth: 2)
+]
 
 = Telegraf
 
@@ -686,7 +688,7 @@
   )
 ]
 
-== Kombinerer alt
+== Kombinert
 
 #slide(composer: (1fr, 1fr))[
   - Klokke
