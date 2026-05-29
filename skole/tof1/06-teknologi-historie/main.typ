@@ -13,7 +13,7 @@
     title: [Historisk utvikling av en teknologisk produkt],
     subtitle: [Historien av transistorer og datamaskiner],
     author: [Olai],
-    date: [2026-05-04],
+    date: [2026-05-28],
     institution: [Amalie Skram VGS],
   ),
 )
@@ -341,8 +341,8 @@
         columns: (auto, auto, auto),
         inset: 10pt,
         [*XOR*], [0], [1],
-        [0], [1], [1],
-        [1], [0], [0],
+        [0], [0], [1],
+        [1], [1], [0],
       )
 
       #figure(
