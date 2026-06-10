@@ -4,7 +4,8 @@ const int TRIG_PIN = 9;
 const int ECHO_PIN = 10;
 
 long duration;
-int distance;
+float distance;
+const int samples = 5;
 
 void setup() {
   delay(5000);
@@ -28,16 +29,32 @@ void loop() {
   int temt6000Value = analogRead(TEMT6000_PIN);
   int ldrValue = analogRead(LDR_PIN);
 
-  // Trigger a measurement from ultrasonic sensor
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
+  float distances = 0.0f;
+  int validSamples = 0;
+  for (int i = 0; i < samples; ++i) {
+    // Trigger a measurement from ultrasonic sensor
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
 
-  // Read the value and convert to cm using speed of sound
-  duration = pulseIn(ECHO_PIN, HIGH);
-  distance = duration * 0.034 / 2;
+    // Read the value and convert to cm using speed of sound
+    // Timeout limited to 30k microseconds ≈ 500cm
+    duration = pulseIn(ECHO_PIN, HIGH, 30000);
+    if (duration > 0) {
+      distances += duration * 0.0343f / 2.0f;
+      ++validSamples;
+    }
+
+    delay(10);
+  }
+
+  if (validSamples > 0) {
+    distance = distances / validSamples;
+  } else {
+    distance = -1.0f;
+  }
 
   // Log values
   Serial.print("TEMT6000:");
@@ -54,5 +71,5 @@ void loop() {
 
   Serial.println();
 
-  delay(50);
+  // delay(50); // Implicitly delayed from the distance loop
 }

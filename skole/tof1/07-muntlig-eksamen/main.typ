@@ -137,7 +137,7 @@
       "r1",
       (5, -2),
       (8, -2),
-      label: $1 unit(k Omega)$,
+      label: $60 unit(k Omega)$,
       fill: blue.lighten(80%),
     )
     node("A1", (4, -1), label: [#text(fill: red)[A1]])
@@ -315,12 +315,14 @@
 ][
 
   ```py
-  df = read_df("dark-flashlight3-long-slow.csv")
+  df = read_df("final1.csv")
   df["Distance"].plot()
   ```
 
   #figure(
-    callisto.display("distance-raw", nb: analysis),
+    box(height: 14em)[
+      #callisto.display("distance-raw", nb: analysis)
+    ],
     caption: [Avstand over tid],
   )
 ]
@@ -338,8 +340,12 @@
   ```
 
   ```py
-  df = read_df("dark-flashlight3-long-slow.csv")
-  df["Distance"] = clamp_diff(df["Distance"], 1)
+  def read(name, diff):
+    df = read_df(name)
+    df["Distance"] = clamp_diff(df["Distance"], diff)
+    return df
+
+  df = read("final1.csv", 0.04)
   df["Distance"].plot()
   ```
 ][
@@ -352,10 +358,10 @@
 #slide[
   === Vurdering av usikkerhet
 
-  Plassert arduino i et mørkt rom og tatt $approx 250$ målinger.
+  Plassert arduino i et mørkt rom og tatt $approx 300$ målinger.
 
   ```py
-  baseline = read_df("dark-baselines.csv")
+  baseline = read_df("final-baselines.csv")
   del baseline["Distance"] # Distance is irrelevant
   ```
 ]
@@ -368,8 +374,25 @@
   avvik = variasjon / 2
   avvik_forhold = avvik / ldr_range * 100
   ldr_baseline = ldr.mean()
+  mid = ldr.min() + variasjon / 2
+
+  print(f"Verdi: {mid:.1f} ± {avvik:.1f}")
+  print(f"Gjennomsnitt: {ldr.mean():.3f}")
   print(f"LDR = {ldr_baseline:.1f} ± {avvik:.1f}")
+  print(f"Intervallstørrelse: {ldr_range}")
   print(f"Variasjonsbredde = {variasjon} ~ {avvik_forhold:.2f}% av intervall")
+  print(f"Standardavvik: {ldr.std():.4f}")
+  print(f"Standardfeil: {ldr.sem():.4f}")
+  ```
+
+  ```
+  Verdi: 2.0 ± 2.0
+  Gjennomsnitt: 0.355
+  LDR = 0.4 ± 2.0
+  Intervallstørrelse: 338
+  Variasjonsbredde = 4 ~ 0.59% av intervall
+  Standardavvik: 0.7655
+  Standardfeil: 0.0427
   ```
 ][
   #figure(
@@ -386,13 +409,23 @@
   avvik = variasjon / 2
   avvik_forhold = avvik / temt_range * 100
   temt_baseline = temt.mean()
-  print(f"TEMT = {temt_baseline:.1f} ± {avvik:.1f}")
+  mid = temt.min() + variasjon / 2
+
+  print(f"Verdi: {mid:.1f} ± {avvik:.1f}")
+  print(f"Gjennomsnitt: {temt.mean():.3f}")
+  print(f"Intervallstørrelse: {temt_range}")
   print(f"Variasjonsbredde = {variasjon} ~ {avvik_forhold:.2f}% av intervall")
+  print(f"Standardavvik: {temt.std():.4f}")
+  print(f"Standardfeil: {temt.sem():.4f}")
   ```
 
   ```
-  TEMT = 19.9 ± 1.0
-  Variasjonsbredde = 2 ~ 0.10% av intervall
+  Verdi: 0.5 ± 0.5
+  Gjennomsnitt: 0.003
+  Intervallstørrelse: 1001
+  Variasjonsbredde = 1 ~ 0.05% av intervall
+  Standardavvik: 0.0558
+  Standardfeil: 0.0031
   ```
 ][
   #figure(
@@ -412,7 +445,14 @@
       )[By Borb, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=3816716]
     ],
   )
+][
+  #figure(
+    callisto.display("temt-raw-scatter", nb: analysis),
+    caption: [Intensitet etter avstand],
+  )
 ]
+
+== Analyse - TEMT6000
 
 #slide[
   Tar gjennomsnitt for hver verdi av $d$.
@@ -420,6 +460,8 @@
   Lager en ny x-akse $x' = 1/d^2$
 
   Fjerner verdier før startpunktet
+
+  Grupperer og tar gjennomsnittet for å redusere usikkerheten.
 
   ```py
   df2 = df.groupby("Distance").mean()
@@ -449,7 +491,7 @@
   ```
 
   ```
-  f(x) = ax + b ≈ 39945x - 1.925
+  f(x) = ax + b ≈ 36599x - 0.891
   R^2 = 0.992
   ```
 
@@ -462,7 +504,26 @@
 ]
 
 #slide[
-  Verifiserer at dette faktisk er invers-kvadrat:
+  Verifiserer invers-kvadrat.
+
+  Antar først at forholdet kan modelleres som
+
+  $
+         y & = C dot d^n \
+    ln (y) & = ln(C dot d^n) \
+    ln (y) & = ln(C) + ln(d^n) \
+    ln (y) & = ln(C) + n ln(d)
+  $
+
+  Dette er et lineært uttrykk:
+
+  $
+    y' & = a x' + b \
+    underbrace(ln(y), y') & = underbrace(n, a) underbrace(ln(d), x') + underbrace(ln(C), b)
+  $
+
+][
+  Finner resultat ved regresjon:
 
   ```py
   log_d = np.log(df2.index.values)
@@ -470,7 +531,7 @@
 
   a_log, _ = np.polyfit(log_d, log_temt, 1)
 
-  print(f"Exponent ≈ {slope_log:.3f}")
+  print(f"Exponent ≈ {a_log:.3f}")
   ```
 
   ```
@@ -490,15 +551,184 @@
   $
 ]
 
+== Analyse - LDR
+
+#slide[
+  Sensoren er ikke lineær.
+
+  $
+    R = k dot I^(- alpha)
+  $
+
+  #text(size: 8pt)[
+    Kilde: electronics stackexchange https://electronics.stackexchange.com/questions/487182/is-there-an-equation-for-the-relationship-between-illuminance-and-the-resistance og anakara universitet https://acikders.ankara.edu.tr/pluginfile.php/98768/mod_resource/content/1/Week3.pdf
+  ]
+
+
+  der $k$ er en konstant og $alpha$ er sensitivitetskoeffisienten.
+
+  $
+    I prop (1/R)^(1/alpha)
+  $
+
+  En generisk LDR har $alpha approx 0.7$
+
+  #text(
+    size: 8pt,
+  )[Kilde: GL55 datablad https://www.kth.se/social/files/54ef17dbf27654753f437c56/GL5537.pdf]
+][
+  Arduino måler spenning over den konstante motstanden på $60 unit(k Omega)$. Arduino leser spenning lineært i $[0, 1023]$
+
+  $
+    U_"Inn" & = I dot sum R \
+          I & = U_"Inn" / (R_"LDR" + R_"Konstant") \
+     U_"Ut" & = I dot R_"Konstant" \
+     U_"Ut" & = (U_"Inn" / (R_"LDR" + R_"Konstant")) dot R_"Konstant"
+  $
+]
+
+#slide(composer: (auto, 1fr))[
+  $
+    U_"Ut" / U_"Inn" & = "ADC"/1023 \
+          1023/"ADC" & = (R_"LDR" + R_"Konstant") / R_"Konstant" \
+          1023/"ADC" & = R_"LDR"/R_"Konstant" + 1 \
+             R_"LDR" & = R_"Konstant" dot (1023/"ADC" - 1)
+  $
+][
+  ```py
+  resistance = 60_000 # 60 kΩ
+  df["R_LDR"] = resistance * ((1023 / df["LDR"]) - 1)
+  alpha = 0.7
+  df["LDR_Linearized"] = 1 / (df["R_LDR"] ** (1 / alpha))
+  ```
+
+  #box(height: 10em)[
+    #grid(
+      columns: 2,
+      inset: 10pt,
+      figure(
+        callisto.display("raw-ldr", nb: analysis),
+        caption: [Raw ADC-verdi],
+      ),
+      figure(
+        callisto.display("raw-ldr-r", nb: analysis),
+        caption: [LDR-motstand],
+      ),
+    )
+  ]
+]
+
+#slide[
+  #grid(
+    columns: 2,
+    inset: 10pt,
+    figure(
+      callisto.display("ldr-plot-1", nb: analysis),
+      caption: [LDR (raw data)],
+    ),
+    figure(
+      callisto.display("ldr-plot-2", nb: analysis),
+      caption: [LDR (linearisert)],
+    ),
+  )
+]
+
+#slide[
+  Plotter data samt lineær regresjon.
+
+  ```py
+  a, b, r, _, _ = linregress(df2["x2"], df2["LDR_Linearized"])
+  print(f"f(x) = ax + b ≈ {a:.0f}x - {-b:.3f}")
+  print(f"R^2 = {r**2:.3f}")
+  ```
+
+  Resultat:
+
+  ```
+  f(x) = ax + b ≈ 0x - 0.000
+  R^2 = 0.994
+  ```
+
+  $R^2 = 0.994$ er også en svært god verdi.
+
+  Logaritmemetoden gir eksponenten $-1.994$, som er samme som for TEMT6000.
+][
+  #figure(
+    box(height: 15em)[#callisto.display("ldr-linear-regression", nb: analysis)],
+    caption: [LDR etter avstand med $x' = 1/(d^2)$, med lineær regresjon],
+  )
+]
+
 == Refleksjon og feilkilder
 
 #slide[
   Systematiske feil
 
-  - Bruker `int` for avstand. (Negligerbart da $d > 25$ gir feil på $± 0.5 "cm" < 2%$).
+  - Forskyvning av avstanden i begge ender (papp vs lys, sensorer)
+  - Refleksjon og dimming i lommelykten (loven gjelder punktkilder)
+  - ADC-referansespenning ($5 unit(V)$?)
+  - Lys fra omgivelsene (redusert til nærmest 0)
+  - Feil verdi for $alpha$
 
   Tilfeldige feil
 
-  - Lys fra omgivelsene
-  - Lyset treffer ikke alltid direkte i en rett linje (menneskelig feil)
+  - Støy fra ultralydsensor
+  - Vinkelavvik av lommelykten
+]
+
+#[
+  #set page(columns: 2)
+
+  #slide[
+    === Utregning av den korrekte verdien for $alpha$
+
+    - Måle LDR-motstand med multimeter
+    - Måle lux med telefon (phyphox)
+
+    Motstanden til LDR er gitt ved:
+
+    $
+      R & = A dot E^(-alpha)
+    $
+
+    Kan da gjøre to målinger og sette opp forholdet mellom dem, og løser likningen:
+
+    $
+          R_1/R_2 & = (A dot E_1^(-alpha))/(A dot E_2^(-alpha)) \
+          R_1/R_2 & = (E_1^(-alpha))/(E_2^(-alpha)) \
+          R_1/R_2 & = (E_2/E_1)^alpha \
+      ln(R_1/R_2) & = ln((E_2/E_1)^alpha) \
+      ln(R_1/R_2) & = alpha dot ln(E_2/E_1) \
+            alpha & = (ln R_1 - ln R_2)/(ln E_2 - ln E_1)
+    $
+  ]
+]
+
+#slide(composer: (1fr, 1fr))[
+  === Validitet av sensorer:
+
+  #figure(
+    image("assets/ldr-resistance.png", height: 11em),
+    caption: [
+      Semi-log plot av LDR-motstand
+
+      #text(
+        size: 8pt,
+      )[Kilde: Adafruit https://learn.adafruit.com/photocells/measuring-light]
+    ],
+  )
+][
+  - Mer komplisert krets (krever ekstra motstand)
+  - Mest følsom for gult og grønt lys ($approx 520-570 unit("nm")$)
+  - Logaritmisk transformasjon
+  - Lavere oppløsning ved sterkt lys
+  - Treg respons
+  - Temperaturavhengighet
+
+  Likevel:
+
+  - Mye billigere
+  - Enklere elektronikk
+  - Likere menneskelig øye
+  - "Filter" mot støy pga treghet
 ]
