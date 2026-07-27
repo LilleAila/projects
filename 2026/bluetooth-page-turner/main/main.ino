@@ -1,12 +1,9 @@
-#include <BleCompositeHID.h>
-#include <KeyboardDevice.h>
+#include <BleKeyboard.h>
 
 const int buttonPin = 4;
 bool lastButtonState = HIGH;
 
-KeyboardDevice* keyboard;
-BLEHostConfiguration bleHostConfig;
-BleCompositeHID compositeHID("ESP32-C6 Page Turner", "Espressif", 100);
+BleKeyboard bleKeyboard;
 
 void setup() {
   delay(500);
@@ -19,11 +16,7 @@ void setup() {
   pinMode(buttonPin, INPUT_PULLUP);
   Serial.println("Initialized Button");
 
-  bleHostConfig.setHidType(HID_KEYBOARD);
-  keyboard = new KeyboardDevice();
-  compositeHID.addDevice(keyboard);
-  compositeHID.begin(bleHostConfig);
-  Serial.println("Initialized BLE HID");
+  bleKeyboard.begin();
 }
 
 void loop() {
@@ -37,14 +30,8 @@ void loop() {
 
   if (lastButtonState == LOW && buttonState == HIGH) {
     // Button released
-    Serial.print("Button released");
-
-    // Turn page
-    if (compositeHID.isConnected()) {
-      Serial.println("Turning page");
-      keyboard->keyPress(KEY_SPACE);
-      keyboard->keyRelease(KEY_SPACE);
-    }
+    Serial.println("Button released");
+    bleKeyboard.print(" ");
   }
 
   lastButtonState = buttonState;
