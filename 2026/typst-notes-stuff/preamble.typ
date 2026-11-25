@@ -18,8 +18,12 @@
 #let pm = sym.plus.minus
 #let ans(x) = math.underline(math.underline(x))
 
+#let note-document(meta, body) = [
+  #let title = meta.at("title", default: "Untitled")
+  #let author = meta.at("author", default: "")
+  #let date = meta.at("date", default: "")
+  #let lang = meta.at("lang", default: "en")
 
-#let note-document(title, author, date, lang, body) = [
   #let preview = sys.inputs.at("preview", default: "") == "1"
 
   #set text(
@@ -93,6 +97,8 @@
 
     #body
   ]
+
+  #metadata(meta) <note-meta>
 
   #content
 ]

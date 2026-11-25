@@ -1,11 +1,12 @@
 #import "preamble.typ": *
-#show: it => note-document(
-  [Test note],
-  [Olai Solsvik],
-  [2026-11-25],
-  "nb",
-  it,
-)
+#show: note-document.with((
+  id: "test-note",
+  title: "Test note",
+  author: "Olai Solsvik",
+  date: "2026-11-25",
+  lang: "nb",
+  aliases: ("foo", "bar"),
+))
 
 = Hello, World!
 
